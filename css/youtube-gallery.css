@@ -1,0 +1,110 @@
+/* -----------------------------------------------------*/
+/* Youtube Main Movie Style*/
+/* -----------------------------------------------------*/
+.iframe-container {
+  overflow: hidden;
+  padding-top: 56.25%;
+  position: relative;
+}
+
+.iframe-container iframe {
+   border: 0;
+   position: absolute;
+   left: 0;
+   top: 0;
+   height: 100%;
+   width: 100%;
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  .padding-150 {
+    padding-left: 150px;
+    padding-right: 150px;
+  }
+}
+
+/* The Modal (background) */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 16777271;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+/* Modal Content */
+.modal-content {
+  margin: auto;
+  width: 90%;  
+  max-width: 1200px;
+  backgroung-color: rgba(0, 0, 0, 1);
+}
+
+/* The Close Button */
+.close {
+  color: white;
+  position: absolute;
+  top: 10px;
+  right: 25px;
+  font-size: 35px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #999;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Youtube Image Gallery */
+
+.youtube-img-container {
+	position: relative;
+	padding-top: 56.25%;
+	overflow: hidden;
+	cursor: pointer;
+}
+
+.youtube-img {
+	position: absolute;
+	top: -16.82%; /* Hide black bars from the image. Youtube image 'sddefault' has different resolution  */
+	left: 0;
+	width: 100%;
+	height: auto;
+	opacity: 1;
+}
+
+.youtube-img:hover {
+	opacity: 0.7;
+}
+
+/* play button */
+.play-button {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin-left: -10%;
+	margin-top: -10%;
+	width: 20%;
+	height: auto;
+	
+	z-index: 1;
+
+}
+
+.play-button img {
+	width: 100%;
+	height: auto;
+}
+
+/* End of Youtube Image Gallery */
+
+
+/* End of Youtube Main Movie Style */

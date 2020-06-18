@@ -1,0 +1,96 @@
+/* -----------------------------------------------------*/
+/* Newsletter Modal Style*/
+/* -----------------------------------------------------*/
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  .padding-150 {
+    padding-left: 150px;
+    padding-right: 150px;
+  }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+  #popupContainer {
+    background-image: url("/images/popup/popupBackground.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: #f1f1f1;
+  }
+
+  #infoContainer {
+    display: inline-block;
+    width: 55%;
+    text-align: center;
+  }  
+} 
+
+/* The Modal (background) */
+#newsletterModal {
+  display: block;
+  position: fixed;
+  z-index: 16777271;
+  padding-top: 50px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* The Close Button */
+
+/* popup Container*/
+#popupContainer {
+  position: relative;
+  padding: 0px;
+  margin: 0px;
+  background-color: rgb(242, 247, 250);
+  margin: auto;
+  max-width: 800px;
+  text-align: right;
+  font-family: "Maiandra GD", Georgia, "Times New Roman", Times, serif;
+}
+
+#infoContainer {
+
+}
+
+.container {
+  text-align: center;
+}
+
+input[type=text], input[type=email], input[type=submit] {
+  width: 100%;
+  padding: 5px;
+  margin: 5px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+input[type=checkbox] {
+  display: inline-block;
+  margin-right: 5px;
+  height: auto;
+}
+
+#newsletterSubmit {
+  width: 90%;
+  font-weight: bold;
+  color: white;
+  background-color: black;
+  cursor:pointer;
+}
+
+#newsletterSubmit:hover {
+  opacity: 0.7;
+}
+
+.smallFont {
+  font-size: 0.7em;
+  display: inline-block;
+}
+
