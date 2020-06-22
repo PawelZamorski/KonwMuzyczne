@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 20, 2020 at 08:51 PM
+-- Generation Time: Jun 22, 2020 at 10:58 AM
 -- Server version: 10.1.13-MariaDB
 -- PHP Version: 5.6.23
 
@@ -200,77 +200,65 @@ INSERT INTO `employee` (`id`, `name`, `course_name_id`, `long_desc`, `img_thumbn
 (10, 'Alicja Niździńska', 5, '<p>Absolwentka Logopedii ogólnej i klinicznej na wydziale Lekarskim Warszawskiego Uniwersytetu Medycznego. Absolwentka wydziału wokalno - estradowego w Warszawie. Zdobywczyni nagród w konkursach wokalnych. Wielokrotnie współpracowała i występowała z różnymi zespołami muzycznymi, w których śpiewała, grała na pianinie lub dyrygowała. Autorka projektu społecznego "Heart Melodies - Muzyką do serc". Od dziecka muzyka jest jej pasją i sprawia jej radość, którą pragnie dzielić się z innymi i czynić z niej pomocną wartość. W praktyce zawodowej wykorzystuje swoje muzyczne oraz logopedyczne umiejętności. Pracuje z najmłodszymi dziećmi, mającymi 1,5 roku oraz z dorosłymi. Prowadzi zajęcia logopedyczne, logorytmiczne oraz klasę śpiewu.</p>', '/images/user-images/ala-square.jpg', '/images/user-images/ala.jpg'),
 (11, 'Maciej Włodowski', 5, '<p>Absolwent Akademii Muzycznej w Łodzi. Obecnie związany z Uniwersytetem Muzycznym Fryderyka Chopina w Warszawie. Uczestniczy w kursach wokalnych w Polsce oraz na świecie. Podczas zajęć szczególną uwagę zwraca na pozbywanie się napięć z organizmu, naturalną technikę wokalną, dykcję i interpretację. Jest kreatywny i z pasją pokazuje świat muzyki. Sympatyczną atmosferą na zajęciach zachęca do rozwijania swoich umiejętności wokalnych. Cechuje go cierpliwość i profesjonalne, indywidualne podejście do każdego ucznia.</p>', '/images/user-images/maciej-square.jpg', '/images/user-images/maciej.jpg'),
 (12, 'Katarzyna Stasiewicz', 7, '<p>Absolwentka Uniwersytetu Muzycznego Fryderyka Chopina w Warszawie. Laureatka wielu konkursów ogólnopolskich i międzynarodowych w zakresie gry solowej i kameralnej. Odbyła liczne kursy solowe u wielu wybitnych artystów. Prowadzi aktywną działalność koncertową, a jej grę cechuje duża muzykalność i wrażliwość – poza dojrzałymi interpretacjami poszukuje możliwie najciekawszego brzmienia instrumentu. Występowała w Polsce, a także m.in. w Szwajcarii, Włoszech, Austrii, Danii, Kanadzie, Korei Południowej oraz na Węgrzech. Podczas swoich zajęć kreatynie wprowadza w świat muzyki dzieci oraz osoby dorosłe i pokazuje im fascynujący świat wiolonczeli.</p>', '/images/user-images/kasia-square.jpg', '/images/user-images/kasia.jpg'),
-(13, 'Daniel Peszko', 6, '<p>Związany z Uniwersytetem Muzycznym&nbsp;im. F. Chopina w Warszawie. Brał udział w ogólnopolskich kursach mistrzowskich oraz w warsztatach muzycznych. Koncertuje w Polsce jako solista, a także gra w zespołach kameralnych – duet, trio, kwartet oraz orkiestra gitarowa. Nagrywa płyty CD, na swym koncie ma m.in. płytę z kwartetem. Jest odważny, lubi podejmować nowe wyzwania. Cechuje go innowacyjność i pomysłowość podczas prowadzonych lekcji.</p>', '/images/user-images/daniel-square.jpg', '/images/user-images/daniel.jpg');
+(13, 'Daniel Peszko', 6, '<p>Związany z Uniwersytetem Muzycznym im. F. Chopina w Warszawie. Brał udział w ogólnopolskich kursach mistrzowskich oraz w warsztatach muzycznych. Koncertuje w Polsce jako solista, a także gra w zespołach kameralnych – duet, trio, kwartet oraz orkiestra gitarowa. Nagrywa płyty CD, na swym koncie ma m.in. płytę z kwartetem. Jest odważny, lubi podejmować nowe wyzwania. Cechuje go innowacyjność i pomysłowość podczas prowadzonych lekcji.</p>', '/images/user-images/daniel-square.jpg', '/images/user-images/daniel.jpg');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `emp_post`
+-- Table structure for table `emp_positions`
 --
 
-CREATE TABLE `emp_post` (
+CREATE TABLE `emp_positions` (
   `employee_id` int(10) UNSIGNED NOT NULL,
-  `job_post_id` int(10) UNSIGNED NOT NULL
+  `positions_id` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `emp_post`
+-- Dumping data for table `emp_positions`
 --
 
-INSERT INTO `emp_post` (`employee_id`, `job_post_id`) VALUES
+INSERT INTO `emp_positions` (`employee_id`, `positions_id`) VALUES
 (1, 1),
 (2, 2),
 (3, 3),
 (4, 4),
-(4, 5),
 (5, 4),
-(5, 6),
 (6, 4),
-(6, 7),
 (7, 4),
-(7, 5),
 (8, 4),
-(8, 8),
 (9, 4),
-(9, 8),
 (10, 4),
-(10, 8),
-(10, 9),
 (11, 4),
-(11, 10),
 (12, 4),
-(12, 5),
-(13, 4),
-(13, 11);
+(13, 4);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `job_post`
+-- Table structure for table `emp_specialization`
 --
 
-CREATE TABLE `job_post` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(255) DEFAULT NULL
+CREATE TABLE `emp_specialization` (
+  `employee_id` int(10) UNSIGNED NOT NULL,
+  `specialization_id` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `job_post`
+-- Dumping data for table `emp_specialization`
 --
 
-INSERT INTO `job_post` (`id`, `name`) VALUES
-(1, 'Założycielka Konwersatorium Muzycznego'),
-(2, 'Specjalista w zakresie planowania strategicznego'),
-(3, 'Dyrektor'),
-(4, 'Nauczyciel'),
-(5, 'wiolonczelista'),
-(6, 'pianista'),
-(7, 'saksofonista'),
-(8, 'wokalistka'),
-(9, 'logopeda'),
-(10, 'wokalista'),
-(11, 'gitarzysta'),
-(12, 'pianistka');
+INSERT INTO `emp_specialization` (`employee_id`, `specialization_id`) VALUES
+(4, 1),
+(5, 2),
+(6, 3),
+(7, 1),
+(8, 4),
+(9, 4),
+(10, 4),
+(10, 5),
+(11, 6),
+(12, 1),
+(13, 7);
 
 -- --------------------------------------------------------
 
@@ -317,6 +305,52 @@ INSERT INTO `offer` (`id`, `courses_id`, `category_id`) VALUES
 (26, 17, 3),
 (27, 18, 3);
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `positions`
+--
+
+CREATE TABLE `positions` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `positions`
+--
+
+INSERT INTO `positions` (`id`, `name`) VALUES
+(1, 'Założycielka Konwersatorium Muzycznego'),
+(2, 'Specjalista w zakresie planowania strategicznego'),
+(3, 'Dyrektor'),
+(4, 'Nauczyciel');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `specialization`
+--
+
+CREATE TABLE `specialization` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `specialization`
+--
+
+INSERT INTO `specialization` (`id`, `name`) VALUES
+(1, 'wiolonczelista'),
+(2, 'pianista'),
+(3, 'saksofonista'),
+(4, 'wokalistka'),
+(5, 'logopeda'),
+(6, 'wokalista'),
+(7, 'gitarzysta'),
+(8, 'pianistka');
+
 --
 -- Indexes for dumped tables
 --
@@ -362,17 +396,18 @@ ALTER TABLE `employee`
   ADD KEY `course_name_id` (`course_name_id`);
 
 --
--- Indexes for table `emp_post`
+-- Indexes for table `emp_positions`
 --
-ALTER TABLE `emp_post`
-  ADD PRIMARY KEY (`employee_id`,`job_post_id`),
-  ADD KEY `job_post_id` (`job_post_id`);
+ALTER TABLE `emp_positions`
+  ADD PRIMARY KEY (`employee_id`,`positions_id`),
+  ADD KEY `job_post_id` (`positions_id`);
 
 --
--- Indexes for table `job_post`
+-- Indexes for table `emp_specialization`
 --
-ALTER TABLE `job_post`
-  ADD PRIMARY KEY (`id`);
+ALTER TABLE `emp_specialization`
+  ADD PRIMARY KEY (`employee_id`,`specialization_id`),
+  ADD KEY `specialization_id` (`specialization_id`);
 
 --
 -- Indexes for table `offer`
@@ -381,6 +416,18 @@ ALTER TABLE `offer`
   ADD PRIMARY KEY (`id`),
   ADD KEY `course_id` (`courses_id`),
   ADD KEY `category_id` (`category_id`);
+
+--
+-- Indexes for table `positions`
+--
+ALTER TABLE `positions`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `specialization`
+--
+ALTER TABLE `specialization`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -417,15 +464,20 @@ ALTER TABLE `course_type`
 ALTER TABLE `employee`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
--- AUTO_INCREMENT for table `job_post`
---
-ALTER TABLE `job_post`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
---
 -- AUTO_INCREMENT for table `offer`
 --
 ALTER TABLE `offer`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+--
+-- AUTO_INCREMENT for table `positions`
+--
+ALTER TABLE `positions`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+--
+-- AUTO_INCREMENT for table `specialization`
+--
+ALTER TABLE `specialization`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- Constraints for dumped tables
 --
@@ -450,11 +502,18 @@ ALTER TABLE `employee`
   ADD CONSTRAINT `employee_ibfk_1` FOREIGN KEY (`course_name_id`) REFERENCES `course_name` (`id`);
 
 --
--- Constraints for table `emp_post`
+-- Constraints for table `emp_positions`
 --
-ALTER TABLE `emp_post`
-  ADD CONSTRAINT `emp_post_ibfk_1` FOREIGN KEY (`employee_id`) REFERENCES `employee` (`id`),
-  ADD CONSTRAINT `emp_post_ibfk_2` FOREIGN KEY (`job_post_id`) REFERENCES `job_post` (`id`);
+ALTER TABLE `emp_positions`
+  ADD CONSTRAINT `emp_positions_ibfk_1` FOREIGN KEY (`employee_id`) REFERENCES `employee` (`id`),
+  ADD CONSTRAINT `emp_positions_ibfk_2` FOREIGN KEY (`positions_id`) REFERENCES `positions` (`id`);
+
+--
+-- Constraints for table `emp_specialization`
+--
+ALTER TABLE `emp_specialization`
+  ADD CONSTRAINT `emp_specialization_ibfk_1` FOREIGN KEY (`employee_id`) REFERENCES `employee` (`id`),
+  ADD CONSTRAINT `emp_specialization_ibfk_2` FOREIGN KEY (`specialization_id`) REFERENCES `specialization` (`id`);
 
 --
 -- Constraints for table `offer`
