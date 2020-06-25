@@ -1,28 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head lang="pl-PL">
-	<meta charset="UTF-8">
-	<!--Page Title-->
-	<title>Konwersatorium Muzyczne w Warszawie</title>
-	<!--Meta Keywords and Description-->
-	<meta name="keywords" content="fortepian, śpiew, nauczyciel, nauka gry dla dzieci, nauka gry dla dorosłych, pianino, centrum warszawy, aleje jerozolimskie">
-	<meta name="description" content="Kreatywna szkoła rozbudzająca miłość do muzyki dla dzieci i dorosłych. Zapraszamy!">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
-	<!--Favicon-->
-	<link rel="shortcut icon" href="/images/favicon.ico" title="Favicon" />
-	<!-- Main CSS Files -->
-	<link rel="stylesheet" href="/css/style.css?v=<?= filemtime("css/style.css") ?>">
-	<!-- Namari Color CSS -->
-	<link rel="stylesheet" href="/css/namari-color.css">
-	<!--Icon Fonts - Font Awesome Icons-->
-	<link rel="stylesheet" href="/css/font-awesome.min.css">
-	<!-- Animate CSS-->
-	<link href="/css/animate.css" rel="stylesheet" type="text/css">
-	<!--Google Webfonts-->
-	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
-	<!-- Youtube Movies CSS-->
-	<link href="/css/youtube-gallery.css" rel="stylesheet" type="text/css">
-	<script src='https://www.google.com/recaptcha/api.js'></script>
+    <?php
+        $title = 'Lato Muzyczne';
+        require($_SERVER['DOCUMENT_ROOT']."/head.php");
+    ?>
 </head>
 <body>
 	<!-- Preloader -->
@@ -132,24 +114,9 @@
 		</main>
 		<!--End Main Content Area-->
 		<!--Footer-->
-		<footer id="landing-footer" class="clearfix">
-			<div class="row clearfix">
-			<!--Social Icons in Footer-->
-				<ul class="col-1 social-icons textr\-right">
-					<li>
-						<a target="_blank" title="facebook" href="https://www.facebook.com/konwersatoriummuzyczne/">
-						<i class="fa fa-facebook fa-1x"></i><span>facebook</span>
-						</a>
-					</li>
-					<li>
-						<a target="_blank" title="YouTube" href="https://www.youtube.com/channel/UCpISipwaVRA4S16_j3ntGWA">
-						<i class="fa fa-youtube fa-1x"></i><span>youtube</span>
-						</a>
-					</li>
-				</ul>
-			<!--End of Social Icons in Footer-->
-			</div>
-		</footer>
+        <?php
+            include($_SERVER['DOCUMENT_ROOT']."/footer.php");
+        ?>
 		<!--End of Footer-->
 	</div>
 	<!--End of Wrapper-->

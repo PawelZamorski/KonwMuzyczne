@@ -1,25 +1,10 @@
 <!DOCTYPE html>
 <html>
     <head lang="pl-PL">
-        <meta charset="UTF-8">
-        <!--Page Title-->
-        <title>Referencje uczniów | Konwersatorium Muzyczne</title>
-        <!--Meta Keywords and Description-->
-        <meta name="keywords" content="fortepian, śpiew, nauczyciel, nauka gry dla dzieci, nauka gry dla dorosłych, pianino, centrum warszawy, aleje jerozolimskie">
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
-        <!--Favicon-->
-        <link rel="shortcut icon" href="/images/favicon.ico" title="Favicon" />
-        <!-- Main CSS Files -->
-        <link rel="stylesheet" href="/css/style.css?v=<?= filemtime("css/style.css") ?>">
-        <!-- Namari Color CSS -->
-        <link rel="stylesheet" href="/css/namari-color.css">
-        <!--Icon Fonts - Font Awesome Icons-->
-        <link rel="stylesheet" href="/css/font-awesome.min.css">
-        <!-- Animate CSS-->
-        <link href="/css/animate.css" rel="stylesheet" type="text/css">
-        <!--Google Webfonts-->
-        <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
+        <?php
+            $title = 'Referencje rodzinne';
+            require($_SERVER['DOCUMENT_ROOT']."/head.php");
+        ?>
     </head>
     <body>
         <!-- Preloader -->
@@ -76,25 +61,9 @@
                 </section>
                 <!--End of Introduction-->
                 <!--Footer-->
-                <footer id="landing-footer" class="clearfix">
-                    <div class="row clearfix">
-                        <p id="copyright" class="col-2"></p>
-                        <!--Social Icons in Footer-->
-                        <ul class="col-2 social-icons">
-                            <li>
-                                <a target="_blank" title="Facebook" href="https://www.facebook.com/KonwersatoriumMuzyczne/">
-                                    <i class="fa fa-facebook fa-1x"></i><span>Facebook</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a target="_blank" title="YouTube" href="https://www.youtube.com/channel/UCpISipwaVRA4S16_j3ntGWA">
-                                    <i class="fa fa-youtube fa-1x"></i><span>YouTube</span>
-                                </a>
-                            </li>
-                        </ul>
-                        <!--End of Social Icons in Footer-->
-                    </div>
-                </footer>
+                <?php
+                    include($_SERVER['DOCUMENT_ROOT']."/footer.php");
+                ?>
                 <!--End of Footer-->
             </div>
             <!-- Include JavaScript resources -->
