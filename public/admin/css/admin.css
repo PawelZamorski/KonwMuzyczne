@@ -1289,4 +1289,11 @@ select.form-control:focus::-ms-value {
 .myTooltip:hover .tooltiptext {
     visibility: visible;
   }
+
+
   
+/* Display */
+.inline-block {
+    display: inline-block;
+}
+

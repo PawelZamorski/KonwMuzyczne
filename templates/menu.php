@@ -9,17 +9,22 @@
                 <!--Social Icons in Header-->
                 <ul class="social-icons">
                     <li>
-                        <a title="For Vietnamese Students" href="/vi/">
+                        <a title="Dla Polskich Studentów" href="/?lang=pl">
+                            <img src="/images/flags/poland.png" />
+                        </a>
+                    </li>
+                    <li>
+                        <a title="For Vietnamese Students" href="/?lang=vi">
                             <img src="/images/flags/vietnam.png" />
                         </a>
                     </li>
                     <li>
-                        <a title="For English Students" href="/en/">
+                        <a title="For English Students" href="/?lang=en">
                             <img src="/images/flags/england.png"  />
                         </a>
                     </li>
                     <li>
-                        <a title="For Chinese Students" href="/ch/">
+                        <a title="For Chinese Students" href="/?lang=zh">
                             <img src="/images/flags/china.png" />
                         </a>
                     </li>

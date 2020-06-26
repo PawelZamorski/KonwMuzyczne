@@ -787,6 +787,10 @@ h6 {
     text-transform: uppercase;
 }
 
+.capitalize {
+    text-transform: capitalize;
+}
+
 /* Section Headings */
 
 .section-heading {

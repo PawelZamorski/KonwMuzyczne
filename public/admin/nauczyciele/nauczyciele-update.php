@@ -208,7 +208,7 @@
 </div>
 <!-- End of Container -->
 
-<!-- Proagate table and build element on load function -->
+<!-- Propagate table and build element on load function -->
 <script>
     // Build JS array from PHP array
 

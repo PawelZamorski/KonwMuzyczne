@@ -1,6 +1,20 @@
-﻿<!DOCTYPE html>
+﻿<?php
+// Start the session
+session_start();
+$_SESSION['lang'] = 'pl'; // default language
+
+if (isset($_GET['lang'])) {
+    $lang = $_GET['lang'];
+    if ($lang === 'pl' || $lang === 'en' || $lang === 'zh' || $lang === 'vi' ) {
+        $_SESSION['lang'] = $lang;
+    }
+}
+
+?>
+
+<!DOCTYPE html>
 <html>
-<head lang="pl-PL">
+<head lang="<?php echo $_SESSION['lang'] ?>">
     <?php
         $title = 'Konwersatorium Muzyczne w Warszawie';
         require(__DIR__ . '/../templates/head.php');
@@ -81,18 +95,8 @@
 		<header id="banner" class="scrollto clearfix landing-page" data-enllax-ratio=".5">
 			<?php require(__DIR__ . '/../templates/menu.php') ?>
 			<!--Banner Content-->
-			<div id="banner-content" class="row clearfix transp-background">
-				<div class="col-38">
-					<div class="section-heading">
-						<h1>Konwersatorium Muzyczne</h1>
-						<h2>Kreatywna szkoła rozbudzająca miłość do muzyki dla dzieci, dorosłych i seniorów.<br><b>Zajęcia w Warszawie<br>i online</b></h2>
-					</div>
-					<!--Call to Action-->
-					<a href="#kontakt" class="button color-white border-gold" id="call-to-action">Spróbuj i umów się<br />na pierwszą lekcję!</a>
-					<!--End Call to Action-->
-				</div>
-			</div>
-			<!--End of Row-->
+    			<?php require(__DIR__ . '/home/main/banner/banner.php') ?>
+			<!--End of Banner -->
 		</header>
 		<!--Main Content Area-->
 		<main id="content">

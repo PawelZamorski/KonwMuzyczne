@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 25, 2020 at 01:44 PM
+-- Generation Time: Jun 26, 2020 at 05:33 PM
 -- Server version: 10.1.13-MariaDB
 -- PHP Version: 5.6.23
 
@@ -263,6 +263,71 @@ INSERT INTO `emp_specialization` (`employee_id`, `specialization_id`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `languages`
+--
+
+CREATE TABLE `languages` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `code` varchar(10) NOT NULL,
+  `name` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `languages`
+--
+
+INSERT INTO `languages` (`id`, `code`, `name`) VALUES
+(1, 'pl', 'Polish'),
+(2, 'en', 'English'),
+(3, 'vi', 'Vietnamese'),
+(4, 'zh', 'Chinese');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `main_banner`
+--
+
+CREATE TABLE `main_banner` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `img` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `main_banner`
+--
+
+INSERT INTO `main_banner` (`id`, `img`) VALUES
+(1, 'banner/image/test');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `main_banner_translation`
+--
+
+CREATE TABLE `main_banner_translation` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `main_banner_id` int(10) UNSIGNED NOT NULL,
+  `languages_id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `long_desc` varchar(255) DEFAULT NULL,
+  `button` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `main_banner_translation`
+--
+
+INSERT INTO `main_banner_translation` (`id`, `main_banner_id`, `languages_id`, `name`, `long_desc`, `button`) VALUES
+(1, 1, 1, 'konwersatorium muzyczne', 'Kreatywna szkoła rozbudzająca miłość do muzyki dla dzieci, dorosłych i seniorów.<br><b>Zajęcia w Warszawie<br>i online</b>', 'Spróbuj i umów się<br>na pierwszą lekcję!'),
+(2, 1, 2, 'The Music Conversatory', 'International school for children and adults\r\n<br>that brings out love of music', 'Try and schedule<br>a first lesson!'),
+(3, 1, 3, 'Konwersatorium Muzyczne', 'Trường Nhạc. Trường cao cấp – khích lệ tình yêu âm nhạc -dành cho thiếu nhi và người lớn.', 'Bạn hãy thử ngay <br> và hẹn buổi học thử đầu tiên'),
+(4, 1, 4, '音乐学校', '针对儿童和成人的精品音乐学校，让你发现你对音乐的爱', '免费试听!');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `offer`
 --
 
@@ -410,6 +475,26 @@ ALTER TABLE `emp_specialization`
   ADD KEY `specialization_id` (`specialization_id`);
 
 --
+-- Indexes for table `languages`
+--
+ALTER TABLE `languages`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `main_banner`
+--
+ALTER TABLE `main_banner`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `main_banner_translation`
+--
+ALTER TABLE `main_banner_translation`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `main_banner_id` (`main_banner_id`),
+  ADD KEY `languages_id` (`languages_id`);
+
+--
 -- Indexes for table `offer`
 --
 ALTER TABLE `offer`
@@ -447,7 +532,7 @@ ALTER TABLE `common_desc`
 -- AUTO_INCREMENT for table `courses`
 --
 ALTER TABLE `courses`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 --
 -- AUTO_INCREMENT for table `course_name`
 --
@@ -462,12 +547,27 @@ ALTER TABLE `course_type`
 -- AUTO_INCREMENT for table `employee`
 --
 ALTER TABLE `employee`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+--
+-- AUTO_INCREMENT for table `languages`
+--
+ALTER TABLE `languages`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT for table `main_banner`
+--
+ALTER TABLE `main_banner`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `main_banner_translation`
+--
+ALTER TABLE `main_banner_translation`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `offer`
 --
 ALTER TABLE `offer`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 --
 -- AUTO_INCREMENT for table `positions`
 --
@@ -514,6 +614,13 @@ ALTER TABLE `emp_positions`
 ALTER TABLE `emp_specialization`
   ADD CONSTRAINT `emp_specialization_ibfk_1` FOREIGN KEY (`employee_id`) REFERENCES `employee` (`id`),
   ADD CONSTRAINT `emp_specialization_ibfk_2` FOREIGN KEY (`specialization_id`) REFERENCES `specialization` (`id`);
+
+--
+-- Constraints for table `main_banner_translation`
+--
+ALTER TABLE `main_banner_translation`
+  ADD CONSTRAINT `main_banner_translation_ibfk_1` FOREIGN KEY (`main_banner_id`) REFERENCES `main_banner` (`id`),
+  ADD CONSTRAINT `main_banner_translation_ibfk_2` FOREIGN KEY (`languages_id`) REFERENCES `languages` (`id`);
 
 --
 -- Constraints for table `offer`
