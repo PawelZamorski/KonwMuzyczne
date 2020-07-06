@@ -36,11 +36,10 @@
             Główna strona
         </a>
         <div class="dropdown-content" aria-labelledby="dropdownMenuLink">
-            <a class="dropdown-item" href="/admin/main//banner/banner.php">Baner</a>
-<!--            <a class="dropdown-item" href="#">Kurs</a>
-            <a class="dropdown-item" href="#">Kategoria</a>
-            <a class="dropdown-item" href="#">Typ kursu</a>
-            <a class="dropdown-item" href="#">Nazwa kursu</a> -->
+            <a class="dropdown-item" href="/admin/main/banner/banner.php">Baner</a>
+            <a class="dropdown-item" href="/admin/main/about/about.php">About</a>
+            <a class="dropdown-item" href="/admin/main/contact/contact.php">Contact</a>
+            <a class="dropdown-item" href="/admin/main/references/references.php">References</a>
         </div>
     </div>
 

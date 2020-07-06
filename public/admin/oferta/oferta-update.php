@@ -1,7 +1,19 @@
 <!-- Get data from the database -->
+
 <?php
+    session_start();
+    $lang = $_SESSION['lang'];
+
     require(__DIR__ . '/../../../config/config.php');
+
     
+
+// TODO: split on two forms:
+    // 1) update offer - create new form: 'create new offer / delete offer / disactivate offer' using such data as category, course, ect.
+    // 2) update data in courses table - it doesn't change data in offer table
+
+
+
     $offer_id = $_GET['offer_id'];
 	
 	// Step 1: Create connection
@@ -23,14 +35,27 @@
 
     // Get main data
 	// Step 2: Perform database query
-    $result = mysqli_query($connection, "SELECT course_name.course_name, courses.long_desc, courses.short_desc, courses.img, courses.movie, common_desc.common_desc, category.category, course_type.type 
-        FROM courses, course_name, offer, category, course_type, common_desc  
-        WHERE offer.id=$offer_id 
-        AND courses.id = offer.courses_id 
-        AND category.id = offer.category_id 
-        AND course_name.id = courses.course_name_id
-        AND course_type.id = courses.course_type_id
-        AND common_desc.id = courses.common_desc_id;");
+    $result = mysqli_query($connection, "SELECT courses.id as courses_id, courses.course_type_id, courses_translation.id as courses_translation_id, 
+    course_name_translation.course_name_id, courses_translation.long_desc, courses_translation.short_desc, courses.img, 
+    courses.movie, courses.common_desc_id, category_translation.category_id, course_type_translation.type 
+        FROM courses, courses_translation, course_name_translation, offer, category_translation, course_type_translation, languages  
+        WHERE offer.id = '$offer_id'
+        AND courses.id = offer.courses_id
+
+        AND course_name_translation.course_name_id = courses.course_name_id
+        AND course_name_translation.languages_id = languages.id
+
+        AND category_translation.category_id = offer.category_id 
+        AND category_translation.languages_id = languages.id
+        
+        AND courses_translation.courses_id = offer.courses_id
+        AND courses_translation.languages_id = languages.id
+        
+        AND course_type_translation.course_type_id = courses.course_type_id
+        AND course_type_translation.languages_id = languages.id
+
+        AND languages.code = '$lang';");
+
     // Step 3: Use returned data
     $data = mysqli_fetch_array($result, MYSQLI_ASSOC);
     // Step 4: Release returned data
@@ -38,17 +63,20 @@
     
     // Get unique data from category
     // Step 2: Perform database query
-    $result = mysqli_query($connection, "SELECT id, category FROM category;");    
+    $result = mysqli_query($connection, "SELECT category_id, category 
+        FROM category_translation, languages
+        WHERE category_translation.languages_id = languages.id
+        AND languages.code = '$lang';");    
     // Step 3: Use returned data
     $data_category = ""; // string that is displayed in the table
     $array_category = array(); // array for JS function
     while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
-        $array_category[$row['id']] = $row['category'];
+        $array_category[$row['category_id']] = $row['category'];
 
-        if ($row['category'] == $data['category']) {
-            $data_category .= '<option value="' . $row['id'] . '" selected>' . $row['category'] . '</option>';
+        if ($row['category_id'] == $data['category_id']) {
+            $data_category .= '<option value="' . $row['category_id'] . '" selected>' . $row['category'] . '</option>';
         } else {
-            $data_category .= '<option value="' . $row['id'] . '">' . $row['category'] . '</option>';
+            $data_category .= '<option value="' . $row['category_id'] . '">' . $row['category'] . '</option>';
         }
     }
     // Step 4: Release returned data
@@ -56,35 +84,41 @@
 
     // Get unique data from course_type
     // Step 2: Perform database query
-    $result = mysqli_query($connection, "SELECT id, course_type.type FROM course_type;");    
+    $result = mysqli_query($connection, "SELECT course_type_id, course_type_translation.type 
+        FROM course_type_translation, languages
+        WHERE course_type_translation.languages_id = languages.id
+        AND languages.code = '$lang';");
     // Step 3: Use returned data
     $data_course_type = ""; // string that is displayed in the table
     $array_course_type = array(); // array for JS function
     while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
-        $array_course_type[$row['id']] = $row['type'];
+        $array_course_type[$row['course_type_id']] = $row['type'];
 
-        if ($row['type'] == $data['type']) {
-            $data_course_type .= '<option value="' . $row['id'] . '" selected>' . $row['type'] . '</option>';
+        if ($row['course_type_id'] == $data['course_type_id']) {
+            $data_course_type .= '<option value="' . $row['course_type_id'] . '" selected>' . $row['type'] . '</option>';
         } else {
-            $data_course_type .= '<option value="' . $row['id'] . '">' . $row['type'] . '</option>';
+            $data_course_type .= '<option value="' . $row['course_type_id'] . '">' . $row['type'] . '</option>';
         }
     }
     // Step 4: Release returned data
     mysqli_free_result($result);
 
-    // Get unique data from course_name
+    // Get unique data from course_name_translation
     // Step 2: Perform database query
-    $result = mysqli_query($connection, "SELECT id, course_name FROM course_name;");    
+    $result = mysqli_query($connection, "SELECT course_name_id, course_name 
+        FROM course_name_translation, languages
+        WHERE course_name_translation.languages_id = languages.id
+        AND languages.code = '$lang';");    
     // Step 3: Use returned data
     $data_course_name = ""; // string that is displayed in the table
     $array_course_name = array(); // array for JS function
     while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
-        $array_course_name[$row['id']] = $row['course_name'];
+        $array_course_name[$row['course_name_id']] = $row['course_name'];
 
-        if ($row['course_name'] == $data['course_name']) {
-            $data_course_name .= '<option value="' . $row['id'] . '" selected>' . $row['course_name'] . '</option>';
+        if ($row['course_name_id'] == $data['course_name_id']) {
+            $data_course_name .= '<option value="' . $row['course_name_id'] . '" selected>' . $row['course_name'] . '</option>';
         } else {
-            $data_course_name .= '<option value="' . $row['id'] . '">' . $row['course_name'] . '</option>';
+            $data_course_name .= '<option value="' . $row['course_name_id'] . '">' . $row['course_name'] . '</option>';
         }
     }
     // Step 4: Release returned data
@@ -92,17 +126,21 @@
 
     // Get unique data from common_desc
     // Step 2: Perform database query
-    $result = mysqli_query($connection, "SELECT id, common_desc FROM common_desc;");    
+    $result = mysqli_query($connection, "SELECT common_desc_translation.common_desc_id, common_desc_translation.common_desc 
+        FROM common_desc, common_desc_translation, languages
+        WHERE common_desc_translation.common_desc_id = common_desc.id
+        AND common_desc_translation.languages_id = languages.id
+        AND languages.code = '$lang';");    
     // Step 3: Use returned data
     $data_common_desc = ""; // string that is displayed in the table
     $array_common_desc = array(); // array for JS function
     while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
-        $array_common_desc[$row['id']] = $row['common_desc'];
+        $array_common_desc[$row['common_desc_id']] = $row['common_desc'];
 
-        if ($row['common_desc'] == $data['common_desc']) {
-            $data_common_desc .= '<option value="' . $row['id'] . '" selected>' . $row['common_desc'] . '</option>';
+        if ($row['common_desc_id'] == $data['common_desc_id']) {
+            $data_common_desc .= '<option value="' . $row['common_desc_id'] . '" selected>' . $row['common_desc'] . '</option>';
         } else {
-            $data_common_desc .= '<option value="' . $row['id'] . '">' . $row['common_desc'] . '</option>';
+            $data_common_desc .= '<option value="' . $row['common_desc_id'] . '">' . $row['common_desc'] . '</option>';
         }
     }
     // Step 4: Release returned data
@@ -127,6 +165,8 @@
     echo
     '<form id="offerForm" action="/admin/oferta/oferta-crud-update.php" method="post">
         <input name="offer_id" value="' . $offer_id . '" hidden>
+        <input name="courses_id" value="' . $data['courses_id'] . '" hidden>
+        <input name="courses_translation_id" value="' . $data['courses_translation_id'] . '" hidden>
         <table class="table table-bordered">
             <thead class="thead-light">
                 <tr>

@@ -35,9 +35,9 @@
     // Insert data
 	// Step 2: Perform database query
     $sql = "INSERT INTO courses 
-    (course_type_id, course_name_id, short_desc, common_desc_id, long_desc, img, movie) 
-    VALUES 
-    ($course_type_id, $course_name_id, '$short_desc', $common_desc_id, '$long_desc', '$img', '$movie');";
+        (course_type_id, course_name_id, common_desc_id, img, movie) 
+        VALUES 
+        ($course_type_id, $course_name_id, $common_desc_id, '$img', '$movie');";
 
     if (mysqli_query($connection, $sql)) {
         $courses_last_id = mysqli_insert_id($connection);
@@ -49,9 +49,9 @@
     // Insert data
 	// Step 2: Perform database query
     $sql = "INSERT INTO offer
-    (courses_id, category_id)
-    VALUES 
-    ($courses_last_id, $category_id);";
+        (courses_id, category_id)
+        VALUES 
+        ($courses_last_id, $category_id);";
 
     if (mysqli_query($connection, $sql)) {
         echo "Record updated successfully";
@@ -59,8 +59,28 @@
         echo "Error updating record: " . mysqli_error($connection);
       }
 
+
+    // Insert data
+    // Create courses for all languages (default null) -> it will enable to update other languages once the offer is created.
+    // Step 2: Perform database query
+    $sql = "INSERT INTO courses_translation 
+        (languages_id, courses_id, short_desc, long_desc) 
+        VALUES 
+        (1, $courses_last_id, '$short_desc', '$long_desc'),
+        (2, $courses_last_id, '$short_desc', '$long_desc'),
+        (3, $courses_last_id, '$short_desc', '$long_desc'),
+        (4, $courses_last_id, '$short_desc', '$long_desc');";
+
+    if (mysqli_query($connection, $sql)) {
+        $courses_last_id = mysqli_insert_id($connection);
+        echo "Record updated successfully. Last ID is " . $courses_last_id;
+      } else {
+        echo "Error updating record: " . mysqli_error($connection);
+      }
+
+
       // Step 5: Close connection
     mysqli_close($connection);
 
-    header("Location: /admin/oferta/oferta.php");
+    // header("Location: /admin/oferta/oferta.php");
 ?>

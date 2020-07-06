@@ -1,5 +1,8 @@
 <!-- Get data from the database -->
 <?php
+    session_start();
+    $lang = $_SESSION['lang'];
+
     require(__DIR__ . '/../../../config/config.php');
     
     $employee_id = $_GET['employee_id'];
@@ -23,63 +26,91 @@
 
     // Get main data
 	// Step 2: Perform database query
-    $result = mysqli_query($connection, "SELECT employee.id as id, employee.name, employee.long_desc, employee.img_thumbnail, employee.img, course_name.course_name 
-        FROM employee, course_name 
-        WHERE employee.id = $employee_id
-        AND course_name.id = employee.course_name_id;");
+    $result = mysqli_query($connection, "SELECT employee.id, employee.name, employee_translation.long_desc, img, img_thumbnail, course_name_translation.course_name_id 
+    FROM employee, employee_translation, course_name_translation, languages
+    WHERE employee.id = $employee_id
+
+    AND course_name_translation.course_name_id = employee.course_name_id
+    AND course_name_translation.languages_id = languages.id
+    
+    AND employee_translation.employee_id = employee.id
+    AND employee_translation.languages_id = languages.id
+    
+    AND languages.code = '$lang';");
 
     // Step 3: Use returned data
     $data = mysqli_fetch_array($result, MYSQLI_ASSOC);
     // Step 4: Release returned data
     mysqli_free_result($result);
     
-    // Get unique data from course_name
+    // Get unique data from course_name_translation
     // Step 2: Perform database query
-    $result = mysqli_query($connection, "SELECT id, course_name FROM course_name;");    
+    $result = mysqli_query($connection, "SELECT course_name_id, course_name 
+        FROM course_name_translation, languages
+        WHERE course_name_translation.languages_id = languages.id
+        AND languages.code = '$lang';");    
     // Step 3: Use returned data
     $data_course_name = ""; // string that is displayed in the table
     $array_course_name = array(); // array for JS function
     while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
-        $array_course_name[$row['id']] = $row['course_name'];
+        $array_course_name[$row['course_name_id']] = $row['course_name'];
 
-        if ($row['course_name'] == $data['course_name']) {
-            $data_course_name .= '<option value="' . $row['id'] . '" selected>' . $row['course_name'] . '</option>';
+        if ($row['course_name_id'] == $data['course_name_id']) {
+            $data_course_name .= '<option value="' . $row['course_name_id'] . '" selected>' . $row['course_name'] . '</option>';
         } else {
-            $data_course_name .= '<option value="' . $row['id'] . '">' . $row['course_name'] . '</option>';
+            $data_course_name .= '<option value="' . $row['course_name_id'] . '">' . $row['course_name'] . '</option>';
         }
     }
     // Step 4: Release returned data
     mysqli_free_result($result);
 
+    // EXPLANATION:
+    // List of positions as HTML drop-down list.
+    // Create list of options to be displayed in HTML drop-down list. The option is updated by selecting an option.
+    // Add 'selected' atribut to the <option> tag for the current option.
+    // List structure: key represents contains id taken form the db, value contains value taken from the db.
+    // Table.column to be updated: emp_positions.positions_id
 
-    // Create arrays from positions name data:
-    // 1). Get data from emp_positions table. It is needed to know which positions the employee has
     // Step 2: Perform database query
+    // Get data from emp_positions table. It is needed to know which position the employee currently has to assign 'selected' attribute
     $result = mysqli_query($connection, "SELECT positions_id FROM emp_positions 
         WHERE employee_id = $employee_id;");
+    // Step 3: Use returned data
     $positions_id_array = array();
     while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
         $positions_id_array[] = $row['positions_id'];
     }
     // Step 4: Release returned data
     mysqli_free_result($result);
-    // 2). Get data from positions name.
     // Step 2: Perform database query
-    $result = mysqli_query($connection, "SELECT id, name FROM positions;");    
+    // Get data from positions_translation.name and positions_translation.positions_id to create the list of options
+    $result = mysqli_query($connection, "SELECT pt.positions_id, pt.name 
+        FROM positions_translation as pt, positions, languages 
+        WHERE pt.positions_id = positions.id 
+        AND pt.languages_id = languages.id 
+        AND languages.code = '$lang';");
+
     // Step 3: Use returned data
-    $data_positions_name = ""; // string that is displayed in the table
+    $data_positions_name = ""; // string that is displayed in the form's table
     $array_positions_name = array(); // array for JS function
     while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
-        $array_positions_name[$row['id']] = $row['name'];
+        $array_positions_name[$row['positions_id']] = $row['name'];
 
-        if(in_array($row['id'], $positions_id_array)) {
-            $data_positions_name .= '<option value="' . $row['id'] . '" selected>' . $row['name'] . '</option>';
+        if(in_array($row['positions_id'], $positions_id_array)) {
+            $data_positions_name .= '<option value="' . $row['positions_id'] . '" selected>' . $row['name'] . '</option>'; // assign 'selected' attribute
         } else {
-            $data_positions_name .= '<option value="' . $row['id'] . '">' . $row['name'] . '</option>';
+            $data_positions_name .= '<option value="' . $row['positions_id'] . '">' . $row['name'] . '</option>';
         }
     }
     // Step 4: Release returned data
     mysqli_free_result($result);
+
+    // EXPLANATION:
+    // List of positions as HTML drop-down list.
+    // Create list of options to be displayed in HTML drop-down list. The option is updated by selecting an option.
+    // Add 'selected' atribut to the <option> tag for the current option.
+    // List structure: key represents contains id taken form the db, value contains value taken from the db.
+    // Table.column to be updated: emp_specialization.specialization_id
 
     // Get unique data from specialization name
     // 1). Get data from emp_specialization table. It is needed to know which specialization the employee has
@@ -93,23 +124,28 @@
     // Step 4: Release returned data
     mysqli_free_result($result);
     // Step 2: Perform database query
-    $result = mysqli_query($connection, "SELECT id, name FROM specialization;");    
+    $result = mysqli_query($connection, "SELECT st.specialization_id, st.name 
+        FROM specialization_translation as st, specialization, languages
+        WHERE st.specialization_id = specialization.id
+        AND st.languages_id = languages.id 
+        AND languages.code = '$lang';");
+
     // Step 3: Use returned data
     $data_specialization_name = ""; // string that is displayed in the table
     $array_specialization_name = array(); // array for JS function
     while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
-        $array_specialization_name[$row['id']] = $row['name'];
+        $array_specialization_name[$row['specialization_id']] = $row['name'];
 
-        if (in_array($row['id'], $specialization_id_array)) {
+        if (in_array($row['specialization_id'], $specialization_id_array)) {
             $data_specialization_name .= 
             '<div class="form-check-inline">
-                <input class="form-check-input" type="checkbox" id="' . $row['name'] . '" name="specialization_id[]" value="' . $row['id'] . '" checked>
+                <input class="form-check-input" type="checkbox" id="' . $row['name'] . '" name="specialization_id[]" value="' . $row['specialization_id'] . '" checked>
                 <label class="form-check-label" for="' . $row['name'] . '">' . $row['name'] . '</label>
             </div>';
         } else {
             $data_specialization_name .= 
             '<div class="form-check-inline">
-                <input class="form-check-input" type="checkbox" id="' . $row['name'] . '" name="specialization_id[]" value="' . $row['id'] . '">
+                <input class="form-check-input" type="checkbox" id="' . $row['name'] . '" name="specialization_id[]" value="' . $row['specialization_id'] . '">
                 <label class="form-check-label" for="' . $row['name'] . '">' . $row['name'] . '</label>
             </div>';
         }

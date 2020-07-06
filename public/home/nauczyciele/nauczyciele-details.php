@@ -1,5 +1,8 @@
 <!-- Get data from the database -->
 <?php
+    session_start();
+    $lang = $_SESSION['lang']; // Get language
+
     require(__DIR__ . '/../../../config/config.php');
 
     $employee_id = $_GET["employee_id"];
@@ -22,10 +25,17 @@
     mysqli_set_charset($connection, "utf8mb4");
 
     // Step 2: Perform database query
-    $result = mysqli_query($connection, "SELECT name, long_desc, img, course_name 
-        FROM employee, course_name 
+    $result = mysqli_query($connection, "SELECT employee.name, employee_translation.long_desc, img, course_name_translation.course_name 
+        FROM employee, employee_translation, course_name_translation, languages
         WHERE employee.id = $employee_id
-        AND employee.course_name_id = course_name.id;");
+
+        AND course_name_translation.course_name_id = employee.course_name_id
+        AND course_name_translation.languages_id = languages.id
+
+        AND employee_translation.employee_id = employee.id
+        AND employee_translation.languages_id = languages.id
+
+        AND languages.code = '$lang';");
 
     // Step 3: Use returned data
     $data = mysqli_fetch_assoc($result);
@@ -34,33 +44,32 @@
 
 <!DOCTYPE html>
 <html>
-    <head lang="pl-PL">
-        <?php
-            $title = $data['name'];
-            require(__DIR__ . '/../../../templates/head.php');
-        ?>
-    </head>
-    <body>
-        <!-- Preloader -->
-        <div id="preloader">
-            <div id="status" class="la-ball-triangle-path">
-                <div></div>
-                <div></div>
-                <div></div>
-            </div>
-        </div>
-        <!--End of Preloader-->
-        <div class="page-border" data-wow-duration="0.7s" data-wow-delay="0.2s">
-            <div class="top-border wow fadeInDown animated" style="visibility: visible; animation-name: fadeInDown;"></div>
-            <div class="right-border wow fadeInRight animated" style="visibility: visible; animation-name: fadeInRight;"></div>
-            <div class="bottom-border wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;"></div>
-            <div class="left-border wow fadeInLeft animated" style="visibility: visible; animation-name: fadeInLeft;"></div>
-        </div>
-        <div id="wrapper">
-            <header id="banner" class="scrollto clearfix" data-enllax-ratio=".5">
-                <?php require(__DIR__ . '/../../../templates/menu.php'); ?>
-            </header>
-        </div>
+<head lang="pl-PL">
+    <?php
+        $title = $data['name'];
+        require(__DIR__ . '/../../../templates/head.php');
+    ?>
+</head>
+<body>
+    <!-- Facebook Chat -->
+    <?php require(__DIR__ . '/../../../lib/facebook/chat.php') ?>
+    <!-- End of Facebook Chat -->
+
+    <!-- Preloader -->
+    <?php require(__DIR__ . '/../../../templates/preloader.php') ?>
+    <!-- End of Preloader-->
+
+    <!-- Page Border -->
+    <?php require(__DIR__ . '/../../../templates/page-border.php') ?>
+    <!-- End of Page Border -->
+
+    <!--Wrapper-->
+    <div id="wrapper">
+        <header id="banner" class="scrollto clearfix landing-page" data-enllax-ratio=".5">
+            <!-- Menu -->
+            <?php require(__DIR__ . '/../../../templates/menu.php') ?>
+            <!-- End of Menu -->
+        </header>
         <!--Main Content Area-->
         <main id="content">
             <!-- Employee -->
@@ -81,22 +90,19 @@
                 </div>
             </section>
         <!--End of Employee -->
+        </main>
+        <!-- End of Main Content Area -->
         <!--Footer-->
         <?php require(__DIR__ . '/../../../templates/footer.php'); ?>
         <!--End of Footer-->
     </div>
-    <!-- Include JavaScript resources -->
-    <script src="/js/jquery.1.8.3.min.js"></script>
-    <script src="/js/wow.min.js"></script>
-    <script src="/js/featherlight.min.js"></script>
-    <script src="/js/featherlight.gallery.min.js"></script>
-    <script src="/js/jquery.enllax.min.js"></script>
-    <script src="/js/jquery.scrollUp.min.js"></script>
-    <script src="/js/jquery.easing.min.js"></script>
-    <script src="/js/jquery.waypoints.min.js"></script>
-    <script src="/js/images-loaded.min.js"></script>
-    <script src="/js/lightbox.min.js"></script>
-    <script src="/js/site.js"></script>
+	<!--End of Wrapper-->
+
+    <!-- JavaScript -->
+    <?php
+    require(__DIR__ ."/../../../templates/js-resources.php");
+    ?>
+    <!-- End of Javascript -->
 </body>
 </html>
 

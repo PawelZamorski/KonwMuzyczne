@@ -1,7 +1,13 @@
 <?php
     require(__DIR__ . '/../../../config/config.php');
 
+// TODO: split on two forms:
+    // 1) update offer
+    // 2) update data in courses table
+
     $offer_id = $_POST['offer_id'];
+    $courses_id = $_POST['courses_id'];
+    $courses_translation_id = $_POST['courses_translation_id'];
     $category_id = $_POST['category_id'];
     $course_type_id = $_POST['course_type_id'];
     $course_name_id = $_POST['course_name_id'];
@@ -30,26 +36,35 @@
 
     // Get main data
 	// Step 2: Perform database query
-    $sql = "UPDATE courses, offer 
-    SET category_id = $category_id,
-    course_type_id = $course_type_id,
+    $sql = "UPDATE courses 
+    SET course_type_id = $course_type_id,
     course_name_id = $course_name_id,
-    short_desc = '$short_desc',
     common_desc_id = $common_desc_id,
-    long_desc = '$long_desc',
     img = '$img',
     movie = '$movie'
-    WHERE offer.id = $offer_id
-    AND courses.id = offer.courses_id;";
+    WHERE courses.id = $courses_id;";
 
     if (mysqli_query($connection, $sql)) {
         echo "Record updated successfully";
       } else {
         echo "Error updating record: " . mysqli_error($connection);
       }
-    
+
+    // Get main data
+	// Step 2: Perform database query
+    $sql = "UPDATE courses_translation 
+    SET short_desc = '$short_desc',
+    long_desc = '$long_desc'
+    WHERE courses_translation.id = $courses_translation_id;";
+
+    if (mysqli_query($connection, $sql)) {
+        echo "Record updated successfully";
+    } else {
+        echo "Error updating record: " . mysqli_error($connection);
+    }
+
     // Step 5: Close connection
     mysqli_close($connection);
 
-    header("Location: /admin/oferta/oferta.php");
+    //header("Location: /admin/oferta/oferta.php");
 ?>

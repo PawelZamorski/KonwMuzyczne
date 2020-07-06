@@ -1530,6 +1530,7 @@ blockquote {
     font-style: italic;
     color:#ccc;
     margin:0 0 25px 0;
+    text-align: center;
 }
 
 /*Price*/
@@ -2460,7 +2461,7 @@ ul li, ol li { margin-left: 30px; line-height:30px; }
 
 .google-maps {
     position: relative;
-    padding-bottom: 75%; // This is the aspect ratio
+    padding-bottom: 75%; /* This is the aspect ratio */
     height: 0;
     overflow: hidden;
 }

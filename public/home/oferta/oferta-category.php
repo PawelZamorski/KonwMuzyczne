@@ -1,4 +1,7 @@
 ﻿<?php
+    session_start();
+    $lang = $_SESSION['lang'];
+
     require(__DIR__ . '/../../../config/config.php');
 
     $category_id = $_GET["category_id"];
@@ -20,24 +23,51 @@
     // Good practice: SET NAMES 'utf8' for MySQL using set_charset method
     mysqli_set_charset($connection, "utf8mb4");
 
+	// Step 2: Perform database query
+    $result = mysqli_query($connection, "SELECT heading_3, heading_2, button, paragraph, heading_3_category 
+        FROM courses_heading_translation, languages
+        WHERE courses_heading_translation.languages_id = languages.id
+        AND languages.code = '$lang';");
+
+    // Step 3: Use returned data
+    $data_heading = mysqli_fetch_array($result, MYSQLI_ASSOC);
+    // Step 4: Release returned data
+    mysqli_free_result($result);
+
+
     // Get data from table category (description of category)
     // Step 2: Perform database query
-    $result = mysqli_query($connection, "SELECT category.id as category_id, category, long_desc, img, common_desc 
-    FROM category, common_desc 
+    $result = mysqli_query($connection, "SELECT  category.img, common_desc_translation.common_desc, category_translation.category, category_translation.long_desc 
+    FROM category, category_translation, common_desc_translation, languages 
     WHERE category.id=$category_id 
-    AND category.common_desc_id=common_desc.id;");
+    AND category.common_desc_id=common_desc_translation.common_desc_id
+    AND common_desc_translation.languages_id = languages.id
+
+    AND category_translation.category_id = category.id
+    AND category_translation.languages_id = languages.id
+    
+    AND languages.code = '$lang';");
+
+    // Step 3: Use returned data
     $data = mysqli_fetch_array($result, MYSQLI_ASSOC);
     // Step 4: Release returned data
 	mysqli_free_result($result);
 
     // Get data from table courses based on condition on table offer ()
     // Step 2: Perform database query
-    $result = mysqli_query($connection, "SELECT offer.id as offer_id, courses.img_thumbnail, category.category, course_type.type 
-        FROM courses, offer, category, course_type 
+    $result = mysqli_query($connection, "SELECT offer.id as offer_id, courses.img_thumbnail, category_translation.category, course_type_translation.type 
+        FROM courses, offer, category, category_translation, course_type_translation, languages
         WHERE offer.category_id=$category_id 
         AND courses.id = offer.courses_id 
         AND category.id = offer.category_id 
-        AND course_type.id = courses.course_type_id;");
+
+        AND course_type_translation.course_type_id = courses.course_type_id
+        AND course_type_translation.languages_id = languages.id
+
+        AND category_translation.category_id = category.id
+        AND category_translation.languages_id = languages.id
+
+        AND languages.code = '$lang';");
 ?>
 
 <!DOCTYPE html>
@@ -49,35 +79,33 @@
     ?>
 </head>
 <body>
-	<!-- Preloader
-	<div id="preloader">
-		<div id="status" class="la-ball-triangle-path">
-			<div></div>
-			<div></div>
-			<div></div>
-		</div>
-	</div>
-	End of Preloader-->
-	<div class="page-border" data-wow-duration="0.7s" data-wow-delay="0.2s">
-		<div class="top-border wow fadeInDown animated" style="visibility: visible; animation-name: fadeInDown;"></div>
-		<div class="right-border wow fadeInRight animated" style="visibility: visible; animation-name: fadeInRight;"></div>
-		<div class="bottom-border wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;"></div>
-		<div class="left-border wow fadeInLeft animated" style="visibility: visible; animation-name: fadeInLeft;"></div>
-	</div>
+    <!-- Facebook Chat -->
+    <?php require(__DIR__ . '/../../../lib/facebook/chat.php') ?>
+    <!-- End of Facebook Chat -->
 
-	<!--Wrapper-->
-	<div id="wrapper">
-		<div>
+    <!-- Preloader -->
+    <?php require(__DIR__ . '/../../../templates/preloader.php') ?>
+    <!-- End of Preloader-->
+
+    <!-- Page Border -->
+    <?php require(__DIR__ . '/../../../templates/page-border.php') ?>
+    <!-- End of Page Border -->
+
+    <!--Wrapper-->
+    <div id="wrapper">
+        <header id="banner" class="scrollto clearfix landing-page" data-enllax-ratio=".5">
+            <!-- Menu -->
             <?php require(__DIR__ . '/../../../templates/menu.php') ?>
-		</div>
-			<!--Main Content Area-->
+            <!-- End of Menu -->
+        </header>
+        <!--Main Content Area-->
 		<main id="content">
 			<section id="about" class="introduction scrollto">
 				<div class="row clearfix">
 					<div class="col-3">
 						<div class="section-heading">
-							<h3>ZAPRASZAMY</h3>
-							<h2 class="section-title">Lekcje indywidualne <?php echo $data['category'] ?></h2>
+							<h3><?php echo $data_heading['heading_3_category'] ?></h3>
+							<h2 class="section-title uppercase"><?php echo $data['category'] ?></h2>
 							<p><img src=<?php echo $data['img'] ?> alt="Lekcje indywidualne <?php echo $data['category'] ?>" /></p>
 						</div>
 					</div>
@@ -91,8 +119,8 @@
 			<section id="oferta" class="secondary-color text-center scrollto clearfix ">
 				<div class="row clearfix">
 					<div class="section-heading">
-						<h3>Twój wybór</h3>
-						<h2 class="section-title">Nasza oferta</h2>
+						<h3><?php echo $data_heading['heading_3'] ?></h3>
+						<h2 class="section-title"><?php echo $data_heading['heading_2'] ?></h2>
 					</div>
 
                     <?php
@@ -104,8 +132,8 @@
                             <div class="pricing-block-content">
                                 <h3>' . $row['type'] . '</h3>
                                 <p class="pricing-sub">' . $row['category'] . '</p>
-                                <span><a href="oferta-details.php?offer_id=' . $row['offer_id'] . '"><img src=' . $row['img_thumbnail'] . ' alt="Zdjęcie ' . $row['type'] . ' ' . $row['category'] . '"/></a></span>
-                                <a href="oferta-details.php?offer_id=' . $row['offer_id'] . '" class="button">Sprawdź</a>
+                                <span><a href="oferta-details.php?offer_id=' . $row['offer_id'] . '"><img src=' . $row['img_thumbnail'] . ' alt="' . $row['type'] . ' ' . $row['category'] . '"/></a></span>
+                                <a href="oferta-details.php?offer_id=' . $row['offer_id'] . '" class="button">' . $data_heading['button'] . '</a>
                             </div>
                         </div>';
                     }
@@ -114,31 +142,18 @@
 			</section>
 			<!--End of Pricing Tables-->
 		</main>
-		<!--End Main Content Area-->
-		<!--Footer-->
-        <?php require(__DIR__ ."/../../../templates/footer.php"); ?>
-		<!--End of Footer-->
-	</div>
+        <!-- End of Main Content Area -->
+        <!--Footer-->
+        <?php require(__DIR__ . '/../../../templates/footer.php'); ?>
+        <!--End of Footer-->
+    </div>
 	<!--End of Wrapper-->
-<!-- Include JavaScript resources -->
-<script src="/js/jquery.1.8.3.min.js"></script>
-<script src="/js/wow.min.js"></script>
-<script src="/js/featherlight.min.js"></script>
-<script src="/js/featherlight.gallery.min.js"></script>
-<script src="/js/jquery.enllax.min.js"></script>
-<script src="/js/jquery.scrollUp.min.js"></script>
-<script src="/js/jquery.easing.min.js"></script>
-<script src="/js/jquery.stickyNavbar.min.js"></script>
-<script src="/js/jquery.waypoints.min.js"></script>
-<script src="/js/images-loaded.min.js"></script>
-<script src="/js/lightbox.min.js"></script>
-<script src="/js/site.js"></script>
-<script src="/js/contact.js"></script>
-<script src="/js/stats.js"></script>
-<script src="/js/youtube-modal.js"></script>
-<script src="/js/newsletter-modal.js"></script>
 
-
+    <!-- JavaScript -->
+    <?php
+    require(__DIR__ ."/../../../templates/js-resources.php");
+    ?>
+    <!-- End of Javascript -->
 </body>
 
 <?php

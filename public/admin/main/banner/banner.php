@@ -116,7 +116,7 @@
     // function -> long_desc
     // Built element on load
     window.addEventListener('load', (event) => {
-        document.getElementById("londDescIn").innerHTML = document.getElementById("longDesc").value;
+        document.getElementById("longDescIn").innerHTML = document.getElementById("longDesc").value;
     });
     // Add event listener
     document.getElementById("longDesc").addEventListener("input", function(){

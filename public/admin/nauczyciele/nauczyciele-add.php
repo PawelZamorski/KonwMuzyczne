@@ -1,5 +1,7 @@
 <!-- Get data from the database -->
 <?php
+    $lang = 'pl';
+
     require(__DIR__ . '/../../../config/config.php');
     
 	// Step 1: Create connection
@@ -18,44 +20,53 @@
 	}
     // Good practice: SET NAMES 'utf8' for MySQL using set_charset method
     mysqli_set_charset($connection, "utf8mb4");
-    
-    // Get unique data from course_name
+
+    // Get unique data from course_name_tranlation
     // Step 2: Perform database query
-    $result = mysqli_query($connection, "SELECT id, course_name FROM course_name;");    
+    $result = mysqli_query($connection, "SELECT course_name_id, course_name 
+        FROM course_name_translation, languages
+        WHERE course_name_translation.languages_id = languages.id
+        AND languages.code = '$lang';");    
     // Step 3: Use returned data
     $data_course_name = ""; // string that is displayed in the table
     $array_course_name = array(); // array for JS function
     while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
-        $array_course_name[$row['id']] = $row['course_name'];
-        $data_course_name .= '<option value="' . $row['id'] . '">' . $row['course_name'] . '</option>';
+        $array_course_name[$row['course_name_id']] = $row['course_name'];
+        $data_course_name .= '<option value="' . $row['course_name_id'] . '">' . $row['course_name'] . '</option>';
     }
     // Step 4: Release returned data
     mysqli_free_result($result);
 
     // Create arrays from positions name data:
     // Step 2: Perform database query
-    $result = mysqli_query($connection, "SELECT id, name FROM positions;");    
+    $result = mysqli_query($connection, "SELECT positions_id, positions_translation.name 
+        FROM positions_translation, languages
+        WHERE positions_translation.languages_id = languages.id
+        AND languages.code = '$lang';");    
     // Step 3: Use returned data
     $data_positions_name = ""; // string that is displayed in the table
     $array_positions_name = array(); // array for JS function
     while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
-        $array_positions_name[$row['id']] = $row['name'];
-        $data_positions_name .= '<option value="' . $row['id'] . '">' . $row['name'] . '</option>';
+        $array_positions_name[$row['positions_id']] = $row['name'];
+        $data_positions_name .= '<option value="' . $row['positions_id'] . '">' . $row['name'] . '</option>';
     }
     // Step 4: Release returned data
     mysqli_free_result($result);
 
     // Get unique data from specialization name
     // Step 2: Perform database query
-    $result = mysqli_query($connection, "SELECT id, name FROM specialization;");    
+    $result = mysqli_query($connection, "SELECT specialization_id, specialization_translation.name 
+        FROM specialization_translation, languages
+        WHERE specialization_translation.languages_id = languages.id
+        AND languages.code = '$lang';");    
     // Step 3: Use returned data
     $data_specialization_name = ""; // string that is displayed in the table
     $array_specialization_name = array(); // array for JS function
     while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
-        $array_specialization_name[$row['id']] = $row['name'];
+        $array_specialization_name[$row['specialization_id']] = $row['name'];
         $data_specialization_name .= 
         '<div class="form-check-inline">
-            <input class="form-check-input" type="checkbox" id="' . $row['name'] . '" name="specialization_id[]" value="' . $row['id'] . '">
+            <input class="form-check-input" type="checkbox" id="' . $row['name'] . '" name="specialization_id[]" value="' . $row['specialization_id'] . '">
             <label class="form-check-label" for="' . $row['name'] . '">' . $row['name'] . '</label>
         </div>';
     }

@@ -1,3 +1,34 @@
+<?php
+    $lang = $_SESSION['lang'];
+    require(__DIR__ . '/../config/config.php');
+
+    // Step 1: Create connection
+	$connection = mysqli_connect($dbhost, $dbuser, $dbpassword, $dbname);
+	
+	// Test if connection happend
+	if(mysqli_connect_errno()){
+		die("DB connection failed: " . 
+			mysqli_connect_error() .
+			" (" . mysqli_connect_errno() . ")"
+		);
+	}
+	
+	if(!$connection){
+		die("Could not connect: " . mysqli_connect_error());
+	}
+    // Good practice: SET NAMES 'utf8' for MySQL using set_charset method
+    mysqli_set_charset($connection, "utf8mb4");
+
+    // Step 2: Perform database query
+    $result_menu = mysqli_query($connection, "SELECT menu.sort_index, menu.code, menu_translation.nav_link
+        FROM menu, menu_translation, languages
+        WHERE menu_translation.menu_id = menu.id
+
+        AND menu_translation.languages_id = languages.id
+        AND languages.code = '$lang';");
+
+?>
+
 <div id="header" class="nav-collapse">
     <div class="row clearfix">
         <div class="col-1">
@@ -61,38 +92,33 @@
             
             <nav id="nav-main">
                 <ul>
-                    <li>
-                        <a href="<?= $a ?>#banner">Strona główna</a>
-                    </li>
-                    <li>
-                        <a href="<?= $a ?>#o-szkole">O szkole</a>
-                    </li>
-                    <li>
-                        <a href="<?= $a ?>#oferta">Oferta</a>
-                    </li>
-                    <li>
-                        <a href="<?= $a ?>#oferta-sezonowa"><b>kursy letnie</b></a>
-                    </li>
-                    <li>
-                        <a href="<?= $a ?>#galeria">Galeria</a>
-                    </li>
-                    <li>
-                        <a href="<?= $a ?>#nauczyciele">Nauczyciele</a>
-                    </li>
-                    <li>
-                        <a href="<?= $a ?>#referencje">Referencje</a>
-                    </li>
-                    <li>
-                        <a href="<?= $a ?>#kontakt">Kontakt</a>
+                <?php
+                    while($row = mysqli_fetch_array($result_menu, MYSQLI_ASSOC)){
+                        echo 
+                        '<li>
+                            <a href="' . $a . '#' . $row['code'] . '">' . $row['nav_link'] . '</a>
+                        </li>';
+                    }
+                ?>
+                    <li class="mobile-links">
+                        <a title="Dla Polskich Studentów" href="/?lang=pl">
+                            <img src="/images/flags/poland.png" />
+                        </a>
                     </li>
                     <li class="mobile-links">
-                        <a href="/vi/"><img src="/images/flags/vietnam.png">For Vietnamese Students</a>
+                        <a title="For Vietnamese Students" href="/?lang=vi">
+                            <img src="/images/flags/vietnam.png" />
+                        </a>
                     </li>
                     <li class="mobile-links">
-                        <a href="/en/"><img src="/images/flags/england.png">For English Students</a>
+                        <a title="For English Students" href="/?lang=en">
+                            <img src="/images/flags/england.png"  />
+                        </a>
                     </li>
                     <li class="mobile-links">
-                        <a href="/chinese.html"><img src="/images/flags/china.png">For Chinese Students</a>
+                        <a title="For Chinese Students" href="/?lang=zh">
+                            <img src="/images/flags/china.png" />
+                        </a>
                     </li>
                     <li class="mobile-links">
                         <a href="https://www.facebook.com/konwersatoriummuzyczne/"><img src="/images/flags/fb-art.png">Dołącz do nas na Facebooku</a>
@@ -115,3 +141,11 @@
     </div>
 </div>
 <!--End of Header-->
+
+<?php  	
+	// Step 4: Release returned data
+	mysqli_free_result($result_menu);
+	
+	// Step 5: Close connection
+    mysqli_close($connection);
+?>

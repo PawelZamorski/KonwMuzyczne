@@ -41,9 +41,9 @@
     // Get main data
 	// Step 2: Perform database query
     $sql = "INSERT INTO employee 
-        (name, course_name_id, img, img_thumbnail, long_desc)
+        (name, course_name_id, img, img_thumbnail)
         VALUES 
-        ('$name', $course_name_id, '$img', '$img_thumbnail', '$long_desc');";
+        ('$name', $course_name_id, '$img', '$img_thumbnail');";
 
     if (mysqli_query($connection, $sql)) {
         $employee_last_id = mysqli_insert_id($connection);
@@ -51,6 +51,23 @@
       } else {
         echo "Error updating record: " . mysqli_error($connection);
       }
+
+    // TODO: check if  = $employee_last_id is not -1
+    // Insert data
+	// Step 2: Perform database query
+    $sql = "INSERT INTO employee_translation
+        (languages_id, employee_id, long_desc)
+        VALUES
+        (1, $employee_last_id, '$long_desc'),
+        (2, $employee_last_id, '$long_desc'),
+        (3, $employee_last_id, '$long_desc'),
+        (4, $employee_last_id, '$long_desc');";
+
+    if (mysqli_query($connection, $sql)) {
+        echo "Record updated successfully";
+    } else {
+        echo "Error updating record: " . mysqli_error($connection);
+    }
 
     // TODO: check if  = $employee_last_id is not -1
     // Insert data

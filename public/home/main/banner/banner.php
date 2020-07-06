@@ -42,3 +42,13 @@
         <!--End Call to Action-->
     </div>
 </div>
+
+
+<?php  	
+	// Step 4: Release returned data
+	mysqli_free_result($result);
+	
+	// Step 5: Close connection
+    mysqli_close($connection);
+
+?>

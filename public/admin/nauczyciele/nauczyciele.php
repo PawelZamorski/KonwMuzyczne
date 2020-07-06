@@ -1,5 +1,8 @@
 <!-- Get data from the database -->
 <?php
+    session_start();
+    $lang = $_SESSION['lang'];
+
     require(__DIR__ . '/../../../config/config.php');
 	
 	// Step 1: Create connection
@@ -20,9 +23,12 @@
     mysqli_set_charset($connection, "utf8mb4");
 
 	// Step 2: Perform database query
-    $result = mysqli_query($connection, "SELECT employee.id as id, employee.name, course_name.course_name 
-        FROM employee, course_name 
-        WHERE course_name.id = employee.course_name_id;");
+    $result = mysqli_query($connection, "SELECT employee.id as id, employee.name, course_name_translation.course_name 
+        FROM employee, course_name_translation, languages 
+        WHERE course_name_translation.course_name_id = employee.course_name_id
+        AND course_name_translation.languages_id = languages.id
+        AND languages.code = '$lang';");
+
 ?>
 
 <!DOCTYPE html>
