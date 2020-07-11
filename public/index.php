@@ -71,7 +71,11 @@ if (isset($_GET['lang'])) {
             <?php require(__DIR__ . '/home/main/special-offer/special-offer-main.php') ?>
             <!-- End of Special Offer -->
 
-			<!--Gallery-->
+            <!-- Shop Main -->
+            <?php require(__DIR__ . '/home/shop/item/item-main.php') ?>
+			<!-- End of Shop Main -->
+
+            <!--Gallery-->
             <?php require(__DIR__ . '/home/main/gallery/gallery.php') ?>
 			<!--End of Gallery-->
 

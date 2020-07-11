@@ -112,7 +112,4 @@
 	
 	// Step 5: Close connection
     mysqli_close($connection);
-
-    // Garbage collector - garbage collector is automatic if variable is out of the scope
-    unset($data);
 ?>

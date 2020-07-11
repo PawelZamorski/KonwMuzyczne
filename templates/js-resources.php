@@ -9,7 +9,6 @@
 <script src="/js/jquery.stickyNavbar.min.js"></script>
 <script src="/js/jquery.waypoints.min.js"></script>
 <script src="/js/images-loaded.min.js"></script>
-<script src="/js/lightbox.min.js"></script>
 <script src="/js/site.js"></script>
 <script src="/js/contact.js"></script>
 <script src="/js/stats.js"></script>

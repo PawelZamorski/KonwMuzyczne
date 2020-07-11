@@ -29,7 +29,7 @@
 
 ?>
 
-<div id="header" class="nav-collapse">
+<div id="header">
     <div class="row clearfix">
         <div class="col-1">
             <div id="logo">
@@ -56,21 +56,6 @@
                     <li>
                         <a title="For Chinese Students" href="/?lang=zh">
                             <img src="/images/flags/china.png" />
-                        </a>
-                    </li>
-                    <li>
-                        <a id="fb-icon" target="_blank" title="facebook" href="https://www.facebook.com/konwersatoriummuzyczne/">
-                            <img src="/images/flags/fb-art.png" />
-                        </a>
-                    </li>
-                    <li>
-                        <a target="_blank" title="instagram" href="https://www.instagram.com/konwersatoriummuzyczne/">
-                            <img src="/images/flags/ig-art.png" />
-                        </a>
-                    </li>
-                    <li>
-                        <a target="_blank" title="YouTube" href="https://www.youtube.com/channel/UCpISipwaVRA4S16_j3ntGWA">
-                            <img src="/images/flags/yt-art.png" />
                         </a>
                     </li>
                 </ul>

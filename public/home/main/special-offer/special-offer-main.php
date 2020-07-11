@@ -43,7 +43,7 @@
 ?>
 
 
-<section id="oferta-sezonowa" class="secondary-color text-center scrollto clearfix ">
+<section id="oferta-sezonowa" class="text-center scrollto clearfix ">
     <div class="row clearfix">
         <div class="section-heading">
             <h3><?php echo $data['heading_3'] ?></h3>

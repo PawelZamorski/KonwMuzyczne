@@ -1,7 +1,7 @@
 <footer id="landing-footer" class="clearfix">
     <div class="row clearfix">
     <!--Social Icons in Footer-->
-        <ul id="font-awesome-footer" class="col-1" style="padding-right: 80px;">
+        <ul class="col-1 fa-opacity style="padding-right: 80px;">
             <li style="margin: 0">
                 <a target="_blank" title="facebook" href="https://www.facebook.com/konwersatoriummuzyczne/">
                     <span class="fa-stack fa-2x">
