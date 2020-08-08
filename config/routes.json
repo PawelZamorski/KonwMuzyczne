@@ -1,0 +1,37 @@
+{
+    "": {
+        "controller": "HomeController",
+        "method": "getAll"
+    },
+    ":lang": {
+        "controller": "HomeController",
+        "method": "getAllLang",
+        "params": {
+            ":lang": "string"
+        }
+    },
+    "courses/:lang": {
+        "controller": "CourseController",
+        "method": "getAll",
+        "params": {
+            ":lang": "string"
+        }
+    },
+    "courses/:lang/:category": {
+        "controller": "CourseController",
+        "method": "getByCategory",
+        "params": {
+            ":lang": "string",
+            ":category": "string"
+        }
+    },
+    "courses/:lang/:courseId": {
+        "controller": "CourseController",
+        "method": "getById",
+        "params": {
+            ":lang": "string",
+            ":courseId": "int"
+        }
+    }
+
+}

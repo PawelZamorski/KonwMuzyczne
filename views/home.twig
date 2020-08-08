@@ -1,0 +1,25 @@
+{% extends 'layout.twig' %}
+
+{% block banner %}
+    {{ include('banner.twig') }}
+{% endblock %}
+
+
+{% block content %}
+    <!-- Home Page -->
+    {{ include('info.twig') }}
+
+    {{ include('counter.twig') }}
+
+    {{ include('progress.twig') }}
+
+    {{ include('youtube-main.twig') }}
+
+    {{ include('facts.twig') }}
+
+    {{ include('movies-gallery.twig') }}
+
+    {{ include('offer-main.twig') }}
+
+    <!-- End of Home Page -->
+{% endblock %}

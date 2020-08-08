@@ -1,0 +1,15 @@
+<div id="facts" class="scrollto clearfix spacious">
+    <div class="row no-padding-bottom clearfix">
+        {% for fact in factsArr %}
+        <div class="col-2 icon-block icon-top wow fadeInUp" data-wow-delay="0.1s">
+            <!--Icon-->
+            <div class="icon">
+                <i class="fa {{ fact.getIcon }} fa-2x"></i>
+            </div>
+            <div class="icon-block-description">
+                {{ fact.getFact | raw }}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>

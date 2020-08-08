@@ -1,0 +1,12 @@
+<div id="counter" class="secondary-color text-center clearfix " style="margin-bottom: 20px;">
+    {% for counter in counterArr %}
+    <div class="pricing-block col-3 wow fadeInUp" data-wow-delay="0.4s">
+        <div class="pricing-block-content">
+            <h3>{{ counter.getHeading3 }}</h3>
+            <span class="count">{{ counter.getCounter }}</span>
+            <br />
+            {{ counter.getShortDesc }}
+        </div>
+    </div>
+    {% endfor %}
+</div>

@@ -1,0 +1,18 @@
+<section id="oferta" class="secondary-color text-center scrollto clearfix ">
+    <div class="row clearfix">
+        <div class="section-heading">
+            <h3>{{ offerMainArr.getHeading3 }}</h3>
+            <h2 class="section-title">{{ offerMainArr.getHeading2 }}</h2>
+        </div>
+        {% for offerCategory in offerCategoryArr %}
+        <div class="pricing-block col-3 wow fadeInUp" data-wow-delay="0.8s">
+            <div class="pricing-block-content">
+                <h3>{{ offerCategory.getCategory }}</h3>
+                <p class="pricing-sub">{{ offerMainArr.getParagraph }}</p>
+                <span><a href="/home/oferta/oferta-category.php?category_id={{ offerCategory.getCategoryId }}"><img src="{{ offerCategory.getImg }}" alt="Zdjęcie ' . $row['category'] . '"/></a></span>
+                <a href="/home/oferta/oferta-category.php?category_id={{ offerCategory.getCategoryId }}" class="button">{{ offerMainArr.getButton }}</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>

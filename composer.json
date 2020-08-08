@@ -1,0 +1,22 @@
+{
+    "name": "konwersatorium/konwersatorium",
+    "description": "Website konwersatoriummuzyczne.pl",
+    "minimum-stability": "stable",
+    "license": "Apache-2.0",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Pawel Zamorski",
+            "email": "zamorskipawel@wp.pl"
+        }
+    ],
+    "require": {
+        "monolog/monolog": "^1.25",
+        "twig/twig": "^1.42"
+    },
+    "autoload": {
+        "psr-4": {
+            "Konwersatorium\\": "src"
+        }
+    }
+}

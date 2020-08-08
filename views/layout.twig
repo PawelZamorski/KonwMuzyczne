@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pl-PL">
+    <head>
+    <meta charset="UTF-8">
+        <!--Page Title-->
+        <title> | Konwersatorium Muzyczne</title>
+        <!--Meta Keywords and Description-->
+        <meta name="keywords" content="fortepian, śpiew, nauczyciel, nauka gry dla dzieci, nauka gry dla dorosłych, pianino, centrum warszawy, aleje jerozolimskie">
+        <meta name="description" content="Kreatywna szkoła rozbudzająca miłość do muzyki dla dzieci i dorosłych. Zapraszamy!">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+        <!--Favicon-->
+        <link rel="shortcut icon" href="/images/favicon.ico" title="Favicon" />
+        <!-- Main CSS Files -->
+        <!--TODO: add version of css: <link rel="stylesheet" href="/css/style.css?v= filemtime("/css/style.css") "> -->
+        <link rel="stylesheet" href="/css/style.css">
+        <!-- Namari Color CSS -->
+        <link rel="stylesheet" href="/css/namari-color.css">
+        <!--Icon Fonts - Font Awesome Icons-->
+        <link rel="stylesheet" href="/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+        <script src="https://kit.fontawesome.com/f7a1bd4acc.js" crossorigin="anonymous"></script>
+        <!-- Animate CSS-->
+        <link href="/css/animate.css" rel="stylesheet" type="text/css">
+        <!--Google Webfonts-->
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
+        <!-- Youtube Movies CSS-->
+        <link href="/css/youtube-gallery.css" rel="stylesheet" type="text/css">
+    </head>
+    <body>
+
+        <!--Wrapper-->
+        <div id="wrapper">
+            {{ include('templates/menu.twig') }}
+              
+            <!--Banner Content-->
+            {% block banner %}{% endblock %}
+            <!--End of Banner Content -->
+
+            <!--Main Content Area-->
+            <main id="content">
+            {% block content %}{% endblock %}            
+            </main>
+            <!--End Main Content Area-->
+
+            <!--Footer-->
+            <footer id="landing-footer" class="clearfix">
+                <div class="row clearfix">
+                <!--Social Icons in Footer-->
+                    <ul class="col-1 fa-opacity style="padding-right: 80px;">
+                        <li style="margin: 0">
+                            <a target="_blank" title="facebook" href="https://www.facebook.com/konwersatoriummuzyczne/">
+                                <span class="fa-stack fa-2x">
+                                    <i class="fas fa-square fa-stack-2x" style="color: #3b5998"></i>
+                                    <i class="fab fa-facebook fa-stack-1x fa-color"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li style="margin: 0">
+                            <a target="_blank" title="instagram" href="https://www.instagram.com/konwersatoriummuzyczne/">
+                                <span class="fa-stack fa-2x">
+                                    <i class="fas fa-square fa-stack-2x" style="color: #3f729b"></i>
+                                    <i class="fab fa-instagram fa-stack-1x fa-color"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li style="margin: 0">
+                            <a target="_blank" title="YouTube" href="https://www.youtube.com/channel/UCpISipwaVRA4S16_j3ntGWA">
+                                <span class="fa-stack fa-2x">
+                                    <i class="fas fa-square fa-stack-2x" style="color: #c4302b"></i>
+                                    <i class="fab fa-youtube fa-stack-1x fa-color"></i>
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                <!--End of Social Icons in Footer-->
+                </div>
+            </footer>
+            <!-- End of Footer -->
+        </div>
+        <!--End of Wrapper-->
+        <!-- Include JavaScript resources -->
+        <script src="/js/jquery.1.8.3.min.js"></script>
+        <script src="/js/wow.min.js"></script>
+        <script src="/js/featherlight.min.js"></script>
+        <script src="/js/featherlight.gallery.min.js"></script>
+        <script src="/js/jquery.enllax.min.js"></script>
+        <script src="/js/jquery.scrollUp.min.js"></script>
+        <script src="/js/jquery.easing.min.js"></script>
+        <script src="/js/jquery.stickyNavbar.min.js"></script>
+        <script src="/js/jquery.waypoints.min.js"></script>
+        <script src="/js/images-loaded.min.js"></script>
+        <script src="/js/site.js"></script>
+        <script src="/js/contact.js"></script>
+        <script src="/js/stats.js"></script>
+        <script src="/js/youtube-modal.js"></script>
+        <script src="/js/newsletter-modal.js"></script>
+    </body>
+</html>

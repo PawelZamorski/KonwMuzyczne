@@ -1,0 +1,13 @@
+{% extends 'layout.twig' %}
+
+{% block content %}
+    <!-- Course Details -->
+    <section id="about" class="introduction scrollto">
+        <div class="row clearfix">
+            <h1>Error Page</h1>
+            {% if errorMessage is defined %}
+            <h1><strong>{{ errorMessage }}</strong></h1>
+            {% endif %}
+        </div>
+    </section>
+{% endblock %}
