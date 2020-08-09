@@ -2,7 +2,7 @@
 
 namespace Konwersatorium\Domain;
 
-class Course {
+class Offer {
     private $name;
     private $category;
     private $type;

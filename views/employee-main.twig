@@ -1,0 +1,24 @@
+<section id="nauczyciele" class="scrollto text-center" data-enllax-ratio=".2">
+    <div class="row clearfix">
+        <div class="section-heading">
+            <h3>{{ employeeMainArr.getHeading3 }}</h3>
+            <h2 class="section-title">{{ employeeMainArr.getHeading2 }}</h2>
+        </div>
+        {% for employee in employeeArr %}
+        <blockquote class="col-3 testimonial classic">
+            <a href="teacher/{{ lang }}/{{ employee.getEmpId }}"><img src="{{ employee.getImgThumbnail }}" alt="Zdjęcie {{ employee.getName }}"/></a>
+            <h3><a href="teacher/{{ lang }}/{{ employee.getEmpId }}">{{ employee.getName }}</a></h3>
+            <h4>{{ employee.getCourseName }}</h4>
+            <footer>
+                {% for position in employee.getPosition %}
+                    {{ position }}
+                {% endfor %}
+
+                {% for specialization in employee.specialization %}
+                    {{ specialization }}
+                {% endfor %}
+            </footer>
+        </blockquote>
+        {% endfor %}
+    </div>
+</section>

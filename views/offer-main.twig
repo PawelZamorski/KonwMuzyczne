@@ -9,8 +9,8 @@
             <div class="pricing-block-content">
                 <h3>{{ offerCategory.getCategory }}</h3>
                 <p class="pricing-sub">{{ offerMainArr.getParagraph }}</p>
-                <span><a href="/home/oferta/oferta-category.php?category_id={{ offerCategory.getCategoryId }}"><img src="{{ offerCategory.getImg }}" alt="Zdjęcie ' . $row['category'] . '"/></a></span>
-                <a href="/home/oferta/oferta-category.php?category_id={{ offerCategory.getCategoryId }}" class="button">{{ offerMainArr.getButton }}</a>
+                <span><a href="offer/category/{{ lang }}/{{ offerCategory.getCategoryId }}"><img src="{{ offerCategory.getImg }}" alt="Zdjęcie ' . $row['category'] . '"/></a></span>
+                <a href="offer/category/{{ lang }}/{{ offerCategory.getCategoryId }}" class="button">{{ offerMainArr.getButton }}</a>
             </div>
         </div>
         {% endfor %}

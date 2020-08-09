@@ -32,6 +32,39 @@
             ":lang": "string",
             ":courseId": "int"
         }
+    },
+    "progress/:lang": {
+        "controller": "ProgressController",
+        "method": "getAll",
+        "params": {
+            ":lang": "string"
+        }
+    },
+    "teacher/:lang/:employeeId": {
+        "controller": "EmployeeController",
+        "method": "getEmployeeById",
+        "params": {
+            ":lang": "string",
+            ":employeeId": "int"
+        }
+    },
+    "references/:lang/:refCategoryId": {
+        "controller": "ReferencesController",
+        "method": "getRefByCategoryId",
+        "params": {
+            ":lang": "string",
+            ":refCategoryId": "int"
+        }
+    },
+    "offer/category/:lang/:categoryId": {
+        "controller": "OfferCategoryController",
+        "method": "getOfferByCategoryId",
+        "params": {
+            ":lang": "string",
+            ":categoryId": "int"
+        }
     }
+
+
 
 }

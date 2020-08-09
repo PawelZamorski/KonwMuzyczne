@@ -1,0 +1,27 @@
+{% extends 'layout.twig' %}
+
+{% block content %}
+    <!-- Progress Details -->
+    <section class="introduction scrollto">
+        <div class="row clearfix">
+            <div class="col-3">
+                <div class="section-heading">
+                    <h3>{{ progressMainArr.getHeading3 }}</h3>
+                    <h2 class="section-title">{{ progressMainArr.getHeading2 }}</h2>
+                </div>
+            </div>
+            <div id="progress" class="col-2-3">
+            {{ progressMainArr.getShortDesc | raw }}
+            <ul class="stats" style="width:80%; margin:40px 0;">
+                {% for progressStat in progressStatArr %}
+                <li data-width="{{ progressStat.getPercent }}">{{ progressStat.getShortDesc }}<span>{{ progressStat.getPercent }}</span></li>
+                {% endfor %}
+            </ul>
+            {{ progressMainArr.getLongDesc | raw }}
+        </div>
+    </section>
+    <!-- End of Progress Details -->
+{% endblock %}
+
+
+

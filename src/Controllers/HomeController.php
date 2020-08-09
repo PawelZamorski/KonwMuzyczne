@@ -6,10 +6,12 @@ use Konwersatorium\Models\MenuModel;
 use Konwersatorium\Models\BannerModel;
 use Konwersatorium\Models\InfoModel;
 use Konwersatorium\Models\CounterModel;
-use Konwersatorium\Models\ProgressMainModel;
-use Konwersatorium\Models\ProgressStatModel;
+use Konwersatorium\Models\ProgressModel;
 use Konwersatorium\Models\FactsModel;
 use Konwersatorium\Models\OfferModel;
+use Konwersatorium\Models\EmployeeModel;
+use Konwersatorium\Models\ReferencesModel;
+use Konwersatorium\Models\ContactModel;
 use Konwersatorium\Exceptions\NotFoundException;
 
 /* 
@@ -44,11 +46,9 @@ class HomeController extends AbstractController {
             $counterArr = $counterModel->getAllLang($lang);
 
             // get progress data
-            $progressMainModel = new ProgressMainModel($this->conn);
-            $progressMainArr = $progressMainModel->getAllLang($lang);
-
-            $progressStatModel = new ProgressStatModel($this->conn);
-            $progressStatArr = $progressStatModel->getAllLang($lang);
+            $progressModel = new ProgressModel($this->conn);
+            $progressMainArr = $progressModel->getProgressMain($lang);
+            $progressStatArr = $progressModel->getProgressStat($lang);
 
             // get facts data
             $factsModel = new FactsModel($this->conn);
@@ -58,9 +58,27 @@ class HomeController extends AbstractController {
             $offerModel = new OfferModel($this->conn);
             $offerMainArr = $offerModel->getOfferMain($lang);
             $offerCategoryArr = $offerModel->getOfferCategory($lang);
+            // get offerSpecialMain data
+            $offerSpecialMainArr = $offerModel->getOfferSpecialMain($lang);
+
+            // get employeeMain data
+            $employeeModel = new employeeModel($this->conn);
+            $employeeMainArr = $employeeModel->getEmployeeMain($lang);
+            $employeeArr = $employeeModel->getAll($lang);
+
+            // get referencesMain data
+            $referencesModel = new ReferencesModel($this->conn);
+            $referencesMainArr = $referencesModel->getReferencesMain($lang);
+            $referencesArr = $referencesModel->getAll($lang);
+
+            // get contactMain data
+            $contactModel = new ContactModel($this->conn);
+            $contactMainArr = $contactModel->getContactMain($lang);
+            $contactDetailsArr = $contactModel->getContactDetails($lang);
 
             // set up properties
             $properties = [
+                'lang' => $lang,
                 'menuArr' => $menuArr, 
                 'bannerArr' => $bannerArr,
                 'infoArr' => $infoArr,
@@ -69,7 +87,14 @@ class HomeController extends AbstractController {
                 'progressStatArr' => $progressStatArr,
                 'factsArr' => $factsArr,
                 'offerMainArr' => $offerMainArr,
-                'offerCategoryArr' => $offerCategoryArr
+                'offerCategoryArr' => $offerCategoryArr,
+                'offerSpecialMainArr' => $offerSpecialMainArr,
+                'employeeMainArr' => $employeeMainArr,
+                'employeeArr' => $employeeArr,
+                'referencesMainArr' => $referencesMainArr,
+                'referencesArr' => $referencesArr,
+                'contactMainArr' => $contactMainArr,
+                'contactDetailsArr' => $contactDetailsArr
                 ];
 
         } catch (NotFoundException $e) {

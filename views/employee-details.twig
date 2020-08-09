@@ -1,0 +1,22 @@
+{% extends 'layout.twig' %}
+
+{% block content %}
+    <!-- Employee -->
+    <section id="about" class="introduction scrollto fixpaddings">
+        <div class="row clearfix">
+            <div class="col-1">
+                <div class="section-heading">
+                    <h3>{{ employeeArr.getCourseName }}</h3>
+                    <h2 class="section-title">{{ employeeArr.getName }}</h2>
+                </div>
+            </div>
+            <div class="col-3">
+                <p><img src="{{ employeeArr.getImg }}" alt="{{ employeeArr.getName }}" class="topMargin"></p>
+            </div>
+            <div class="col-3">
+                {{ employeeArr.getLongDesc | raw }}
+            </div>
+        </div>
+    </section>
+    <!--End of Employee -->
+{% endblock %}

@@ -1,0 +1,27 @@
+<section id="referencje" class="scrollto text-center clearfix" data-enllax-ratio=".2" style="padding-top:15px;">
+    <div class="section-heading">
+        <h3>{{ referencesMainArr.getHeading3 }}</h3>
+        <h2 class="section-title">{{ referencesMainArr.getHeading2 }}</h2>
+    </div>
+
+    {% for references in referencesArr %}
+    <div class="pricing-block col-3 wow fadeInUp" data-wow-delay="0.4s">
+        <a href="references/{{ lang }}/{{ references.getCategoryId }}" class="button">{{ references.getButton }}</a>
+    </div>
+    {% endfor %}
+
+    <div class="col-1">
+        <h2 class="section-title" style="font-size: 140%; margin-top: 50px;">{{ referencesMainArr.getPartners }}</h2>
+    </div>
+    <div class="col-1 wow fadeInUp" data-wow-delay="0.4s">
+        <ul class="partners">
+            <li><img src="/images/partnerzy/partner1.jpg" /></li>
+            <li><img src="/images/partnerzy/partner2.jpg" /></li>
+            <li><img src="/images/partnerzy/partner3.jpg" /></li>
+            <li><img src="/images/partnerzy/partner4.jpg" /></li>
+            <li><img src="/images/partnerzy/partner5.jpg" /></li>
+            <li><img src="/images/partnerzy/partner6.jpg" /></li>
+            <li><img src="/images/partnerzy/partner7.jpg" /></li>
+        </ul>
+    </div>
+</section>

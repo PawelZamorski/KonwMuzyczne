@@ -1,0 +1,42 @@
+{% extends 'layout.twig' %}
+
+{% block content %}
+    <!-- Offer Category -->
+    <section id="about" class="introduction scrollto">
+        <div class="row clearfix">
+            <div class="col-3">
+                <div class="section-heading">
+                    <h3>ZAPRASZAMY</h3>
+                    <h2 class="section-title uppercase">{{ offerMainByCategoryArr.getCategory }}</h2>
+                    <p><img src="{{ offerMainByCategoryArr.getImg }}" alt="Lekcje indywidualne {{ offerMainByCategoryArr.getHeading3 }}" /></p>
+                </div>
+            </div>
+            <div class="col-2-3 alignToPhoto">
+            {{ offerMainByCategoryArr.getCommonDesc | raw }}
+            {{ offerMainByCategoryArr.getLongDesc | raw }}
+            </div>
+        </div>
+    </section>
+    <!--Pricing Tables-->
+    <section id="oferta" class="secondary-color text-center scrollto clearfix ">
+        <div class="row clearfix">
+            <div class="section-heading">
+                <h3><?php echo $data_heading['heading_3'] ?></h3>
+                <h2 class="section-title"><?php echo $data_heading['heading_2'] ?></h2>
+            </div>
+
+            {% for offer in offerByCategoryArr %}
+                <div class="pricing-block col-3 wow fadeInUp" data-wow-delay="0.8s">
+                    <div class="pricing-block-content">
+                        <h3>{{ offer.getType }}</h3>
+                        <p class="pricing-sub">{{ offer.getCategory }}</p>
+                        <span><a href="oferta-details.php?offer_id={{ offer.getName }}"><img src="{{ offer.getImgThumbnail }}" alt="{{ offer.getType }} {{ offer.getName }}"/></a></span>
+                        <a href="oferta-details.php?offer_id={{ offer.getName }}" class="button">BUTTON</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+    <!--End of Pricing Tables-->
+    <!-- End of Offer Category -->
+{% endblock %}

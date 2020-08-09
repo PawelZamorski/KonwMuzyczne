@@ -1,0 +1,22 @@
+{% extends 'layout.twig' %}
+
+{% block content %}
+    <!-- References -->
+
+    TEST
+    <section class="introduction scrollto">
+        <div class="row clearfix">
+            <div class="col-3">
+                <div class="section-heading">
+                    <h3>{{ referencesArr.getHeading3 }}</h3>
+                    <h2 class="section-title">{{ referencesArr.getHeading2 }}</h2>
+                    <p class="section-subtitle">{{ referencesArr.getShortDesc | raw }}</p>
+                </div>
+            </div>
+            <div class="col-2-3">
+                {{ referencesArr.getLongDesc | raw }}
+            </div>
+        </div>
+    </section>
+    <!--End of References -->
+{% endblock %}

@@ -21,7 +21,7 @@
     mysqli_set_charset($connection, "utf8mb4");
 
 	// Step 2: Perform database query
-    $result = mysqli_query($connection, "SELECT *
+    $result = mysqli_query($connection, "SELECT heading_3, heading_2, email_name, email_email, email_message, button
         FROM main_contact_translation, languages as l
         WHERE languages_id = l.id
         AND l.code = '$lang';");
