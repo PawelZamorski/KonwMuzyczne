@@ -2,7 +2,7 @@
 
 {% block content %}
     <!-- Offer Category -->
-    <section id="about" class="introduction scrollto">
+    <section class="introduction scrollto">
         <div class="row clearfix">
             <div class="col-3">
                 <div class="section-heading">
@@ -18,11 +18,11 @@
         </div>
     </section>
     <!--Pricing Tables-->
-    <section id="oferta" class="secondary-color text-center scrollto clearfix ">
+    <section class="secondary-color text-center scrollto clearfix ">
         <div class="row clearfix">
             <div class="section-heading">
-                <h3><?php echo $data_heading['heading_3'] ?></h3>
-                <h2 class="section-title"><?php echo $data_heading['heading_2'] ?></h2>
+                <h3>Twój wybór</h3>
+                <h2 class="section-title">Nasza oferta</h2>
             </div>
 
             {% for offer in offerByCategoryArr %}
@@ -30,8 +30,8 @@
                     <div class="pricing-block-content">
                         <h3>{{ offer.getType }}</h3>
                         <p class="pricing-sub">{{ offer.getCategory }}</p>
-                        <span><a href="oferta-details.php?offer_id={{ offer.getName }}"><img src="{{ offer.getImgThumbnail }}" alt="{{ offer.getType }} {{ offer.getName }}"/></a></span>
-                        <a href="oferta-details.php?offer_id={{ offer.getName }}" class="button">BUTTON</a>
+                        <span><a href="/offer/details/{{ lang }}/{{ offer.getOfferId }}"><img src="{{ offer.getImgThumbnail }}" alt="{{ offer.getType }} {{ offer.getName }}"/></a></span>
+                        <a href="/offer/details/{{ lang }}/{{ offer.getOfferId }}" class="button">BUTTON</a>
                     </div>
                 </div>
             {% endfor %}

@@ -1,0 +1,36 @@
+{% extends 'layout.twig' %}
+{% block content %}
+    <!-- Offer Details -->
+    <section id="about" class="introduction scrollto">
+        <div class="row clearfix">
+            <div class="col-3">
+                <div class="section-heading">
+                    <h3 class="uppercase">{{ offerByIdArr.getCategory }}</h3>
+                    <h2 class="section-title">{{ offerByIdArr.getName }}</h2>
+                    <p>
+                        <img src="{{ offerByIdArr.getImg }}" alt="{{ offerByIdArr.getName }}"/>
+                    </p>
+                    <div class="text-center">
+                        <a href="/offer/buy/{{ lang }}/{{ offerByIdArr.getOfferId }}" class="button "  style="background-color: #f5edd6">KUP TERAZ</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-2-3 alignToPhoto">
+                <!-- Youtube Movie
+                <div>
+                    <div class="iframe-container">
+                        <iframe src="{{ offerByIdArr.getMovie }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+                End of Youtube Movie-->
+                <!-- Short description -->
+                {{ offerByIdArr.getShortDesc | raw }}
+                <!-- Common description -->
+                {{ offerByIdArr.getCommonDesc | raw }}
+                <!-- Long description -->
+                {{ offerByIdArr.getLongDesc | raw }}
+            </div>
+        </div>
+    </section>
+    <!-- End of Offer Details -->
+{% endblock %}

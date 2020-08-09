@@ -57,11 +57,35 @@
         }
     },
     "offer/category/:lang/:categoryId": {
-        "controller": "OfferCategoryController",
+        "controller": "OfferController",
         "method": "getOfferByCategoryId",
         "params": {
             ":lang": "string",
             ":categoryId": "int"
+        }
+    },
+    "offer/details/:lang/:offerId": {
+        "controller": "OfferController",
+        "method": "getOfferById",
+        "params": {
+            ":lang": "string",
+            ":offerId": "int"
+        }
+    },
+    "offer/buy/:lang/:offerId": {
+        "controller": "OfferController",
+        "method": "buyOfferById",
+        "params": {
+            ":lang": "string",
+            ":offerId": "int"
+        }
+    },
+    "offer/buy/payment/:lang/:offerId": {
+        "controller": "OfferController",
+        "method": "payOfferById",
+        "params": {
+            ":lang": "string",
+            ":offerId": "int"
         }
     }
 

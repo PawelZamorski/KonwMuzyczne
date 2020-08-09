@@ -1,0 +1,39 @@
+{% extends 'layout.twig' %}
+
+{% block content %}
+    <!-- Offer Buy -->
+    <section class="secondary-color text-center scrollto clearfix ">
+        <div class="row clearfix">
+            <div class="section-heading">
+                <h3>Oferta</h3>
+                <h2 class="section-title">Płatność</h2>
+            </div>
+            <div class="text-center">
+                <p>W przypadku pytań prosimy o kontakt z działem sprzedaży:</p>
+                <p>Prosimy o wybór płatności</p>
+                <br>
+                <p>Przelew tradycyjny:</p>
+                <p>Adres: </p>
+                <p>Numer konta: </p>
+                <br>
+                <p>Płatność online: kwota 300PLN</p>
+                <h1><b>BRAMKA DO PŁATNOŚCI</b></h1>
+                <br>
+
+            </div>
+
+            <div id="address" class="row clearfix">
+
+            {% for contactDetails in contactDetailsArr %}
+                <div class="col-3">{{ contactDetails.getDetail | raw }}</div>
+            {% endfor %}
+            </div>
+
+        </div>
+
+
+
+        </div>
+    </section>
+    <!-- End of Offer Buy -->
+{% endblock %}

@@ -8,34 +8,32 @@
 
 #}
 
-{% set x = "/index.php" %}
-
 <div id="header" class="nav-collapse">
     <div class="row clearfix">
         <div class="col-1">
             <div id="logo">
-                <a href="index.html"><img src="/images/logo-mini.png" id="navigation-logo" alt="Landing Page" /></a>
+                <a href="/{{ lang }}"><img src="/images/logo-mini.png" id="navigation-logo" alt="Landing Page" /></a>
             </div>
             <aside>
                 <!--Social Icons in Header-->
                 <ul class="social-icons">
                     <li>
-                        <a title="Dla Polskich Studentów" href="/?lang=pl">
+                        <a title="Dla Polskich Studentów" href="/pl">
                             <img src="/images/flags/poland.png" />
                         </a>
                     </li>
                     <li>
-                        <a title="For Vietnamese Students" href="/?lang=vi">
+                        <a title="For Vietnamese Students" href="/vi">
                             <img src="/images/flags/vietnam.png" />
                         </a>
                     </li>
                     <li>
-                        <a title="For English Students" href="/?lang=en">
+                        <a title="For English Students" href="/en">
                             <img src="/images/flags/england.png"  />
                         </a>
                     </li>
                     <li>
-                        <a title="For Chinese Students" href="/?lang=zh">
+                        <a title="For Chinese Students" href="/zh">
                             <img src="/images/flags/china.png" />
                         </a>
                     </li>
@@ -64,27 +62,27 @@
                 <ul>
                 {% for menu in menuArr %}
                     <li>
-                        <a href="{{ x }}/#{{ menu.getCode }}">{{ menu.getNavLink }}</a>
+                        <a href="/{{ lang }}#{{ menu.getCode }}">{{ menu.getNavLink }}</a>
                     </li>
                 {% endfor %}
 
                     <li class="mobile-links">
-                        <a title="Dla Polskich Studentów" href="/?lang=pl">
+                        <a title="Dla Polskich Studentów" href="/pl">
                             <img src="/images/flags/poland.png" />
                         </a>
                     </li>
                     <li class="mobile-links">
-                        <a title="For Vietnamese Students" href="/?lang=vi">
+                        <a title="For Vietnamese Students" href="/vi">
                             <img src="/images/flags/vietnam.png" />
                         </a>
                     </li>
                     <li class="mobile-links">
-                        <a title="For English Students" href="/?lang=en">
+                        <a title="For English Students" href="/en">
                             <img src="/images/flags/england.png"  />
                         </a>
                     </li>
                     <li class="mobile-links">
-                        <a title="For Chinese Students" href="/?lang=zh">
+                        <a title="For Chinese Students" href="/zh">
                             <img src="/images/flags/china.png" />
                         </a>
                     </li>

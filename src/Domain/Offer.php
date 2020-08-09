@@ -3,6 +3,7 @@
 namespace Konwersatorium\Domain;
 
 class Offer {
+    private $offer_id;
     private $name;
     private $category;
     private $type;
@@ -13,7 +14,8 @@ class Offer {
     private $img_thumbnail;
     private $movie;
 
-    public function __construct($name, $category, $type, $short_desc, $common_desc, $long_desc, $img, $img_thumbnail, $movie) {
+    public function __construct($offer_id, $name, $category, $type, $short_desc, $common_desc, $long_desc, $img, $img_thumbnail, $movie) {
+        $this->offer_id = $offer_id;
         $this->name = $name;
         $this->category = $category;
         $this->type = $type;
@@ -25,6 +27,10 @@ class Offer {
         $this->movie = $movie;
     }
 
+    public function getOfferId() {
+        return $this->offer_id;
+    }
+ 
     public function getName() {
         return $this->name;
     }

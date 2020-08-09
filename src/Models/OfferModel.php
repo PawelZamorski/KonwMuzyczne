@@ -93,7 +93,7 @@ class OfferModel extends AbstractModel {
     public function getOfferByCategoryId($lang, $category_id) {
         $itemArr = array();
 
-        $query = "SELECT course_name_translation.course_name, courses_translation.long_desc, courses_translation.short_desc, courses.img, courses.img_thumbnail, courses.movie, common_desc_translation.common_desc, category_translation.category, course_type_translation.type 
+        $query = "SELECT offer.id as offer_id, course_name_translation.course_name, courses_translation.long_desc, courses_translation.short_desc, courses.img, courses.img_thumbnail, courses.movie, common_desc_translation.common_desc, category_translation.category, course_type_translation.type 
             FROM courses, courses_translation, offer, course_name_translation, category, category_translation, course_type_translation, common_desc_translation, languages
             WHERE offer.category_id=?
             AND offer.category_id = category.id
@@ -124,7 +124,7 @@ class OfferModel extends AbstractModel {
         $result = $stmt->get_result();
         // Fetch associative array
         while ($row = $result->fetch_assoc()) {
-            array_push($itemArr, new Offer($row['course_name'], $row['category'], $row['type'], $row['short_desc'], $row['common_desc'], $row['long_desc'], $row['img'], $row['img_thumbnail'], $row['movie']));
+            array_push($itemArr, new Offer($row['offer_id'], $row['course_name'], $row['category'], $row['type'], $row['short_desc'], $row['common_desc'], $row['long_desc'], $row['img'], $row['img_thumbnail'], $row['movie']));
         }
         // Check if there are any data
         if (empty($itemArr)) {
@@ -133,11 +133,11 @@ class OfferModel extends AbstractModel {
         return $itemArr;
     }
 
-    public function getOfferById($lang, $courseId) {
-        $query = "SELECT course_name_translation.course_name, courses_translation.long_desc, courses_translation.short_desc, courses.img, courses.img_thumbnail, courses.movie, common_desc_translation.common_desc, category_translation.category, course_type_translation.type 
+    public function getOfferById($lang, $offer_id) {
+        $query = "SELECT offer.id as offer_id, course_name_translation.course_name, courses_translation.long_desc, courses_translation.short_desc, courses.img, courses.img_thumbnail, courses.movie, common_desc_translation.common_desc, category_translation.category, course_type_translation.type 
             FROM courses, courses_translation, offer, course_name_translation, category, category_translation, course_type_translation, common_desc_translation, languages
             WHERE offer.id=?
-            AND courses.id = offer.courses_id 
+            AND offer.courses_id = courses.id 
 
             AND course_name_translation.course_name_id = courses.course_name_id
             AND course_name_translation.languages_id = languages.id
@@ -158,7 +158,7 @@ class OfferModel extends AbstractModel {
 
         // TODO: should be used try catch block ???
         $stmt = $this->conn->prepare($query); // prepare statement
-        $stmt->bind_param('is', $courseId, $lang); // bind params to the statement. First param: data type, ie 'i' stands for integer, 's' for string
+        $stmt->bind_param('is', $offer_id, $lang); // bind params to the statement. First param: data type, ie 'i' stands for integer, 's' for string
         $stmt->execute(); // execute query
         // Get the result
         $result = $stmt->get_result();
@@ -169,7 +169,7 @@ class OfferModel extends AbstractModel {
             throw new NotFoundException();
         }
 
-        return new Course($row['course_name'], $row['category'], $row['type'], $row['short_desc'], $row['common_desc'], $row['long_desc'], $row['img'], $row['img_thumbnail'], $row['movie']);
+        return new Offer($row['offer_id'], $row['course_name'], $row['category'], $row['type'], $row['short_desc'], $row['common_desc'], $row['long_desc'], $row['img'], $row['img_thumbnail'], $row['movie']);
     }
 
     public function getOfferSpecialMain($lang) {

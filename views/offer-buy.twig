@@ -1,0 +1,52 @@
+{% extends 'layout.twig' %}
+
+{% block content %}
+    <!-- Offer Buy -->
+    <section class="secondary-color text-center scrollto clearfix ">
+        <div class="row clearfix">
+            <div class="section-heading">
+                <h3>Oferta</h3>
+                <h2 class="section-title">Kup Teraz</h2>
+            </div>
+            <div>
+                <p>W przypadku pytań prosimy o kontakt z działem sprzedaży:</p>
+                <p>Na Twoją skrzynkę pocztową zostanie wysłana informacja potwierdzająca dokonanie rezerwacji</p>
+            </div>
+            <div>
+                <div class="col"> 
+                    <form id="ajax-contact" method="post" action="#">
+                        <div class="field">
+                            <input type="text" id="name" name="name" placeholder="{{ contactMainArr.getEmailName }}" required>
+                        </div>
+                        <div class="field">
+                            <input type="email" id="email" name="email" placeholder="{{ contactMainArr.getEmailEmail }}" required>
+                        </div>
+                        <div class="field">
+                            <textarea id="message" name="message" placeholder="{{ contactMainArr.getEmailMessage }}" required disabled>Oferta kurs {{ offerByIdArr.getCategory }} | {{ offerByIdArr.getName }} Kwota do zapłaty za pakiet 4 lekcji: 300zł</textarea>
+                        </div>
+                        <div class="g-recaptcha" data-sitekey="6LePgS8UAAAAACsBnGlHt1kk4lZrlxsvQFsy8GQR">
+                        </div>
+                        <div class="field">
+                            <a id="" href="/offer/buy/payment/{{ lang }}/{{ offerByIdArr.getOfferId }}" class="button"  >ZAPŁAĆ</a>
+                        </div>
+                    </form>
+                    <div id="form-messages">
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+            <div id="address" class="row clearfix">
+
+            {% for contactDetails in contactDetailsArr %}
+                <div class="col-3">{{ contactDetails.getDetail | raw }}</div>
+            {% endfor %}
+            </div>
+
+        </div>
+
+
+
+        </div>
+    </section>
+    <!-- End of Offer Buy -->
+{% endblock %}

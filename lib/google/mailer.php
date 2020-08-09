@@ -104,8 +104,8 @@
             // Set the recipient email address.
             // FIXME: Update this to your desired email address.
             // $recipient = "bogna.kolodziej@wp.pl";
-            $recipient = "zamorskipawel@wp.pl";
-//            $recipient = "sekretariat@konwersatoriummuzyczne.pl";
+            // $recipient = "zamorskipawel@wp.pl";
+            $recipient = "sekretariat@konwersatoriummuzyczne.pl";
 
             // Set the email subject.
             $subject = "Nowy kontakt ze strony: $name";
