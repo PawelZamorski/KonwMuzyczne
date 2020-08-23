@@ -59,7 +59,7 @@ class HomeController extends AbstractController {
             $offerMainArr = $offerModel->getOfferMain($lang);
             $offerCategoryArr = $offerModel->getOfferCategory($lang);
             // get offerSpecialMain data
-            $offerSpecialMainArr = $offerModel->getOfferSpecialMain($lang);
+            $offerSpecialMainArr = $offerModel->getOfferSpecial($lang);
 
             // get employeeMain data
             $employeeModel = new employeeModel($this->conn);

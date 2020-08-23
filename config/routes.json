@@ -72,6 +72,13 @@
             ":offerId": "int"
         }
     },
+    "offer/special/details/:lang": {
+        "controller": "OfferController",
+        "method": "getOfferSpecialDetails",
+        "params": {
+            ":lang": "string"
+        }
+    },
     "offer/buy/:lang/:offerId": {
         "controller": "OfferController",
         "method": "buyOfferById",

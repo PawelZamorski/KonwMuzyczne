@@ -25,8 +25,24 @@
         <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
         <!-- Youtube Movies CSS-->
         <link href="/css/youtube-gallery.css" rel="stylesheet" type="text/css">
+        <!-- Google recaptcha -->
+        <script src='https://www.google.com/recaptcha/api.js'></script>
+        <!-- Facebook Pixel -->
+        {{ include('facebook/pixel.twig') }}
+        <!-- End of Facebook Pixel -->
     </head>
     <body>
+        <!-- Facebook Chat -->
+        {{ include('facebook/chat.twig') }}
+        <!-- End of Facebook Chat -->
+
+        <!-- Preloader -->
+        {{ include('templates/preloader.twig') }}
+        <!-- End of Preloader -->
+        {{ include('templates/page-border.twig') }}
+        <!-- Page Boarder -->
+
+        <!-- End of Page Boarder -->
 
         <!--Wrapper-->
         <div id="wrapper">

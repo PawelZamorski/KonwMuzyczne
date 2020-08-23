@@ -1,0 +1,22 @@
+{% extends 'layout.twig' %}
+{% block content %}
+    <!-- Offer Details -->
+    <section id="about" class="introduction scrollto">
+        <div class="row clearfix">
+            <div class="col-3">
+                <div class="section-heading">
+                    <h3 class="uppercase">{{ offerSpecialArr.getHeading3 }}</h3>
+                    <h2 class="section-title">{{ offerSpecialArr.getHeading2 }}</h2>
+                    <p>
+                        <img src="{{ offerSpecialArr.getImg }}" alt="Image"/>
+                    </p>
+                </div>
+            </div>
+            <div class="col-2-3 alignToPhoto">
+                <!-- Long description -->
+                {{ offerSpecialArr.getLongDesc | raw }}
+            </div>
+        </div>
+    </section>
+    <!-- End of Offer Details -->
+{% endblock %}

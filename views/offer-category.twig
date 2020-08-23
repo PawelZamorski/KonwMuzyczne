@@ -7,7 +7,7 @@
             <div class="col-3">
                 <div class="section-heading">
                     <h3>ZAPRASZAMY</h3>
-                    <h2 class="section-title uppercase">{{ offerMainByCategoryArr.getCategory }}</h2>
+                    <h2 class="section-title">{{ offerMainByCategoryArr.getCategory }}</h2>
                     <p><img src="{{ offerMainByCategoryArr.getImg }}" alt="Lekcje indywidualne {{ offerMainByCategoryArr.getHeading3 }}" /></p>
                 </div>
             </div>
@@ -31,7 +31,7 @@
                         <h3>{{ offer.getType }}</h3>
                         <p class="pricing-sub">{{ offer.getCategory }}</p>
                         <span><a href="/offer/details/{{ lang }}/{{ offer.getOfferId }}"><img src="{{ offer.getImgThumbnail }}" alt="{{ offer.getType }} {{ offer.getName }}"/></a></span>
-                        <a href="/offer/details/{{ lang }}/{{ offer.getOfferId }}" class="button">BUTTON</a>
+                        <a href="/offer/details/{{ lang }}/{{ offer.getOfferId }}" class="button">{{ offerMainArr.getButton }}</a>
                     </div>
                 </div>
             {% endfor %}

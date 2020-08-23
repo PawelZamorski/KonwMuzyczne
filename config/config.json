@@ -5,7 +5,5 @@
         "password": "",
         "dbname": "konw_muzyczne"
     },
-
     "log": "/var/log/konwersatorium.log"
-
 }

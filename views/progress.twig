@@ -1,3 +1,5 @@
+{% set k = 3 %}
+
 <div id="progress" class="secondary-color text-center clearfix " style="margin-bottom: 20px;">
     <div class="row clearfix">
         <div class="section-heading">
@@ -6,8 +8,8 @@
         </div>
         <div class="pricing-block col-1 wow fadeInUp" data-wow-delay="0.4s">
             <ul class="stats">
-                {% for progressStat in progressStatArr %}
-                <li data-width="{{ progressStat.getPercent }}">{{ progressStat.getShortDesc }}<span>{{ progressStat.getPpercent }}</span></li>
+                {% for i in range(1, k) %}
+                <li data-width="{{ progressStatArr[i].getPercent }}">{{ progressStatArr[i].getShortDesc }}<span>{{ progressStatArr[i].getPpercent }}</span></li>
                 {% endfor %}
             </ul>
             <!--Call to Action-->

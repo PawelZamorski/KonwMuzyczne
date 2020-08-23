@@ -172,8 +172,8 @@ class OfferModel extends AbstractModel {
         return new Offer($row['offer_id'], $row['course_name'], $row['category'], $row['type'], $row['short_desc'], $row['common_desc'], $row['long_desc'], $row['img'], $row['img_thumbnail'], $row['movie']);
     }
 
-    public function getOfferSpecialMain($lang) {
-        $query = "SELECT heading_3, heading_2, long_desc, button, img
+    public function getOfferSpecial($lang) {
+        $query = "SELECT heading_3, heading_2, short_desc, long_desc, button, img
         FROM main_special_offer_translation, languages
         WHERE main_special_offer_translation.languages_id = languages.id
         AND languages.code = ?;";
@@ -191,7 +191,7 @@ class OfferModel extends AbstractModel {
             throw new NotFoundException();
         }
 
-        return new OfferSpecialMain($row['heading_3'], $row['heading_2'], $row['long_desc'], $row['button'], $row['img']);
+        return new OfferSpecialMain($row['heading_3'], $row['heading_2'], $row['short_desc'], $row['long_desc'], $row['button'], $row['img']);
     }
 
 }
