@@ -1,4 +1,12 @@
 {
+    "test20200823/offer/details/:lang/:offerId": {
+        "controller": "OfferController",
+        "method": "testGetOfferById",
+        "params": {
+            ":lang": "string",
+            ":offerId": "int"
+        }
+    },
     "": {
         "controller": "HomeController",
         "method": "getAll"

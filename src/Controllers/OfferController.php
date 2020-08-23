@@ -9,6 +9,36 @@ use Konwersatorium\Exceptions\NotFoundException;
 
 class OfferController extends AbstractController {
 
+    public function testGetOfferById($lang, $offer_id) {
+        // instantiate array
+        $properties = array();
+
+        try {
+            // get menu data
+            $menuModel = new MenuModel($this->conn);
+            $menuArr = $menuModel->getAllLang($lang);
+
+            // get employee data
+            $offerModel = new OfferModel($this->conn);
+            $offerByIdArr = $offerModel->getOfferById($lang, $offer_id);
+
+            // set up properties
+            $properties = [
+                'lang' => $lang,
+                'menuArr' => $menuArr,
+                'offerByIdArr' => $offerByIdArr
+                ];
+
+        } catch (NotFoundException $e) {
+//            $this->log->warn('Customer email not found: ' . $email);
+            $errorController = new ErrorController($this->request);
+            $errorController->notFound($lang);
+            
+        }
+
+        return $this->render('test-offer-details.twig', $properties);
+    }
+    
     public function getOfferById($lang, $offer_id) {
         // instantiate array
         $properties = array();
