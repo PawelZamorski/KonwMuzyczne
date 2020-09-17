@@ -10,6 +10,7 @@
                 <th scope="col">Imię i nazwisko</th>
                 <th scope="col">Nazwa kursu</th>
                 <th scope="col">Edycja</th>
+                <th scope="col">Usuń</th>                
             </tr>
         </thead>
         <tbody>
@@ -19,6 +20,7 @@
                 <td>{{ employee.getName }}</td>
                 <td>{{ employee.getCourseName }}</td>
                 <td><a href="/admin/{{ lang }}/teacher/{{ employee.getEmpId }}" class="btn btn-light" role="button" aria-pressed="true">Edytuj</a></td>
+                <td><a href="/admin/{{ lang }}/teacher/{{ employee.getEmpId }}/delete" class="btn btn-light" role="button" aria-pressed="true" onclick="return confirm('Potwierdź usunięcie danych!')">Usuń</a></td>
             </tr>
         {% endfor %}
         </tbody>

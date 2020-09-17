@@ -384,4 +384,16 @@ class EmployeeModel extends AbstractModel {
 
     }
 
+    function deleteEmployeeById($lang, $employee_id) {
+        // Update main data
+        // Step 2: Perform database query
+        $sql = "DELETE FROM employee WHERE id = $employee_id;";
+
+        if ($this->conn->query($sql) === TRUE) {
+//            echo "Record updated successfully";
+        } else {
+            echo "Error updating record: " . $this->conn->error;
+        }
+    }
+
 }

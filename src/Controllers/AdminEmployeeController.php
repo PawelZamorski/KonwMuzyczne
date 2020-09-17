@@ -67,6 +67,7 @@ class AdminEmployeeController extends AbstractController {
         try {
             // get employee data
             $employeeModel = new EmployeeModel($this->conn);
+            // TODO: display message
             $message = $employeeModel->updateEmployeeById($lang, $employee_id);
             
             $host = $_SERVER['HTTP_HOST'];
@@ -80,6 +81,26 @@ class AdminEmployeeController extends AbstractController {
             $errorController->notFound($lang);            
         }
     }
+
+    public function deleteEmployeeById($lang, $employee_id) {
+        try {
+            // delete employee data
+            $employeeModel = new EmployeeModel($this->conn);
+            // TODO: display message
+            $message = $employeeModel->deleteEmployeeById($lang, $employee_id);
+            
+            $host = $_SERVER['HTTP_HOST'];
+            $uri = "/admin/$lang/teacher";
+            header("Location: http://$host$uri");
+            exit;
+            
+        } catch (NotFoundException $e) {
+//            $this->log->warn('Customer email not found: ' . $email);
+            $errorController = new ErrorController($this->request);
+            $errorController->notFound($lang);            
+        }
+    }
+
 
 }
 

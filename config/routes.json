@@ -145,8 +145,16 @@
             ":lang": "string",
             ":employeeId": "int"
         }
-    }
+    },
 
+    "admin/:lang/teacher/:employeeId/delete": {
+        "controller": "AdminEmployeeController",
+        "method": "deleteEmployeeById",
+        "params": {
+            ":lang": "string",
+            ":employeeId": "int"
+        }
+    }
 
 
 }
