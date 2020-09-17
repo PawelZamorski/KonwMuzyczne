@@ -101,6 +101,56 @@ class AdminEmployeeController extends AbstractController {
         }
     }
 
+    public function openCreateEmployeeForm($lang) {
+        // instantiate array
+        $properties = array();
+
+        // always use pl language for create employee form
+        $lang = 'pl';
+
+        try {
+            // get employee data
+            $employeeModel = new EmployeeModel($this->conn);
+            $courseNamesArr = $employeeModel->getAllCourseNames($lang);
+            $positionsArr = $employeeModel->getAllPositions($lang);
+            $specializationsArr = $employeeModel->getAllSpecializations($lang);
+
+            // set up properties
+            $properties = [
+                'lang' => $lang,
+                'courseNamesArr' => $courseNamesArr,
+                'positionsArr' => $positionsArr,
+                'specializationsArr' => $specializationsArr
+                ];
+
+        } catch (NotFoundException $e) {
+//            $this->log->warn('Customer email not found: ' . $email);
+            $errorController = new ErrorController($this->request);
+            $errorController->notFound($lang);
+            
+        }
+
+        return $this->render('admin/admin-employee-create-form.twig', $properties);
+    }
+
+    public function createEmployee($lang) {
+        try {
+            // delete employee data
+            $employeeModel = new EmployeeModel($this->conn);
+            // TODO: display message
+            $message = $employeeModel->createEmployee($lang);
+            
+            $host = $_SERVER['HTTP_HOST'];
+            $uri = "/admin/$lang/teacher";
+            header("Location: http://$host$uri");
+            exit;
+            
+        } catch (NotFoundException $e) {
+//            $this->log->warn('Customer email not found: ' . $email);
+            $errorController = new ErrorController($this->request);
+            $errorController->notFound($lang);            
+        }
+    }
 
 }
 

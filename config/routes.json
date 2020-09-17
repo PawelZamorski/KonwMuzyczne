@@ -154,7 +154,22 @@
             ":lang": "string",
             ":employeeId": "int"
         }
-    }
+    },
 
+    "admin/:lang/teacher/createEmployeeForm": {
+        "controller": "AdminEmployeeController",
+        "method": "openCreateEmployeeForm",
+        "params": {
+            ":lang": "string"
+        }
+    },
+
+    "admin/:lang/teacher/create": {
+        "controller": "AdminEmployeeController",
+        "method": "createEmployee",
+        "params": {
+            ":lang": "string"
+        }
+    }
 
 }

@@ -396,4 +396,95 @@ class EmployeeModel extends AbstractModel {
         }
     }
 
+    function createEmployee($lang) {
+        $name = $_POST['name'];
+        $course_name_id = $_POST['course_name_id'];
+        $img = $_POST['img'];
+        $img_thumbnail = $_POST['img_thumbnail'];
+        $long_desc = $_POST['long_desc'];
+        $positions_id = $_POST['positions_id']; // 0 means no position
+        if(isset($_POST['specialization_id'])) { // specialization_id may not be set
+            $specialization_id = $_POST['specialization_id'];
+        } else {
+            $specialization_id = array(); // Create empty array to process further steps (remove data from emp_specialization table)
+        }
+
+        // Insert main data
+        // Step 2: Perform database query
+        $sql = "INSERT INTO employee (`name`, `course_name_id`, `img_thumbnail`, `img`)
+        VALUES ('$name', $course_name_id, '$img_thumbnail', '$img');";
+
+        if ($this->conn->query($sql) === TRUE) {
+            // Get last id
+            $employee_last_id = $this->conn->insert_id;
+//            echo "Record updated successfully";
+        } else {
+            echo "Error updating record: " . $this->conn->error;
+        }
+
+    
+        // TODO: check if  = $employee_last_id is not -1
+        // Insert translation data
+        // Step 2: Perform database query
+        $sql = "INSERT INTO employee_translation
+        (languages_id, employee_id, long_desc)
+        VALUES
+        (1, $employee_last_id, '$long_desc'),
+        (2, $employee_last_id, '$long_desc'),
+        (3, $employee_last_id, '$long_desc'),
+        (4, $employee_last_id, '$long_desc');";
+
+        if ($this->conn->query($sql) === TRUE) {
+//            echo "Record updated successfully";
+        } else {
+            echo "Error updating record: " . $this->conn->error;
+        }
+
+        // TODO: check if  = $employee_last_id is not -1
+        // Insert data
+        // Step 2: Perform database query
+        if ($positions_id > 0) {
+            $sql = "INSERT INTO emp_positions
+            (employee_id, positions_id)
+            VALUES
+            ($employee_last_id, $positions_id);";
+    
+            if ($this->conn->query($sql)  === TRUE) {
+    //            echo "Record updated successfully";
+            } else {
+                echo "Error updating record: " . $this->conn->error;
+            }    
+        }
+
+        // TODO: check if  = $employee_last_id is not -1
+        // Insert data
+        // Step 2: Perform database query
+        if  (!empty($specialization_id)) { // Check if there is any data to be insert
+            // Prepare data, change from array to string
+            $counter = 0;
+            $values = "";
+            foreach($specialization_id as $value) {
+                if($counter === (count($specialization_id) - 1)) {
+                    $values .= "($employee_last_id, $value)";
+                } else {
+                    $values .= "($employee_last_id, $value), ";
+                }
+
+                $counter += 1;
+            }
+        
+            // Insert new data
+            $sql = "INSERT INTO emp_specialization (employee_id, specialization_id)
+                VALUES $values;";
+            if ($this->conn->query($sql)  === TRUE) {
+//                    echo "Unbelivable Success: Record updated successfully";
+            } else {
+                echo "Error updating record here: " . $this->conn->error;
+            }
+
+        } else {
+            echo "Error updating record: " . $this->conn->error;
+        }
+    }    
+
 }
