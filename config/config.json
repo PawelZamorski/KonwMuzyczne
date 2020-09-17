@@ -3,7 +3,7 @@
         "servername": "localhost",
         "user": "root",
         "password": "",
-        "dbname": "konw_muzyczne"
+        "dbname": "fortepian_konwer"
     },
     "log": "/var/log/konwersatorium.log"
 }

@@ -3,22 +3,22 @@
     <div>
         <ul class="social-icons">
             <li class="inline-block">
-                <a title="Dla Polskich Studentów" href="/admin/index.php?lang=pl">
+                <a title="Dla Polskich Studentów" href="/admin/pl">
                     <img src="/images/flags/poland.png" />
                 </a>
             </li>
             <li class="inline-block">
-                <a title="For Vietnamese Students" href="/admin/index.php?lang=vi">
+                <a title="For Vietnamese Students" href="/admin/vi">
                     <img src="/images/flags/vietnam.png" />
                 </a>
             </li>
             <li class="inline-block">
-                <a title="For English Students" href="/admin/index.php?lang=en">
+                <a title="For English Students" href="/admin/en">
                     <img src="/images/flags/england.png"  />
                 </a>
             </li>
             <li class="inline-block">
-                <a title="For Chinese Students" href="/admin/index.php?lang=zh">
+                <a title="For Chinese Students" href="/admin/zh">
                     <img src="/images/flags/china.png" />
                 </a>
             </li>
@@ -27,10 +27,10 @@
 
     <!-- End of Language Icons -->
     <h1>Panel administracyjny</h1>
-    <a class="btn btn-info" href="/admin/index.php" role="button" aria-pressed="true">Home</a>
+    <a class="btn btn-info" href="/admin/{{ lang }}" role="button" aria-pressed="true">Home</a>
 <!-- Update -->
     <a class="btn btn-info" href="/admin/oferta/oferta.php" role="button" aria-pressed="true">Oferta</a>
-    <a class="btn btn-info" href="/admin/nauczyciele/nauczyciele.php" role="button" aria-pressed="true">Nauczyciele</a>
+    <a class="btn btn-info" href="/admin/{{ lang }}/teacher" role="button" aria-pressed="true">Nauczyciele</a>
     <div class="dropdown">
         <a class="btn btn-info" href="#" role="button" id="dropdownMenuLink" aria-haspopup="true" aria-expanded="false">
             Główna strona

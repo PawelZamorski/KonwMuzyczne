@@ -9,20 +9,26 @@
                 <h2 class="section-title">Kup Teraz</h2>
             </div>
             <div>
-                <p>W przypadku pytań prosimy o kontakt z działem sprzedaży:</p>
-                <p>Na Twoją skrzynkę pocztową zostanie wysłana informacja potwierdzająca dokonanie rezerwacji</p>
-            </div>
-            <div>
                 <div class="col"> 
                     <form id="ajax-contact" method="post" action="/lib/google/mailer-buy.php">
+                        <input type="hidden" name="message" value="Oferta kurs {{ offerByIdArr.getCategory }} | {{ offerByIdArr.getName }} Kwota do zapłaty za pakiet 4 lekcji: 400zł">
+                        <input type="hidden" name="lang" value="pl">
+                        <input type="hidden" name="offerId" value={{ offerByIdArr.getOfferId }}>
+                        <div>
+                            <p>W przypadku pytań prosimy o kontakt z działem sprzedaży:</p>
+                            <br>
+                            <p>Prosimy o wypełnienie formularza z zamówieniem.</p>
+                            <p>Na Twoją skrzynkę pocztową zostanie wysłana informacja potwierdzająca dokonanie rezerwacji następującej oferty:</p>
+                            <ul>
+                                <li>nazwa kursu: {{ offerByIdArr.getCategory }} | {{ offerByIdArr.getName }}</li>
+                                <li>kwota do zapłaty za pakiet 4 lekcji: 400zł</li>
+                            </ul>
+                        </div>
                         <div class="field">
                             <input type="text" id="name" name="name" placeholder="{{ contactMainArr.getEmailName }}" required>
                         </div>
                         <div class="field">
                             <input type="email" id="email" name="email" placeholder="{{ contactMainArr.getEmailEmail }}" required>
-                        </div>
-                        <div class="field">
-                            <textarea id="message" name="message" placeholder="{{ contactMainArr.getEmailMessage }}" required readonly>Oferta kurs {{ offerByIdArr.getCategory }} | {{ offerByIdArr.getName }} Kwota do zapłaty za pakiet 4 lekcji: 300zł</textarea>
                         </div>
                         <div class="g-recaptcha" data-sitekey="6LePgS8UAAAAACsBnGlHt1kk4lZrlxsvQFsy8GQR">
                         </div>

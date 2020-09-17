@@ -6,7 +6,7 @@
         <div class="row clearfix">
             <div class="col-3">
                 <div class="section-heading">
-                    <h3>ZAPRASZAMY</h3>
+                    <h3>{{ offerMainByCategoryArr.getHeading3Category }}</h3>
                     <h2 class="section-title">{{ offerMainByCategoryArr.getCategory }}</h2>
                     <p><img src="{{ offerMainByCategoryArr.getImg }}" alt="Lekcje indywidualne {{ offerMainByCategoryArr.getHeading3 }}" /></p>
                 </div>
@@ -21,8 +21,8 @@
     <section class="secondary-color text-center scrollto clearfix ">
         <div class="row clearfix">
             <div class="section-heading">
-                <h3>Twój wybór</h3>
-                <h2 class="section-title">Nasza oferta</h2>
+                <h3>{{ offerMainByCategoryArr.getHeading3 }}</h3>
+                <h2 class="section-title">{{ offerMainByCategoryArr.getHeading2 }}</h2>
             </div>
 
             {% for offer in offerByCategoryArr %}

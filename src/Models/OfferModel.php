@@ -36,8 +36,8 @@ class OfferModel extends AbstractModel {
     * Return offer category domain by category id
     */
     public function getOfferCategoryById($lang, $category_id) {
-        $query = "SELECT  category.id, category_translation.category, category_translation.long_desc, common_desc_translation.common_desc, category.img  
-        FROM category, category_translation, common_desc_translation, languages 
+        $query = "SELECT  category.id, category_translation.category, cht.heading_3_category, cht.heading_3, cht.heading_2, category_translation.long_desc, common_desc_translation.common_desc, category.img  
+        FROM category, category_translation, common_desc_translation, courses_heading_translation as cht, languages 
         WHERE category.id = ?
         AND category.common_desc_id=common_desc_translation.common_desc_id
         AND common_desc_translation.languages_id = languages.id
@@ -45,6 +45,8 @@ class OfferModel extends AbstractModel {
         AND category_translation.category_id = category.id
         AND category_translation.languages_id = languages.id
         
+        AND cht.languages_id = languages.id
+
         AND languages.code = ?;";
 
         // TODO: should try catch block be used ???
@@ -60,7 +62,7 @@ class OfferModel extends AbstractModel {
             throw new NotFoundException();
         }
 
-        return new OfferCategory($row['id'], $row['category'], $row['long_desc'], $row['common_desc'], $row['img']);
+        return new OfferCategory($row['id'], $row['category'], $row['heading_3_category'], $row['heading_3'], $row['heading_2'], $row['long_desc'], $row['common_desc'], $row['img']);
     }
 
 
@@ -81,7 +83,7 @@ class OfferModel extends AbstractModel {
         $result = $stmt->get_result();
         // Fetch associative array
         while ($row = $result->fetch_assoc()) {
-            array_push($itemArr, new OfferCategory($row['id'], $row['category'], '', '', $row['img']));
+            array_push($itemArr, new OfferCategory($row['id'], $row['category'], '', '', '', '', '', $row['img']));
         }
         // Check if there are any data
         if (empty($itemArr)) {
@@ -134,7 +136,7 @@ class OfferModel extends AbstractModel {
     }
 
     public function getOfferById($lang, $offer_id) {
-        $query = "SELECT offer.id as offer_id, course_name_translation.course_name, courses_translation.long_desc, courses_translation.short_desc, courses.img, courses.img_thumbnail, courses.movie, common_desc_translation.common_desc, category_translation.category, course_type_translation.type 
+        $query = "SELECT offer.id as offer_id, course_name_translation.course_name, courses_translation.long_desc, courses_translation.short_desc, courses_translation.img, courses.img_thumbnail, courses.movie, common_desc_translation.common_desc, category_translation.category, course_type_translation.type 
             FROM courses, courses_translation, offer, course_name_translation, category, category_translation, course_type_translation, common_desc_translation, languages
             WHERE offer.id=?
             AND offer.courses_id = courses.id 

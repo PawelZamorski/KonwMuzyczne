@@ -7,6 +7,15 @@
             ":offerId": "int"
         }
     },
+    "test20200823/offer/buy/payment/:lang/:offerId": {
+        "controller": "OfferController",
+        "method": "testPayOfferById",
+        "params": {
+            ":lang": "string",
+            ":offerId": "int"
+        }
+    },
+
     "": {
         "controller": "HomeController",
         "method": "getAll"
@@ -101,6 +110,40 @@
         "params": {
             ":lang": "string",
             ":offerId": "int"
+        }
+    },
+
+    "admin/:lang": {
+        "controller": "AdminHomeController",
+        "method": "loadHomepageLang",
+        "params": {
+            ":lang": "string"
+        }
+    },
+
+    "admin/:lang/teacher": {
+        "controller": "AdminEmployeeController",
+        "method": "getAllEmployee",
+        "params": {
+            ":lang": "string"
+        }
+    },
+
+    "admin/:lang/teacher/:employeeId": {
+        "controller": "AdminEmployeeController",
+        "method": "getEmployeeById",
+        "params": {
+            ":lang": "string",
+            ":employeeId": "int"
+        }
+    },
+
+    "admin/:lang/teacher/:employeeId/update": {
+        "controller": "AdminEmployeeController",
+        "method": "updateEmployeeById",
+        "params": {
+            ":lang": "string",
+            ":employeeId": "int"
         }
     }
 

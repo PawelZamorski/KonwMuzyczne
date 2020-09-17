@@ -65,13 +65,11 @@
         }
     }
 
-
-
       // Only process POST reqeusts.
       if ($_SERVER["REQUEST_METHOD"] == "POST") {
           // Get the form fields and remove whitespace.
           $name = strip_tags(trim($_POST["name"]));
-  				$name = str_replace(array("\r","\n"),array(" "," "),$name);
+  		  $name = str_replace(array("\r","\n"),array(" "," "),$name);
           $email = filter_var(trim($_POST["email"]), FILTER_SANITIZE_EMAIL);
           $message = trim($_POST["message"]);
 
@@ -99,31 +97,32 @@
 
           // captcha success
           if ($resp->success) {
-
-
             // Set the recipient email address.
             // FIXME: Update this to your desired email address.
             // $recipient = "bogna.kolodziej@wp.pl";
-            // $recipient = "zamorskipawel@wp.pl";
-            $recipient = "sekretariat@konwersatoriummuzyczne.pl";
+            // $recipient = "sekretariat@konwersatoriummuzyczne.pl";
+            $recipient = $email;
 
             // Set the email subject.
-            $subject = "Nowy kontakt ze strony: $name";
+            $subject = "Konwersatorium Muzyczne: Potwierdzenie rezerwacji kursu";
 
             // Build the email content.
-            $email_content = "Imię: $name\n";
-            $email_content .= "Email: $email\n\n";
-            $email_content .= "Wiadomość:\n$message\n";
+            $email_content = "Witamy $name\n";
+            $email_content .= "Dziękujemy za dokonanie rezerwacji kursu:\n$message\n";
 
-            // Build the email headers.
-            $email_headers = "From: $name <$email>";
-
+            // To send HTML mail, the Content-type header must be set
+            $headers[] = 'MIME-Version: 1.0';
+            $headers[] = 'Content-type: text/html; charset=UTF-8';
+            // Additional headers
+            $headers[] = "From: sekretariat@konwersatoriummuzyczne.pl";
+            
             // Send the email.
-            $mail=mail($recipient, $subject, $email_content, $email_headers);
+            $mail=mail($recipient, $subject, $email_content, implode("\r\n", $headers));
+
             if ($mail) {
                 // Set a 200 (okay) response code.
                 http_response_code(200);
-                echo "Dziękujemy! Twoja wiadomość już do nas przyszła!";
+                header("Location: /test20200823/offer/buy/payment/pl/1");
             } else {
                 // Set a 500 (internal server error) response code.
                 http_response_code(500);
@@ -133,7 +132,7 @@
              // captcha failure
              http_response_code(403);
              echo "Captcha nie została potwierdzona.";
-          }
+            }
       } else {
           // Not a POST request, set a 403 (forbidden) response code.
           http_response_code(403);

@@ -9,8 +9,8 @@ class Employee {
     private $img;
     private $img_thumbnail;
     private $course_name;
-    private $position;
-    private $specialization;
+    private $position; // TODO: Position object
+    private $specialization; // TODO: array of Specialization objects
 
     public function __construct($emp_id, $name, $long_desc, $img, $img_thumbnail, $course_name, $position, $specialization) {
         $this->emp_id = $emp_id;
@@ -39,7 +39,7 @@ class Employee {
         return $this->img;
     }
 
-    public function getimgThumbnail() {
+    public function getImgThumbnail() {
         return $this->img_thumbnail;
     }
 
