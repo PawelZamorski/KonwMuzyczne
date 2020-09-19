@@ -7,6 +7,7 @@ use Konwersatorium\Domain\EmployeeMain;
 use Konwersatorium\Domain\Positions;
 use Konwersatorium\Domain\Specialization;
 use Konwersatorium\Exceptions\NotFoundException;
+use Konwersatorium\Services\GoogleTranslate;
 
 class EmployeeModel extends AbstractModel {
 
@@ -421,18 +422,24 @@ class EmployeeModel extends AbstractModel {
         } else {
             echo "Error updating record: " . $this->conn->error;
         }
-
     
         // TODO: check if  = $employee_last_id is not -1
         // Insert translation data
         // Step 2: Perform database query
+        // Use Google Translate to translate from polish to english
+        $google_translate_service = new GoogleTranslate();
+        $long_desc_en = $google_translate_service->translate($long_desc, 'en');
+        // Use english translation to translate to vietnamies and chinies
+        $long_desc_vi = $google_translate_service->translate($long_desc_en, 'vi');
+        $long_desc_zh = $google_translate_service->translate($long_desc_en, 'zh');
+
         $sql = "INSERT INTO employee_translation
         (languages_id, employee_id, long_desc)
         VALUES
         (1, $employee_last_id, '$long_desc'),
-        (2, $employee_last_id, '$long_desc'),
-        (3, $employee_last_id, '$long_desc'),
-        (4, $employee_last_id, '$long_desc');";
+        (2, $employee_last_id, '$long_desc_en'),
+        (3, $employee_last_id, '$long_desc_vi'),
+        (4, $employee_last_id, '$long_desc_zh');";
 
         if ($this->conn->query($sql) === TRUE) {
 //            echo "Record updated successfully";
@@ -485,6 +492,6 @@ class EmployeeModel extends AbstractModel {
         } else {
             echo "Error updating record: " . $this->conn->error;
         }
-    }    
+    }
 
 }

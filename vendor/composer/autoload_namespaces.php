@@ -7,4 +7,5 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Twig_' => array($vendorDir . '/twig/twig/lib'),
+    'Rize\\UriTemplate' => array($vendorDir . '/rize/uri-template/src'),
 );
