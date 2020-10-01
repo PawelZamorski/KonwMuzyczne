@@ -6,9 +6,9 @@ namespace Konwersatorium\Services;
 use Google\Cloud\Translate\V2\TranslateClient;
 
 
-// Authentication by URL: https://www.googleapis.com/language/translate/v2/?key=AIzaSyCMfZu9ZvQy-z9qu-BLXVr8Y8HAT5NirtE&q=Dzie%C5%84%20dobry&source=pl&target=en
+// Authentication by URL: https://www.googleapis.com/language/translate/v2/?key=insert_key&q=Dzie%C5%84%20dobry&source=pl&target=en
 
-
+// TODO: handle error
 class GoogleTranslate {
     /* Authenticating as a service account
     * Passing credentials using code:

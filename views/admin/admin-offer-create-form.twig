@@ -1,0 +1,49 @@
+{% extends 'admin/admin-layout.twig' %}
+
+{% block content %}
+<!-- Container -->
+<div class="container-fluid">
+    <form id="offerForm" action="/admin/{{ lang }}/offer/create" method="post">
+        <table class="table table-bordered">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">Element</th>
+                    <th scope="col">Zawartość</th>
+                </tr>
+            </thead>
+            <tbody id="data">
+                <tr>
+                    <th scope="row">Kategoria</th>
+                    <td>
+                        <select id="category" class="form-control custom-select mb-3" name="category_id">
+                            {% for offerCategory in offerCategoryArr %}
+                                <option value="{{ offerCategory.getCategoryId }}">{{ offerCategory.getCategory }}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">Kod kursu</th>
+                    <td>
+                        <select id="courseId" class="form-control custom-select mb-3" name="course_id">
+                            {% for course in allCoursesArr %}
+                                <option value="{{ course.getId }}">{{ course.getCode }}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <button type="button" class="btn btn-primary btn-lg btn-block" onclick="submitForm(this)">Dodaj</button>
+    </form>
+
+</div>
+
+<script>
+    function submitForm() {
+        const element = document.getElementById("offerForm");
+        element.submit();
+    }
+</script>
+
+{% endblock %}

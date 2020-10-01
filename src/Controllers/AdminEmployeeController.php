@@ -19,7 +19,8 @@ class AdminEmployeeController extends AbstractController {
             // set up properties
             $properties = [
                 'lang' => $lang,
-                'employeeArr' => $employeeArr
+                'employeeArr' => $employeeArr,
+                'test' => 'alamakota'
                 ];
 
         } catch (NotFoundException $e) {

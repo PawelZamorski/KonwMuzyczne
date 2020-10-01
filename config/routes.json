@@ -170,6 +170,61 @@
         "params": {
             ":lang": "string"
         }
+    },
+
+    "admin/:lang/offer": {
+        "controller": "AdminOfferController",
+        "method": "getAllOffer",
+        "params": {
+            ":lang": "string"
+        }
+    },
+
+    "admin/:lang/offer/:offerId": {
+        "controller": "AdminOfferController",
+        "method": "getOfferById",
+        "params": {
+            ":lang": "string",
+            ":offerId": "int"
+        }
+    },
+
+    "admin/:lang/offer/:offerId/update": {
+        "controller": "AdminOfferController",
+        "method": "updateOfferById",
+        "params": {
+            ":lang": "string",
+            ":offerId": "int"
+        }
+    },
+
+    "admin/:lang/offer/createOfferForm": {
+        "controller": "AdminOfferController",
+        "method": "openCreateOfferForm",
+        "params": {
+            ":lang": "string"
+        }
+    },
+
+    "admin/:lang/offer/create": {
+        "controller": "AdminOfferController",
+        "method": "createOffer",
+        "params": {
+            ":lang": "string"
+        }
+    },
+
+    "admin/:lang/offer/:offerId/delete": {
+        "controller": "AdminOfferController",
+        "method": "deleteOfferById",
+        "params": {
+            ":lang": "string",
+            ":offerId": "int"
+        }
     }
+
+
+
+
 
 }
