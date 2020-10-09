@@ -1,0 +1,228 @@
+{% extends 'admin/admin-layout.twig' %}
+
+{% block content %}
+<!-- Container -->
+<div class="container-fluid">
+    <form id="offerForm" action="/admin/{{ lang }}/offerCourse/create" method="post">
+        <table class="table table-bordered">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">Element</th>
+                    <th scope="col">Zawartość</th>
+                </tr>
+            </thead>
+            <tbody id="data">
+                <tr>
+                    <th scope="row">Kod kursu</th>
+                    <td><input id="code" class="form-control" type="text" name="code" required></td>
+                <tr>
+                    <th scope="row">Typ kursu</th>
+                    <td>
+                        <select id="courseType" class="form-control custom-select mb-3" name="course_type_id">
+                            {% for offerType in offerTypesArr %}
+                                {% if offerType.getType == offerByIdArr.getType %}
+                                    <option value="{{ offerType.getTypeId }}" selected>{{ offerType.getType }}</option>
+                                {% else %}
+                                    <option value="{{ offerType.getTypeId }}">{{ offerType.getType }}</option>                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="col">Nazwa kursu</th>
+                        <td>
+                            <select id="courseName" class="form-control custom-select mb-3" name="course_name_id">
+                            {% for key, courseName in courseNamesArr %}
+                                {% if courseName == offerByIdArr.getName %}
+                                    <option value="{{ key }}" selected>{{ courseName }}</option>
+                                {% else %}
+                                    <option value="{{ key }}">{{ courseName }}</option>
+                                {% endif %}
+                            {% endfor %}                    
+                            </select>
+                        </td>
+                </tr>
+                <tr>
+                    <th scope="col">Krótki opis</th>
+                    <td><textarea id="shortDesc" class="form-control" name="short_desc" cols="100"></textarea></td>
+                </tr>
+                <tr>
+                    <th scope="col">Wspólny opis</th>
+                    <td>
+                        <select id="commonDesc" class="form-control custom-select mb-3" name="common_desc_id">
+                            {% for key, commonDesc in commonDescArr %}
+                                {% if commonDesc == offerByIdArr.getCommonDesc %}
+                                    <option value="{{ key }}" selected>{{ commonDesc }}</option>
+                                {% else %}
+                                    <option value="{{ key }}">{{ commonDesc }}</option>                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="col">Długi opis</th>
+                    <td><textarea id="longDesc" class="form-control" name="long_desc" cols="100" oninput="display(this)"></textarea></td>
+                </tr>
+                <tr>
+<!-- TODO: add image translation - different language version have different image -->
+                    <th scope="col">Zdjęcie</th>
+                    <td><input id="img" class="form-control" type="text" name="img"></td>
+                </tr>
+                <tr>
+                    <th scope="col">Zdjęcie - thumbnail</th>
+                    <td><input id="img_thumbnail" class="form-control" type="text" name="img_thumbnail"></td>
+                </tr>
+
+                <tr>
+                    <th scope="col">Film</th>
+                    <td><input id="movie" class="form-control" type="text" name="movie" required></td>
+                </tr>
+            </tbody>
+        </table>
+<!-- TODO: Browser will automaticly validate input. However, if the JS function submit() is used, it will submit the form anyway. Must use input type="submit" for automatic validation or validate input data inside function -->
+        <input type="submit" class="btn btn-primary btn-lg btn-block">Dodaj Kurs</button>
+    </form>
+
+    <h2>Podgląd kursu</h2>
+    <hr>
+
+</div>
+<!-- End of Container -->
+<!-- Container -->
+<div class="container">
+<!-- Main Content Area -->
+<main id="content">
+    <!-- Course Details -->
+    <section id="about" class="introduction scrollto">
+        <div class="row clearfix">
+            <div class="col-3">
+                <div class="section-heading">
+                    <h3 id="categoryIn" class="uppercase"></h3>
+                    <h2 id="courseNameIn" class="section-title"></h2>
+                    <p>
+                        <img id="imgIn" src="" alt=""/>
+                    </p>
+                </div>
+            </div>
+            <div class="col-2-3 alignToPhoto">
+                <!-- Youtube Movie-->
+                <div>
+                    <div class="iframe-container">
+                        <iframe id="movieIn" src="" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+                <!--End of Youtube Movie-->
+                <div class="myTooltip">
+                    <span class="tooltiptext">Krótki opis</span>
+                    <div id="shortDescIn"></div>
+                </div>
+                <div class="myTooltip">
+                    <span class="tooltiptext">Wspólny opis</span>
+                    <div id="commonDescIn" class="myTooltip"></div>
+                </div>
+                <div class="myTooltip">
+                    <span class="tooltiptext">Długi opis</span>
+                    <div id="longDescIn" class="myTooltip"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End of Course Details -->
+</main>
+</div>
+<!-- End of Container -->
+
+<!-- Propagate table and build element on load function -->
+<script>
+    // Build JS array from PHP array
+
+    // function -> select course name 
+    json_course_name = JSON.parse("{{ courseNamesArr|json_encode|e('js') }}");
+    // Built element on load
+    window.addEventListener('load', (event) => {
+        // json_course_name is JavaScript object literal. Can not use numbers with dot notation. To access the variable treat it as array.
+        document.getElementById("courseNameIn").innerHTML = json_course_name[document.getElementById("courseName").value];
+    });
+    // Add event listener
+    document.getElementById("courseName").addEventListener("change", function(){
+        document.getElementById("courseNameIn").innerHTML = json_course_name[this.value];
+    });
+
+    // function -> short description
+    // Built element on load
+    window.addEventListener('load', (event) => {
+        document.getElementById("shortDescIn").innerHTML = document.getElementById("shortDesc").value;
+    });
+    // Add event listener
+    document.getElementById("shortDesc").addEventListener("input", function(){
+        document.getElementById("shortDescIn").innerHTML = document.getElementById("shortDesc").value;
+    });
+
+    // function -> select course name 
+    json_common_desc = JSON.parse("{{ commonDescArr|json_encode|e('js') }}");
+    // Built element on load
+    window.addEventListener('load', (event) => {
+        document.getElementById("commonDescIn").innerHTML = json_common_desc[document.getElementById("commonDesc").value];
+    });
+    // Add event listener
+    document.getElementById("commonDesc").addEventListener("change", function(){
+        document.getElementById("commonDescIn").innerHTML = json_common_desc[this.value];
+    });
+
+    // function -> long description
+    // Built element on load
+    window.addEventListener('load', (event) => {
+        document.getElementById("longDescIn").innerHTML = document.getElementById("longDesc").value;
+    });
+    // Add event listener
+    document.getElementById("longDesc").addEventListener("input", function(){
+        document.getElementById("longDescIn").innerHTML = document.getElementById("longDesc").value;
+    });
+
+    // function -> img
+    // Built element on load
+    window.addEventListener('load', (event) => {
+        document.getElementById("imgIn").src = document.getElementById("img").value;
+        document.getElementById("imgIn").alt = "Zdjęcie " + document.getElementById("img").value;
+    });
+    // Add event listener
+    document.getElementById("img").addEventListener("input", function(){
+        document.getElementById("imgIn").src = document.getElementById("img").value;
+        document.getElementById("imgIn").alt = "Zdjęcie " + document.getElementById("img").value;
+    });
+
+    // function -> movie
+    // Built element on load
+    window.addEventListener('load', (event) => {
+        document.getElementById("movieIn").src = document.getElementById("movie").value;
+    });
+    // Add event listener
+    document.getElementById("movie").addEventListener("input", function(){
+        document.getElementById("movieIn").src = document.getElementById("movie").value;
+    });
+
+</script>
+
+<!-- textarea function -->
+<script>
+    const tx = document.getElementsByTagName('textarea');
+    for (let i = 0; i < tx.length; i++) {
+        tx[i].setAttribute('style', 'height:' + (tx[i].scrollHeight) + 'px;overflow-y:hidden;');        
+        tx[i].addEventListener("input", OnInput, false);
+    }
+
+    function OnInput() {
+        this.style.height = 'auto';
+        this.style.height = (this.scrollHeight) + 'px';
+    }
+
+</script>
+
+<script>
+    function submitForm() {
+        const element = document.getElementById("offerForm");
+        element.submit();
+    }
+</script>
+
+{% endblock %}

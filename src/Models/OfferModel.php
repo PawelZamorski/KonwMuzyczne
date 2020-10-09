@@ -396,6 +396,83 @@ class OfferModel extends AbstractModel {
         return $itemArr;
     }
 
+    public function getCourseById($lang, $course_id) {
+        $query = "SELECT courses.id, courses.code, course_name_id, common_desc_id, course_type_id, img_thumbnail, movie, long_desc, short_desc, img
+            FROM courses, courses_translation, languages
+            WHERE courses.id = ?
+            
+            AND courses_translation.courses_id = courses.id
+            AND courses_translation.languages_id = languages.id
+        
+            AND languages.code = ?;";
+
+        // TODO: should be used try catch block ???
+        $stmt = $this->conn->prepare($query); // prepare statement
+        $stmt->bind_param('is', $course_id, $lang); // bind params to the statement. First param: data type, ie 'i' stands for integer, 's' for string
+        $stmt->execute(); // execute query
+        // Get the result
+        $result = $stmt->get_result();
+        // Fetch first row
+        $row = $result->fetch_assoc();
+        // Check if there are any data
+        if (empty($row)) {
+            throw new NotFoundException();
+        }
+
+        return new OfferCourse($row['id'], $row['code'], $row['course_name_id'], $row['common_desc_id'], $row['course_type_id'], $row['img_thumbnail'], $row['movie'], $row['long_desc'], $row['short_desc'], $row['img']);
+    }
+
+    public function updateCourseById($lang, $course_id) {
+        // courses table
+        $course_id = $course_id;
+        $code = $_POST['code'];
+        $course_name_id = $_POST['course_name_id'];
+        $common_desc_id = $_POST['common_desc_id'];
+        $course_type_id = $_POST['course_type_id'];
+        $img_thumbnail = $_POST['img_thumbnail'];
+        $movie = $_POST['movie'];
+        // courses_translation table
+        $long_desc = $_POST['long_desc'];
+        $short_desc = $_POST['short_desc'];
+        $img = $_POST['img'];
+
+        // update main data
+        // Step 2: Perform database query
+        $sql = "UPDATE courses 
+        SET
+        code = '$code',
+        course_name_id = $course_name_id,
+        common_desc_id = $common_desc_id,
+        course_type_id = $course_type_id,
+        img_thumbnail = '$img_thumbnail',
+        movie = '$movie'
+        WHERE courses.id = $course_id;";
+
+        if ($this->conn->query($sql) === TRUE) {
+            echo "Record updated successfully";
+        } else {
+            echo "Error updating record: " . $this->conn->error;
+        }
+
+        
+        // Get main data
+        // Step 2: Perform database query
+        $sql = "UPDATE courses_translation 
+        SET short_desc = '$short_desc',
+        long_desc = '$long_desc',
+        img = '$img'
+        WHERE courses_translation.courses_id = $course_id
+        
+        AND courses_translation.languages_id = 
+            (SELECT id FROM languages WHERE code = '$lang');";
+
+        if ($this->conn->query($sql) === TRUE) {
+            echo "Record updated successfully";
+        } else {
+            echo "Error updating record: " . $this->conn->error;
+        }
+    }
+    
     public function createOffer($long) {
         $course_id = $_POST['course_id'];
         $category_id = $_POST['category_id'];
@@ -423,4 +500,48 @@ class OfferModel extends AbstractModel {
         }
 
     }
+
+
+
+
+
+    public function createOfferCourse($lang) {
+        $code = $_POST['code'];
+        $course_name_id = $_POST['course_name_id'];
+        $common_desc_id = $_POST['common_desc_id'];
+        $course_type_id = $_POST['course_type_id'];
+        $img_thumbnail = $_POST['img_thumbnail'];
+        $movie = $_POST['movie'];
+        // courses_translation table
+        $long_desc = $_POST['long_desc'];
+        $short_desc = $_POST['short_desc'];
+        $img = $_POST['img'];
+
+        $course_last_id;
+    
+        // Insert main data
+        // Step 2: Perform database query
+        $sql = "INSERT INTO courses (`code`, `course_name_id`, `common_desc_id`, `course_type_id`, `img_thumbnail`, `movie`)
+        VALUES ('$code', $course_name_id, $common_desc_id, $course_type_id, '$img_thumbnail', '$movie');";
+
+        if ($this->conn->query($sql) === TRUE) {
+            // get last id of inserted entity
+            $course_last_id = $this->conn->insert_id;
+
+            echo "Record added successfully";
+        } else {
+            echo "Error updating record: " . $this->conn->error;
+        }
+
+        $sql = "INSERT INTO courses_translation (`languages_id`, `courses_id`, `long_desc`, `short_desc`, `img`)
+        VALUES (1, $course_last_id, '$long_desc', '$short_desc', '$img');";
+        if ($this->conn->query($sql) === TRUE) {
+            // get last id of inserted entity
+            echo "Record added successfully";
+        } else {
+            echo "Error updating record: " . $this->conn->error;
+        }
+       
+    }
+
 }

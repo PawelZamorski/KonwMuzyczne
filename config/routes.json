@@ -221,7 +221,51 @@
             ":lang": "string",
             ":offerId": "int"
         }
+    },
+
+    "admin/:lang/offerCourse": {
+        "controller": "AdminOfferController",
+        "method": "getAllCourses",
+        "params": {
+            ":lang": "string"
+        }
+    },
+
+    "admin/:lang/offerCourse/:courseId": {
+        "controller": "AdminOfferController",
+        "method": "getCourseById",
+        "params": {
+            ":lang": "string",
+            ":courseId": "int"
+        }
+    },
+
+    "admin/:lang/offerCourse/:courseId/update": {
+        "controller": "AdminOfferController",
+        "method": "updateCourseById",
+        "params": {
+            ":lang": "string",
+            ":courseId": "int"
+        }
+    },
+
+    "admin/:lang/offerCourse/createOfferCourseForm": {
+        "controller": "AdminOfferController",
+        "method": "openCreateOfferCourseForm",
+        "params": {
+            ":lang": "string"
+        }
+    },
+
+    "admin/:lang/offerCourse/create": {
+        "controller": "AdminOfferController",
+        "method": "createOfferCourse",
+        "params": {
+            ":lang": "string"
+        }
     }
+
+
 
 
 

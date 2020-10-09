@@ -9,6 +9,7 @@
                 <tr>
                     <th scope="col">Element</th>
                     <th scope="col">Zawartość</th>
+                    <th scope="col">Dodaj</th>
                 </tr>
             </thead>
             <tbody id="data">
@@ -21,6 +22,7 @@
                             {% endfor %}
                         </select>
                     </td>
+                    <td><a class="btn btn-info btn-block" href="/admin/{{ lang }}/offerCategory/createOfferCategoryForm" role="button" aria-pressed="true">Utwórz Kategorię</a></td>
                 </tr>
                 <tr>
                     <th scope="row">Kod kursu</th>
@@ -31,6 +33,7 @@
                             {% endfor %}
                         </select>
                     </td>
+                    <td><a class="btn btn-info btn-block" href="/admin/{{ lang }}/offerCourse/createOfferCourseForm" role="button" aria-pressed="true">Utwórz Kurs</a></td>
                 </tr>
             </tbody>
         </table>

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Czas generowania: 01 Paź 2020, 19:54
+-- Czas generowania: 09 Paź 2020, 11:03
 -- Wersja serwera: 10.1.13-MariaDB
 -- Wersja PHP: 5.6.23
 
@@ -169,7 +169,8 @@ INSERT INTO `courses` (`id`, `code`, `course_name_id`, `common_desc_id`, `course
 (16, 'dla dorosłych - retoryka', 11, 2, 10, '/images/oferta-ikony/retoryka.jpg', 'https://www.youtube.com/embed/r6ThuFthhsE?&rel=0'),
 (17, 'dla dorosłych - musicfulness', 12, 2, 11, '/images/oferta-ikony/musicfulness.jpg', 'https://www.youtube.com/embed/r6ThuFthhsE?&rel=0'),
 (18, 'dla dorosłych - meloman', 13, 2, 12, '/images/oferta-ikony/meloman.jpg', 'https://www.youtube.com/embed/r6ThuFthhsE?&rel=0'),
-(20, 'dla dorosłych - kompozycja', 15, 3, 13, '/images/oferta-ikony/kompozycja.jpg', NULL);
+(20, 'dla dorosłych - kompozycja', 15, 3, 13, '/images/oferta-ikony/kompozycja.jpg', NULL),
+(21, 'Ala ma kota - Test', 1, 1, 1, '', 'https://www.youtube.com/embed/b4h8Ot88kcA?&rel=0');
 
 -- --------------------------------------------------------
 
@@ -294,7 +295,8 @@ INSERT INTO `courses_translation` (`id`, `languages_id`, `courses_id`, `long_des
 (86, 4, 16, '<p>這些課程適用於初學者和高級成年人。學習資料-我們通過電子郵件發送給您。課堂在線上單獨舉行-在約定的日期上課。提供波蘭語和英語課程。 </p>\r\n<p>從古羅馬時代起，講堂就受到高度重視。演講者不僅必須表現出出色的口語表達能力，而且還必須知道如何有效傳達自己的信息才能被理解和記住。如今，那些對自己的魅力著迷的演講者已經掌握了呼吸的工作以及語音中語音的正確發出。 </p>\r\n<p>該程序是根據您的興趣而準備的，並且用於：</p>\r\n<ul>\r\n<li>演員</li>\r\n<li>電視記者</li>\r\n<li>政客</li>\r\n<li>商人</li>\r\n<li>外國人</li>\r\n</ul>\r\n<p>通過言語治療和音樂課，您可以提高發音並發掘每個說話者的自然潛能。此外，這些課程還教授適當的放鬆技巧，這些技巧可以幫助並促進日常工作，包括借助相機和麥克風進行語音通話以及自我完善的途徑。</p>', '<p>Individual classes based on a master-pupil system . A specially designed programme for teaching adults from scratch.</p>', '/images/oferta/zh_oferta/retoryka.jpg'),
 (87, 4, 17, '<p>這些課程既適合成人初學者，也適合那些已經在玩和學習的人。學習資料-我們通過電子郵件發送註釋。課堂在線上單獨舉行-在約定的日期上課。提供波蘭語和英語課程。 </p>\r\n<p>在當今世界，我們一直很忙。我們對最後期限，項目和要執行的任務的追求。學生有更多的測試，重要的考試，以及無時無刻學習和記憶的新事物。成人從事的工作是在規定的時間內要完成的任務和目標。缺乏家人，朋友和自己的時間是很常見的。 </p>\r\n<p>為了追求成功，我們忘記了最重要的事情-我們自己。有時你必須停下來。音樂性是一個程序，可以幫助您恢復平衡和和諧感。 </p>\r\n<p>該程序包括：</p>\r\n<ul>\r\n<li>放鬆技巧</li>\r\n<li>呼吸練習</li>\r\n<li>音樂療法的元素</li>\r\n<li>學習傾聽和專心</li>\r\n<li>學習著眼於此時此地</li>\r\n</ul>\r\n<p>這是一個獨特的程序，可讓您減速，停止和休息。這是您可以安全地平靜下來並進行再生的時候。音樂可以減輕壓力並改善生活質量。 </p>\r\n<p>音樂性計劃是指正念，它使用音樂及其對人體和心靈的有益影響。 </p>', '<p>Individual classes based on a master-pupil system . A specially designed programme for teaching adults from scratch.</p>', '/images/oferta/zh_oferta/musicfulness.jpg'),
 (88, 4, 18, '<p>A music lover is an expert in music. Such a person can recognize a good performance, notice its important elements, and surprise others with an interesting anecdote about the composer. Concert hall has no secrets. A music lover knows when to clap, and which concerts to attend. It is a person who have knowledge about art.</p>\r\n<p>The programme is selected in accordance with your interests, and it includes among others:</p>\r\n<ul>\r\n<li>history of music</li>\r\n<li>musical literature</li>\r\n<li>lives and works of great composers</li>\r\n<li>world canon of musical masterpieces</li>\r\n<li>watching and analyzing selected fragments of operas and ballets</li>\r\n<li>rules of music</li>\r\n</ul>\r\n<p>Lessons are available in English</p>', '<p>Individual classes based on a master-pupil system . A specially designed programme for teaching adults from scratch.</p>', '/images/oferta/zh_oferta/meloman.jpg'),
-(89, 4, 20, '<p>我們在華沙市中心的一座新藝術風格的廉價公寓裡上課，並且現在也在線上授課-遍及波蘭和世界各地的課程。 </p>\r\n<p>可以在線授課，但會有所不同。學習資料-我們通過電子郵件發送給您。課堂在線上單獨舉行-在約定的日期上課。提供波蘭語和英語課程。 </p>\r\n<p>音樂創作是想像力的創造藝術。它提供了一個獨特的機會來表達您自己的內在世界的豐富性，其中充滿了各種情感並通過音樂藝術進行了搜索。在課堂上，您將有機會就傑出的作曲家的作品，他們的技術手段和聲音材料發展自己的觀點。 </p>\r\n<p>要找到自己的構圖風格，您需要了解所有可能性，並能夠發現自己的創造力個性。該課程包括學習各種風格的寫作：</p>\r\n<ul>\r\n<li>巴洛克</li>\r\n<li>古典主義</li>\r\n<li>浪漫主義</li>\r\n<li>十二指腸技術</li>\r\n<li>無意者</li>\r\n<li>電聲音樂</li>\r\n<li>電影音樂</li>\r\n<li>最小音樂趨勢</li>\r\n</ul>\r\n<p>在上課期間，使用了現代計算機技術-用於編輯筆記和創建音樂的程序。傳統上，您自己創作的作品是在樂譜上以及在筆記本電腦或平板電腦上完成的。 </p>', '<p>Individual classes based on a master-pupil system . A specially designed programme for teaching adults from scratch.</p>', '/images/oferta/zh_oferta/kompozycja.jpg');
+(89, 4, 20, '<p>我們在華沙市中心的一座新藝術風格的廉價公寓裡上課，並且現在也在線上授課-遍及波蘭和世界各地的課程。 </p>\r\n<p>可以在線授課，但會有所不同。學習資料-我們通過電子郵件發送給您。課堂在線上單獨舉行-在約定的日期上課。提供波蘭語和英語課程。 </p>\r\n<p>音樂創作是想像力的創造藝術。它提供了一個獨特的機會來表達您自己的內在世界的豐富性，其中充滿了各種情感並通過音樂藝術進行了搜索。在課堂上，您將有機會就傑出的作曲家的作品，他們的技術手段和聲音材料發展自己的觀點。 </p>\r\n<p>要找到自己的構圖風格，您需要了解所有可能性，並能夠發現自己的創造力個性。該課程包括學習各種風格的寫作：</p>\r\n<ul>\r\n<li>巴洛克</li>\r\n<li>古典主義</li>\r\n<li>浪漫主義</li>\r\n<li>十二指腸技術</li>\r\n<li>無意者</li>\r\n<li>電聲音樂</li>\r\n<li>電影音樂</li>\r\n<li>最小音樂趨勢</li>\r\n</ul>\r\n<p>在上課期間，使用了現代計算機技術-用於編輯筆記和創建音樂的程序。傳統上，您自己創作的作品是在樂譜上以及在筆記本電腦或平板電腦上完成的。 </p>', '<p>Individual classes based on a master-pupil system . A specially designed programme for teaching adults from scratch.</p>', '/images/oferta/zh_oferta/kompozycja.jpg'),
+(90, 1, 21, 'test', 'test', '/images/user-images/daniel.jpg');
 
 -- --------------------------------------------------------
 
@@ -2028,7 +2030,7 @@ ALTER TABLE `common_desc_translation`
 -- AUTO_INCREMENT dla tabeli `courses`
 --
 ALTER TABLE `courses`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 --
 -- AUTO_INCREMENT dla tabeli `courses_heading_translation`
 --
@@ -2038,7 +2040,7 @@ ALTER TABLE `courses_heading_translation`
 -- AUTO_INCREMENT dla tabeli `courses_translation`
 --
 ALTER TABLE `courses_translation`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=90;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
 --
 -- AUTO_INCREMENT dla tabeli `course_name`
 --
@@ -2158,7 +2160,7 @@ ALTER TABLE `menu_translation`
 -- AUTO_INCREMENT dla tabeli `offer`
 --
 ALTER TABLE `offer`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 --
 -- AUTO_INCREMENT dla tabeli `positions`
 --
