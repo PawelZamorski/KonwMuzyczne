@@ -263,7 +263,17 @@
         "params": {
             ":lang": "string"
         }
+    },
+
+    "admin/:lang/offerCourse/:courseId/delete": {
+        "controller": "AdminOfferController",
+        "method": "deleteCourseById",
+        "params": {
+            ":lang": "string",
+            ":courseId": "int"
+        }
     }
+
 
 
 

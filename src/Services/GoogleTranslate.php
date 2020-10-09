@@ -28,7 +28,7 @@ class GoogleTranslate {
             'target' => $target_language
         ]);
 
-    return $result[text];
+    return $result['text'];
     }
 
 }

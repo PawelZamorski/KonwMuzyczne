@@ -308,12 +308,12 @@ class AdminOfferController extends AbstractController {
             $offerModel = new OfferModel($this->conn);
             // TODO: display message
             $message = $offerModel->createOfferCourse($lang);
-/*            
+            
             $host = $_SERVER['HTTP_HOST'];
-            $uri = "/admin/$lang/offer/create";
+            $uri = "/admin/$lang/offerCourse";
             header("Location: http://$host$uri");
             exit;
-*/            
+            
         } catch (NotFoundException $e) {
 //            $this->log->warn('Customer email not found: ' . $email);
             $errorController = new ErrorController($this->request);
@@ -321,6 +321,26 @@ class AdminOfferController extends AbstractController {
         }
 
     }
+
+    public function deleteCourseById($lang, $course_id) {
+        try {
+            // delete offer data
+            $offerModel = new OfferModel($this->conn);
+            // TODO: display message
+            $message = $offerModel->deleteCourseById($lang, $course_id);
+            
+            $host = $_SERVER['HTTP_HOST'];
+            $uri = "/admin/$lang/offerCourse";
+            header("Location: http://$host$uri");
+            exit;
+            
+        } catch (NotFoundException $e) {
+//            $this->log->warn('Customer email not found: ' . $email);
+            $errorController = new ErrorController($this->request);
+            $errorController->notFound($lang);            
+        }
+    }
+
 
 }
 

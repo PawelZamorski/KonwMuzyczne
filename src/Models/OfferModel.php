@@ -9,6 +9,7 @@ use Konwersatorium\Domain\OfferType;
 use Konwersatorium\Domain\OfferSpecialMain;
 use Konwersatorium\Domain\OfferCourse;
 use Konwersatorium\Exceptions\NotFoundException;
+use Konwersatorium\Services\GoogleTranslate;
 
 class OfferModel extends AbstractModel {
 
@@ -156,7 +157,7 @@ class OfferModel extends AbstractModel {
     public function getOfferByCategoryId($lang, $category_id) {
         $itemArr = array();
 
-        $query = "SELECT offer.id as offer_id, course_name_translation.course_name, courses_translation.long_desc, courses_translation.short_desc, courses.img, courses.img_thumbnail, courses.movie, common_desc_translation.common_desc, category_translation.category, course_type_translation.type 
+        $query = "SELECT offer.id as offer_id, course_name_translation.course_name, courses_translation.long_desc, courses_translation.short_desc, courses_translation.img, courses.img_thumbnail, courses.movie, common_desc_translation.common_desc, category_translation.category, course_type_translation.type 
             FROM courses, courses_translation, offer, course_name_translation, category, category_translation, course_type_translation, common_desc_translation, languages
             WHERE offer.category_id=?
             AND offer.category_id = category.id
@@ -533,8 +534,28 @@ class OfferModel extends AbstractModel {
             echo "Error updating record: " . $this->conn->error;
         }
 
+        // TODO: check if  = $e_last_id is not -1
+        // Insert translation data
+        // Step 2: Perform database query
+        // Use Google Translate to translate from polish to english
+        $google_translate_service = new GoogleTranslate();
+
+        $long_desc_en = $google_translate_service->translate($long_desc, 'en');
+        // Use english translation to translate to vietnamies and chinies
+        $long_desc_vi = $google_translate_service->translate($long_desc_en, 'vi');
+        $long_desc_zh = $google_translate_service->translate($long_desc_en, 'zh');
+
+        $short_desc_en = $google_translate_service->translate($short_desc, 'en');
+        // Use english translation to translate to vietnamies and chinies
+        $short_desc_vi = $google_translate_service->translate($short_desc_en, 'vi');
+        $short_desc_zh = $google_translate_service->translate($short_desc_en, 'zh');
+
         $sql = "INSERT INTO courses_translation (`languages_id`, `courses_id`, `long_desc`, `short_desc`, `img`)
-        VALUES (1, $course_last_id, '$long_desc', '$short_desc', '$img');";
+        VALUES 
+        (1, $course_last_id, '$long_desc', '$short_desc', '$img'),
+        (2, $course_last_id, '$long_desc_en', '$short_desc_en', '$img'),
+        (3, $course_last_id, '$long_desc_vi', '$short_desc_vi', '$img'),
+        (4, $course_last_id, '$long_desc_zh', '$short_desc_zh', '$img');";
         if ($this->conn->query($sql) === TRUE) {
             // get last id of inserted entity
             echo "Record added successfully";
@@ -543,5 +564,17 @@ class OfferModel extends AbstractModel {
         }
        
     }
+
+    public function deleteCourseById($lang, $course_id) {
+        $sql = "DELETE FROM courses WHERE id = $course_id;";
+
+        if ($this->conn->query($sql) === TRUE) {
+//            echo "Record updated successfully";
+        } else {
+            echo "Error updating record: " . $this->conn->error;
+        }
+
+    }
+
 
 }
