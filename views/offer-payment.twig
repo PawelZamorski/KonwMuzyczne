@@ -1,6 +1,4 @@
-{% extends 'layout.twig' %}
 
-{% block content %}
     <!-- Offer Buy -->
     <section class="secondary-color text-center scrollto clearfix ">
             <!-- Bank Payment -->
@@ -16,8 +14,7 @@
                     <p>ul. Poznańska 39</p>
                     <p>00-697 Warszawa</p>
                     <br>
-                    <p>Alior bank S.A. nr konta: 28 24 1028 4007 2120 0000 5588</p>
-                    
+                    <p>Alior bank S.A. nr konta: 28 24 1028 4007 2120 0000 5588</p>                    
                 </div>
             </div>
 
@@ -30,7 +27,7 @@
                     </div>
                 </div>
                 <div class="col-2-3 alignToPhoto">
-                    <p><b>300 PLN pełna wpłata</b></p>
+                    <p><b>400 PLN pełna wpłata</b></p>
                     <p>Przelew online dokonywany jest poprzez operatora płatności Dotpay sp. z o. o.</p>
                     <a class="button" href="https://ssl.dotpay.pl/test_payment/?chk=252866421d80ab7dc37a1a649553fb1ec9a718852b937f372e0187378dafac24&pid=lb69tr2bbp53ui002zmbjqyo6zujgmac">ZAPŁAĆ</a>
                     <img src="/images/shop/payment/set_credit_card-horizontal-transparent.png" alt="Logo Credit Cards" style="margin-top: 30px;"/>
@@ -38,7 +35,6 @@
                     <img src="/images/shop/payment/apple-icon-60x60.png" alt="Logo DotPay" style="margin-top: 30px;"/>
                     <br>
                     <a href="#">Regulamin płatności online poprzez serwis Dotpay sp. z o.o. na rzecz Konwersatorium Muzycznego w Warszawie</a>
-
                 </div>
             </div>
 
@@ -53,16 +49,9 @@
                 <div class="col-2-3 alignToPhoto">
                     <p>Konwersatorium Muzyczne</p>
                     <p>ul. Poznańska 39</p>
-                    <p>00-697 Warszawa</p>                    </div>
+                    <p>00-697 Warszawa</p>
+                </div>
             </div>
-        </div>
-
-        <!-- Contact Details -->
-        <div id="address" class="row clearfix">
-        {% for contactDetails in contactDetailsArr %}
-            <div class="col-3">{{ contactDetails.getDetail | raw }}</div>
-        {% endfor %}
         </div>
     </section>
     <!-- End of Offer Buy -->
-{% endblock %}

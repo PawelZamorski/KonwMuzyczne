@@ -73,6 +73,8 @@
           $email = filter_var(trim($_POST["email"]), FILTER_SANITIZE_EMAIL);
           $message = trim($_POST["message"]);
 
+          $offer_id = strip_tags(trim($_POST["name"]));
+
           // Check that data was sent to the mailer.
           if ( empty($name) OR empty($message) OR !filter_var($email, FILTER_VALIDATE_EMAIL)) {
               // Set a 400 (bad request) response code and exit.
@@ -87,7 +89,7 @@
           curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
           curl_setopt($ch, CURLOPT_POST, 1);
           curl_setopt($ch, CURLOPT_POSTFIELDS, array(
-            'secret' => "6LePgS8UAAAAALLAh5sA9D0lGr2_LhcSeRqaF507",
+            'secret' => "6Ld1ldUZAAAAABC60092Ulf9Xa4IUAJoi6M6ERE_",
             'response' => $_POST['g-recaptcha-response'],
             'remoteip' => $_SERVER['REMOTE_ADDR']
           ));
@@ -122,7 +124,7 @@
             if ($mail) {
                 // Set a 200 (okay) response code.
                 http_response_code(200);
-                header("Location: /test20200823/offer/buy/payment/pl/1");
+                header("Location: /offer/buy/payment/pl/$offer_id");
             } else {
                 // Set a 500 (internal server error) response code.
                 http_response_code(500);

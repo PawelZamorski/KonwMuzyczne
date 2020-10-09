@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Czas generowania: 09 Paź 2020, 11:03
+-- Czas generowania: 10 Paź 2020, 00:12
 -- Wersja serwera: 10.1.13-MariaDB
 -- Wersja PHP: 5.6.23
 
@@ -170,7 +170,8 @@ INSERT INTO `courses` (`id`, `code`, `course_name_id`, `common_desc_id`, `course
 (17, 'dla dorosłych - musicfulness', 12, 2, 11, '/images/oferta-ikony/musicfulness.jpg', 'https://www.youtube.com/embed/r6ThuFthhsE?&rel=0'),
 (18, 'dla dorosłych - meloman', 13, 2, 12, '/images/oferta-ikony/meloman.jpg', 'https://www.youtube.com/embed/r6ThuFthhsE?&rel=0'),
 (20, 'dla dorosłych - kompozycja', 15, 3, 13, '/images/oferta-ikony/kompozycja.jpg', NULL),
-(21, 'Ala ma kota - Test', 1, 1, 1, '', 'https://www.youtube.com/embed/b4h8Ot88kcA?&rel=0');
+(21, 'Ala ma kota - Test', 1, 1, 1, '', 'https://www.youtube.com/embed/b4h8Ot88kcA?&rel=0'),
+(22, 'Al ama kota - Test', 1, 1, 1, '/images/user-images/daniel-square.jpg', 'https://www.youtube.com/embed/b4h8Ot88kcA?&rel=0');
 
 -- --------------------------------------------------------
 
@@ -2030,7 +2031,7 @@ ALTER TABLE `common_desc_translation`
 -- AUTO_INCREMENT dla tabeli `courses`
 --
 ALTER TABLE `courses`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 --
 -- AUTO_INCREMENT dla tabeli `courses_heading_translation`
 --
@@ -2040,7 +2041,7 @@ ALTER TABLE `courses_heading_translation`
 -- AUTO_INCREMENT dla tabeli `courses_translation`
 --
 ALTER TABLE `courses_translation`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=99;
 --
 -- AUTO_INCREMENT dla tabeli `course_name`
 --
@@ -2273,7 +2274,7 @@ ALTER TABLE `courses_heading_translation`
 --
 ALTER TABLE `courses_translation`
   ADD CONSTRAINT `courses_translation_ibfk_1` FOREIGN KEY (`languages_id`) REFERENCES `languages` (`id`),
-  ADD CONSTRAINT `courses_translation_ibfk_2` FOREIGN KEY (`courses_id`) REFERENCES `courses` (`id`);
+  ADD CONSTRAINT `courses_translation_ibfk_2` FOREIGN KEY (`courses_id`) REFERENCES `courses` (`id`) ON DELETE CASCADE;
 
 --
 -- Ograniczenia dla tabeli `course_name_translation`

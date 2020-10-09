@@ -16,6 +16,18 @@
         }
     },
 
+
+
+    
+    "/offer/buy/payment/:lang/:offerId": {
+        "controller": "OfferController",
+        "method": "payOfferById",
+        "params": {
+            ":lang": "string",
+            ":offerId": "int"
+        }
+    },
+
     "": {
         "controller": "HomeController",
         "method": "getAll"

@@ -206,8 +206,8 @@ class OfferController extends AbstractController {
             
         }
 
-//        return $this->render('offer-buy.twig', $properties);
-return $this->render('test-offer-buy.twig', $properties);
+        return $this->render('offer-buy.twig', $properties);
+//return $this->render('test-offer-buy.twig', $properties);
 
     }
 
