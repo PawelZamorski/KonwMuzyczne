@@ -2,8 +2,8 @@
     "db": {
         "servername": "localhost",
         "user": "root",
-        "password": "",
-        "dbname": "fortepian_konwer"
+        "password": "1qwerty0",
+        "dbname": "konw_muzyczne"
     },
     "log": "/var/log/konwersatorium.log",
     "mailer": {
@@ -11,7 +11,7 @@
         "from": "zamorskipawel@wp.pl"
     },
     "recaptcha": {
-        "secretKey": "6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe",
-        "sitekey": "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+        "secretKey": "6Ld1ldUZAAAAABC60092Ulf9Xa4IUAJoi6M6ERE_",
+        "sitekey": "6Ld1ldUZAAAAAA-jiQkhzm31YQGSQXjCiS9CHd9L"
     }
 }

@@ -6,76 +6,10 @@ use Konwersatorium\Models\MenuModel;
 use Konwersatorium\Models\OfferModel;
 use Konwersatorium\Models\ContactModel;
 use Konwersatorium\Exceptions\NotFoundException;
+use Konwersatorium\Core\Config;
+use Konwersatorium\Mailer\MailerBuy;
 
 class OfferController extends AbstractController {
-
-    public function testGetOfferById($lang, $offer_id) {
-        // instantiate array
-        $properties = array();
-
-        try {
-            // get menu data
-            $menuModel = new MenuModel($this->conn);
-            $menuArr = $menuModel->getAllLang($lang);
-
-            // get employee data
-            $offerModel = new OfferModel($this->conn);
-            $offerByIdArr = $offerModel->getOfferById($lang, $offer_id);
-
-            // set up properties
-            $properties = [
-                'lang' => $lang,
-                'menuArr' => $menuArr,
-                'offerByIdArr' => $offerByIdArr
-                ];
-
-        } catch (NotFoundException $e) {
-//            $this->log->warn('Customer email not found: ' . $email);
-            $errorController = new ErrorController($this->request);
-            $errorController->notFound($lang);
-            
-        }
-
-        return $this->render('test-offer-details.twig', $properties);
-    }
-
-    public function testPayOfferById($lang, $offer_id) {
-        // instantiate array
-        $properties = array();
-
-        try {
-            // get menu data
-            $menuModel = new MenuModel($this->conn);
-            $menuArr = $menuModel->getAllLang($lang);
-
-            // get employee data
-            $offerModel = new OfferModel($this->conn);
-            $offerByIdArr = $offerModel->getOfferById($lang, $offer_id);
-
-            // get contactMain data
-            $contactModel = new ContactModel($this->conn);
-            $contactMainArr = $contactModel->getContactMain($lang);
-            $contactDetailsArr = $contactModel->getContactDetails($lang);
-
-            // set up properties
-            $properties = [
-                'lang' => $lang,
-                'menuArr' => $menuArr,
-                'offerByIdArr' => $offerByIdArr,
-                'contactMainArr' => $contactMainArr,
-                'contactDetailsArr' => $contactDetailsArr
-                ];
-
-        } catch (NotFoundException $e) {
-//            $this->log->warn('Customer email not found: ' . $email);
-            $errorController = new ErrorController($this->request);
-            $errorController->notFound($lang);
-            
-        }
-
-        return $this->render('test-offer-payment.twig', $properties);
-    }
-
     
     public function getOfferById($lang, $offer_id) {
         // instantiate array
@@ -89,13 +23,17 @@ class OfferController extends AbstractController {
             // get employee data
             $offerModel = new OfferModel($this->conn);
             $offerByIdArr = $offerModel->getOfferById($lang, $offer_id);
+            
+            // get button
+            $offerBuyArr = $offerModel->getOfferBuy($lang);
 
             // set up properties
             $properties = [
                 'lang' => $lang,
                 'menuArr' => $menuArr,
-                'offerByIdArr' => $offerByIdArr
-                ];
+                'offerByIdArr' => $offerByIdArr,
+                'offerBuyArr' => $offerBuyArr
+            ];
 
         } catch (NotFoundException $e) {
 //            $this->log->warn('Customer email not found: ' . $email);
@@ -184,19 +122,25 @@ class OfferController extends AbstractController {
             // get employee data
             $offerModel = new OfferModel($this->conn);
             $offerByIdArr = $offerModel->getOfferById($lang, $offer_id);
+            $offerBuyArr = $offerModel->getOfferBuy($lang);
 
             // get contactMain data
             $contactModel = new ContactModel($this->conn);
             $contactMainArr = $contactModel->getContactMain($lang);
             $contactDetailsArr = $contactModel->getContactDetails($lang);
 
+            // get config data - recaptcha site key
+            $recaptchaConfig = Config::getConfig()->get('recaptcha');
+
             // set up properties
             $properties = [
                 'lang' => $lang,
                 'menuArr' => $menuArr,
                 'offerByIdArr' => $offerByIdArr,
+                'offerBuyArr' => $offerBuyArr,
                 'contactMainArr' => $contactMainArr,
-                'contactDetailsArr' => $contactDetailsArr
+                'contactDetailsArr' => $contactDetailsArr,
+                'recaptchaConfig' => $recaptchaConfig
                 ];
 
         } catch (NotFoundException $e) {
@@ -223,29 +167,64 @@ class OfferController extends AbstractController {
             // get employee data
             $offerModel = new OfferModel($this->conn);
             $offerByIdArr = $offerModel->getOfferById($lang, $offer_id);
+            $offerBuyArr = $offerModel->getOfferBuy($lang);
 
             // get contactMain data
             $contactModel = new ContactModel($this->conn);
             $contactMainArr = $contactModel->getContactMain($lang);
             $contactDetailsArr = $contactModel->getContactDetails($lang);
 
+            // run mailer and get message
+            $processed = false;
+            $message = "";
+            $mailerBuy = new MailerBuy();
+            $processed = $mailerBuy->isFormDataValid();
+//            $message = "Dane wpisane do formularza są niepoprawne. Spróbuj jeszcze raz!";
+            if($processed) {
+                $processed = $mailerBuy->isRecaptchaValid();
+            } else {
+                $message = "Dane wpisane do formularza są niepoprawne. Spróbuj jeszcze raz!";
+            }
+            if($processed) {
+                $processed = $mailerBuy->isEmailSend();
+            } else {
+                $message = "Captcha nie została potwierdzona.";
+            }
+            if(!$processed) {
+                $message = "Ups! Coś poszło nie tak. Spróbuj do nas zadzwonić!";
+            }
+
+
+// chk value
+$chkParametersChain = "ifhFAPPwsaml1GV5u5JaqUBkqshCqhfa" . "730320" . "400" . "PLN" . "Pakiet 4 lekcji"
+     . "http://testwebproject.eu/" . "0" . "Powrót do Konwersatorium Muzycznego";
+
+$chkValue = hash('sha256', $chkParametersChain);
+
+
+
             // set up properties
             $properties = [
                 'lang' => $lang,
                 'menuArr' => $menuArr,
                 'offerByIdArr' => $offerByIdArr,
+                'offerBuyArr' => $offerBuyArr,
                 'contactMainArr' => $contactMainArr,
-                'contactDetailsArr' => $contactDetailsArr
+                'contactDetailsArr' => $contactDetailsArr,
+                'chkValue' => $chkValue
                 ];
 
         } catch (NotFoundException $e) {
 //            $this->log->warn('Customer email not found: ' . $email);
             $errorController = new ErrorController($this->request);
             $errorController->notFound($lang);
-            
         }
-
-        return $this->render('offer-payment.twig', $properties);
+        // data are send to jQuery Ajax (contact.js)
+        if($processed) {
+            return $this->render('offer-payment.twig', $properties);
+        } else {
+            echo $message; // response is send to jquery Ajax (contact.js)
+        }
     }
 
 }

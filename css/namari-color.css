@@ -335,6 +335,12 @@ h6 {
     border-color:#111;
 }
 
+.button-secondary, input[type="submit"] {
+    border-color:#111;
+    color: #111;
+    background-color: #d2b356;
+}
+
 
 /* Button Hover Color */
 
@@ -343,6 +349,11 @@ h6 {
     color:#d2b356;
 }
 
+.button-secondary:hover,  input[type="submit"]:hover {
+    border-color:#d2b356;
+    color:#d2b356;
+    background-color: #fff;
+}
 
 /* ----------Banner Buttons---------- */
 

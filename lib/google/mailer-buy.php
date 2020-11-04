@@ -1,5 +1,15 @@
 <?php
 
+    // get config data
+    $url = file_get_contents("../../config/config.json");
+    if ($url === false) {
+        // deal with error...
+        echo "Could not find config file";
+        exit;
+    }
+    $config_data = json_decode($url, true);
+
+
     if (!function_exists('http_response_code')) {
         function http_response_code($code = NULL) {
 
@@ -73,7 +83,7 @@
           $email = filter_var(trim($_POST["email"]), FILTER_SANITIZE_EMAIL);
           $message = trim($_POST["message"]);
 
-          $offer_id = strip_tags(trim($_POST["name"]));
+//          $offer_id = strip_tags(trim($_POST["name"]));
 
           // Check that data was sent to the mailer.
           if ( empty($name) OR empty($message) OR !filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -109,22 +119,25 @@
             $subject = "Konwersatorium Muzyczne: Potwierdzenie rezerwacji kursu";
 
             // Build the email content.
-            $email_content = "Witamy $name\n";
-            $email_content .= "Dziękujemy za dokonanie rezerwacji kursu:\n$message\n";
+            $email_content = "Witamy - test";
+//            $email_content = "Witamy $name\n";
+//            $email_content .= "Dziękujemy za dokonanie rezerwacji kursu:\n$message\n";
 
             // To send HTML mail, the Content-type header must be set
             $headers[] = 'MIME-Version: 1.0';
             $headers[] = 'Content-type: text/html; charset=UTF-8';
             // Additional headers
-            $headers[] = "From: sekretariat@konwersatoriummuzyczne.pl";
+//            $headers[] = 'From: sekretariat@konwersatoriummuzyczne.pl';
             
+            $headers[] = 'From: ' . $config_data['mailer']['from'];
+
             // Send the email.
             $mail=mail($recipient, $subject, $email_content, implode("\r\n", $headers));
 
             if ($mail) {
                 // Set a 200 (okay) response code.
                 http_response_code(200);
-                header("Location: /offer/buy/payment/pl/$offer_id");
+                header("Location: /offer/buy/payment/pl/1");
             } else {
                 // Set a 500 (internal server error) response code.
                 http_response_code(500);

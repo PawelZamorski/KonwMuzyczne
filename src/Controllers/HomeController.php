@@ -13,6 +13,7 @@ use Konwersatorium\Models\EmployeeModel;
 use Konwersatorium\Models\ReferencesModel;
 use Konwersatorium\Models\ContactModel;
 use Konwersatorium\Exceptions\NotFoundException;
+use Konwersatorium\Core\Config;
 
 /* 
 * Homepage Controller
@@ -76,6 +77,9 @@ class HomeController extends AbstractController {
             $contactMainArr = $contactModel->getContactMain($lang);
             $contactDetailsArr = $contactModel->getContactDetails($lang);
 
+            // get config data - recaptcha site key
+            $recaptchaConfig = Config::getConfig()->get('recaptcha');
+
             // set up properties
             $properties = [
                 'lang' => $lang,
@@ -94,7 +98,8 @@ class HomeController extends AbstractController {
                 'referencesMainArr' => $referencesMainArr,
                 'referencesArr' => $referencesArr,
                 'contactMainArr' => $contactMainArr,
-                'contactDetailsArr' => $contactDetailsArr
+                'contactDetailsArr' => $contactDetailsArr,
+                'recaptchaConfig' => $recaptchaConfig
                 ];
 
         } catch (NotFoundException $e) {

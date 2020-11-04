@@ -1,5 +1,15 @@
 <?php
 
+    // get config data
+    $url = file_get_contents("../../config/config.json");
+    if ($url === false) {
+        // deal with error...
+        echo "Could not find config file";
+        exit;
+    }
+    $config_data = json_decode($url, true);
+
+
     if (!function_exists('http_response_code')) {
         function http_response_code($code = NULL) {
 
@@ -71,7 +81,7 @@
       if ($_SERVER["REQUEST_METHOD"] == "POST") {
           // Get the form fields and remove whitespace.
           $name = strip_tags(trim($_POST["name"]));
-  				$name = str_replace(array("\r","\n"),array(" "," "),$name);
+  		  $name = str_replace(array("\r","\n"),array(" "," "),$name);
           $email = filter_var(trim($_POST["email"]), FILTER_SANITIZE_EMAIL);
           $message = trim($_POST["message"]);
 
@@ -89,7 +99,7 @@
           curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
           curl_setopt($ch, CURLOPT_POST, 1);
           curl_setopt($ch, CURLOPT_POSTFIELDS, array(
-            'secret' => "6LePgS8UAAAAALLAh5sA9D0lGr2_LhcSeRqaF507",
+            'secret' => $config_data['recaptcha']['secretKey'],
             'response' => $_POST['g-recaptcha-response'],
             'remoteip' => $_SERVER['REMOTE_ADDR']
           ));
@@ -101,11 +111,23 @@
           if ($resp->success) {
 
 
+            // $secretKey = "6Ld1ldUZAAAAABC60092Ulf9Xa4IUAJoi6M6ERE_";
+            // $captcha = $_POST['g-recaptcha-response'];
+            // $ip = $_SERVER['REMOTE_ADDR'];
+            // // post request to server
+            // $url = 'https://www.google.com/recaptcha/api/siteverify?secret=' . urlencode($secretKey) .  '&response=' . urlencode($captcha);
+            // $response = file_get_contents($url);
+            // $responseKeys = json_decode($response,true);
+
+            // // should return JSON with success as true
+            // if($responseKeys["success"]) {
+    
+
             // Set the recipient email address.
             // FIXME: Update this to your desired email address.
             // $recipient = "bogna.kolodziej@wp.pl";
-            // $recipient = "zamorskipawel@wp.pl";
-            $recipient = "sekretariat@konwersatoriummuzyczne.pl";
+            // $recipient = "sekretariat@konwersatoriummuzyczne.pl";
+            $recipient = $config_data['mailer']['recipient'];
 
             // Set the email subject.
             $subject = "Nowy kontakt ze strony: $name";
@@ -134,6 +156,7 @@
              http_response_code(403);
              echo "Captcha nie została potwierdzona.";
           }
+
       } else {
           // Not a POST request, set a 403 (forbidden) response code.
           http_response_code(403);

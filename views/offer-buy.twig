@@ -5,62 +5,53 @@
     <section class="secondary-color text-center scrollto clearfix ">
         <div class="row clearfix">
             <div class="section-heading">
-                <h3>Oferta</h3>
-                <h2 class="section-title">Kup Teraz</h2>
+                <h3>{{ offerBuyArr.getHeading3Buy }}</h3>
+                <h2 class="section-title">{{ offerBuyArr.getHeading2Buy }}</h2>
             </div>
-            <div>
-                <div class="col"> 
-                
-<!-- TODO: reCAPTCHA + send confirmation emial to user via mailer-buy.php 
-
-
-this form does not use reCAPTCHA:
-<form id="ajax-contact" method="post" action="/offer/buy/payment/pl/{{ offerByIdArr.getOfferId }}">
--->
-                    <form id="ajax-contact" method="post" action="/lib/google/mailer-buy.php">
+            <div class="col">
+                <form id="ajax-contact" method="post" action="/offer/buy/payment/{{ lang }}/{{ offerByIdArr.getOfferId }}">
+                    <div class="col-2">
+                        <div>
+                            {{ offerBuyArr.getInfoBuy | raw }}
+                            <ul>
+                                <li class="text-left">{{ offerBuyArr.getInfoCourse }} {{ offerByIdArr.getCategory }} | {{ offerByIdArr.getName }}</li>
+                                <li class="text-left">{{ offerBuyArr.getInfoPrice }}</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-2">
                         <input type="hidden" name="message" value="Oferta kurs {{ offerByIdArr.getCategory }} | {{ offerByIdArr.getName }} Kwota do zapłaty za pakiet 4 lekcji: 400zł">
                         <input type="hidden" name="lang" value="{{ lang }}">
                         <input type="hidden" name="offerId" value={{ offerByIdArr.getOfferId }}>
-                        <div>
-                            <p>W przypadku pytań prosimy o kontakt z działem sprzedaży:</p>
-                            <br>
-                            <p>Prosimy o wypełnienie formularza z zamówieniem.</p>
-                            <p>Na Twoją skrzynkę pocztową zostanie wysłana informacja potwierdzająca dokonanie rezerwacji następującej oferty:</p>
-                            <ul>
-                                <li class="text-left">nazwa kursu: {{ offerByIdArr.getCategory }} | {{ offerByIdArr.getName }}</li>
-                                <li class="text-left">kwota do zapłaty za pakiet 4 lekcji: 400zł</li>
-                            </ul>
-                        </div>
-                        <br>
                         <div class="field">
                             <input type="text" id="name" name="name" placeholder="{{ contactMainArr.getEmailName }}" required>
                         </div>
                         <div class="field">
                             <input type="email" id="email" name="email" placeholder="{{ contactMainArr.getEmailEmail }}" required>
                         </div>
-                        <div class="g-recaptcha" data-sitekey="6Ld1ldUZAAAAAA-jiQkhzm31YQGSQXjCiS9CHd9L">
+<!--  TODO: implement error message, keep form-message. Changes must be done in contact.js. 
+                    <div id="error-messages">
+                        <p class="text-central" style="color: red;"></p>
+                    </div>
+-->
+                        <div class="g-recaptcha" data-sitekey="{{ recaptchaConfig.sitekey }}">
                         </div>
                         <div class="field">
-                            <button id="button" class="button" type="submit">Potwierdź</button>
+                            <button id="button" class="button" type="submit">{{ offerBuyArr.getButtonConfirm }}</button>
                         </div>
-                    </form>
-                    <div id="form-messages">
-                        <p></p>
                     </div>
+                </form>
+                <div id="form-messages">
+                    <p></p>
+                </div>
+                <div>
+                    {{ offerBuyArr.getInfoBuyContact | raw }}
                 </div>
             </div>
-            <div id="address" class="row clearfix">
-
-            {% for contactDetails in contactDetailsArr %}
-                <div class="col-3">{{ contactDetails.getDetail | raw }}</div>
-            {% endfor %}
-            </div>
-
-        </div>
-
-
-
         </div>
     </section>
     <!-- End of Offer Buy -->
+    <!-- Footer -->
+    <!-- End of Footer -->
+
 {% endblock %}

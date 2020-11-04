@@ -1,24 +1,4 @@
-{
-    "test20200823/offer/details/:lang/:offerId": {
-        "controller": "OfferController",
-        "method": "testGetOfferById",
-        "params": {
-            ":lang": "string",
-            ":offerId": "int"
-        }
-    },
-    "test20200823/offer/buy/payment/:lang/:offerId": {
-        "controller": "OfferController",
-        "method": "testPayOfferById",
-        "params": {
-            ":lang": "string",
-            ":offerId": "int"
-        }
-    },
-
-
-
-    
+{    
     "/offer/buy/payment/:lang/:offerId": {
         "controller": "OfferController",
         "method": "payOfferById",

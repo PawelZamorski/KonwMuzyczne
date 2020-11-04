@@ -26,10 +26,10 @@ $(function() {
 
       // Set the message text.
       // $(formMessages).text(response);
-$(formMessages).html(response);
+      $(formMessages).html(response);
 
       //alert('hej');
-      $('#ajax-contact').delay(350).slideUp('slow');
+      $('#ajax-contact').delay(50).slideUp('slow');
       // Clear the form.
       /*$('#name').val('');
       $('#email').val('');
@@ -42,11 +42,11 @@ $(formMessages).html(response);
       // Set the message text.
       if (data.responseText !== '') {
           //$(formMessages).text(data.responseText);
-$(formMessages).html(data.responseText);
+        $(formMessages).html(data.responseText);
 
       } else {
           //$(formMessages).text('Ups! Coś jest nie tak... Najlepiej do nas zadzwoń!');
-$(formMessages).html('Ups! Coś jest nie tak... Najlepiej do nas zadzwoń!');
+        $(formMessages).html('Ups! Coś jest nie tak... Najlepiej do nas zadzwoń!');
       }
     });
   });

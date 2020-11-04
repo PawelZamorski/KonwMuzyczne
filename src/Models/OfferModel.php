@@ -8,6 +8,7 @@ use Konwersatorium\Domain\OfferCategory;
 use Konwersatorium\Domain\OfferType;
 use Konwersatorium\Domain\OfferSpecialMain;
 use Konwersatorium\Domain\OfferCourse;
+use Konwersatorium\Domain\OfferBuy;
 use Konwersatorium\Exceptions\NotFoundException;
 use Konwersatorium\Services\GoogleTranslate;
 
@@ -574,6 +575,31 @@ class OfferModel extends AbstractModel {
             echo "Error updating record: " . $this->conn->error;
         }
 
+    }
+
+    
+    public function getOfferBuy($lang) {
+        $query = "SELECT *  
+        FROM shop_buy_translation, languages
+        WHERE shop_buy_translation.languages_id = languages.id
+        AND languages.code = ?;";
+
+        // TODO: should try catch block be used ???
+        $stmt = $this->conn->prepare($query); // prepare statement
+        $stmt->bind_param('s', $lang); // bind params to the statement
+        $stmt->execute(); // execute query
+        // Get the result
+        $result = $stmt->get_result();
+        // Fetch first row
+        $row = $result->fetch_assoc();
+        // Check if there are any data
+        if (empty($row)) {
+            throw new NotFoundException();
+        }
+
+        return new OfferBuy($row['heading_3_buy'], $row['heading_2_buy'], $row['heading_2_payment_1'], $row['heading_2_payment_2'],
+            $row['heading_2_payment_3'], $row['info_buy'], $row['info_course'], $row['info_price'], $row['info_buy_contact'], $row['info_payment'], $row['button_confirm'],
+            $row['button_pay'], $row['button_payment_policy'], $row['info_account'], $row['info_address'], $row['info_payment_gateway']);        
     }
 
 

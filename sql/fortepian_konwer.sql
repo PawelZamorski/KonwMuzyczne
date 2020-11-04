@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Czas generowania: 10 Paź 2020, 00:12
+-- Czas generowania: 27 Paź 2020, 00:20
 -- Wersja serwera: 10.1.13-MariaDB
 -- Wersja PHP: 5.6.23
 
@@ -1458,6 +1458,43 @@ INSERT INTO `references_type` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Struktura tabeli dla tabeli `shop_buy_translation`
+--
+
+CREATE TABLE `shop_buy_translation` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `languages_id` int(10) UNSIGNED NOT NULL,
+  `heading_3_buy` varchar(255) DEFAULT NULL,
+  `heading_2_buy` varchar(255) DEFAULT NULL,
+  `heading_2_payment_1` varchar(255) DEFAULT NULL,
+  `heading_2_payment_2` varchar(255) DEFAULT NULL,
+  `heading_2_payment_3` varchar(255) DEFAULT NULL,
+  `info_buy` varchar(1000) DEFAULT NULL,
+  `info_course` varchar(255) DEFAULT NULL,
+  `info_price` varchar(255) DEFAULT NULL,
+  `info_buy_contact` varchar(1000) DEFAULT NULL,
+  `info_payment` varchar(255) DEFAULT NULL,
+  `button_confirm` varchar(255) DEFAULT NULL,
+  `button_pay` varchar(255) DEFAULT NULL,
+  `button_payment_policy` varchar(255) DEFAULT NULL,
+  `info_account` varchar(255) DEFAULT NULL,
+  `info_address` varchar(255) DEFAULT NULL,
+  `info_payment_gateway` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Zrzut danych tabeli `shop_buy_translation`
+--
+
+INSERT INTO `shop_buy_translation` (`id`, `languages_id`, `heading_3_buy`, `heading_2_buy`, `heading_2_payment_1`, `heading_2_payment_2`, `heading_2_payment_3`, `info_buy`, `info_course`, `info_price`, `info_buy_contact`, `info_payment`, `button_confirm`, `button_pay`, `button_payment_policy`, `info_account`, `info_address`, `info_payment_gateway`) VALUES
+(1, 1, 'Oferta', 'Kup Teraz', 'Przelew tradycyjny', 'Płatność online (kartą)', 'Płatność w biurze Konwersatorium Muzycznego', '<p>Prosimy o wypełnienie formularza z zamówieniem.</p>\r\n<p>Na Twoją skrzynkę pocztową zostanie wysłana informacja potwierdzająca dokonanie rezerwacji następującej oferty:</p>', 'nazwa kursu:', 'kwota do zapłaty za pakiet 4 lekcji po 30 minut: 400zł', '<p>W przypadku pytań prosimy o kontakt z działem sprzedaży: sekretariat@konwersatriummuzyczne.pl lub pod numerem telefonu +48 883 489 184</p>', '<p>TODO: Prosimy o wybór sposobu platnosci</p>', 'Potwierdź', 'Kup Teraz', 'Regulamin płatności online poprzez serwis Dotpay sp. z o.o. na rzecz Konwersatorium Muzycznego w Warszawie', '<p>Konwersatorium Muzyczne</p>\r\n<p>ul. Poznańska 39</p>\r\n<p>00-697 Warszawa</p>\r\n<p>Alior bank S.A. nr konta: 28 24 1028 4007 2120 0000 5588</p>', '<p>Konwersatorium Muzyczne</p>\r\n<p>ul. Poznańska 39</p>\r\n<p>00-697 Warszawa</p>\r\n<p>TODO: w których godzinach / telefoniczne umowienie spotkania</p>', '<p><b>400 PLN pełna wpłata</b></p>\r\n<p>Przelew online dokonywany jest poprzez operatora płatności Dotpay sp. z o. o.</p>'),
+(2, 2, 'Offer', 'Buy Now', 'Traditional bank transfer', 'Online payment', 'Payment in the office of the Music Conversatory', '<p> Please complete the order form. </p>\r\n<p> An information confirming the booking of the following offer will be sent to your mailbox: </p>', 'course name:', 'amount to be paid for a package of 4 lessons of 30 minutes: PLN 400', '<p> If you have any questions, please contact the sales department: sekretariat@konwersatriummuzyczne.pl or by calling +48 883 489 184 </p>', '<p> TODO: Please choose payment method </p>', 'Submit', 'Buy Now', 'Online payment regulations via Dotpay sp.z o.o. for the Music Conversatory in Warsaw', '<p>Konwersatorium Muzyczne</p>\r\n<p>ul. Poznańska 39</p>\r\n<p>00-697 Warszawa</p>\r\n<p>Alior bank S.A. account number: 28 24 1028 4007 2120 0000 5588</p>', '<p>Konwersatorium Muzyczne</p>\r\n<p>ul. Poznańska 39</p>\r\n<p>00-697 Warszawa</p>', '<p> <b> PLN 400 full payment </b> </p>\r\n<p> Online transfer is made through the payment operator Dotpay sp. z o. o. </p>'),
+(3, 3, 'Phục vụ', 'Mua ngay', 'Chuyển khoản ngân hàng truyền thống', 'Thanh toán trực tuyến', 'Thanh toán tại văn phòng Konwersatoium Myzyczne', '<p> Vui lòng hoàn thành mẫu đơn đặt hàng. </p>\r\n<p> Thông tin xác nhận việc đặt ưu đãi sau sẽ được gửi đến hộp thư của bạn: </p>', 'tên khóa học:', '\r\nsố tiền phải trả cho gói 4 buổi học 30 phút: 400 PLN', '<p> Mọi thắc mắc vui lòng liên hệ phòng kinh doanh: sekretaries@konwersatriummuzyczne.pl hoặc gọi số +48 883 489 184 </p>', '\r\n<p> Vui lòng chọn phương thức thanh toán </p>', 'Gửi đi', 'Mua ngay', 'Quy định thanh toán trực tuyến qua Dotpay sp.z o.o. cho Konwersatorium Muzyczne ở Warsaw', '<p>Konwersatorium Muzyczne</p>\r\n<p>ul. Poznańska 39</p>\r\n<p>00-697 Warszawa</p>\r\n<p>Alior bank S.A. \r\nsố tài khoản: 28 24 1028 4007 2120 0000 5588</p>', '<p> Konwersatorium Muzyczne </p>\r\n<p> ul. Poznańska 39 </p>\r\n<p> 00-697 Warszawa </p>', '<p> <b> Thanh toán đầy đủ 400 PLN </b> </p>\r\n<p> Chuyển khoản trực tuyến được thực hiện thông qua nhà điều hành thanh toán Dotpay sp. z o. o. </p>'),
+(4, 4, '提供', '立即購買', '傳統銀行轉帳', '網上支付', '在Konwersatoium Myzyczne辦公室付款', '<p>請填寫訂單。 </ p>\r\n<p>確認確認以下優惠的信息將發送到您的郵箱：</ p>', '課程名：', '一套4節30分鐘的課程的費用：400波蘭茲羅提', '<p>如有任何疑問，請聯繫銷售部門：sekretariat@konwersatriummuzyczne.pl或致電+48 883 489 184 </ p>', '<p> 請選擇付款方式</ p>', '提交', '立即購買', '通過Dotpay sp.z o.o.在線付款規定華沙的Konwersatorium Muzyczne商店', '<p>Konwersatorium Muzyczne</p>\r\n<p>ul. Poznańska 39</p>\r\n<p>00-697 Warszawa</p>\r\n<p>Alior bank S.A. \r\n帳號: 28 24 1028 4007 2120 0000 5588</p>', '<p> Konwersatorium Muzyczne </p>\r\n<p> ul. Poznańska 39 </p>\r\n<p> 00-697 Warszawa </p>', '<p> <b> 400波蘭茲羅提</ b> </ p>\r\n<p>通過付款運營商Dotpay sp。進行在線轉帳。則o。 </ p>');
+
+-- --------------------------------------------------------
+
+--
 -- Struktura tabeli dla tabeli `shop_item_category`
 --
 
@@ -1954,6 +1991,13 @@ ALTER TABLE `references_type`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `shop_buy_translation`
+--
+ALTER TABLE `shop_buy_translation`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `languages_id` (`languages_id`);
+
+--
 -- Indexes for table `shop_item_category`
 --
 ALTER TABLE `shop_item_category`
@@ -2031,7 +2075,7 @@ ALTER TABLE `common_desc_translation`
 -- AUTO_INCREMENT dla tabeli `courses`
 --
 ALTER TABLE `courses`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 --
 -- AUTO_INCREMENT dla tabeli `courses_heading_translation`
 --
@@ -2041,7 +2085,7 @@ ALTER TABLE `courses_heading_translation`
 -- AUTO_INCREMENT dla tabeli `courses_translation`
 --
 ALTER TABLE `courses_translation`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=99;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
 --
 -- AUTO_INCREMENT dla tabeli `course_name`
 --
@@ -2196,6 +2240,11 @@ ALTER TABLE `references_translation`
 -- AUTO_INCREMENT dla tabeli `references_type`
 --
 ALTER TABLE `references_type`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT dla tabeli `shop_buy_translation`
+--
+ALTER TABLE `shop_buy_translation`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT dla tabeli `shop_item_category`
@@ -2422,6 +2471,12 @@ ALTER TABLE `references_translation`
   ADD CONSTRAINT `references_translation_ibfk_2` FOREIGN KEY (`references_no_id`) REFERENCES `references_no` (`id`),
   ADD CONSTRAINT `references_translation_ibfk_3` FOREIGN KEY (`references_category_id`) REFERENCES `references_category` (`id`),
   ADD CONSTRAINT `references_translation_ibfk_4` FOREIGN KEY (`references_type_id`) REFERENCES `references_type` (`id`);
+
+--
+-- Ograniczenia dla tabeli `shop_buy_translation`
+--
+ALTER TABLE `shop_buy_translation`
+  ADD CONSTRAINT `shop_buy_translation_ibfk_1` FOREIGN KEY (`languages_id`) REFERENCES `languages` (`id`);
 
 --
 -- Ograniczenia dla tabeli `shop_item_category_translation`
