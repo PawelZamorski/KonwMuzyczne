@@ -1,4 +1,5 @@
 {    
+
     "/offer/buy/payment/:lang/:offerId": {
         "controller": "OfferController",
         "method": "payOfferById",
@@ -104,6 +105,7 @@
             ":offerId": "int"
         }
     },
+
 
     "admin/:lang": {
         "controller": "AdminHomeController",

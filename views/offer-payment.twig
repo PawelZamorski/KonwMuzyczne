@@ -1,7 +1,18 @@
+{% extends 'layout.twig' %}
 
+{% block content %}
     <!-- Offer Buy -->
     <section class="secondary-color text-center scrollto clearfix ">
-    <p>{{ offerBuyArr.getInfoPayment | raw }}</p>
+        <div class="row clearfix">
+            <div class="section-heading" style="padding-bottom:0px;">
+                <h3>{{ offerBuyArr.getHeading3Buy }}</h3>
+                <h2 class="section-title" style="padding-bottom:0px;">{{ offerBuyArr.getHeading2Payment }}</h2>
+            </div>
+        </div>
+    </section>
+    <!-- Offer Buy -->
+    <section class="secondary-color text-center scrollto clearfix ">
+<!--    <p>{{ offerBuyArr.getInfoPayment | raw }}</p> -->
             <!-- Bank Payment -->
             <div class="col">
                 <div class="col-3">
@@ -10,7 +21,12 @@
                     </div>
                 </div>
                 <div class="col-2-3 alignToPhoto">
-                    {{ offerBuyArr.getInfoAccount | raw }}                    
+                    {{ offerBuyArr.getInfoAccount | raw }}
+                    <!-- Course info -->
+<!-- TODO: Add 'tytu przelewu'  oraz numer rezerwacji-->
+                    <p class="capitalize">
+                        Tytu przelewu: rezerwacja nr: 1234/2020 | {{ mailerBuyData.offer_category }} | {{ mailerBuyData.offer_name }}
+                    </p>
                 </div>
             </div>
             <br>
@@ -24,7 +40,7 @@
                     </div>
                 </div>
                 <div class="col-2-3 alignToPhoto">
-                    {{ offerBuyArr.getInfoPaymentGateway | raw }}
+                <!--    {{ offerBuyArr.getInfoPaymentGateway | raw }} -->
                     <!-- Form DotPay -->
                 <!--    <form action="https://ssl.dotpay.pl/t2/" method="post" target="_parent"> -->
                     <form action="https://ssl.dotpay.pl/test_payment/" method="post" target="_parent">
@@ -42,14 +58,14 @@
                         <!-- Tekst przycisku powrotu do sklepu -->
                         <input type="hidden" name="buttontext" value="Powrót do Konwersatorium Muzycznego" />
                         <!-- End of DotPay Config -->
-                        <button id="button" class="button" type="submit">{{ offerBuyArr.getButtonPay }}</button>
+                        <button id="button" type="submit" style="border:0px; cursor: pointer; margin-bottom: 10px">
+                            <img src="/images/shop/payment/set_credit_card-horizontal-transparent.png" alt="Logo Credit Cards"/>
+                            </br>
+                            <img src="/images/shop/payment/apple-icon-60x60.png" alt="Logo DotPay"/>
+                        </button>
                     </form>
                     <!-- End of Form DotPay -->
                     <br><br>
-                    <img src="/images/shop/payment/set_credit_card-horizontal-transparent.png" alt="Logo Credit Cards"/>
-                    </br></br>
-                    <img src="/images/shop/payment/apple-icon-60x60.png" alt="Logo DotPay"/>
-                    <br>
                     <a href="#">{{ offerBuyArr.getButtonPaymentPolicy }}</a>
                 </div>
             </div>
@@ -70,3 +86,5 @@
         </div>
     </section>
     <!-- End of Offer Buy -->
+
+{% endblock %}

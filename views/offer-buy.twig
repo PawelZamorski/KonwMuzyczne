@@ -4,47 +4,52 @@
     <!-- Offer Buy -->
     <section class="secondary-color text-center scrollto clearfix ">
         <div class="row clearfix">
-            <div class="section-heading">
+            <div class="section-heading" style="padding-bottom:0px;">
                 <h3>{{ offerBuyArr.getHeading3Buy }}</h3>
-                <h2 class="section-title">{{ offerBuyArr.getHeading2Buy }}</h2>
+                <h2 class="section-title" style="padding-bottom:0px;">{{ offerBuyArr.getHeading2Buy }}</h2>
             </div>
             <div class="col">
-                <form id="ajax-contact" method="post" action="/offer/buy/payment/{{ lang }}/{{ offerByIdArr.getOfferId }}">
-                    <div class="col-2">
-                        <div>
-                            {{ offerBuyArr.getInfoBuy | raw }}
-                            <ul>
-                                <li class="text-left">{{ offerBuyArr.getInfoCourse }} {{ offerByIdArr.getCategory }} | {{ offerByIdArr.getName }}</li>
-                                <li class="text-left">{{ offerBuyArr.getInfoPrice }}</li>
-                            </ul>
-                        </div>
+<!--                <form id="shop-contact" class="text-left" method="post" action="/offer/buy/payment/{{ lang }}/{{ offerByIdArr.getOfferId }}"> -->
+                <form id="shop-contact" class="text-left" method="post" action="/offer/buy/payment/{{ lang }}/{{ offerByIdArr.getOfferId }}">
+                    <div class="col-1" style="padding-top:0px; padding-bottom:0px;">
+                        {{ offerBuyArr.getInfoMain | raw }}
                     </div>
-                    <div class="col-2">
-                        <input type="hidden" name="message" value="Oferta kurs {{ offerByIdArr.getCategory }} | {{ offerByIdArr.getName }} Kwota do zapłaty za pakiet 4 lekcji: 400zł">
-                        <input type="hidden" name="lang" value="{{ lang }}">
+                    <!-- Form inputs -->
+                    <div class="col-2" style="padding-top:0px;">
                         <input type="hidden" name="offerId" value={{ offerByIdArr.getOfferId }}>
+                        <input type="hidden" name="offerCategory" value="{{ offerByIdArr.getCategory }}">
+                        <input type="hidden" name="offerName" value="{{ offerByIdArr.getName }}">
+                        <input type="hidden" name="lang" value="{{ lang }}">
                         <div class="field">
-                            <input type="text" id="name" name="name" placeholder="{{ contactMainArr.getEmailName }}" required>
+                            <input type="text" id="name" name="name" placeholder="{{ contactMainArr.getEmailName }}" required style="width:100%">
                         </div>
                         <div class="field">
-                            <input type="email" id="email" name="email" placeholder="{{ contactMainArr.getEmailEmail }}" required>
+                            <input type="email" id="email" name="email" placeholder="{{ contactMainArr.getEmailEmail }}" required style="width:100%">
                         </div>
-<!--  TODO: implement error message, keep form-message. Changes must be done in contact.js. 
-                    <div id="error-messages">
-                        <p class="text-central" style="color: red;"></p>
-                    </div>
--->
+
+{% if errorMessage %}                        
+<div id="error-messages" class="text-central" >
+    <p style="color: red; font-size: small;">*{{ errorMessage }}</p>
+</div>
+{% endif %}
                         <div class="g-recaptcha" data-sitekey="{{ recaptchaConfig.sitekey }}">
                         </div>
-                        <div class="field">
+                        <div class="field text-center">
                             <button id="button" class="button" type="submit">{{ offerBuyArr.getButtonConfirm }}</button>
                         </div>
                     </div>
+                    <!-- End Form Input -->
+                    <!-- Info -->
+                    <div class="col-1">
+                        {{ offerBuyArr.getInfoBuy | raw }}
+                        <ul>
+                            <li class="text-left">{{ offerBuyArr.getInfoCourse }} {{ offerByIdArr.getCategory }} | {{ offerByIdArr.getName }}</li>
+                            <li class="text-left">{{ offerBuyArr.getInfoPrice }}</li>
+                        </ul>
+                    </div>
+                    <!-- End Info -->
                 </form>
-                <div id="form-messages">
-                    <p></p>
-                </div>
-                <div>
+                <div class="col-1">
                     {{ offerBuyArr.getInfoBuyContact | raw }}
                 </div>
             </div>

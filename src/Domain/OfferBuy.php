@@ -5,9 +5,11 @@ namespace Konwersatorium\Domain;
 class OfferBuy {
     private $heading_3_buy;
     private $heading_2_buy;
+    private $heading_2_payment;
     private $heading_2_payment_1;
     private $heading_2_payment_2;
     private $heading_2_payment_3;
+    private $info_main;
     private $info_buy;
     private $info_course;
     private $info_price;
@@ -20,15 +22,17 @@ class OfferBuy {
     private $info_address;
     private $info_payment_gateway;
 
-    public function __construct($heading_3_buy, $heading_2_buy, $heading_2_payment_1, $heading_2_payment_2, $heading_2_payment_3, 
-        $info_buy, $info_course, $info_price, $info_buy_contact, $info_payment, $button_confirm, $button_pay, $button_payment_policy, $info_account, 
+    public function __construct($heading_3_buy, $heading_2_buy, $heading_2_payment, $heading_2_payment_1, $heading_2_payment_2, $heading_2_payment_3, 
+        $info_main, $info_buy, $info_course, $info_price, $info_buy_contact, $info_payment, $button_confirm, $button_pay, $button_payment_policy, $info_account, 
         $info_address, $info_payment_gateway) {
         
         $this->heading_3_buy = $heading_3_buy;
         $this->heading_2_buy = $heading_2_buy;
+        $this->heading_2_payment = $heading_2_payment;
         $this->heading_2_payment_1 = $heading_2_payment_1;
         $this->heading_2_payment_2 = $heading_2_payment_2;
         $this->heading_2_payment_3 = $heading_2_payment_3;
+        $this->info_main = $info_main;        
         $this->info_buy = $info_buy;
         $this->info_course = $info_course;
         $this->info_price = $info_price;
@@ -50,6 +54,10 @@ class OfferBuy {
         return $this->heading_2_buy;
     }
 
+    public function getHeading2Payment() {
+        return $this->heading_2_payment;
+    }
+
     public function getHeading2Payment1() {
         return $this->heading_2_payment_1;
     }
@@ -60,6 +68,10 @@ class OfferBuy {
 
     public function getHeading2Payment3() {
         return $this->heading_2_payment_3;
+    }
+
+    public function getInfoMain() {
+        return $this->info_main;
     }
 
     public function getInfoBuy() {

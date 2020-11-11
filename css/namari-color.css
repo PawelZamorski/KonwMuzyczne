@@ -311,6 +311,14 @@ h6 {
     color:#111;
 }
 
+.uppercase {
+    text-transform: uppercase;
+}
+
+.capitalize {
+    text-transform: capitalize;
+}
+
 
 /*------------------------------------------------------------------------------------------*/
 /* 6. Buttons */

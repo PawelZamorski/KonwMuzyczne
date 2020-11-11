@@ -155,6 +155,7 @@ class OfferController extends AbstractController {
 
     }
 
+
     public function payOfferById($lang, $offer_id) {
         // instantiate array
         $properties = array();
@@ -176,24 +177,22 @@ class OfferController extends AbstractController {
 
             // run mailer and get message
             $processed = false;
-            $message = "";
+            $errorMessage = "";
             $mailerBuy = new MailerBuy();
-            $processed = $mailerBuy->isFormDataValid();
-//            $message = "Dane wpisane do formularza są niepoprawne. Spróbuj jeszcze raz!";
-            if($processed) {
-                $processed = $mailerBuy->isRecaptchaValid();
-            } else {
-                $message = "Dane wpisane do formularza są niepoprawne. Spróbuj jeszcze raz!";
-            }
-            if($processed) {
-                $processed = $mailerBuy->isEmailSend();
-            } else {
-                $message = "Captcha nie została potwierdzona.";
-            }
-            if(!$processed) {
-                $message = "Ups! Coś poszło nie tak. Spróbuj do nas zadzwonić!";
-            }
+            // get data as array
+            $mailerBuyData = $mailerBuy->getData();
 
+            if($processed = $mailerBuy->isFormDataValid()) {
+                // if($processed = $mailerBuy->isRecaptchaValid()) {
+                //     if($processed = $mailerBuy->isEmailSend()) {
+                        
+                //     } else $errorMessage = "Ups! Coś poszło nie tak. Spróbuj do nas zadzwonić!"; 
+                // } else {
+                //     $errorMessage = "Captcha nie została potwierdzona.";
+                // }
+            } else {
+                $errorMessage = "Dane wpisane do formularza są niepoprawne. Spróbuj jeszcze raz!";
+            }
 
 // chk value
 $chkParametersChain = "ifhFAPPwsaml1GV5u5JaqUBkqshCqhfa" . "730320" . "400" . "PLN" . "Pakiet 4 lekcji"
@@ -211,7 +210,8 @@ $chkValue = hash('sha256', $chkParametersChain);
                 'offerBuyArr' => $offerBuyArr,
                 'contactMainArr' => $contactMainArr,
                 'contactDetailsArr' => $contactDetailsArr,
-                'chkValue' => $chkValue
+                'chkValue' => $chkValue,
+                'errorMessage' => $errorMessage
                 ];
 
         } catch (NotFoundException $e) {
@@ -223,7 +223,8 @@ $chkValue = hash('sha256', $chkParametersChain);
         if($processed) {
             return $this->render('offer-payment.twig', $properties);
         } else {
-            echo $message; // response is send to jquery Ajax (contact.js)
+            // TODO: redirect to url: offer buy
+            return $this->render('offer-buy.twig', $properties); // display offer-buy page with error message
         }
     }
 

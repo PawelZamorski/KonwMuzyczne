@@ -11,14 +11,43 @@
         // data send by POST
         private $name = "";
         private $email = "";
+        private $offer_id = "";
+        private $offer_category = "";
+        private $offer_name = "";
+        private $lang = "";
 
         public function __construct() {
             // get config data
             $config_recaptcha = Config::getConfig()->get('recaptcha');
             $config_mailer = Config::getConfig()->get('mailer');
+
+            // set data from POST
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                if(isset($_POST['name'])) $this->name = $_POST['name'];
+                if(isset($_POST['email'])) $this->email = $_POST['email'];
+                if(isset($_POST['offerId'])) $this->offer_id = $_POST['offerId'];
+                if(isset($_POST['offerCategory'])) $this->offer_category = $_POST['offerCategory'];
+                if(isset($_POST['offerName'])) $this->offer_name = $_POST['offerName'];
+                if(isset($_POST['lang'])) {
+                    $this->lang = $_POST['lang'];
+                    // TODO: use database to select languages
+                    if($this->lang != 'pl' && $this->lang != 'en' && $this->lang != 'vi' && $this->lang != 'zh') {
+                        $this->lang = 'pl';
+                    }
+                } else {
+                    $this->lang = 'pl';
+                }    
+            }
+        }
+
+        public function getData() {
+            return array("name"=>$this->name, "email"=>$this->email, "offer_id"=>$this->offer_id, "offer_category"=>$this->offer_category,
+                        "offer_name"=>$this->offer_name, "lang"=>$this->lang);
         }
 
         public function isFormDataValid() {
+            // TODO: data are set up in constructor. Use data from object
+            // TODO: validate data in seperate function
             // Only process POST reqeusts.
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 // Get the form fields and remove whitespace.
