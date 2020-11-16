@@ -4,6 +4,7 @@ namespace Konwersatorium\Models;
 
 use Konwersatorium\Domain\OfferBuy;
 use Konwersatorium\Domain\OfferReservation;
+use Konwersatorium\Domain\OfferPaymentPolicy;
 use Konwersatorium\Exceptions\NotFoundException;
 
 class ShopModel extends AbstractModel {
@@ -114,6 +115,27 @@ class ShopModel extends AbstractModel {
         } else {
             echo "Error updating record: " . $this->conn->error;
         }
+    }
+
+    public function getPaymentPolicy($lang) {
+        $query = "SELECT *
+        FROM shop_payment_policy_translation, languages
+        WHERE shop_payment_policy_translation.languages_id = languages.id
+        AND languages.code = ?;";
+
+        // TODO: should try catch block be used ???
+        $stmt = $this->conn->prepare($query); // prepare statement
+        $stmt->bind_param('s', $lang); // bind params to the statement
+        $stmt->execute(); // execute query
+        // Get the result
+        $result = $stmt->get_result();
+        // Fetch first row
+        $row = $result->fetch_assoc();
+        // Check if there are any data
+        if (empty($row)) {
+            throw new NotFoundException();
+        }
+        return new OfferPaymentPolicy($row['heading_3'], $row['heading_2'], $row['long_desc']);
     }
 
 }

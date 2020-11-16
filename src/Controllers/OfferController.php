@@ -273,5 +273,35 @@ $chkValue = hash('sha256', $chkParametersChain);
         }
     }
 
+        public function getPaymentPolicy($lang) {
+        // instantiate array
+        $properties = array();
+
+        try {
+            // get menu data
+            $menuModel = new MenuModel($this->conn);
+            $menuArr = $menuModel->getAllLang($lang);
+
+            $shopModel = new ShopModel($this->conn);
+            $offerPaymentPolicy = $shopModel->getPaymentPolicy($lang);
+
+
+            // set up properties
+            $properties = [
+                'lang' => $lang,
+                'menuArr' => $menuArr,
+                'offerPaymentPolicy' => $offerPaymentPolicy
+                ];
+
+        } catch (NotFoundException $e) {
+//            $this->log->warn('Customer email not found: ' . $email);
+            $errorController = new ErrorController($this->request);
+            $errorController->notFound($lang);
+            
+        }
+
+        return $this->render('offer-payment-policy.twig', $properties);
+    }
+
 }
 
