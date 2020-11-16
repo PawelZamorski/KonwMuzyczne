@@ -3,7 +3,7 @@
 {% block content %}
     <!-- Offer Buy -->
     <section class="secondary-color text-center scrollto clearfix ">
-        <div class="row clearfix">
+        <div class="row clearfix" style="padding-bottom:0px;">
             <div class="section-heading" style="padding-bottom:0px;">
                 <h3>{{ offerBuyArr.getHeading3Buy }}</h3>
                 <h2 class="section-title" style="padding-bottom:0px;">{{ offerBuyArr.getHeading2Payment }}</h2>
@@ -25,7 +25,7 @@
                     <!-- Course info -->
 <!-- TODO: Add 'tytu przelewu'  oraz numer rezerwacji-->
                     <p class="capitalize">
-                        Tytu przelewu: rezerwacja nr: 1234/2020 | {{ mailerBuyData.offer_category }} | {{ mailerBuyData.offer_name }}
+                        {{ res_no }} - {{ mailerBuyData.offer_category }} {{ mailerBuyData.offer_name }}
                     </p>
                 </div>
             </div>

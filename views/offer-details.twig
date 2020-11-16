@@ -11,9 +11,16 @@
                         <img src="{{ offerByIdArr.getImg }}" alt="{{ offerByIdArr.getName }}"/>
                     </p>
                     <!-- Buy Button -->
-                    <div class="text-center">
-                        <a href="/offer/buy/{{ lang }}/{{ offerByIdArr.getOfferId }}" class="button button-secondary uppercase">{{ offerBuyArr.getButtonPay }}</a>
-                    </div>
+                    {% if quantity > 0 %}
+                        <div class="text-center">
+                            <a href="/offer/buy/{{ lang }}/{{ offerByIdArr.getOfferId }}" class="button button-secondary uppercase">{{ offerBuyArr.getButtonPay }}</a>
+                        </div>
+                    {% else %}
+                        <p style="color: red; font-size: small;">*Brak wolnych miejsc. Prosimy o kontakt z biurem sprzedaży w celu rezerwcji późniejszego terminu</p>
+                        <div class="text-center">
+                            <a class="button button-secondary uppercase">{{ offerBuyArr.getButtonPay }}</a>
+                        </div>
+                    {% endif %}
                     <!-- End of Buy Button -->
                 </div>
             </div>

@@ -18,8 +18,8 @@
 
         public function __construct() {
             // get config data
-            $config_recaptcha = Config::getConfig()->get('recaptcha');
-            $config_mailer = Config::getConfig()->get('mailer');
+            $this->config_recaptcha = Config::getConfig()->get('recaptcha');
+            $this->config_mailer = Config::getConfig()->get('mailer');
 
             // set data from POST
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -68,13 +68,15 @@
         }
 
         public function isRecaptchaValid() {
+//            $secretKey = $this->config_recaptcha['secretKey'];
+           
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, "https://www.google.com/recaptcha/api/siteverify");
             curl_setopt($ch, CURLOPT_HEADER, 0);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
             curl_setopt($ch, CURLOPT_POST, 1);
             curl_setopt($ch, CURLOPT_POSTFIELDS, array(
-              'secret' => "6Ld1ldUZAAAAABC60092Ulf9Xa4IUAJoi6M6ERE_",
+              'secret' => $this->config_recaptcha['secretKey'],
               'response' => $_POST['g-recaptcha-response'],
               'remoteip' => $_SERVER['REMOTE_ADDR']
             ));
@@ -83,6 +85,7 @@
             curl_close($ch);
 
             if($resp->success) {
+                http_response_code(200);
                 return true;
             } else {
                 // captcha failure

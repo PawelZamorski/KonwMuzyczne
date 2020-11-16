@@ -26,12 +26,12 @@
                         <div class="field">
                             <input type="email" id="email" name="email" placeholder="{{ contactMainArr.getEmailEmail }}" required style="width:100%">
                         </div>
-
-{% if errorMessage %}                        
-<div id="error-messages" class="text-central" >
-    <p style="color: red; font-size: small;">*{{ errorMessage }}</p>
-</div>
-{% endif %}
+                        <!-- error message-->
+                        {% if errorMessage %}                        
+                        <div id="error-messages" class="text-central" >
+                            <p style="color: red; font-size: small;">*{{ errorMessage }}</p>
+                        </div>
+                        {% endif %}
                         <div class="g-recaptcha" data-sitekey="{{ recaptchaConfig.sitekey }}">
                         </div>
                         <div class="field text-center">
