@@ -259,6 +259,28 @@ class OfferModel extends AbstractModel {
         return new OfferSpecialMain($row['heading_3'], $row['heading_2'], $row['short_desc'], $row['long_desc'], $row['button'], $row['img']);
     }
 
+    public function getOfferSpecial_2($lang) {
+        $query = "SELECT heading_3, heading_2, short_desc, long_desc, button, img
+        FROM special_offer_2_translation, languages
+        WHERE special_offer_2_translation.languages_id = languages.id
+        AND languages.code = ?;";
+
+        // TODO: should try catch block be used ???
+        $stmt = $this->conn->prepare($query); // prepare statement
+        $stmt->bind_param('s', $lang); // bind params to the statement
+        $stmt->execute(); // execute query
+        // Get the result
+        $result = $stmt->get_result();
+        // Fetch first row
+        $row = $result->fetch_assoc();
+        // Check if there are any data
+        if (empty($row)) {
+            throw new NotFoundException();
+        }
+
+        return new OfferSpecialMain($row['heading_3'], $row['heading_2'], $row['short_desc'], $row['long_desc'], $row['button'], $row['img']);
+    }
+
     public function getAllOffer($lang) {
         $itemArr = array();        
 

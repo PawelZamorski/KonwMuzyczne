@@ -1,0 +1,17 @@
+<section id="oferta-sezonowa-2" class="secondary-color text-center scrollto clearfix ">
+    <div class="row clearfix">
+        <div class="section-heading">
+            <h3>{{ offerSpecialMain_2_Arr.getHeading3 }}</h3>
+            <h2 class="section-title">{{ offerSpecialMain_2_Arr.getHeading2 }}</h2>
+        </div>
+        <div class="col-3 col-100">
+            <img src="{{ offerSpecialMain_2_Arr.getImg }}" alt="{{ offerSpecialMain_2_Arr.getHeading3 }}">
+        </div>
+        <div class="col-2-3 alignToPhoto">
+            {{ offerSpecialMain_2_Arr.getShortDesc | raw }}
+            <div class="text-center">
+                <a href="/voucher/{{ lang }}" class="button" style="margin: 30px 0;">{{ offerSpecialMain_2_Arr.getButton }}</a>
+            </div>
+        </div>
+    </div>
+</section>

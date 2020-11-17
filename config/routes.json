@@ -106,6 +106,13 @@
         }
     },
 
+    "voucher/:lang": {
+        "controller": "OfferController",
+        "method": "getOfferSpecialDetails_2",
+        "params": {
+            ":lang": "string"
+        }
+    },
 
     "admin/:lang": {
         "controller": "AdminHomeController",

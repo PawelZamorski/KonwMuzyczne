@@ -117,6 +117,43 @@ class OfferController extends AbstractController {
         return $this->render('offer-special-details.twig', $properties);
     }
 
+    public function getOfferSpecialDetails_2($lang) {
+        // instantiate array
+        $properties = array();
+
+        try {
+            // get menu data
+            $menuModel = new MenuModel($this->conn);
+            $menuArr = $menuModel->getAllLang($lang);
+
+            // get offer special data
+            $offerModel = new OfferModel($this->conn);
+            $offerSpecial_2_Arr = $offerModel->getOfferSpecial_2($lang);
+            // get offerMain data
+            $offerMainArr = $offerModel->getOfferMain($lang);
+            $offerCategoryArr = $offerModel->getOfferCategory($lang);
+            
+
+            // set up properties
+            $properties = [
+                'lang' => $lang,
+                'menuArr' => $menuArr,
+                'offerSpecial_2_Arr' => $offerSpecial_2_Arr,
+                'offerMainArr' => $offerMainArr,
+                'offerCategoryArr' => $offerCategoryArr
+                ];
+
+        } catch (NotFoundException $e) {
+//            $this->log->warn('Customer email not found: ' . $email);
+            $errorController = new ErrorController($this->request);
+            $errorController->notFound($lang);
+            
+        }
+
+        return $this->render('offer-special-details-2.twig', $properties);
+    }
+
+
     public function buyOfferById($lang, $offer_id) {
         // instantiate array
         $properties = array();
@@ -303,5 +340,7 @@ $chkValue = hash('sha256', $chkParametersChain);
         return $this->render('offer-payment-policy.twig', $properties);
     }
 
+
+    
 }
 
