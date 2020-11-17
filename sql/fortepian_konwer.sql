@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Czas generowania: 17 Lis 2020, 15:46
+-- Czas generowania: 17 Lis 2020, 22:48
 -- Wersja serwera: 10.1.13-MariaDB
 -- Wersja PHP: 5.6.23
 
@@ -170,7 +170,6 @@ INSERT INTO `courses` (`id`, `code`, `course_name_id`, `common_desc_id`, `course
 (17, 'dla dorosłych - musicfulness', 12, 2, 11, '/images/oferta-ikony/musicfulness.jpg', 'https://www.youtube.com/embed/r6ThuFthhsE?&rel=0'),
 (18, 'dla dorosłych - meloman', 13, 2, 12, '/images/oferta-ikony/meloman.jpg', 'https://www.youtube.com/embed/r6ThuFthhsE?&rel=0'),
 (20, 'dla dorosłych - kompozycja', 15, 3, 13, '/images/oferta-ikony/kompozycja.jpg', NULL),
-(21, 'Ala ma kota - Test', 1, 1, 1, '', 'https://www.youtube.com/embed/b4h8Ot88kcA?&rel=0'),
 (22, 'Al ama kota - Test', 1, 1, 1, '/images/user-images/daniel-square.jpg', 'https://www.youtube.com/embed/b4h8Ot88kcA?&rel=0');
 
 -- --------------------------------------------------------
@@ -296,8 +295,7 @@ INSERT INTO `courses_translation` (`id`, `languages_id`, `courses_id`, `long_des
 (86, 4, 16, '<p>這些課程適用於初學者和高級成年人。學習資料-我們通過電子郵件發送給您。課堂在線上單獨舉行-在約定的日期上課。提供波蘭語和英語課程。 </p>\r\n<p>從古羅馬時代起，講堂就受到高度重視。演講者不僅必須表現出出色的口語表達能力，而且還必須知道如何有效傳達自己的信息才能被理解和記住。如今，那些對自己的魅力著迷的演講者已經掌握了呼吸的工作以及語音中語音的正確發出。 </p>\r\n<p>該程序是根據您的興趣而準備的，並且用於：</p>\r\n<ul>\r\n<li>演員</li>\r\n<li>電視記者</li>\r\n<li>政客</li>\r\n<li>商人</li>\r\n<li>外國人</li>\r\n</ul>\r\n<p>通過言語治療和音樂課，您可以提高發音並發掘每個說話者的自然潛能。此外，這些課程還教授適當的放鬆技巧，這些技巧可以幫助並促進日常工作，包括借助相機和麥克風進行語音通話以及自我完善的途徑。</p>', '<p>Individual classes based on a master-pupil system . A specially designed programme for teaching adults from scratch.</p>', '/images/oferta/zh_oferta/retoryka.jpg'),
 (87, 4, 17, '<p>這些課程既適合成人初學者，也適合那些已經在玩和學習的人。學習資料-我們通過電子郵件發送註釋。課堂在線上單獨舉行-在約定的日期上課。提供波蘭語和英語課程。 </p>\r\n<p>在當今世界，我們一直很忙。我們對最後期限，項目和要執行的任務的追求。學生有更多的測試，重要的考試，以及無時無刻學習和記憶的新事物。成人從事的工作是在規定的時間內要完成的任務和目標。缺乏家人，朋友和自己的時間是很常見的。 </p>\r\n<p>為了追求成功，我們忘記了最重要的事情-我們自己。有時你必須停下來。音樂性是一個程序，可以幫助您恢復平衡和和諧感。 </p>\r\n<p>該程序包括：</p>\r\n<ul>\r\n<li>放鬆技巧</li>\r\n<li>呼吸練習</li>\r\n<li>音樂療法的元素</li>\r\n<li>學習傾聽和專心</li>\r\n<li>學習著眼於此時此地</li>\r\n</ul>\r\n<p>這是一個獨特的程序，可讓您減速，停止和休息。這是您可以安全地平靜下來並進行再生的時候。音樂可以減輕壓力並改善生活質量。 </p>\r\n<p>音樂性計劃是指正念，它使用音樂及其對人體和心靈的有益影響。 </p>', '<p>Individual classes based on a master-pupil system . A specially designed programme for teaching adults from scratch.</p>', '/images/oferta/zh_oferta/musicfulness.jpg'),
 (88, 4, 18, '<p>A music lover is an expert in music. Such a person can recognize a good performance, notice its important elements, and surprise others with an interesting anecdote about the composer. Concert hall has no secrets. A music lover knows when to clap, and which concerts to attend. It is a person who have knowledge about art.</p>\r\n<p>The programme is selected in accordance with your interests, and it includes among others:</p>\r\n<ul>\r\n<li>history of music</li>\r\n<li>musical literature</li>\r\n<li>lives and works of great composers</li>\r\n<li>world canon of musical masterpieces</li>\r\n<li>watching and analyzing selected fragments of operas and ballets</li>\r\n<li>rules of music</li>\r\n</ul>\r\n<p>Lessons are available in English</p>', '<p>Individual classes based on a master-pupil system . A specially designed programme for teaching adults from scratch.</p>', '/images/oferta/zh_oferta/meloman.jpg'),
-(89, 4, 20, '<p>我們在華沙市中心的一座新藝術風格的廉價公寓裡上課，並且現在也在線上授課-遍及波蘭和世界各地的課程。 </p>\r\n<p>可以在線授課，但會有所不同。學習資料-我們通過電子郵件發送給您。課堂在線上單獨舉行-在約定的日期上課。提供波蘭語和英語課程。 </p>\r\n<p>音樂創作是想像力的創造藝術。它提供了一個獨特的機會來表達您自己的內在世界的豐富性，其中充滿了各種情感並通過音樂藝術進行了搜索。在課堂上，您將有機會就傑出的作曲家的作品，他們的技術手段和聲音材料發展自己的觀點。 </p>\r\n<p>要找到自己的構圖風格，您需要了解所有可能性，並能夠發現自己的創造力個性。該課程包括學習各種風格的寫作：</p>\r\n<ul>\r\n<li>巴洛克</li>\r\n<li>古典主義</li>\r\n<li>浪漫主義</li>\r\n<li>十二指腸技術</li>\r\n<li>無意者</li>\r\n<li>電聲音樂</li>\r\n<li>電影音樂</li>\r\n<li>最小音樂趨勢</li>\r\n</ul>\r\n<p>在上課期間，使用了現代計算機技術-用於編輯筆記和創建音樂的程序。傳統上，您自己創作的作品是在樂譜上以及在筆記本電腦或平板電腦上完成的。 </p>', '<p>Individual classes based on a master-pupil system . A specially designed programme for teaching adults from scratch.</p>', '/images/oferta/zh_oferta/kompozycja.jpg'),
-(90, 1, 21, 'test', 'test', '/images/user-images/daniel.jpg');
+(89, 4, 20, '<p>我們在華沙市中心的一座新藝術風格的廉價公寓裡上課，並且現在也在線上授課-遍及波蘭和世界各地的課程。 </p>\r\n<p>可以在線授課，但會有所不同。學習資料-我們通過電子郵件發送給您。課堂在線上單獨舉行-在約定的日期上課。提供波蘭語和英語課程。 </p>\r\n<p>音樂創作是想像力的創造藝術。它提供了一個獨特的機會來表達您自己的內在世界的豐富性，其中充滿了各種情感並通過音樂藝術進行了搜索。在課堂上，您將有機會就傑出的作曲家的作品，他們的技術手段和聲音材料發展自己的觀點。 </p>\r\n<p>要找到自己的構圖風格，您需要了解所有可能性，並能夠發現自己的創造力個性。該課程包括學習各種風格的寫作：</p>\r\n<ul>\r\n<li>巴洛克</li>\r\n<li>古典主義</li>\r\n<li>浪漫主義</li>\r\n<li>十二指腸技術</li>\r\n<li>無意者</li>\r\n<li>電聲音樂</li>\r\n<li>電影音樂</li>\r\n<li>最小音樂趨勢</li>\r\n</ul>\r\n<p>在上課期間，使用了現代計算機技術-用於編輯筆記和創建音樂的程序。傳統上，您自己創作的作品是在樂譜上以及在筆記本電腦或平板電腦上完成的。 </p>', '<p>Individual classes based on a master-pupil system . A specially designed programme for teaching adults from scratch.</p>', '/images/oferta/zh_oferta/kompozycja.jpg');
 
 -- --------------------------------------------------------
 
@@ -587,10 +585,7 @@ INSERT INTO `employee` (`id`, `name`, `course_name_id`, `img_thumbnail`, `img`) 
 (58, 'Ala Makota', 3, '/images/user-images/daniel-square.jpg', '/images/user-images/daniel.jpg'),
 (59, 'Ala Makota', 3, '/images/user-images/daniel-square.jpg', '/images/user-images/daniel.jpg'),
 (62, 'Nowy Gosciu', 1, '/images/user-images/daniel-square.jpg', '/images/user-images/daniel.jpg'),
-(65, 'Kuba Twardoch', 1, '/images/user-images/daniel-square.jpg', '/images/user-images/daniel.jpg'),
-(66, 'Kuba Twardoch', 1, '/images/user-images/daniel-square.jpg', '/images/user-images/daniel.jpg'),
-(67, 'Nowy Gościu', 2, '/images/user-images/daniel-square.jpg', '/images/user-images/daniel.jpg'),
-(68, 'Ala', 1, '/images/user-images/daniel-square.jpg', '/images/user-images/daniel.jpg');
+(65, 'Kuba Twardoch', 1, '/images/user-images/daniel-square.jpg', '/images/user-images/daniel.jpg');
 
 -- --------------------------------------------------------
 
@@ -653,19 +648,7 @@ INSERT INTO `employee_translation` (`id`, `languages_id`, `employee_id`, `long_d
 (50, 4, 8, '<p>Łódź音樂學院的畢業生，目前在華沙的弗雷德里克·肖邦音樂大學工作。 他在波蘭和世界各地參加聲樂課程。 在上課時，他特別注意消除緊張感，發展自然的聲樂技巧，聽寫和解釋。 他富有創造力，對介紹音樂世界充滿熱情。 他鼓勵學生在友好的氛圍中發展自己的發聲能力。 他以對每個學生的耐心和專業，個性化的方法而聞名。 他給兒童和成人授課</p>'),
 (51, 4, 9, '<p>A graduate of the Fryderyk Chopin University of Music in Warsaw. She is fascinated by the Mediterranean culture, in particular by Italy and Italian songs. She is creative and full of passion. During lessons, she helps students release their voice, even the shy ones. She devotes herself to teaching with dedication, and encourages her students to continuous development. She is kind and supportive in a travel around the world of music. She gives singing lessons to children and adults.</p>'),
 (52, 4, 10, '<p>A graduate of general and clinical speech therapy at the Medical Faculty of the Medical University of Warsaw. A graduate of the vocal and stage department in Warsaw. A winner of vocal competitions. She has collaborated and performed many times with various music bands in which she sang, played the piano or conducted. An author of the social project "Heart Melodies - Music to hearts". Since childhood, music has been her passion and has given her joy, which she wants to share with others. In her professional practice, she uses her musical and speech therapy skills. She works with the babies as young as 1.5 years old, and with adults. She gives speech therapeutic, logorhythmic, and singing lessons for children and adults.</p>'),
-(55, 4, 13, '<p>Associated with the Fryderyk Chopin University of Music in Warsaw. He participated in master courses and music workshops. He performs on concerts as a soloists, but also plays in instrumental ensembles – duets, trios, quartets, and guitar orchestras. He records CDs, and his discography includes, among others, a CV recorded with a quartet. He is brave, and likes to take up new challenges. He is known of his innovative character and ingenuity, which surface during his extraordinary lessons.</p>'),
-(83, 1, 66, '<p> To jest długi opis jak cholera. Ciekawe, czy zostanie prawidłowo przetłumaczony na angielski. Wątpię.</p>'),
-(84, 2, 66, '<p> This is a long description as hell. I wonder if it will be correctly translated into English. I doubt it. </p>'),
-(85, 3, 66, '<p> To jest długi opis jak cholera. Ciekawe, czy zostanie prawidłowo przetłumaczony na angielski. Wątpię.</p>'),
-(86, 4, 66, '<p> To jest długi opis jak cholera. Ciekawe, czy zostanie prawidłowo przetłumaczony na angielski. Wątpię.</p>'),
-(87, 1, 67, '<p>To jest nowy opis nowego nauczyciela muzyki. Jest świetny. Lubi śpiewać i spać przez cały dzień. Właściwie to śpiewa jak śpi. A przy tym głośno chrapie, że słychać go na całą wieś.</p>'),
-(88, 2, 67, '<p> This is a new description of a new music teacher. He is great. He likes to sing and sleep all day. Actually, he sings when he sleeps. And at the same time he snores loudly that you can hear him in the whole village. </p>'),
-(89, 3, 67, '<p> Đây là mô tả mới về một giáo viên dạy nhạc mới. Anh ấy thật tuyệt. Anh ấy thích hát và ngủ cả ngày. Thực ra anh ấy hát khi ngủ. Và đồng thời anh ta ngáy to mà bạn có thể nghe thấy anh ta trong cả làng. </p>'),
-(90, 4, 67, '<p>这是对新音乐老师的新描述。他很棒。他喜欢整天唱歌和睡觉。实际上，他睡觉时会唱歌。同时他大声打ore，让你在整个村庄都能听到他的声音。 </p>'),
-(91, 1, 68, '<p> Test, czy i tym razem się uda. Zobaczymy jak sobie poradzi ze znakami. \r\n<ul>\r\n<li>To jest pierwszy element.</li>\r\n</ul>\r\n</p>'),
-(92, 2, 68, '<p> Test if it will work this time. We&#39;ll see how he handles the signs. <ul><li> This is the first element. </li></ul></p>'),
-(93, 3, 68, '<p> Kiểm tra xem nó sẽ hoạt động lần này. Chúng ta sẽ xem cách anh ấy xử lý các dấu hiệu. <ul><li> Đây là yếu tố đầu tiên. </li></ul></p>'),
-(94, 4, 68, '<p>测试这次是否可以使用。我们将看到他如何处理标志。 <ul><li>这是第一个要素。 </li></ul></p>-TW');
+(55, 4, 13, '<p>Associated with the Fryderyk Chopin University of Music in Warsaw. He participated in master courses and music workshops. He performs on concerts as a soloists, but also plays in instrumental ensembles – duets, trios, quartets, and guitar orchestras. He records CDs, and his discography includes, among others, a CV recorded with a quartet. He is brave, and likes to take up new challenges. He is known of his innovative character and ingenuity, which surface during his extraordinary lessons.</p>');
 
 -- --------------------------------------------------------
 
@@ -716,10 +699,7 @@ INSERT INTO `emp_positions` (`employee_id`, `positions_id`) VALUES
 (8, 4),
 (9, 4),
 (10, 4),
-(13, 4),
-(66, 1),
-(67, 3),
-(68, 1);
+(13, 4);
 
 -- --------------------------------------------------------
 
@@ -744,11 +724,7 @@ INSERT INTO `emp_specialization` (`employee_id`, `specialization_id`) VALUES
 (9, 4),
 (10, 4),
 (10, 5),
-(13, 7),
-(66, 2),
-(66, 3),
-(67, 2),
-(67, 7);
+(13, 7);
 
 -- --------------------------------------------------------
 
@@ -1152,12 +1128,11 @@ INSERT INTO `menu` (`id`, `code`, `sort_index`) VALUES
 (1, 'banner', 1),
 (2, 'o-szkole', 2),
 (3, 'oferta', 3),
-(4, 'oferta-sezonowa', 4),
-(5, 'galeria', 6),
-(6, 'nauczyciele', 7),
-(7, 'referencje', 8),
-(8, 'kontakt', 9),
-(9, 'oferta-sezonowa-2', 5);
+(4, 'oferta-sezonowa-2', 4),
+(5, 'galeria', 5),
+(6, 'nauczyciele', 6),
+(7, 'referencje', 7),
+(8, 'kontakt', 8);
 
 -- --------------------------------------------------------
 
@@ -1180,7 +1155,7 @@ INSERT INTO `menu_translation` (`id`, `languages_id`, `menu_id`, `nav_link`) VAL
 (1, 1, 1, 'Strona główna'),
 (2, 1, 2, 'O szkole'),
 (3, 1, 3, 'Oferta'),
-(4, 1, 4, 'Zapisy'),
+(4, 1, 4, 'Vouchery'),
 (5, 1, 5, 'Galeria'),
 (6, 1, 6, 'Nauczyciele'),
 (7, 1, 7, 'Referencje'),
@@ -1188,7 +1163,7 @@ INSERT INTO `menu_translation` (`id`, `languages_id`, `menu_id`, `nav_link`) VAL
 (9, 2, 1, 'Home'),
 (10, 2, 2, 'School'),
 (11, 2, 3, 'Programmes'),
-(12, 2, 4, 'Enrollment'),
+(12, 2, 4, 'Voucher'),
 (13, 2, 5, 'Gallery'),
 (14, 2, 6, 'Teachers'),
 (15, 2, 7, 'References'),
@@ -1196,7 +1171,7 @@ INSERT INTO `menu_translation` (`id`, `languages_id`, `menu_id`, `nav_link`) VAL
 (17, 3, 1, 'Trang chủ'),
 (18, 3, 2, 'Về trường học'),
 (19, 3, 3, 'Gói hàng giới thiệu'),
-(20, 3, 4, 'Ghi danh'),
+(20, 3, 4, 'Phiếu thưởng'),
 (21, 3, 5, 'Trưng bày'),
 (22, 3, 6, 'Giáo viên'),
 (23, 3, 7, 'Lời khen giới thiệu'),
@@ -1204,15 +1179,11 @@ INSERT INTO `menu_translation` (`id`, `languages_id`, `menu_id`, `nav_link`) VAL
 (25, 4, 1, '主页'),
 (26, 4, 2, '学校简介'),
 (27, 4, 3, '课程开设'),
-(28, 4, 4, '註冊'),
+(28, 4, 4, '憑證'),
 (29, 4, 5, '艺术展示'),
 (30, 4, 6, '教师风采'),
 (31, 4, 7, '他人荐语'),
-(32, 4, 8, '联系我们'),
-(33, 1, 9, 'Vouchery'),
-(34, 2, 9, 'Voucher'),
-(35, 3, 9, 'Voucher'),
-(36, 4, 9, 'Voucher');
+(32, 4, 8, '联系我们');
 
 -- --------------------------------------------------------
 
@@ -1479,6 +1450,7 @@ CREATE TABLE `shop_buy_translation` (
   `info_buy` varchar(1000) DEFAULT NULL,
   `info_course` varchar(255) DEFAULT NULL,
   `info_price` varchar(255) DEFAULT NULL,
+  `info_expiration` varchar(500) DEFAULT NULL,
   `info_buy_contact` varchar(1000) DEFAULT NULL,
   `info_payment` varchar(255) DEFAULT NULL,
   `button_confirm` varchar(255) DEFAULT NULL,
@@ -1493,11 +1465,11 @@ CREATE TABLE `shop_buy_translation` (
 -- Zrzut danych tabeli `shop_buy_translation`
 --
 
-INSERT INTO `shop_buy_translation` (`id`, `languages_id`, `heading_3_buy`, `heading_2_buy`, `heading_2_payment`, `heading_2_payment_1`, `heading_2_payment_2`, `heading_2_payment_3`, `info_main`, `info_buy`, `info_course`, `info_price`, `info_buy_contact`, `info_payment`, `button_confirm`, `button_pay`, `button_payment_policy`, `info_account`, `info_address`, `info_payment_gateway`) VALUES
-(1, 1, 'Oferta', 'Kup Teraz', 'Zapłać Teraz', 'Przelew tradycyjny', 'Płatność online', 'Płatność w siedzibie szkoły', '<p>Prosimy o wypełnienie formularza z zamówieniem.</p>', '<p>Na Twoją skrzynkę pocztową zostanie wysłana informacja potwierdzająca dokonanie rezerwacji następującej oferty:</p>', 'nazwa kursu:', 'kwota do zapłaty za pakiet 4 lekcji po 30 minut: 400zł', '<p>W przypadku pytań prosimy o kontakt z działem sprzedaży: sekretariat@konwersatriummuzyczne.pl lub pod numerem telefonu +48 883 489 184</p>', '<p>Prosimy o wybór sposobu platnosci</p>', 'Potwierdź', 'Kup Teraz', 'Regulamin płatności online poprzez serwis Dotpay sp. z o.o. na rzecz Konwersatorium Muzycznego w Warszawie', '<p>Konwersatorium Muzyczne</p>\r\n<p>ul. Poznańska 39</p>\r\n<p>00-697 Warszawa</p>\r\n<p>Alior bank S.A. nr konta: 28 24 1028 4007 2120 0000 5588</p>\r\n<p>Prosimy o podanie w tytule przelewu numeru rezerwacji oraz nazwy kursu:</p>', '<p>Konwersatorium Muzyczne</p>\r\n<p>ul. Poznańska 39</p>\r\n<p>00-697 Warszawa</p>\r\n<p>Prosimy o umówienie się na spotkanie.</p>', '<p><b>400 PLN pełna wpłata</b></p>\r\n<p>Przelew online dokonywany jest poprzez operatora płatności Dotpay sp. z o. o.</p>'),
-(2, 2, 'Offer', 'Buy Now', 'Pay Now', 'Traditional bank transfer', 'Online payment', 'Payment at the school premises', '<p> Please complete the order form. </p>', '<p> An information confirming the booking of the following offer will be sent to your mailbox: </p>', 'course name:', 'amount to be paid for a package of 4 lessons of 30 minutes: PLN 400', '<p> If you have any questions, please contact the sales department: sekretariat@konwersatriummuzyczne.pl or by calling +48 883 489 184 </p>', '<p> TODO: Please choose payment method </p>', 'Submit', 'Buy Now', 'Online payment regulations via Dotpay sp.z o.o. for the Music Conversatory in Warsaw', '<p>Konwersatorium Muzyczne</p>\r\n<p>ul. Poznańska 39</p>\r\n<p>00-697 Warszawa</p>\r\n<p>Alior bank S.A. account number: 28 24 1028 4007 2120 0000 5588</p>\r\n<p> Please provide the reservation number and the name of the course in the transfer title: </p>', '<p>Konwersatorium Muzyczne</p>\r\n<p>ul. Poznańska 39</p>\r\n<p>00-697 Warszawa</p>\r\n<p>Please make an appointment.</p>', '<p> <b> PLN 400 full payment </b> </p>\r\n<p> Online transfer is made through the payment operator Dotpay sp. z o. o. </p>'),
-(3, 3, 'Phục vụ', 'Mua ngay', 'Trả tiền ngay', 'Chuyển khoản ngân hàng truyền thống', 'Thanh toán trực tuyến', 'Thanh toán tại cơ sở của trường', '<p> Vui lòng hoàn thành mẫu đơn đặt hàng. </p>', '<p> Thông tin xác nhận việc đặt ưu đãi sau sẽ được gửi đến hộp thư của bạn: </p>', 'tên khóa học:', 'số tiền phải trả cho gói 4 buổi học 30 phút: 400 PLN', '<p> Mọi thắc mắc vui lòng liên hệ phòng kinh doanh: sekretaries@konwersatriummuzyczne.pl hoặc gọi số +48 883 489 184 </p>', '<p> Vui lòng chọn phương thức thanh toán </p>', 'Gửi đi', 'Mua ngay', 'Quy định thanh toán trực tuyến qua Dotpay sp.z o.o. cho Konwersatorium Muzyczne ở Warsaw', '<p>Konwersatorium Muzyczne</p>\r\n<p>ul. Poznańska 39</p>\r\n<p>00-697 Warszawa</p>\r\n<p>Alior bank S.A. \r\nsố tài khoản: 28 24 1028 4007 2120 0000 5588</p>\r\n<p> Vui lòng cung cấp số đặt chỗ và tên khóa học trong tiêu đề chuyển nhượng: </p>', '<p> Konwersatorium Muzyczne </p>\r\n<p> ul. Poznańska 39 </p>\r\n<p> 00-697 Warszawa </p>\r\n<p> Vui lòng đặt lịch hẹn. </p>', '<p> <b> Thanh toán đầy đủ 400 PLN </b> </p>\r\n<p> Chuyển khoản trực tuyến được thực hiện thông qua nhà điều hành thanh toán Dotpay sp. z o. o. </p>'),
-(4, 4, '提供', '立即購買', '現在付款', '傳統銀行轉帳', '網上支付', '在校舍付款', '<p>請填寫訂單。 </ p>', '<p>確認確認以下優惠的信息將發送到您的郵箱：</ p>', '課程名：', '一套4節30分鐘的課程的費用：400波蘭茲羅提', '<p>如有任何疑問，請聯繫銷售部門：sekretariat@konwersatriummuzyczne.pl或致電+48 883 489 184 </ p>', '<p> 請選擇付款方式</ p>', '提交', '立即購買', '通過Dotpay sp.z o.o.在線付款規定華沙的Konwersatorium Muzyczne商店', '<p>Konwersatorium Muzyczne</p>\r\n<p>ul. Poznańska 39</p>\r\n<p>00-697 Warszawa</p>\r\n<p>Alior bank S.A. \r\n帳號: 28 24 1028 4007 2120 0000 5588</p>', '<p> Konwersatorium Muzyczne </p>\r\n<p> ul. Poznańska 39 </p>\r\n<p> 00-697 Warszawa </p>\r\n<p>請預約。 </ p>\r\n<p>請在轉移標題中提供預訂號和課程名稱：</ p>', '<p> <b> 400波蘭茲羅提</ b> </ p>\r\n<p>通過付款運營商Dotpay sp。進行在線轉帳。則o。 </ p>');
+INSERT INTO `shop_buy_translation` (`id`, `languages_id`, `heading_3_buy`, `heading_2_buy`, `heading_2_payment`, `heading_2_payment_1`, `heading_2_payment_2`, `heading_2_payment_3`, `info_main`, `info_buy`, `info_course`, `info_price`, `info_expiration`, `info_buy_contact`, `info_payment`, `button_confirm`, `button_pay`, `button_payment_policy`, `info_account`, `info_address`, `info_payment_gateway`) VALUES
+(1, 1, 'Oferta', 'Kup Teraz', 'Zapłać Teraz', 'Przelew tradycyjny', 'Płatność online', 'Płatność w siedzibie szkoły', '<p>Prosimy o wypełnienie formularza z zamówieniem.</p>', '<p>Na Twoją skrzynkę pocztową zostanie wysłana informacja potwierdzająca dokonanie rezerwacji następującej oferty:</p>', 'nazwa kursu:', 'kwota do zapłaty za pakiet 4 lekcji po 30 minut: 400zł', 'pakiet jest do wykorzystania w ciągu 30 dni od daty zakupu', '<p>W przypadku pytań prosimy o kontakt z działem sprzedaży: sekretariat@konwersatriummuzyczne.pl lub pod numerem telefonu +48 883 489 184</p>', '<p>Prosimy o wybór sposobu platnosci</p>', 'Potwierdź', 'Kup Teraz', 'Regulamin płatności online poprzez serwis Dotpay sp. z o.o. na rzecz Konwersatorium Muzycznego w Warszawie', '<p>Konwersatorium Muzyczne</p>\r\n<p>ul. Poznańska 39</p>\r\n<p>00-697 Warszawa</p>\r\n<p>Alior bank S.A. nr konta: 28 24 1028 4007 2120 0000 5588</p>\r\n<p>Prosimy o podanie w tytule przelewu numeru rezerwacji oraz nazwy kursu:</p>', '<p>Konwersatorium Muzyczne</p>\r\n<p>ul. Poznańska 39</p>\r\n<p>00-697 Warszawa</p>\r\n<p>Prosimy o umówienie się na spotkanie.</p>', '<p><b>400 PLN pełna wpłata</b></p>\r\n<p>Przelew online dokonywany jest poprzez operatora płatności Dotpay sp. z o. o.</p>'),
+(2, 2, 'Offer', 'Buy Now', 'Pay Now', 'Traditional bank transfer', 'Online payment', 'Payment at the school premises', '<p> Please complete the order form. </p>', '<p> An information confirming the booking of the following offer will be sent to your mailbox: </p>', 'course name:', 'amount to be paid for a package of 4 lessons of 30 minutes: PLN 400', 'the package can be used within 30 days from the date of purchase', '<p> If you have any questions, please contact the sales department: sekretariat@konwersatriummuzyczne.pl or by calling +48 883 489 184 </p>', '<p> TODO: Please choose payment method </p>', 'Submit', 'Buy Now', 'Online payment regulations via Dotpay sp.z o.o. for the Music Conversatory in Warsaw', '<p>Konwersatorium Muzyczne</p>\r\n<p>ul. Poznańska 39</p>\r\n<p>00-697 Warszawa</p>\r\n<p>Alior bank S.A. account number: 28 24 1028 4007 2120 0000 5588</p>\r\n<p> Please provide the reservation number and the name of the course in the transfer title: </p>', '<p>Konwersatorium Muzyczne</p>\r\n<p>ul. Poznańska 39</p>\r\n<p>00-697 Warszawa</p>\r\n<p>Please make an appointment.</p>', '<p> <b> PLN 400 full payment </b> </p>\r\n<p> Online transfer is made through the payment operator Dotpay sp. z o. o. </p>'),
+(3, 3, 'Phục vụ', 'Mua ngay', 'Trả tiền ngay', 'Chuyển khoản ngân hàng truyền thống', 'Thanh toán trực tuyến', 'Thanh toán tại cơ sở của trường', '<p> Vui lòng hoàn thành mẫu đơn đặt hàng. </p>', '<p> Thông tin xác nhận việc đặt ưu đãi sau sẽ được gửi đến hộp thư của bạn: </p>', 'tên khóa học:', 'số tiền phải trả cho gói 4 buổi học 30 phút: 400 PLN', '\r\ngói có thể được sử dụng trong vòng 30 ngày kể từ ngày mua', '<p> Mọi thắc mắc vui lòng liên hệ phòng kinh doanh: sekretaries@konwersatriummuzyczne.pl hoặc gọi số +48 883 489 184 </p>', '<p> Vui lòng chọn phương thức thanh toán </p>', 'Gửi đi', 'Mua ngay', 'Quy định thanh toán trực tuyến qua Dotpay sp.z o.o. cho Konwersatorium Muzyczne ở Warsaw', '<p>Konwersatorium Muzyczne</p>\r\n<p>ul. Poznańska 39</p>\r\n<p>00-697 Warszawa</p>\r\n<p>Alior bank S.A. \r\nsố tài khoản: 28 24 1028 4007 2120 0000 5588</p>\r\n<p> Vui lòng cung cấp số đặt chỗ và tên khóa học trong tiêu đề chuyển nhượng: </p>', '<p> Konwersatorium Muzyczne </p>\r\n<p> ul. Poznańska 39 </p>\r\n<p> 00-697 Warszawa </p>\r\n<p> Vui lòng đặt lịch hẹn. </p>', '<p> <b> Thanh toán đầy đủ 400 PLN </b> </p>\r\n<p> Chuyển khoản trực tuyến được thực hiện thông qua nhà điều hành thanh toán Dotpay sp. z o. o. </p>'),
+(4, 4, '提供', '立即購買', '現在付款', '傳統銀行轉帳', '網上支付', '在校舍付款', '<p>請填寫訂單。 </ p>', '<p>確認確認以下優惠的信息將發送到您的郵箱：</ p>', '課程名：', '一套4節30分鐘的課程的費用：400波蘭茲羅提', '自購買之日起30天內可以使用該包裝', '<p>如有任何疑問，請聯繫銷售部門：sekretariat@konwersatriummuzyczne.pl或致電+48 883 489 184 </ p>', '<p> 請選擇付款方式</ p>', '提交', '立即購買', '通過Dotpay sp.z o.o.在線付款規定華沙的Konwersatorium Muzyczne商店', '<p>Konwersatorium Muzyczne</p>\r\n<p>ul. Poznańska 39</p>\r\n<p>00-697 Warszawa</p>\r\n<p>Alior bank S.A. \r\n帳號: 28 24 1028 4007 2120 0000 5588</p>', '<p> Konwersatorium Muzyczne </p>\r\n<p> ul. Poznańska 39 </p>\r\n<p> 00-697 Warszawa </p>\r\n<p>請預約。 </ p>\r\n<p>請在轉移標題中提供預訂號和課程名稱：</ p>', '<p> <b> 400波蘭茲羅提</ b> </ p>\r\n<p>通過付款運營商Dotpay sp。進行在線轉帳。則o。 </ p>');
 
 -- --------------------------------------------------------
 
@@ -1538,141 +1510,9 @@ INSERT INTO `shop_client_reservations` (`id`, `offer_id`, `name`, `email`, `res_
 (31, 12, 'Test Name', 'zamorskipawel@wp.pl', '20201116/164402', '2020-11-16', 1, 0),
 (32, 12, 'Test Name', 'zamorskipawel@wp.pl', '20201116/164530', '2020-11-16', 1, 0),
 (33, 13, 'Test Name', 'zamorskipawel@wp.pl', '20201116/183354', '2020-11-16', 1, 0),
-(34, 13, 'Test Name', 'zamorskipawel@wp.pl', '20201116/184001', '2020-11-16', 1, 0);
-
--- --------------------------------------------------------
-
---
--- Struktura tabeli dla tabeli `shop_item_category`
---
-
-CREATE TABLE `shop_item_category` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `code` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Zrzut danych tabeli `shop_item_category`
---
-
-INSERT INTO `shop_item_category` (`id`, `code`) VALUES
-(1, 'ebook'),
-(2, 'book'),
-(3, 'cd'),
-(4, 'course');
-
--- --------------------------------------------------------
-
---
--- Struktura tabeli dla tabeli `shop_item_category_translation`
---
-
-CREATE TABLE `shop_item_category_translation` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `languages_id` int(10) UNSIGNED NOT NULL,
-  `shop_item_category_id` int(10) UNSIGNED NOT NULL,
-  `category` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Zrzut danych tabeli `shop_item_category_translation`
---
-
-INSERT INTO `shop_item_category_translation` (`id`, `languages_id`, `shop_item_category_id`, `category`) VALUES
-(1, 1, 1, 'ebook'),
-(2, 1, 2, 'książka'),
-(3, 1, 3, 'cd'),
-(4, 1, 4, 'kurs');
-
--- --------------------------------------------------------
-
---
--- Struktura tabeli dla tabeli `shop_item_details`
---
-
-CREATE TABLE `shop_item_details` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `shop_item_category_id` int(10) UNSIGNED NOT NULL,
-  `img` varchar(255) NOT NULL,
-  `img_thumbnail` varchar(255) NOT NULL,
-  `quantity` int(10) NOT NULL,
-  `price` decimal(10,2) NOT NULL,
-  `author` varchar(500) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Zrzut danych tabeli `shop_item_details`
---
-
-INSERT INTO `shop_item_details` (`id`, `shop_item_category_id`, `img`, `img_thumbnail`, `quantity`, `price`, `author`) VALUES
-(1, 1, '/images/shop/item/temp.jpg', '/images/shop/item/temp.jpg', 10, '45.99', 'Jan Kowalski'),
-(2, 1, '/images/shop/item/temp.jpg', '/images/shop/item/temp.jpg', 5, '45.99', 'Jan Kowalski'),
-(3, 2, '/images/shop/item/temp.jpg', '/images/shop/item/temp.jpg', 2, '45.99', 'Jan Kowalski'),
-(4, 4, '/images/shop/item/temp.jpg', '/images/shop/item/temp.jpg', 2, '45.99', 'Jan Kowalski'),
-(5, 1, '/images/shop/item/temp.jpg', '/images/shop/item/temp.jpg', 6, '45.99', 'Jan Kowalski'),
-(6, 2, '/images/shop/item/temp.jpg', '/images/shop/item/temp.jpg', 4, '45.99', 'Jan Kowalski'),
-(7, 1, '/images/shop/item/temp.jpg', '/images/shop/item/temp.jpg', 5, '45.99', 'Jan Kowalski'),
-(8, 2, '/images/shop/item/temp.jpg', '/images/shop/item/temp.jpg', 5, '45.99', 'Jan Kowalski'),
-(9, 4, '/images/shop/item/temp.jpg', '/images/shop/item/temp.jpg', 6, '45.99', 'Jan Kowalski'),
-(10, 1, '/images/shop/item/temp.jpg', '/images/shop/item/temp.jpg', 5, '45.99', 'Jan Kowalski');
-
--- --------------------------------------------------------
-
---
--- Struktura tabeli dla tabeli `shop_item_details_translation`
---
-
-CREATE TABLE `shop_item_details_translation` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `languages_id` int(10) UNSIGNED NOT NULL,
-  `shop_item_details_id` int(10) UNSIGNED NOT NULL,
-  `title` varchar(255) NOT NULL,
-  `short_desc` varchar(2000) DEFAULT NULL,
-  `long_desc` varchar(5000) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Zrzut danych tabeli `shop_item_details_translation`
---
-
-INSERT INTO `shop_item_details_translation` (`id`, `languages_id`, `shop_item_details_id`, `title`, `short_desc`, `long_desc`) VALUES
-(1, 1, 1, 'Tytył Lorem ipsum', 'krótki opis - Lorem Ipsum', 'długi opis - Lorem Ipsum'),
-(2, 1, 2, 'Tytuł', 'Krótki opis', 'Długi opis'),
-(3, 1, 3, 'Tytuł', 'Krótki opis', 'Długi opis'),
-(4, 1, 4, 'Tytuł', 'Krótki opis', 'Długi opis'),
-(5, 1, 5, 'Tytuł', 'Krótki opis', 'Długi opis'),
-(6, 1, 6, 'Tytuł', 'Krótki opis', 'Długi opis'),
-(7, 1, 7, 'Tytuł', 'Krótki opis', 'Długi opis'),
-(8, 1, 8, 'Tytuł', 'Krótki opis', 'Długi opis'),
-(9, 1, 9, 'Tytuł', 'Krótki opis', 'Długi opis'),
-(10, 1, 10, 'Tytuł', 'Krótki opis', 'Długi opis');
-
--- --------------------------------------------------------
-
---
--- Struktura tabeli dla tabeli `shop_item_main_translation`
---
-
-CREATE TABLE `shop_item_main_translation` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `languages_id` int(10) UNSIGNED NOT NULL,
-  `heading_3` varchar(255) DEFAULT NULL,
-  `heading_2` varchar(255) DEFAULT NULL,
-  `short_desc` varchar(2000) DEFAULT NULL,
-  `long_desc` varchar(5000) DEFAULT NULL,
-  `button` varchar(255) DEFAULT NULL,
-  `button_show` varchar(255) NOT NULL,
-  `button_add` varchar(255) NOT NULL,
-  `button_remove` varchar(255) NOT NULL,
-  `img` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Zrzut danych tabeli `shop_item_main_translation`
---
-
-INSERT INTO `shop_item_main_translation` (`id`, `languages_id`, `heading_3`, `heading_2`, `short_desc`, `long_desc`, `button`, `button_show`, `button_add`, `button_remove`, `img`) VALUES
-(1, 1, 'Sklep', 'Zapraszamy na zakupy', '<p>Polecamy ebooki, kursy wideo, ksiązki...</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>\r\n<p>W naszej ofercie znajdują się:</p>\r\n<ul class="text-left">\r\n<li>ebooki</li>\r\n<li>kursy</li>\r\n<li>książki</li>\r\n</ul>\r\n<p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>\r\n', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>', 'Przejdź do sklepu', 'Zobacz', 'Dodaj', 'Usuń', '/images/shop/main/ebook.jpg\r\n');
+(34, 13, 'Test Name', 'zamorskipawel@wp.pl', '20201116/184001', '2020-11-16', 1, 0),
+(35, 14, 'Test', 'zamorskipawel@wp.pl', '20201117/201518', '2020-11-17', 1, 0),
+(36, 27, 'Test', 'zamorskipawel@wp.pl', '20201117/201622', '2020-11-17', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -1696,8 +1536,8 @@ INSERT INTO `shop_item_quantity` (`id`, `code`, `quantity`) VALUES
 (3, 'spiew', 0),
 (4, 'gitara', 8),
 (5, 'wiolonczela', 8),
-(6, 'saksofon', 10),
-(7, 'meloman', 10),
+(6, 'saksofon', 9),
+(7, 'meloman', 9),
 (8, 'kompozycja', 10);
 
 -- --------------------------------------------------------
@@ -2193,42 +2033,6 @@ ALTER TABLE `shop_client_reservations`
   ADD KEY `offer_id` (`offer_id`);
 
 --
--- Indexes for table `shop_item_category`
---
-ALTER TABLE `shop_item_category`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `shop_item_category_translation`
---
-ALTER TABLE `shop_item_category_translation`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `languages_id` (`languages_id`),
-  ADD KEY `shop_item_category_id` (`shop_item_category_id`);
-
---
--- Indexes for table `shop_item_details`
---
-ALTER TABLE `shop_item_details`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `shop_item_category_id` (`shop_item_category_id`);
-
---
--- Indexes for table `shop_item_details_translation`
---
-ALTER TABLE `shop_item_details_translation`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `languages_id` (`languages_id`),
-  ADD KEY `shop_item_details_id` (`shop_item_details_id`);
-
---
--- Indexes for table `shop_item_main_translation`
---
-ALTER TABLE `shop_item_main_translation`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `languages_id` (`languages_id`);
-
---
 -- Indexes for table `shop_item_quantity`
 --
 ALTER TABLE `shop_item_quantity`
@@ -2425,7 +2229,7 @@ ALTER TABLE `main_special_offer_translation`
 -- AUTO_INCREMENT dla tabeli `menu`
 --
 ALTER TABLE `menu`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT dla tabeli `menu_translation`
 --
@@ -2480,32 +2284,7 @@ ALTER TABLE `shop_buy_translation`
 -- AUTO_INCREMENT dla tabeli `shop_client_reservations`
 --
 ALTER TABLE `shop_client_reservations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
---
--- AUTO_INCREMENT dla tabeli `shop_item_category`
---
-ALTER TABLE `shop_item_category`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
---
--- AUTO_INCREMENT dla tabeli `shop_item_category_translation`
---
-ALTER TABLE `shop_item_category_translation`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
---
--- AUTO_INCREMENT dla tabeli `shop_item_details`
---
-ALTER TABLE `shop_item_details`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
---
--- AUTO_INCREMENT dla tabeli `shop_item_details_translation`
---
-ALTER TABLE `shop_item_details_translation`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
---
--- AUTO_INCREMENT dla tabeli `shop_item_main_translation`
---
-ALTER TABLE `shop_item_main_translation`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 --
 -- AUTO_INCREMENT dla tabeli `shop_item_quantity`
 --
@@ -2743,32 +2522,6 @@ ALTER TABLE `shop_buy_translation`
 --
 ALTER TABLE `shop_client_reservations`
   ADD CONSTRAINT `shop_client_reservations_ibfk_1` FOREIGN KEY (`offer_id`) REFERENCES `offer` (`id`);
-
---
--- Ograniczenia dla tabeli `shop_item_category_translation`
---
-ALTER TABLE `shop_item_category_translation`
-  ADD CONSTRAINT `shop_item_category_translation_ibfk_1` FOREIGN KEY (`languages_id`) REFERENCES `languages` (`id`),
-  ADD CONSTRAINT `shop_item_category_translation_ibfk_2` FOREIGN KEY (`shop_item_category_id`) REFERENCES `shop_item_category` (`id`);
-
---
--- Ograniczenia dla tabeli `shop_item_details`
---
-ALTER TABLE `shop_item_details`
-  ADD CONSTRAINT `shop_item_details_ibfk_1` FOREIGN KEY (`shop_item_category_id`) REFERENCES `shop_item_category` (`id`);
-
---
--- Ograniczenia dla tabeli `shop_item_details_translation`
---
-ALTER TABLE `shop_item_details_translation`
-  ADD CONSTRAINT `shop_item_details_translation_ibfk_1` FOREIGN KEY (`languages_id`) REFERENCES `languages` (`id`),
-  ADD CONSTRAINT `shop_item_details_translation_ibfk_2` FOREIGN KEY (`shop_item_details_id`) REFERENCES `shop_item_details` (`id`);
-
---
--- Ograniczenia dla tabeli `shop_item_main_translation`
---
-ALTER TABLE `shop_item_main_translation`
-  ADD CONSTRAINT `shop_item_main_translation_ibfk_1` FOREIGN KEY (`languages_id`) REFERENCES `languages` (`id`);
 
 --
 -- Ograniczenia dla tabeli `shop_item_quantity_to_courses`
