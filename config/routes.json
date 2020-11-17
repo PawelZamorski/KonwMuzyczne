@@ -114,6 +114,15 @@
         }
     },
 
+    "gitaradodomu/:lang": {
+        "controller": "OfferController",
+        "method": "getOfferSpecialDetails_3",
+        "params": {
+            ":lang": "string"
+        }
+    },
+
+
     "admin/:lang": {
         "controller": "AdminHomeController",
         "method": "loadHomepageLang",
