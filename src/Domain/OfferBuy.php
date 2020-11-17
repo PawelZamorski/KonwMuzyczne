@@ -13,6 +13,7 @@ class OfferBuy {
     private $info_buy;
     private $info_course;
     private $info_price;
+    private $info_expiration;
     private $info_buy_contact;
     private $info_payment;
     private $button_confirm;
@@ -23,7 +24,7 @@ class OfferBuy {
     private $info_payment_gateway;
 
     public function __construct($heading_3_buy, $heading_2_buy, $heading_2_payment, $heading_2_payment_1, $heading_2_payment_2, $heading_2_payment_3, 
-        $info_main, $info_buy, $info_course, $info_price, $info_buy_contact, $info_payment, $button_confirm, $button_pay, $button_payment_policy, $info_account, 
+        $info_main, $info_buy, $info_course, $info_price, $info_expiration, $info_buy_contact, $info_payment, $button_confirm, $button_pay, $button_payment_policy, $info_account, 
         $info_address, $info_payment_gateway) {
         
         $this->heading_3_buy = $heading_3_buy;
@@ -36,6 +37,7 @@ class OfferBuy {
         $this->info_buy = $info_buy;
         $this->info_course = $info_course;
         $this->info_price = $info_price;
+        $this->info_expiration = $info_expiration;
         $this->info_buy_contact = $info_buy_contact;
         $this->info_payment = $info_payment;
         $this->button_confirm = $button_confirm;
@@ -84,6 +86,10 @@ class OfferBuy {
 
     public function getInfoPrice() {
         return $this->info_price;
+    }
+
+    public function getInfoExpiration() {
+        return $this->info_expiration;
     }
 
     public function getInfoBuyContact() {

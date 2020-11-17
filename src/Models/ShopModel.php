@@ -29,7 +29,7 @@ class ShopModel extends AbstractModel {
         }
 
         return new OfferBuy($row['heading_3_buy'], $row['heading_2_buy'], $row['heading_2_payment'], $row['heading_2_payment_1'], $row['heading_2_payment_2'],
-            $row['heading_2_payment_3'], $row['info_main'], $row['info_buy'], $row['info_course'], $row['info_price'], $row['info_buy_contact'], $row['info_payment'], $row['button_confirm'],
+            $row['heading_2_payment_3'], $row['info_main'], $row['info_buy'], $row['info_course'], $row['info_price'], $row['info_expiration'], $row['info_buy_contact'], $row['info_payment'], $row['button_confirm'],
             $row['button_pay'], $row['button_payment_policy'], $row['info_account'], $row['info_address'], $row['info_payment_gateway']);        
     }
 
