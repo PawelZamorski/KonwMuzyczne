@@ -267,6 +267,9 @@ class OfferController extends AbstractController {
             // run mailer and get message
             $processed = false;
             $errorMessage = "";
+            // create variable to store res no
+            $res_no = "";
+
             $mailerBuy = new MailerBuy();
             // get POST data as array, validates them
             // TODO refactor code, move validation of POST data to service
@@ -280,9 +283,28 @@ class OfferController extends AbstractController {
                 // send reservation email
                 if($processed = $mailerBuy->isFormDataValid()) {
                     if($processed = $mailerBuy->isRecaptchaValid()) {
-                        if($processed = true /* $mailerBuy->isEmailSend() */) {
+                        // create Reservation in reservation table
+                        // check availibility of an item
+                        // process email
+                        $offer_id = $mailerBuyData['offer_id'];
+                        $name = $mailerBuyData['name'];
+                        $email = $mailerBuyData['email'];
+                        $offer_reservation_last_id = $shopModel->createOfferReservation($offer_id, $name, $email);
+                        // get reservation number from database
+                        $res_no = $shopModel->getResNo($offer_reservation_last_id);
+
+                        // decrement the quantity of available item
+                        $shopModel->updateItemQuantity($offer_id, $quantity - 1);
+
+                        // send email
+                        // set res_no in MailerBuy object to use it in isEmailSend
+                        $mailerBuy->setResNo($res_no);
+                        if($processed = $mailerBuy->isEmailSend()) {
                             
-                        } else $errorMessage = "Ups! Coś poszło nie tak. Spróbuj do nas zadzwonić!"; 
+                        } else {
+                            $errorMessage = "Ups! Coś poszło nie tak. Spróbuj do nas zadzwonić!";
+                            // Delete reservation from DB
+                        } 
                     } else {
                         $errorMessage = "Captcha nie została potwierdzona.";
                     }
@@ -294,22 +316,6 @@ class OfferController extends AbstractController {
                 $errorMessage = "Oferta jest wyprzedana. Prosimy o kontakt telefoniczny z biurem sprzedaży.";
             }
 
-            // create Reservation in reservation table
-            $res_no = ""; // create variable to store res no
-            // TODO the same as above - validation of data shoul not be in mailer class
-            if ($processed) {
-                // check availibility of an item
-                // process email
-                $offer_id = $mailerBuyData['offer_id'];
-                $name = $mailerBuyData['name'];
-                $email = $mailerBuyData['email'];
-                $offer_reservation_last_id = $shopModel->createOfferReservation($offer_id, $name, $email);
-                // get reservation number from database
-                $res_no = $shopModel->getResNo($offer_reservation_last_id);
-
-                // decrement the quantity of available item
-                $shopModel->updateItemQuantity($offer_id, $quantity - 1);
-            }
 
 // chk value
 $chkParametersChain = "ifhFAPPwsaml1GV5u5JaqUBkqshCqhfa" . "730320" . "400" . "PLN" . "Pakiet 4 lekcji"
