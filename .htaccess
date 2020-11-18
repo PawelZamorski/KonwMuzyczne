@@ -1,13 +1,18 @@
 # http://httpd.apache.org/docs/2.4/rewrite/intro.html#htaccess
 
-RewriteEngine On
-
-
-RewriteEngine on
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-# RewriteRule ^(.*)$ /index.php?path=$1 [NC,QSA]
-RewriteRule ^(.*)$ /index.php/$1 [NC,QSA]
+# konwersatoriummuzyczne
+# RewriteEngine on
+# RewriteCond %{REQUEST_FILENAME} !-f
+# RewriteCond %{REQUEST_FILENAME} !-d
+# RewriteRule ^(.*)$ /index.php/$1 [NC,QSA]
 
 # RewriteCond %{SERVER_PORT} 80
 # RewriteRule ^(.*)$ https://www.konwersatoriummuzyczne.pl/$1 [R,L]
+
+
+
+# The rules for localhost production and testing
+RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ /index.php/$1 [NC,QSA]

@@ -44,20 +44,35 @@
                     <!-- Form DotPay -->
                 <!--    <form action="https://ssl.dotpay.pl/t2/" method="post" target="_parent"> -->
                     <form action="https://ssl.dotpay.pl/test_payment/" method="post" target="_parent">
-                        <!-- DotPay Config -->
-                        <input type="hidden" name="amount" value="400" />
-                        <input type="hidden" name="currency" value="PLN" />
                         <!-- numer ID w Dotpay -->
-                        <input type="hidden" name="id" value="730320" />
-                        <!-- Tytuł transakcji -->
-                        <input type="hidden" name="description" value="Pakiet 4 lekcji" />
                         <input type="hidden" name="chk" value="{{ chkValue }}" />
+                        <input type="hidden" name="id" value="730320" />
                         <!-- Ardes URL powrotu do sklepu -->
                         <input type="hidden" name="url" value="http://testwebproject.eu/" />
                         <input type="hidden" name="type" value="0" />
-                        <!-- Tekst przycisku powrotu do sklepu -->
-                        <input type="hidden" name="buttontext" value="Powrót do Konwersatorium Muzycznego" />
+                        {% if lang == 'en' or lang == 'vi' or lang == 'zh' %}
+                            <!-- DotPay Config -->
+                            <input type="hidden" name="amount" value="100" />
+                            <input type="hidden" name="currency" value="EUR" />
+                            <!-- Tytuł transakcji -->
+                            <input type="hidden" name="description" value="4 lessons package, reservation no {{ res_no }}" />
+                            <!-- Tekst przycisku powrotu do sklepu -->
+                            <input type="hidden" name="buttontext" value="Return to Konwersatorium Muzyczne website" />
+                            <!-- Jezyk strony dotpay -->
+                            <input type='hidden' name='lang' value='en' />
+                        {% else %}
+                            <!-- DotPay Config -->
+                            <input type="hidden" name="amount" value="400" />
+                            <input type="hidden" name="currency" value="PLN" />
+                            <!-- Tytuł transakcji -->
+                            <input type="hidden" name="description" value="Pakiet 4 lekcji, numer rezerwacji {{ res_no }}" />
+                            <!-- Tekst przycisku powrotu do sklepu -->
+                            <input type="hidden" name="buttontext" value="Powrót do Konwersatorium Muzycznego" />
+                            <!-- Jezyk strony dotpay -->
+                            <input type='hidden' name='lang' value='pl' />
+                        {% endif %}
                         <!-- End of DotPay Config -->
+                    
                         <button id="button" type="submit" style="border:0px; cursor: pointer; margin-bottom: 10px">
                             <img src="/images/shop/payment/set_credit_card-horizontal-transparent.png" alt="Logo Credit Cards"/>
                             </br>
@@ -66,7 +81,7 @@
                     </form>
                     <!-- End of Form DotPay -->
                     <br><br>
-                    <a href="/offer/buy/payment/policy/{{ lang }}">{{ offerBuyArr.getButtonPaymentPolicy }}</a>
+                    <a href="/offer/buy/payment/policy/{{ lang }}" target="_blank">{{ offerBuyArr.getButtonPaymentPolicy }}</a>
                 </div>
             </div>
             <br>

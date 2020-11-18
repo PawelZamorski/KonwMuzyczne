@@ -316,12 +316,22 @@ class OfferController extends AbstractController {
                 $errorMessage = "Oferta jest wyprzedana. Prosimy o kontakt telefoniczny z biurem sprzedaży.";
             }
 
+// TODO: refactor -> move to config or function. It is used also in MailerBuy
+// dotpay chk value - the order of values must be kept. For more info check the dotpay website: 
+// https://www.dotpay.pl/developer/doc/api_payment/pl/#ochrona-integralnosci-parametrow-przekierowania-chk
 
-// chk value
-$chkParametersChain = "ifhFAPPwsaml1GV5u5JaqUBkqshCqhfa" . "730320" . "400" . "PLN" . "Pakiet 4 lekcji"
-     . "http://testwebproject.eu/" . "0" . "Powrót do Konwersatorium Muzycznego";
+$chkValue = "";
 
-$chkValue = hash('sha256', $chkParametersChain);
+if($lang == 'en' | $lang == 'vi' | $lang == 'zh' ) {
+    $chkParametersChain = "ifhFAPPwsaml1GV5u5JaqUBkqshCqhfa" . "en" . "730320" . "100" . "EUR" . "4 lessons package, reservation no " . $res_no
+    . "http://testwebproject.eu/" . "0" . "Return to Konwersatorium Muzyczne website";
+    $chkValue = hash('sha256', $chkParametersChain);
+    include '/email/reservation-version-en.php';
+} else {
+    $chkParametersChain = "ifhFAPPwsaml1GV5u5JaqUBkqshCqhfa" . "pl" . "730320" . "400" . "PLN" . "Pakiet 4 lekcji, numer rezerwacji " . $res_no
+    . "http://testwebproject.eu/" . "0" . "Powrót do Konwersatorium Muzycznego";
+    $chkValue = hash('sha256', $chkParametersChain);    
+}
 
 
             // set up properties
@@ -380,8 +390,6 @@ $chkValue = hash('sha256', $chkParametersChain);
 
         return $this->render('offer-payment-policy.twig', $properties);
     }
-
-
     
 }
 

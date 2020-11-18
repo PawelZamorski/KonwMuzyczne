@@ -13,5 +13,6 @@
     "recaptcha": {
         "secretKey": "6Ld1ldUZAAAAABC60092Ulf9Xa4IUAJoi6M6ERE_",
         "sitekey": "6Ld1ldUZAAAAAA-jiQkhzm31YQGSQXjCiS9CHd9L"
-    }
+    },
+    "domain": "http://www.testwebproject.eu"
 }
