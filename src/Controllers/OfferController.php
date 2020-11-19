@@ -45,10 +45,8 @@ class OfferController extends AbstractController {
         } catch (NotFoundException $e) {
 //            $this->log->warn('Customer email not found: ' . $email);
             $errorController = new ErrorController($this->request);
-            $errorController->notFound($lang);
-            
+            return $errorController->notFoundWithMessage($lang, 'Error details: requested offer does not exist.');
         }
-
         return $this->render('offer-details.twig', $properties);
     }
 
@@ -80,8 +78,7 @@ class OfferController extends AbstractController {
         } catch (NotFoundException $e) {
 //            $this->log->warn('Customer email not found: ' . $email);
             $errorController = new ErrorController($this->request);
-            $errorController->notFound($lang);
-            
+            return $errorController->notFoundWithMessage($lang, 'Error details: requested category does not exist.');            
         }
 
         return $this->render('offer-category.twig', $properties);
@@ -110,8 +107,7 @@ class OfferController extends AbstractController {
         } catch (NotFoundException $e) {
 //            $this->log->warn('Customer email not found: ' . $email);
             $errorController = new ErrorController($this->request);
-            $errorController->notFound($lang);
-            
+            return $errorController->notFoundWithMessage($lang, 'Error details: data fetching failed.');
         }
 
         return $this->render('offer-special-details.twig', $properties);
@@ -146,8 +142,7 @@ class OfferController extends AbstractController {
         } catch (NotFoundException $e) {
 //            $this->log->warn('Customer email not found: ' . $email);
             $errorController = new ErrorController($this->request);
-            $errorController->notFound($lang);
-            
+            return $errorController->notFoundWithMessage($lang, 'Error details: data fetching failed.');
         }
 
         return $this->render('offer-special-details-2.twig', $properties);
@@ -182,8 +177,7 @@ class OfferController extends AbstractController {
         } catch (NotFoundException $e) {
 //            $this->log->warn('Customer email not found: ' . $email);
             $errorController = new ErrorController($this->request);
-            $errorController->notFound($lang);
-            
+            return $errorController->notFoundWithMessage($lang, 'Error details: data fetching failed.');
         }
 
         return $this->render('offer-special-details-3.twig', $properties);
@@ -231,8 +225,7 @@ class OfferController extends AbstractController {
         } catch (NotFoundException $e) {
 //            $this->log->warn('Customer email not found: ' . $email);
             $errorController = new ErrorController($this->request);
-            $errorController->notFound($lang);
-            
+            return $errorController->notFoundWithMessage($lang, 'Error details: data fetching failed.');
         }
 
         return $this->render('offer-buy.twig', $properties);
@@ -351,7 +344,7 @@ if($lang == 'en' | $lang == 'vi' | $lang == 'zh' ) {
         } catch (NotFoundException $e) {
 //            $this->log->warn('Customer email not found: ' . $email);
             $errorController = new ErrorController($this->request);
-            $errorController->notFound($lang);
+            return $errorController->notFoundWithMessage($lang, 'Error details: data fetching failed.');
         }
         if($processed) {
             return $this->render('offer-payment.twig', $properties);
@@ -384,8 +377,7 @@ if($lang == 'en' | $lang == 'vi' | $lang == 'zh' ) {
         } catch (NotFoundException $e) {
 //            $this->log->warn('Customer email not found: ' . $email);
             $errorController = new ErrorController($this->request);
-            $errorController->notFound($lang);
-            
+            return $errorController->notFoundWithMessage($lang, 'Error details: data fetching failed.');
         }
 
         return $this->render('offer-payment-policy.twig', $properties);

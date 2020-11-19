@@ -7,6 +7,7 @@ use Konwersatorium\Domain\EmployeeMain;
 use Konwersatorium\Domain\Positions;
 use Konwersatorium\Domain\Specialization;
 use Konwersatorium\Exceptions\NotFoundException;
+use Konwersatorium\Exceptions\DbException;
 use Konwersatorium\Services\GoogleTranslate;
 
 class EmployeeModel extends AbstractModel {
@@ -322,7 +323,7 @@ class EmployeeModel extends AbstractModel {
         if ($this->conn->query($sql) === TRUE) {
 //            echo "Record updated successfully";
         } else {
-            echo "Error updating record: " . $this->conn->error;
+            throw new DbException($this->conn->error);
         }
 
         $sql = "UPDATE employee_translation
@@ -334,7 +335,7 @@ class EmployeeModel extends AbstractModel {
         if ($this->conn->query($sql) === TRUE) {
 //            echo "Record updated successfully";
         } else {
-            echo "Error updating record: " . $this->conn->error;
+            throw new DbException($this->conn->error);
         }
 
         
@@ -347,7 +348,7 @@ class EmployeeModel extends AbstractModel {
         if ($this->conn->query($sql)  === TRUE) {
 //            echo "Record updated successfully";
         } else {
-            echo "Error updating record: " . $this->conn->error;
+            throw new DbException($this->conn->error);
         }
 
         // Insert data
@@ -376,11 +377,11 @@ class EmployeeModel extends AbstractModel {
                 if ($this->conn->query($sql)  === TRUE) {
 //                    echo "Unbelivable Success: Record updated successfully";
                 } else {
-                    echo "Error updating record here: " . $this->conn->error;
+                    throw new DbException($this->conn->error);
                 }
             }
         } else {
-            echo "Error updating record: " . $this->conn->error;
+            throw new DbException($this->conn->error);
         }
 
     }
@@ -393,7 +394,7 @@ class EmployeeModel extends AbstractModel {
         if ($this->conn->query($sql) === TRUE) {
 //            echo "Record updated successfully";
         } else {
-            echo "Error updating record: " . $this->conn->error;
+            throw new DbException($this->conn->error);
         }
     }
 
@@ -420,7 +421,7 @@ class EmployeeModel extends AbstractModel {
             $employee_last_id = $this->conn->insert_id;
 //            echo "Record updated successfully";
         } else {
-            echo "Error updating record: " . $this->conn->error;
+            throw new DbException($this->conn->error);
         }
     
         // TODO: check if  = $employee_last_id is not -1
@@ -444,7 +445,7 @@ class EmployeeModel extends AbstractModel {
         if ($this->conn->query($sql) === TRUE) {
 //            echo "Record updated successfully";
         } else {
-            echo "Error updating record: " . $this->conn->error;
+            throw new DbException($this->conn->error);
         }
 
         // TODO: check if  = $employee_last_id is not -1
@@ -459,7 +460,7 @@ class EmployeeModel extends AbstractModel {
             if ($this->conn->query($sql)  === TRUE) {
     //            echo "Record updated successfully";
             } else {
-                echo "Error updating record: " . $this->conn->error;
+                throw new DbException($this->conn->error);
             }    
         }
 
@@ -486,11 +487,11 @@ class EmployeeModel extends AbstractModel {
             if ($this->conn->query($sql)  === TRUE) {
 //                    echo "Unbelivable Success: Record updated successfully";
             } else {
-                echo "Error updating record here: " . $this->conn->error;
+                throw new DbException($this->conn->error);
             }
 
         } else {
-            echo "Error updating record: " . $this->conn->error;
+            throw new DbException($this->conn->error);
         }
     }
 

@@ -109,8 +109,7 @@ class HomeController extends AbstractController {
         } catch (NotFoundException $e) {
 //            $this->log->warn('Customer email not found: ' . $email);
             $errorController = new ErrorController($this->request);
-            $errorController->notFound($lang);
-            
+            return $errorController->notFoundWithMessage($lang, 'Error details: data fetching failed.');
         }
 
         return $this->render('home.twig', $properties);

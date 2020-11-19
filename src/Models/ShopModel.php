@@ -113,7 +113,7 @@ class ShopModel extends AbstractModel {
         if ($this->conn->query($query) === TRUE) {
             // echo  "Record updated successfully";
         } else {
-            echo "Error updating record: " . $this->conn->error;
+            throw new DbException($this->conn->error);
         }
     }
 

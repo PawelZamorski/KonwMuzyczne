@@ -31,8 +31,7 @@ class EmployeeController extends AbstractController {
         } catch (NotFoundException $e) {
 //            $this->log->warn('Customer email not found: ' . $email);
             $errorController = new ErrorController($this->request);
-            $errorController->notFound($lang);
-            
+            return $errorController->notFoundWithMessage($lang, 'Error details: employee not found.');
         }
 
         return $this->render('employee-details.twig', $properties);

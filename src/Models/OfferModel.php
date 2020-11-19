@@ -10,6 +10,7 @@ use Konwersatorium\Domain\OfferSpecialMain;
 use Konwersatorium\Domain\OfferCourse;
 use Konwersatorium\Domain\OfferBuy;
 use Konwersatorium\Exceptions\NotFoundException;
+use Konwersatorium\Exceptions\DbException;
 use Konwersatorium\Services\GoogleTranslate;
 
 class OfferModel extends AbstractModel {
@@ -230,10 +231,10 @@ class OfferModel extends AbstractModel {
         // Fetch first row
         $row = $result->fetch_assoc();
         // Check if there are any data
-        if (empty($row)) {
+
+        if (empty($row)) {        
             throw new NotFoundException();
         }
-
         return new Offer($row['offer_id'], $row['course_name'], $row['category'], $row['type'], $row['short_desc'], $row['common_desc'], $row['long_desc'], $row['img'], $row['img_thumbnail'], $row['movie']);
     }
 
@@ -349,6 +350,7 @@ class OfferModel extends AbstractModel {
     }
 
     public function updateOfferById($lang, $offer_id) {
+        // TODO change sql to transaction or create private methods to deal with different sql.
         
         $category_id = $_POST['category_id']; // category_id is in offer table - do not update it
         $course_type_id = $_POST['course_type_id'];
@@ -392,7 +394,7 @@ class OfferModel extends AbstractModel {
         if ($this->conn->query($sql) === TRUE) {
             echo "Record updated successfully";
         } else {
-            echo "Error updating record: " . $this->conn->error;
+            throw new DbException($this->conn->error);
         }
 
         
@@ -409,7 +411,7 @@ class OfferModel extends AbstractModel {
         if ($this->conn->query($sql) === TRUE) {
             echo "Record updated successfully";
         } else {
-            echo "Error updating record: " . $this->conn->error;
+            throw new DbException($this->conn->error);
         }
     }
 
@@ -497,7 +499,7 @@ class OfferModel extends AbstractModel {
         if ($this->conn->query($sql) === TRUE) {
             echo "Record updated successfully";
         } else {
-            echo "Error updating record: " . $this->conn->error;
+            throw new DbException($this->conn->error);
         }
 
         
@@ -515,7 +517,7 @@ class OfferModel extends AbstractModel {
         if ($this->conn->query($sql) === TRUE) {
             echo "Record updated successfully";
         } else {
-            echo "Error updating record: " . $this->conn->error;
+            throw new DbException($this->conn->error);
         }
     }
     
@@ -531,7 +533,7 @@ class OfferModel extends AbstractModel {
         if ($this->conn->query($sql) === TRUE) {
             echo "Record added successfully";
         } else {
-            echo "Error updating record: " . $this->conn->error;
+            throw new DbException($this->conn->error);
         }
 
     }
@@ -542,7 +544,7 @@ class OfferModel extends AbstractModel {
         if ($this->conn->query($sql) === TRUE) {
 //            echo "Record updated successfully";
         } else {
-            echo "Error updating record: " . $this->conn->error;
+            throw new DbException($this->conn->error);
         }
 
     }
@@ -574,9 +576,9 @@ class OfferModel extends AbstractModel {
             // get last id of inserted entity
             $course_last_id = $this->conn->insert_id;
 
-            echo "Record added successfully";
+//            echo "Record added successfully";
         } else {
-            echo "Error updating record: " . $this->conn->error;
+            throw new DbException($this->conn->error);
         }
 
         // TODO: check if  = $e_last_id is not -1
@@ -616,7 +618,7 @@ class OfferModel extends AbstractModel {
         if ($this->conn->query($sql) === TRUE) {
 //            echo "Record updated successfully";
         } else {
-            echo "Error updating record: " . $this->conn->error;
+            throw new DbException($this->conn->error);
         }
 
     }
