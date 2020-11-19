@@ -7,6 +7,7 @@ use Konwersatorium\Models\OfferModel;
 use Konwersatorium\Models\ContactModel;
 use Konwersatorium\Models\ShopModel;
 use Konwersatorium\Exceptions\NotFoundException;
+use Konwersatorium\Exceptions\DbException;
 use Konwersatorium\Core\Config;
 use Konwersatorium\Mailer\MailerBuy;
 
@@ -345,7 +346,11 @@ if($lang == 'en' | $lang == 'vi' | $lang == 'zh' ) {
 //            $this->log->warn('Customer email not found: ' . $email);
             $errorController = new ErrorController($this->request);
             return $errorController->notFoundWithMessage($lang, 'Error details: data fetching failed.');
+        } catch (DbException $e) {
+            $errorController = new ErrorController($this->request);
+            return $errorController->notFoundWithMessage($lang, $e);
         }
+
         if($processed) {
             return $this->render('offer-payment.twig', $properties);
         } else {

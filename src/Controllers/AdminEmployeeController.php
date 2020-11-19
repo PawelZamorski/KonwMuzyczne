@@ -4,6 +4,7 @@ namespace Konwersatorium\Controllers;
 
 use Konwersatorium\Models\EmployeeModel;
 use Konwersatorium\Exceptions\NotFoundException;
+use Konwersatorium\Exceptions\DbException;
 
 class AdminEmployeeController extends AbstractController {
 
@@ -74,10 +75,10 @@ class AdminEmployeeController extends AbstractController {
             header("Location: http://$host$uri");
             exit;
             
-        } catch (NotFoundException $e) {
+        } catch (DbException $e) {
 //            $this->log->warn('Customer email not found: ' . $email);
             $errorController = new ErrorController($this->request);
-            $errorController->notFound($lang);            
+            return $errorController->notFoundWithMessage($lang, $e);
         }
     }
 
@@ -93,10 +94,10 @@ class AdminEmployeeController extends AbstractController {
             header("Location: http://$host$uri");
             exit;
             
-        } catch (NotFoundException $e) {
+        } catch (DbException $e) {
 //            $this->log->warn('Customer email not found: ' . $email);
             $errorController = new ErrorController($this->request);
-            $errorController->notFound($lang);            
+            return $errorController->notFoundWithMessage($lang, $e);
         }
     }
 
@@ -143,10 +144,10 @@ class AdminEmployeeController extends AbstractController {
             header("Location: http://$host$uri");
             exit;
             
-        } catch (NotFoundException $e) {
+        } catch (DbException $e) {
 //            $this->log->warn('Customer email not found: ' . $email);
             $errorController = new ErrorController($this->request);
-            $errorController->notFound($lang);            
+            return $errorController->notFoundWithMessage($lang, $e);
         }
     }
 

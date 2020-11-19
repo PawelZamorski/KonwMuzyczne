@@ -6,6 +6,7 @@ use Konwersatorium\Models\MenuModel;
 use Konwersatorium\Models\OfferModel;
 use Konwersatorium\Models\ContactModel;
 use Konwersatorium\Exceptions\NotFoundException;
+use Konwersatorium\Exceptions\DbException;
 
 // TODO: refactor -> create course model
 use Konwersatorium\Models\EmployeeModel;
@@ -76,8 +77,7 @@ class AdminOfferController extends AbstractController {
         } catch (NotFoundException $e) {
 //            $this->log->warn('Customer email not found: ' . $email);
             $errorController = new ErrorController($this->request);
-            $errorController->notFound($lang);
-            
+            return $errorController->notFoundWithMessage($lang, 'Error details: data fetching failed.');
         }
 
         return $this->render('admin/admin-offer-details.twig', $properties);
@@ -97,10 +97,10 @@ class AdminOfferController extends AbstractController {
             header("Location: http://$host$uri");
             exit;
             
-        } catch (NotFoundException $e) {
+        } catch (DbException $e) {
 //            $this->log->warn('Customer email not found: ' . $email);
             $errorController = new ErrorController($this->request);
-            $errorController->notFound($lang);            
+            return $errorController->notFoundWithMessage($lang, $e);
         }
     }
 
@@ -129,8 +129,7 @@ class AdminOfferController extends AbstractController {
         } catch (NotFoundException $e) {
 //            $this->log->warn('Customer email not found: ' . $email);
             $errorController = new ErrorController($this->request);
-            $errorController->notFound($lang);
-            
+            return $errorController->notFoundWithMessage($lang, 'Error details: data fetching failed.');
         }
 
         return $this->render('admin/admin-offer-create-form.twig', $properties);
@@ -148,10 +147,10 @@ class AdminOfferController extends AbstractController {
             header("Location: http://$host$uri");
             exit;
            
-        } catch (NotFoundException $e) {
+        } catch (DbException $e) {
 //            $this->log->warn('Customer email not found: ' . $email);
             $errorController = new ErrorController($this->request);
-            $errorController->notFound($lang);            
+            return $errorController->notFoundWithMessage($lang, $e);
         }
     }
 
@@ -167,10 +166,10 @@ class AdminOfferController extends AbstractController {
             header("Location: http://$host$uri");
             exit;
             
-        } catch (NotFoundException $e) {
+        } catch (DbException $e) {
 //            $this->log->warn('Customer email not found: ' . $email);
             $errorController = new ErrorController($this->request);
-            $errorController->notFound($lang);            
+            return $errorController->notFoundWithMessage($lang, $e);
         }
     }
 
@@ -191,7 +190,7 @@ class AdminOfferController extends AbstractController {
 
         } catch (NotFoundException $e) {
             $errorController = new ErrorController($this->request);
-            $errorController->notFound($lang);
+            return $errorController->notFoundWithMessage($lang, 'Error details: data fetching failed.');
         }
 
         return $this->render('admin/admin-offerCourse-all.twig', $properties);        
@@ -232,7 +231,7 @@ class AdminOfferController extends AbstractController {
 
         } catch (NotFoundException $e) {
             $errorController = new ErrorController($this->request);
-            $errorController->notFound($lang);
+            return $errorController->notFoundWithMessage($lang, 'Error details: data fetching failed.');
         }
 
         return $this->render('admin/admin-offerCourse-details.twig', $properties);        
@@ -251,10 +250,10 @@ class AdminOfferController extends AbstractController {
             header("Location: http://$host$uri");
             exit;
 */            
-        } catch (NotFoundException $e) {
+        } catch (DbException $e) {
 //            $this->log->warn('Customer email not found: ' . $email);
             $errorController = new ErrorController($this->request);
-            $errorController->notFound($lang);            
+            return $errorController->notFoundWithMessage($lang, $e);
         }
     }
 
@@ -294,8 +293,7 @@ class AdminOfferController extends AbstractController {
         } catch (NotFoundException $e) {
 //            $this->log->warn('Customer email not found: ' . $email);
             $errorController = new ErrorController($this->request);
-            $errorController->notFound($lang);
-            
+            return $errorController->notFoundWithMessage($lang, 'Error details: data fetching failed.');
         }
 
         return $this->render('admin/admin-offerCourse-create-form.twig', $properties);
@@ -314,10 +312,10 @@ class AdminOfferController extends AbstractController {
             header("Location: http://$host$uri");
             exit;
             
-        } catch (NotFoundException $e) {
+        } catch (DbException $e) {
 //            $this->log->warn('Customer email not found: ' . $email);
             $errorController = new ErrorController($this->request);
-            $errorController->notFound($lang);            
+            return $errorController->notFoundWithMessage($lang, $e);
         }
 
     }
@@ -334,10 +332,10 @@ class AdminOfferController extends AbstractController {
             header("Location: http://$host$uri");
             exit;
             
-        } catch (NotFoundException $e) {
+        } catch (DbException $e) {
 //            $this->log->warn('Customer email not found: ' . $email);
             $errorController = new ErrorController($this->request);
-            $errorController->notFound($lang);            
+            return $errorController->notFoundWithMessage($lang, $e);
         }
     }
 
