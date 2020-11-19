@@ -112,18 +112,21 @@ class MailerBuy {
 
         // Build the email content.
         $email_content = $this->createEmail();
-//            $email_content = "Witamy $name\n";
-//            $email_content .= "Dziękujemy za dokonanie rezerwacji kursu:\n$message\n";
+        // $email_content = "Witamy $name\n";
+
 
         // To send HTML mail, the Content-type header must be set
         $headers[] = 'MIME-Version: 1.0';
-        $headers[] = 'Content-type: text/html; charset=UTF-8';
+        // Use plain text and html version of an email
+        $headers[] = 'Content-Type: multipart/alternative; boundary=boundary1q2w3e4r5t6y';
+        // $headers[] = 'Content-type: text/html; charset=UTF-8';
         // Additional headers
-//            $headers[] = 'From: sekretariat@konwersatoriummuzyczne.pl';
+        // $headers[] = 'From: sekretariat@konwersatoriummuzyczne.pl';
         
         $headers[] = 'From: ' . $this->config_mailer['from'];
 
         // Send the email.
+        set_time_limit(60); // extend the execution time 
         $mail=mail($recipient, $subject, $email_content, implode("\r\n", $headers));
 
         if ($mail) {
