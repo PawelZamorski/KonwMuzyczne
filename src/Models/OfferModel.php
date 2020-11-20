@@ -552,7 +552,6 @@ class OfferModel extends AbstractModel {
 
 
 
-
     public function createOfferCourse($lang) {
         $code = $_POST['code'];
         $course_name_id = $_POST['course_name_id'];
@@ -607,7 +606,7 @@ class OfferModel extends AbstractModel {
             // get last id of inserted entity
             echo "Record added successfully";
         } else {
-            echo "Error updating record: " . $this->conn->error;
+            throw new DbException($this->conn->error);
         }
        
     }

@@ -21,7 +21,7 @@ class AdminHomeController extends AbstractController {
                 ];
 
         } catch (NotFoundException $e) {
-//            $this->log->warn('Customer email not found: ' . $email);
+            $this->log->warning('NotFoundException: ' . $e);
             $errorController = new ErrorController($this->request);
             return $errorController->notFoundWithMessage($lang, 'Error details: data fetching failed.');            
         }

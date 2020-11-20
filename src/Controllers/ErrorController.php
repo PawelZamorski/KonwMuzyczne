@@ -20,10 +20,12 @@ class ErrorController extends AbstractController {
             // set up properties
             $properties = ['menuArr' => $menuArr, 'errorMessage' => $errorMessage];
         } catch (NotFoundException $e) {
+            $this->log->warning('NotFoundException: ' . $e);
             // set up properties
             $properties = ['errorMessage' => $errorMessage. ' NotFoundException Test'];
             return $this->render('error.twig', $properties);
         } catch (Exception $e) {
+            $this->log->error('Exception: ' . $e);
             $properties = ['errorMessage' => $errorMessage. ' Exception test'];
             return $this->render('error.twig', $properties);
         }
@@ -46,10 +48,12 @@ class ErrorController extends AbstractController {
             // set up properties
             $properties = ['menuArr' => $menuArr, 'errorMessage' => $errorMessage];
         } catch (NotFoundException $e) {
+            $this->log->warning('NotFoundException: ' . $e);
             // set up properties
             $properties = ['errorMessage' => $errorMessage. 'Error details: requested language does not exist.'];
             return $this->render('error.twig', $properties);
         } catch (Exception $e) {
+            $this->log->error('Exception: ' . $e);
             $properties = ['errorMessage' => $errorMessage. ' Exception details: somethign went wrong. Please  contact administrator.'];
             return $this->render('error.twig', $properties);
         }

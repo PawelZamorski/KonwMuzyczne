@@ -33,7 +33,7 @@ abstract class AbstractController {
 
         $this->log = new Logger('konwersatorium');
         $logFile = $this->config->get('log');
-        $this->log->pushHandler(new StreamHandler($logFile, Logger::DEBUG));
+        $this->log->pushHandler(new StreamHandler(__DIR__ . '/../..' . $logFile, Logger::DEBUG));
     }
 
     /*

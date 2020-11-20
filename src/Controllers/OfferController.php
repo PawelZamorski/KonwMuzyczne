@@ -44,7 +44,7 @@ class OfferController extends AbstractController {
             ];
 
         } catch (NotFoundException $e) {
-//            $this->log->warn('Customer email not found: ' . $email);
+            $this->log->warning('NotFoundException: ' . $e);
             $errorController = new ErrorController($this->request);
             return $errorController->notFoundWithMessage($lang, 'Error details: requested offer does not exist.');
         }
@@ -77,7 +77,7 @@ class OfferController extends AbstractController {
                 ];
 
         } catch (NotFoundException $e) {
-//            $this->log->warn('Customer email not found: ' . $email);
+            $this->log->warning('NotFoundException: ' . $e);
             $errorController = new ErrorController($this->request);
             return $errorController->notFoundWithMessage($lang, 'Error details: requested category does not exist.');            
         }
@@ -106,7 +106,7 @@ class OfferController extends AbstractController {
                 ];
 
         } catch (NotFoundException $e) {
-//            $this->log->warn('Customer email not found: ' . $email);
+            $this->log->warning('NotFoundException: ' . $e);
             $errorController = new ErrorController($this->request);
             return $errorController->notFoundWithMessage($lang, 'Error details: data fetching failed.');
         }
@@ -141,7 +141,7 @@ class OfferController extends AbstractController {
                 ];
 
         } catch (NotFoundException $e) {
-//            $this->log->warn('Customer email not found: ' . $email);
+            $this->log->warning('NotFoundException: ' . $e);
             $errorController = new ErrorController($this->request);
             return $errorController->notFoundWithMessage($lang, 'Error details: data fetching failed.');
         }
@@ -176,7 +176,7 @@ class OfferController extends AbstractController {
                 ];
 
         } catch (NotFoundException $e) {
-//            $this->log->warn('Customer email not found: ' . $email);
+            $this->log->warning('NotFoundException: ' . $e);
             $errorController = new ErrorController($this->request);
             return $errorController->notFoundWithMessage($lang, 'Error details: data fetching failed.');
         }
@@ -224,7 +224,7 @@ class OfferController extends AbstractController {
                 ];
 
         } catch (NotFoundException $e) {
-//            $this->log->warn('Customer email not found: ' . $email);
+            $this->log->warning('NotFoundException: ' . $e);
             $errorController = new ErrorController($this->request);
             return $errorController->notFoundWithMessage($lang, 'Error details: data fetching failed.');
         }
@@ -343,10 +343,11 @@ if($lang == 'en' | $lang == 'vi' | $lang == 'zh' ) {
                 'res_no' => $res_no
                 ];
         } catch (NotFoundException $e) {
-//            $this->log->warn('Customer email not found: ' . $email);
+            $this->log->warning('NotFoundException: ' . $e);
             $errorController = new ErrorController($this->request);
             return $errorController->notFoundWithMessage($lang, 'Error details: data fetching failed.');
         } catch (DbException $e) {
+            $this->log->error('DbException: ' . $e);
             $errorController = new ErrorController($this->request);
             return $errorController->notFoundWithMessage($lang, $e);
         }
@@ -380,7 +381,7 @@ if($lang == 'en' | $lang == 'vi' | $lang == 'zh' ) {
                 ];
 
         } catch (NotFoundException $e) {
-//            $this->log->warn('Customer email not found: ' . $email);
+            $this->log->warning('NotFoundException: ' . $e);
             $errorController = new ErrorController($this->request);
             return $errorController->notFoundWithMessage($lang, 'Error details: data fetching failed.');
         }

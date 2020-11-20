@@ -30,6 +30,7 @@ class AdminOfferController extends AbstractController {
             ];
 
         } catch (NotFoundException $e) {
+            $this->log->warning('NotFoundException: ' . $e);
             $errorController = new ErrorController($this->request);
             $errorController->notFound($lang);
         }
@@ -75,7 +76,7 @@ class AdminOfferController extends AbstractController {
                 ];
 
         } catch (NotFoundException $e) {
-//            $this->log->warn('Customer email not found: ' . $email);
+            $this->log->warning('NotFoundException: ' . $e);
             $errorController = new ErrorController($this->request);
             return $errorController->notFoundWithMessage($lang, 'Error details: data fetching failed.');
         }
@@ -98,7 +99,7 @@ class AdminOfferController extends AbstractController {
             exit;
             
         } catch (DbException $e) {
-//            $this->log->warn('Customer email not found: ' . $email);
+            $this->log->warning('DbException: ' . $e);
             $errorController = new ErrorController($this->request);
             return $errorController->notFoundWithMessage($lang, $e);
         }
@@ -127,7 +128,7 @@ class AdminOfferController extends AbstractController {
                 ];
 
         } catch (NotFoundException $e) {
-//            $this->log->warn('Customer email not found: ' . $email);
+            $this->log->warning('NotFoundException: ' . $e);
             $errorController = new ErrorController($this->request);
             return $errorController->notFoundWithMessage($lang, 'Error details: data fetching failed.');
         }
@@ -148,7 +149,7 @@ class AdminOfferController extends AbstractController {
             exit;
            
         } catch (DbException $e) {
-//            $this->log->warn('Customer email not found: ' . $email);
+            $this->log->warning('DbException: ' . $e);
             $errorController = new ErrorController($this->request);
             return $errorController->notFoundWithMessage($lang, $e);
         }
@@ -167,7 +168,7 @@ class AdminOfferController extends AbstractController {
             exit;
             
         } catch (DbException $e) {
-//            $this->log->warn('Customer email not found: ' . $email);
+            $this->log->warning('DbException: ' . $e);
             $errorController = new ErrorController($this->request);
             return $errorController->notFoundWithMessage($lang, $e);
         }
@@ -189,6 +190,7 @@ class AdminOfferController extends AbstractController {
             ];
 
         } catch (NotFoundException $e) {
+            $this->log->warning('NotFoundException: ' . $e);
             $errorController = new ErrorController($this->request);
             return $errorController->notFoundWithMessage($lang, 'Error details: data fetching failed.');
         }
@@ -230,6 +232,7 @@ class AdminOfferController extends AbstractController {
             ];
 
         } catch (NotFoundException $e) {
+            $this->log->warning('NotFoundException: ' . $e);
             $errorController = new ErrorController($this->request);
             return $errorController->notFoundWithMessage($lang, 'Error details: data fetching failed.');
         }
@@ -251,7 +254,7 @@ class AdminOfferController extends AbstractController {
             exit;
 */            
         } catch (DbException $e) {
-//            $this->log->warn('Customer email not found: ' . $email);
+            $this->log->warning('DbException: ' . $e);
             $errorController = new ErrorController($this->request);
             return $errorController->notFoundWithMessage($lang, $e);
         }
@@ -291,7 +294,7 @@ class AdminOfferController extends AbstractController {
                 ];
 
         } catch (NotFoundException $e) {
-//            $this->log->warn('Customer email not found: ' . $email);
+            $this->log->warning('NotFoundException: ' . $e);
             $errorController = new ErrorController($this->request);
             return $errorController->notFoundWithMessage($lang, 'Error details: data fetching failed.');
         }
@@ -313,7 +316,7 @@ class AdminOfferController extends AbstractController {
             exit;
             
         } catch (DbException $e) {
-//            $this->log->warn('Customer email not found: ' . $email);
+            $this->log->error('DbException: ' . $e);
             $errorController = new ErrorController($this->request);
             return $errorController->notFoundWithMessage($lang, $e);
         }
@@ -333,7 +336,7 @@ class AdminOfferController extends AbstractController {
             exit;
             
         } catch (DbException $e) {
-//            $this->log->warn('Customer email not found: ' . $email);
+            $this->log->warning('DbException: ' . $e);
             $errorController = new ErrorController($this->request);
             return $errorController->notFoundWithMessage($lang, $e);
         }
