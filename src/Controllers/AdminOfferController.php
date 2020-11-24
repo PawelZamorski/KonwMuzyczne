@@ -7,6 +7,7 @@ use Konwersatorium\Models\OfferModel;
 use Konwersatorium\Models\ContactModel;
 use Konwersatorium\Exceptions\NotFoundException;
 use Konwersatorium\Exceptions\DbException;
+use Konwersatorium\Services\Authentication;
 
 // TODO: refactor -> create course model
 use Konwersatorium\Models\EmployeeModel;
@@ -35,7 +36,17 @@ class AdminOfferController extends AbstractController {
             $errorController->notFound($lang);
         }
 
-        return $this->render('admin/admin-offer-all.twig', $properties);
+        if($this->isLoggedIn()) {
+            return $this->render('admin/admin-offer-all.twig', $properties);
+        } else {
+            // set up properties
+            $properties = [
+                'lang' => $lang,
+                'userName' => 'default user name'
+                ];
+            // user is not logged in and did not send any post data
+            return $this->render('admin/admin-login.twig', $properties);            
+        }
     }
 
     public function getOfferById($lang, $offer_id) {
@@ -81,7 +92,17 @@ class AdminOfferController extends AbstractController {
             return $errorController->notFoundWithMessage($lang, 'Error details: data fetching failed.');
         }
 
-        return $this->render('admin/admin-offer-details.twig', $properties);
+        if($this->isLoggedIn()) {
+            return $this->render('admin/admin-offer-details.twig', $properties);
+        } else {
+            // set up properties
+            $properties = [
+                'lang' => $lang,
+                'userName' => 'default user name'
+                ];
+            // user is not logged in and did not send any post data
+            return $this->render('admin/admin-login.twig', $properties);            
+        }
     }
 
     public function updateOfferById($lang, $offer_id) {
@@ -133,7 +154,17 @@ class AdminOfferController extends AbstractController {
             return $errorController->notFoundWithMessage($lang, 'Error details: data fetching failed.');
         }
 
-        return $this->render('admin/admin-offer-create-form.twig', $properties);
+        if($this->isLoggedIn()) {
+            return $this->render('admin/admin-offer-create-form.twig', $properties);
+        } else {
+            // set up properties
+            $properties = [
+                'lang' => $lang,
+                'userName' => 'default user name'
+                ];
+            // user is not logged in and did not send any post data
+            return $this->render('admin/admin-login.twig', $properties);            
+        }
     }
 
     public function createOffer($lang) {
@@ -195,7 +226,17 @@ class AdminOfferController extends AbstractController {
             return $errorController->notFoundWithMessage($lang, 'Error details: data fetching failed.');
         }
 
-        return $this->render('admin/admin-offerCourse-all.twig', $properties);        
+        if($this->isLoggedIn()) {
+            return $this->render('admin/admin-offerCourse-all.twig', $properties);        
+        } else {
+            // set up properties
+            $properties = [
+                'lang' => $lang,
+                'userName' => 'default user name'
+                ];
+            // user is not logged in and did not send any post data
+            return $this->render('admin/admin-login.twig', $properties);            
+        }
     }
 
     public function getCourseById($lang, $course_id) {
@@ -237,7 +278,17 @@ class AdminOfferController extends AbstractController {
             return $errorController->notFoundWithMessage($lang, 'Error details: data fetching failed.');
         }
 
-        return $this->render('admin/admin-offerCourse-details.twig', $properties);        
+        if($this->isLoggedIn()) {
+            return $this->render('admin/admin-offerCourse-details.twig', $properties);        
+        } else {
+            // set up properties
+            $properties = [
+                'lang' => $lang,
+                'userName' => 'default user name'
+                ];
+            // user is not logged in and did not send any post data
+            return $this->render('admin/admin-login.twig', $properties);            
+        }
     }
     public function updateCourseById($lang, $course_id) {
         try {
@@ -299,8 +350,17 @@ class AdminOfferController extends AbstractController {
             return $errorController->notFoundWithMessage($lang, 'Error details: data fetching failed.');
         }
 
-        return $this->render('admin/admin-offerCourse-create-form.twig', $properties);
-
+        if($this->isLoggedIn()) {
+            return $this->render('admin/admin-offerCourse-create-form.twig', $properties);
+        } else {
+            // set up properties
+            $properties = [
+                'lang' => $lang,
+                'userName' => 'default user name'
+                ];
+            // user is not logged in and did not send any post data
+            return $this->render('admin/admin-login.twig', $properties);            
+        }
     }
 
     public function createOfferCourse($lang) {
@@ -342,6 +402,12 @@ class AdminOfferController extends AbstractController {
         }
     }
 
+    private function isLoggedIn() {
+        // TODO move authentication to parent class, so it will be done for all admin controllers
+        // authentication service to login
+        $auth = new Authentication;
+        return $auth->isLoggedIn();
+    }
 
 }
 

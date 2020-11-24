@@ -5,6 +5,7 @@ namespace Konwersatorium\Controllers;
 use Konwersatorium\Models\EmployeeModel;
 use Konwersatorium\Exceptions\NotFoundException;
 use Konwersatorium\Exceptions\DbException;
+use Konwersatorium\Services\Authentication;
 
 class AdminEmployeeController extends AbstractController {
 
@@ -30,7 +31,17 @@ class AdminEmployeeController extends AbstractController {
             return $errorController->notFoundWithMessage($lang, 'Error details: data fetching failed.');
         }
 
-        return $this->render('admin/admin-employee-all.twig', $properties);
+        if($this->isLoggedIn()) {
+            return $this->render('admin/admin-employee-all.twig', $properties);            
+        } else {
+            // set up properties
+            $properties = [
+                'lang' => $lang,
+                'userName' => 'default user name'
+                ];
+            // user is not logged in and did not send any post data
+            return $this->render('admin/admin-login.twig', $properties);            
+        }
     }
     
     public function getEmployeeById($lang, $employee_id) {
@@ -60,7 +71,17 @@ class AdminEmployeeController extends AbstractController {
             return $errorController->notFoundWithMessage($lang, 'Error details: data fetching failed.');
         }
 
-        return $this->render('admin/admin-employee-details.twig', $properties);
+        if($this->isLoggedIn()) {
+            return $this->render('admin/admin-employee-details.twig', $properties);
+        } else {
+            // set up properties
+            $properties = [
+                'lang' => $lang,
+                'userName' => 'default user name'
+                ];
+            // user is not logged in and did not send any post data
+            return $this->render('admin/admin-login.twig', $properties);            
+        }
     }
 
     public function updateEmployeeById($lang, $employee_id) {
@@ -129,7 +150,17 @@ class AdminEmployeeController extends AbstractController {
             return $errorController->notFoundWithMessage($lang, 'Error details: data fetching failed.');
         }
 
-        return $this->render('admin/admin-employee-create-form.twig', $properties);
+        if($this->isLoggedIn()) {
+            return $this->render('admin/admin-employee-create-form.twig', $properties);
+        } else {
+            // set up properties
+            $properties = [
+                'lang' => $lang,
+                'userName' => 'default user name'
+                ];
+            // user is not logged in and did not send any post data
+            return $this->render('admin/admin-login.twig', $properties);            
+        }
     }
 
     public function createEmployee($lang) {
@@ -149,6 +180,13 @@ class AdminEmployeeController extends AbstractController {
             $errorController = new ErrorController($this->request);
             return $errorController->notFoundWithMessage($lang, $e);
         }
+    }
+
+    private function isLoggedIn() {
+        // TODO move authentication to parent class, so it will be done for all admin controllers
+        // authentication service to login
+        $auth = new Authentication;
+        return $auth->isLoggedIn();
     }
 
 }
