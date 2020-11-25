@@ -17,9 +17,9 @@ Płatność można uregulować tradycyjnym przelewem lub bezpośrednio w biurze 
 
 Dane do przelewu oraz adres biura:
 Bogna Kołodziej Konwersatorium Muzyczne
-ul. Aleje Jerozolimskie 47
+ul. Aleje Jerozolimskie 47/20
 00-697 Warszawa
-Santander Bank Polska SA. nr konta: ...
+Santander Bank Polska SA. nr konta: 82109018700000000146786604
 
 Rezerwacja ważna jest przez okres 7 dni. W przypadku braku płatności w podanym terminie rezerwacja zostaje anulowana.
 
@@ -214,9 +214,9 @@ Content-type: text/html; charset=UTF-8
                                                             <td class='text' style='color:#333333; font-family:Roboto, Georgia, serif; font-size:16px; line-height:30px; text-align:left; font-weight:300; padding-bottom:30px;'>
                                                                 Dane do przelewu oraz adres biura:<br>
                                                                 Bogna Kołodziej Konwersatorium Muzyczne<br>
-                                                                ul. Aleje Jerozolimskie 47<br>
+                                                                ul. Aleje Jerozolimskie 47/20<br>
                                                                 00-697 Warszawa<br>
-                                                                Santander Bank Polska SA. nr konta: ...
+                                                                Santander Bank Polska SA. nr konta: 82109018700000000146786604
                                                             </td>
                                                         </tr>
                                                         <tr>

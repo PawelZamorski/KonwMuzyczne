@@ -9,15 +9,15 @@ Dziękujemy za dokonanie rezerwacji.
 Poniżej załączamy informacje o złożonym Zamówieniu:
 Kurs dla dorosłych Klasa saksofonu
 Zamówienie nr 20201118/224427
-Pakiet obejmuje 4 godziny lekcyjne po 30 minut i jest w cenie 400 PLN. Do wykorzystania w ciągu 30 dni od daty zakupu. Terminy zajęć są ustalane indywidualnie – telefonicznie 883 489 184 lub mejlowo sekretariat@konwersatoriummuzyczne.pl Opłata nie podlega zwrotowi w przypadku rezygnacji z usług świadczonych przez Konwersatorium Muzyczne. W sytuacji zaistnienia zdarzeń losowych zapewniamy zastępstwo nauczyciela prowadzącego. Lekcje można odwoływać najpóźniej 24h przed planowaną lekcją, po tym terminie lekcja traktowana jest jako przeprowadzona.
+Pakiet obejmuje 4 godziny lekcyjne po 30 minut i jest w cenie 99 euro. Do wykorzystania w ciągu 30 dni od daty zakupu. Terminy zajęć są ustalane indywidualnie – telefonicznie 883 489 184 lub mejlowo sekretariat@konwersatoriummuzyczne.pl Opłata nie podlega zwrotowi w przypadku rezygnacji z usług świadczonych przez Konwersatorium Muzyczne. W sytuacji zaistnienia zdarzeń losowych zapewniamy zastępstwo nauczyciela prowadzącego. Lekcje można odwoływać najpóźniej 24h przed planowaną lekcją, po tym terminie lekcja traktowana jest jako przeprowadzona.
 
 Płatność można uregulować tradycyjnym przelewem lub bezpośrednio w biurze Konwersatorium Muzycznego. Szczegółowe informacje zamieszczone są poniżej. Płatność można uregulować tradycyjnym przelewem, płatnością online lub bezpośrednio w biurze Konwersatorium Muzycznego. W celu dokonania płatności online prosimy o skorzystanie z następującego linku: Konwersatorium Muzyczne/Płatność
 
 Dane do przelewu oraz adres biura:
 Bogna Kołodziej Konwersatorium Muzyczne
-ul. Aleje Jerozolimskie 47
+ul. Aleje Jerozolimskie 47/20
 00-697 Warszawa
-Santander Bank Polska SA. nr konta: ...
+Santander Bank Polska SA. nr konta: 82109018700000000146786604
 
 Rezerwacja ważna jest przez okres 7 dni. W przypadku braku płatności w podanym terminie rezerwacja zostaje anulowana.
 
@@ -179,7 +179,7 @@ Content-type: text/html; charset=UTF-8
                                                         <tr>
                                                             <td class='text' style='color:#333333; font-family:Roboto, Georgia, serif; font-size:16px; line-height:28px; text-align:justify; font-weight:300;'>
                                                                 <multiline>
-                                                                    Pakiet obejmuje 4 godziny lekcyjne po 30 minut i jest w cenie 400 PLN. Do wykorzystania w ciągu 30 dni od daty zakupu. 
+                                                                    Pakiet obejmuje 4 godziny lekcyjne po 30 minut i jest w cenie 99 euro. Do wykorzystania w ciągu 30 dni od daty zakupu. 
                                                                     Terminy zajęć są ustalane indywidualnie – telefonicznie 883 489 184 lub mejlowo sekretariat@konwersatoriummuzyczne.pl  
                                                                     Opłata nie podlega zwrotowi w przypadku rezygnacji z usług świadczonych przez Konwersatorium Muzyczne. 
                                                                     W sytuacji zaistnienia zdarzeń losowych zapewniamy zastępstwo nauczyciela prowadzącego. 
@@ -203,7 +203,7 @@ Content-type: text/html; charset=UTF-8
                                                                     <!-- Version with online payment - link must contain data required by dotpay gateway -->
                                                                         Płatność można uregulować tradycyjnym przelewem, płatnością online lub bezpośrednio w biurze Konwersatorium Muzycznego.
                                                                         W celu dokonania płatności online prosimy o skorzystanie z następującego linku:
-                                                                    <a href='https://ssl.dotpay.pl/test_payment/?chk=" . $chkValue . "&lang=en&id=730320&amount=100&currency=EUR&description=" . $this->res_no . "&url=http://testwebproject.eu&type=0&buttontext=KonwersatoriumMuzyczne' style='font-weight: bold; color: #d2c1a1'>Konwersatorium Muzyczne / Online Payment</a>
+                                                                    <a href='https://ssl.dotpay.pl/test_payment/?chk=" . $chkValue . "&lang=en&id=730320&amount=99&currency=EUR&description=" . $this->res_no . "&url=http://testwebproject.eu&type=0&buttontext=KonwersatoriumMuzyczne' style='font-weight: bold; color: #d2c1a1'>Konwersatorium Muzyczne / Online Payment</a>
                                                                 </multiline>
                                                             </td>
                                                         </tr>
@@ -211,9 +211,9 @@ Content-type: text/html; charset=UTF-8
                                                             <td class='text' style='color:#333333; font-family:Roboto, Georgia, serif; font-size:16px; line-height:30px; text-align:left; font-weight:300; padding-bottom:30px;'>
                                                                 Dane do przelewu oraz adres biura:<br>
                                                                 Bogna Kołodziej Konwersatorium Muzyczne<br>
-                                                                ul. Aleje Jerozolimskie 47<br>
+                                                                ul. Aleje Jerozolimskie 47/20<br>
                                                                 00-697 Warszawa<br>
-                                                                Santander Bank Polska SA. nr konta: ...
+                                                                Santander Bank Polska SA. nr konta: 82109018700000000146786604
                                                             </td>
                                                         </tr>
                                                         <tr>

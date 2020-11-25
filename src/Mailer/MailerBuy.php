@@ -9,6 +9,7 @@ class MailerBuy {
     private $config_mailer;
     private $config_domain;
 
+    // TODO refactor -> use other class to collect data from POST form
     // data send by POST
     private $name = "";
     private $email = "";
@@ -18,21 +19,27 @@ class MailerBuy {
     private $lang = "";
     private $res_no = "";
 
-
     public function __construct() {
         // get config data
         $this->config_recaptcha = Config::getConfig()->get('recaptcha'); // returns array
         $this->config_mailer = Config::getConfig()->get('mailer'); // returns array
         $this->config_domain = Config::getConfig()->get('domain'); // returns string
 
-
+        // TODO refactor -> use other class to collect data from POST form
         // set data from POST
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            if(isset($_POST['name'])) $this->name = $_POST['name'];
-            if(isset($_POST['email'])) $this->email = $_POST['email'];
+            if(isset($_POST['name'])) { 
+                // Get the form fields and remove whitespace.
+                $this->name = strip_tags(trim($_POST["name"]));
+                $this->name = str_replace(array("\r","\n"),array(" "," "),$this->name);
+            }
+            if(isset($_POST['email'])) {
+                $this->email = filter_var(trim($_POST['email']), FILTER_SANITIZE_EMAIL);    
+            }
             if(isset($_POST['offerId'])) $this->offer_id = $_POST['offerId'];
             if(isset($_POST['offerCategory'])) $this->offer_category = $_POST['offerCategory'];
             if(isset($_POST['offerName'])) $this->offer_name = $_POST['offerName'];
+            // TODO refactor -> $lang is a url parameter
             if(isset($_POST['lang'])) {
                 $this->lang = $_POST['lang'];
                 // TODO: use database to select languages
@@ -41,37 +48,34 @@ class MailerBuy {
                 }
             } else {
                 $this->lang = 'pl';
-            }    
+            }
+
+            // uset POST data to prevent from resubmission
+            unset($_POST['name']);
+            unset($_POST['email']);
         }
     }
 
+    // TODO refactor -> use other class to collect data from POST form -> move this method to other class
     public function getData() {
         return array("name"=>$this->name, "email"=>$this->email, "offer_id"=>$this->offer_id, "offer_category"=>$this->offer_category,
                     "offer_name"=>$this->offer_name, "lang"=>$this->lang);
     }
 
+    // TODO refactor -> use service to validate data
     public function isFormDataValid() {
-        // TODO: data are set up in constructor. Use data from object
-        // TODO: validate data in seperate function
-        // Only process POST reqeusts.
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            // Get the form fields and remove whitespace.
-            $this->name = strip_tags(trim($_POST["name"]));
-            $this->name = str_replace(array("\r","\n"),array(" "," "),$this->name);
-            $this->email = filter_var(trim($_POST["email"]), FILTER_SANITIZE_EMAIL);
-    
-            // Check that data was sent to the mailer.
-            if ( empty($this->name) OR !filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
-                // Set a 400 (bad request) response code and exit.
-                http_response_code(400);
-                return false;
-            } else {
-                http_response_code(200);
-                return true;
-            }
+        // Check that data were sent by POST method (name, email) and that email is valid
+        if ( empty($this->name) OR !filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
+            // Set a 400 (bad request) response code and exit.
+            http_response_code(400);
+            return false;
+        } else {
+            http_response_code(200);
+            return true;
         }
     }
 
+    // TODO refactor-> use service to validate recaptcha
     public function isRecaptchaValid() {
 //            $secretKey = $this->config_recaptcha['secretKey'];
         
@@ -150,7 +154,7 @@ class MailerBuy {
             // TODO: refactor -> move to config or function. It is used also in OfferController
             // dotpay chk value - the order of values must be kept. For more info check the dotpay website: 
             // https://www.dotpay.pl/developer/doc/api_payment/pl/#ochrona-integralnosci-parametrow-przekierowania-chk
-            $chkParametersChain = "ifhFAPPwsaml1GV5u5JaqUBkqshCqhfa" . "en" . "730320" . "100" . "EUR" . $this->res_no
+            $chkParametersChain = "ifhFAPPwsaml1GV5u5JaqUBkqshCqhfa" . "en" . "730320" . "99" . "EUR" . $this->res_no
             . "http://testwebproject.eu" . "0" . "KonwersatoriumMuzyczne";
             $chkValue = hash('sha256', $chkParametersChain);
             include '/email/reservation-version-en.php';

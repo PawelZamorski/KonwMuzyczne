@@ -294,7 +294,8 @@ class OfferController extends AbstractController {
                         // set res_no in MailerBuy object to use it in isEmailSend
                         $mailerBuy->setResNo($res_no);
                         if($processed = $mailerBuy->isEmailSend()) {
-                            
+                            // clear Post data to prevent from resubmission
+                            $_POST[] = array();
                         } else {
                             $errorMessage = "Ups! Coś poszło nie tak. Spróbuj do nas zadzwonić!";
                             // Delete reservation from DB
@@ -317,10 +318,9 @@ class OfferController extends AbstractController {
 $chkValue = "";
 
 if($lang == 'en' | $lang == 'vi' | $lang == 'zh' ) {
-    $chkParametersChain = "ifhFAPPwsaml1GV5u5JaqUBkqshCqhfa" . "en" . "730320" . "100" . "EUR" . "4 lessons package, reservation no " . $res_no
+    $chkParametersChain = "ifhFAPPwsaml1GV5u5JaqUBkqshCqhfa" . "en" . "730320" . "99" . "EUR" . "4 lessons package, reservation no " . $res_no
     . "http://testwebproject.eu/" . "0" . "Return to Konwersatorium Muzyczne website";
     $chkValue = hash('sha256', $chkParametersChain);
-    include '/email/reservation-version-en.php';
 } else {
     $chkParametersChain = "ifhFAPPwsaml1GV5u5JaqUBkqshCqhfa" . "pl" . "730320" . "400" . "PLN" . "Pakiet 4 lekcji, numer rezerwacji " . $res_no
     . "http://testwebproject.eu/" . "0" . "Powrót do Konwersatorium Muzycznego";

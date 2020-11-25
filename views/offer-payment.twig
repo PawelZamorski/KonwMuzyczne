@@ -1,105 +1,99 @@
 {% extends 'layout.twig' %}
 
 {% block content %}
-    <!-- Offer Buy -->
+    <!-- Offer Payment Heading-->
     <section class="secondary-color text-center scrollto clearfix ">
-        <div class="row clearfix" style="padding-bottom:0px;">
+        <!-- Offer Payment Heading-->
+        <div class="row" style="padding-bottom:0px;">
             <div class="section-heading" style="padding-bottom:0px;">
                 <h3>{{ offerBuyArr.getHeading3Buy }}</h3>
                 <h2 class="section-title" style="padding-bottom:0px;">{{ offerBuyArr.getHeading2Payment }}</h2>
             </div>
         </div>
-    </section>
-    <!-- Offer Buy -->
-    <section class="secondary-color text-center scrollto clearfix ">
-<!--    <p>{{ offerBuyArr.getInfoPayment | raw }}</p> -->
-            <!-- Bank Payment -->
-            <div class="col">
-                <div class="col-3">
-                    <div class="section-heading">
-                        <h2 class="section-title">{{ offerBuyArr.getHeading2Payment1 }}</h2>
-                    </div>
+        <!-- End of Offer Payment Heading -->
+        <!-- General Payment Info   <p>{{ offerBuyArr.getInfoPayment | raw }}</p> -->
+        
+        <!-- Bank Payment -->
+        <div class="row no-padding-bottom no-padding-top margin-top">
+            <div class="col-3">
+                <div class="section-heading">
+                    <h2 class="section-title">{{ offerBuyArr.getHeading2Payment1 }}</h2>
                 </div>
-                <div class="col-2-3 alignToPhoto">
-                    {{ offerBuyArr.getInfoAccount | raw }}
-                    <!-- Course info -->
+            </div>
+            <div class="col-2-3">
+                {{ offerBuyArr.getInfoAccount | raw }}
+                <!-- Course info -->
 <!-- TODO: Add 'tytu przelewu'  oraz numer rezerwacji-->
-                    <p class="capitalize">
-                        {{ res_no }} - {{ mailerBuyData.offer_category }} {{ mailerBuyData.offer_name }}
-                    </p>
+                <p class="capitalize">
+                    {{ res_no }} - {{ mailerBuyData.offer_category }} {{ mailerBuyData.offer_name }}
+                </p>
+                <br><br><br>
+            </div>
+        </div>
+        <!-- DotPay POST -->
+        <div class="row no-padding-bottom no-padding-top margin-top">
+            <div class="col-3">
+                <div class="section-heading">
+                    <h2 class="section-title">{{ offerBuyArr.getHeading2Payment2 }}</h2>
                 </div>
             </div>
-            <br>
-            <br>
-            <br>
-            <!-- DotPay POST -->
-            <div class="col">
-                <div class="col-3">
-                    <div class="section-heading">
-                        <h2 class="section-title">{{ offerBuyArr.getHeading2Payment2 }}</h2>
-                    </div>
-                </div>
-                <div class="col-2-3 alignToPhoto">
-                <!--    {{ offerBuyArr.getInfoPaymentGateway | raw }} -->
-                    <!-- Form DotPay -->
-                <!--    <form action="https://ssl.dotpay.pl/t2/" method="post" target="_parent"> -->
-                    <form action="https://ssl.dotpay.pl/test_payment/" method="post" target="_parent">
-                        <!-- numer ID w Dotpay -->
-                        <input type="hidden" name="chk" value="{{ chkValue }}" />
-                        <input type="hidden" name="id" value="730320" />
-                        <!-- Ardes URL powrotu do sklepu -->
-                        <input type="hidden" name="url" value="http://testwebproject.eu/" />
-                        <input type="hidden" name="type" value="0" />
-                        {% if lang == 'en' or lang == 'vi' or lang == 'zh' %}
-                            <!-- DotPay Config -->
-                            <input type="hidden" name="amount" value="100" />
-                            <input type="hidden" name="currency" value="EUR" />
-                            <!-- Tytuł transakcji -->
-                            <input type="hidden" name="description" value="4 lessons package, reservation no {{ res_no }}" />
-                            <!-- Tekst przycisku powrotu do sklepu -->
-                            <input type="hidden" name="buttontext" value="Return to Konwersatorium Muzyczne website" />
-                            <!-- Jezyk strony dotpay -->
-                            <input type='hidden' name='lang' value='en' />
-                        {% else %}
-                            <!-- DotPay Config -->
-                            <input type="hidden" name="amount" value="400" />
-                            <input type="hidden" name="currency" value="PLN" />
-                            <!-- Tytuł transakcji -->
-                            <input type="hidden" name="description" value="Pakiet 4 lekcji, numer rezerwacji {{ res_no }}" />
-                            <!-- Tekst przycisku powrotu do sklepu -->
-                            <input type="hidden" name="buttontext" value="Powrót do Konwersatorium Muzycznego" />
-                            <!-- Jezyk strony dotpay -->
-                            <input type='hidden' name='lang' value='pl' />
-                        {% endif %}
-                        <!-- End of DotPay Config -->
-                    
-                        <button id="button" type="submit" style="border:0px; cursor: pointer; margin-bottom: 10px">
-                            <img src="/images/shop/payment/set_credit_card-horizontal-transparent.png" alt="Logo Credit Cards"/>
-                            </br>
-                            <img src="/images/shop/payment/apple-icon-60x60.png" alt="Logo DotPay"/>
-                        </button>
-                    </form>
-                    <!-- End of Form DotPay -->
-                    <br><br>
-                    <a href="/offer/buy/payment/policy/{{ lang }}" target="_blank">{{ offerBuyArr.getButtonPaymentPolicy }}</a>
+            <div class="col-2-3">
+            <!--    {{ offerBuyArr.getInfoPaymentGateway | raw }} -->
+                <!-- Form DotPay -->
+            <!--    <form action="https://ssl.dotpay.pl/t2/" method="post" target="_parent"> -->
+                <form action="https://ssl.dotpay.pl/test_payment/" method="post" target="_parent">
+                    <!-- numer ID w Dotpay -->
+                    <input type="hidden" name="chk" value="{{ chkValue }}" />
+                    <input type="hidden" name="id" value="730320" />
+                    <!-- Ardes URL powrotu do sklepu -->
+                    <input type="hidden" name="url" value="http://testwebproject.eu/" />
+                    <input type="hidden" name="type" value="0" />
+                    {% if lang == 'en' or lang == 'vi' or lang == 'zh' %}
+                        <!-- DotPay Config -->
+                        <input type="hidden" name="amount" value="99" />
+                        <input type="hidden" name="currency" value="EUR" />
+                        <!-- Tytuł transakcji -->
+                        <input type="hidden" name="description" value="4 lessons package, reservation no {{ res_no }}" />
+                        <!-- Tekst przycisku powrotu do sklepu -->
+                        <input type="hidden" name="buttontext" value="Return to Konwersatorium Muzyczne website" />
+                        <!-- Jezyk strony dotpay -->
+                        <input type='hidden' name='lang' value='en' />
+                    {% else %}
+                        <!-- DotPay Config -->
+                        <input type="hidden" name="amount" value="400" />
+                        <input type="hidden" name="currency" value="PLN" />
+                        <!-- Tytuł transakcji -->
+                        <input type="hidden" name="description" value="Pakiet 4 lekcji, numer rezerwacji {{ res_no }}" />
+                        <!-- Tekst przycisku powrotu do sklepu -->
+                        <input type="hidden" name="buttontext" value="Powrót do Konwersatorium Muzycznego" />
+                        <!-- Jezyk strony dotpay -->
+                        <input type='hidden' name='lang' value='pl' />
+                    {% endif %}
+                    <!-- End of DotPay Config -->
+                
+                    <button id="button" class="secondary-color" type="submit" style="border:0px; cursor: pointer; margin-bottom: 10px" disabled>
+                        <img src="/images/shop/payment/gateway-button.png" alt="Logo Credit Cards and DotPay" style="width: 90%; height: auto;" />
+                    </button>
+                </form>
+                <!-- End of Form DotPay -->
+                <br>
+                <a href="/offer/buy/payment/policy/{{ lang }}" target="_blank">{{ offerBuyArr.getButtonPaymentPolicy }}</a>
+                <br><br><br>
+            </div>
+        </div>
+        <!-- Payment In Office -->
+        <div class="row no-padding-bottom no-padding-top margin-top">
+            <div class="col-3">
+                <div class="section-heading">
+                    <h2 class="section-title">{{ offerBuyArr.getHeading2Payment3 }}</h2>
                 </div>
             </div>
-            <br>
-            <br>
-            <br>
-            <!-- Payment In Office -->
-            <div class="col">
-                <div class="col-3">
-                    <div class="section-heading">
-                        <h2 class="section-title">{{ offerBuyArr.getHeading2Payment3 }}</h2>
-                    </div>
-                </div>
-                <div class="col-2-3 alignToPhoto">
-                    {{ offerBuyArr.getInfoAddress | raw }}
-                </div>
+            <div class="col-2-3">
+                {{ offerBuyArr.getInfoAddress | raw }}
+                <br><br>
             </div>
         </div>
     </section>
-    <!-- End of Offer Buy -->
+    <!-- End of Offer Payment -->
 
 {% endblock %}

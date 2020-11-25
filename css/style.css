@@ -193,11 +193,11 @@ section {
     position: relative;
 }
 
-.no-padding-bottom .row, .no-padding-bottom div, .no-padding-bottom.row {
+.no-padding-bottom .row, .no-padding-bottom div, .no-padding-bottom.row, .no-padding-bottom {
     padding-bottom: 0;
 }
 
-.no-padding-top.row, .no-padding-top div {
+.no-padding-top.row, .no-padding-top div, .no-padding-top {
     padding-top: 0;
 }
 
@@ -297,6 +297,10 @@ section {
 
 .col-38 {
     width: 38.2%;
+}
+
+.margin-top {
+    margin-top: 20px;
 }
 
 /* --------- 2.1 Header --------- */
