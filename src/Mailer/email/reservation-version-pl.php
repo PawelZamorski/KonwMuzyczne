@@ -2,40 +2,7 @@
 // The boundary value in a multipart/alternative email (--boundary1q2w3e4r5t6y) cannot be preceded by any other sign, i.e. space, tab or any other. 
 // It must start from the beginning of the line. Otherwise it is not interpreted corectly by email client and it becomes a part of a message.
 $email_content = 
-"--boundary1q2w3e4r5t6y
-Content-type: text/plain; charset=UTF-8
-
-Szanowni Państwo,
-Dziękujemy za dokonanie rezerwacji.
-
-Poniżej załączamy informacje o złożonym Zamówieniu:
-Kurs dla dorosłych Klasa saksofonu
-Zamówienie nr 20201118/224427
-Pakiet obejmuje 4 godziny lekcyjne po 30 minut i jest w cenie 400 PLN. Do wykorzystania w ciągu 30 dni od daty zakupu. Terminy zajęć są ustalane indywidualnie – telefonicznie 883 489 184 lub mejlowo sekretariat@konwersatoriummuzyczne.pl Opłata nie podlega zwrotowi w przypadku rezygnacji z usług świadczonych przez Konwersatorium Muzyczne. W sytuacji zaistnienia zdarzeń losowych zapewniamy zastępstwo nauczyciela prowadzącego. Lekcje można odwoływać najpóźniej 24h przed planowaną lekcją, po tym terminie lekcja traktowana jest jako przeprowadzona.
-
-Płatność można uregulować tradycyjnym przelewem lub bezpośrednio w biurze Konwersatorium Muzycznego. Szczegółowe informacje zamieszczone są poniżej. Płatność można uregulować tradycyjnym przelewem, płatnością online lub bezpośrednio w biurze Konwersatorium Muzycznego. W celu dokonania płatności online prosimy o skorzystanie z następującego linku: Konwersatorium Muzyczne/Płatność
-
-Dane do przelewu oraz adres biura:
-Bogna Kołodziej Konwersatorium Muzyczne
-ul. Aleje Jerozolimskie 47/20
-00-697 Warszawa
-Santander Bank Polska SA. nr konta: 82109018700000000146786604
-
-Rezerwacja ważna jest przez okres 7 dni. W przypadku braku płatności w podanym terminie rezerwacja zostaje anulowana.
-
-W przypadku pytań prosimy o kontakt z działem sprzedaży:
-Zadzwoń: +48 22 628 01 13, +48 883 489 184
-Napisz: sekretariat@konwersatoriummuzyczne.pl
-
-
-Serdecznie pozdrawiamy,
-Konwersatorium Muzyczne
-
-
---boundary1q2w3e4r5t6y
-Content-type: text/html; charset=UTF-8
-
-<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+"<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html lang='pl' xml:lang='pl' xmlns='http://www.w3.org/1999/xhtml' xmlns:v='urn:schemas-microsoft-com:vml' xmlns:o='urn:schemas-microsoft-com:office:office'>
 <head>
     <meta http-equiv='Content-type' content='text/html; charset=utf-8' />
@@ -292,8 +259,6 @@ Content-type: text/html; charset=UTF-8
         </tr>
     </table>
 </body>
-</html>
-
---boundary1q2w3e4r5t6y--";
+</html>";
 
 ?>

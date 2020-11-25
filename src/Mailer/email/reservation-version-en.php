@@ -1,38 +1,6 @@
 <?php
 $email_content = 
-"--boundary1q2w3e4r5t6y
-Content-type: text/plain; charset=UTF-8
-
-Szanowni Państwo,
-Dziękujemy za dokonanie rezerwacji.
-
-Poniżej załączamy informacje o złożonym Zamówieniu:
-Kurs dla dorosłych Klasa saksofonu
-Zamówienie nr 20201118/224427
-Pakiet obejmuje 4 godziny lekcyjne po 30 minut i jest w cenie 99 euro. Do wykorzystania w ciągu 30 dni od daty zakupu. Terminy zajęć są ustalane indywidualnie – telefonicznie 883 489 184 lub mejlowo sekretariat@konwersatoriummuzyczne.pl Opłata nie podlega zwrotowi w przypadku rezygnacji z usług świadczonych przez Konwersatorium Muzyczne. W sytuacji zaistnienia zdarzeń losowych zapewniamy zastępstwo nauczyciela prowadzącego. Lekcje można odwoływać najpóźniej 24h przed planowaną lekcją, po tym terminie lekcja traktowana jest jako przeprowadzona.
-
-Płatność można uregulować tradycyjnym przelewem lub bezpośrednio w biurze Konwersatorium Muzycznego. Szczegółowe informacje zamieszczone są poniżej. Płatność można uregulować tradycyjnym przelewem, płatnością online lub bezpośrednio w biurze Konwersatorium Muzycznego. W celu dokonania płatności online prosimy o skorzystanie z następującego linku: Konwersatorium Muzyczne/Płatność
-
-Dane do przelewu oraz adres biura:
-Bogna Kołodziej Konwersatorium Muzyczne
-ul. Aleje Jerozolimskie 47/20
-00-697 Warszawa
-Santander Bank Polska SA. nr konta: 82109018700000000146786604
-
-Rezerwacja ważna jest przez okres 7 dni. W przypadku braku płatności w podanym terminie rezerwacja zostaje anulowana.
-
-W przypadku pytań prosimy o kontakt z działem sprzedaży:
-Zadzwoń: +48 22 628 01 13, +48 883 489 184
-Napisz: sekretariat@konwersatoriummuzyczne.pl
-
-
-Serdecznie pozdrawiamy,
-Konwersatorium Muzyczne
-
---boundary1q2w3e4r5t6y
-Content-type: text/html; charset=UTF-8
-
-<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+"<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html lang='pl' xml:lang='pl' xmlns='http://www.w3.org/1999/xhtml' xmlns:v='urn:schemas-microsoft-com:vml' xmlns:o='urn:schemas-microsoft-com:office:office'>
 <head>
     <meta http-equiv='Content-type' content='text/html; charset=utf-8' />
@@ -159,57 +127,55 @@ Content-type: text/html; charset=UTF-8
                                                     <table width='100%' border='0' cellspacing='0' cellpadding='0'>
                                                         <tr>
                                                             <td class='h2 pb20' style='color:#333333; font-family:Cinzel, Georgia, serif; font-size:30px; line-height:38px; text-align:center; padding-bottom:20px;'>
-                                                                Dziękujemy za dokonanie rezerwacji
+                                                                Thank you for your reservation
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td class='text pb30' style='color:#333333; font-family:Roboto, Georgia, serif; font-size:16px; line-height:34px; text-align:justify; font-weight:300; padding-bottom:30px;'>
                                                                 <multiline>
-                                                                    Poniżej załączamy informacje o złożonym Zamówieniu.
+                                                                    Below you will find details confirming your reservation.
                                                                 </multiline>
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td class='text' style='color:#333333; font-family:Roboto, Georgia, serif; font-size:16px; line-height:28px; text-align:justify; font-weight:300;'>
                                                                 <multiline>
-                                                                    Kurs " . $this->offer_category . " " . $this->offer_name .
-                                                                "</multiline>
+                                                                " . $this->offer_name . " Course " . $this->offer_category . "
+                                                                </multiline>
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td class='text' style='color:#333333; font-family:Roboto, Georgia, serif; font-size:16px; line-height:28px; text-align:justify; font-weight:300;'>
                                                                 <multiline>
-                                                                    Pakiet obejmuje 4 godziny lekcyjne po 30 minut i jest w cenie 99 euro. Do wykorzystania w ciągu 30 dni od daty zakupu. 
-                                                                    Terminy zajęć są ustalane indywidualnie – telefonicznie 883 489 184 lub mejlowo sekretariat@konwersatoriummuzyczne.pl  
-                                                                    Opłata nie podlega zwrotowi w przypadku rezygnacji z usług świadczonych przez Konwersatorium Muzyczne. 
-                                                                    W sytuacji zaistnienia zdarzeń losowych zapewniamy zastępstwo nauczyciela prowadzącego. 
-                                                                    Lekcje można odwoływać najpóźniej 24h przed planowaną lekcją, po tym terminie lekcja traktowana jest jako przeprowadzona.
+                                                                    The course consists of 4 lessons, 30 min each, and costs €99.
+                                                                    The booking is valid for 30 days since the day of the purchase.
+                                                                    Times and dates of the lessons are discussed individually over a phone (call +64 883 489 184) or e-mail (sekretariat@konwersatoriummuzyczne.pl).
+                                                                    The payment is non-refundable, even if you choose to withdraw from the course.
+                                                                    In case of fortuitous events, a substitute teacher will be assigned to you.
+                                                                    Lessons can be cancelled 24 hours before a scheduled time, at the latest, cancelling any time after the deadline will not be acknowledged and such lesson will be considered as taken.
                                                                 </multiline>
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td class='text pb30' style='color:#333333; font-family:Roboto, Georgia, serif; font-size:16px; line-height:28px; text-align:justify; font-weight:300; padding-bottom:30px;'>
                                                                 <multiline>
-                                                                    Zamówienie nr " . $this->res_no .
-                                                                "</multiline>
+                                                                 Order No. " . $this->res_no . "
+                                                                </multiline>
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td class='text pb30' style='color:#333333; font-family:Roboto, Georgia, serif; font-size:16px; line-height:28px; text-align:justify; font-weight:300; padding-bottom:30px;'>
                                                                 <multiline>
-                                                                    Płatność można uregulować tradycyjnym przelewem lub bezpośrednio w biurze Konwersatorium Muzycznego.
-                                                                    Szczegółowe informacje zamieszczone są poniżej.
-                                                                    
+                                                                    The payment can be done by a traditional bank transfer, an online payment or directly at the premises of the Music Conversatory.                                                                    
                                                                     <!-- Version with online payment - link must contain data required by dotpay gateway -->
-                                                                        Płatność można uregulować tradycyjnym przelewem, płatnością online lub bezpośrednio w biurze Konwersatorium Muzycznego.
-                                                                        W celu dokonania płatności online prosimy o skorzystanie z następującego linku:
+                                                                    See the details below. To make an online payment, please follow the link:
                                                                     <a href='https://ssl.dotpay.pl/test_payment/?chk=" . $chkValue . "&lang=en&id=730320&amount=99&currency=EUR&description=" . $this->res_no . "&url=http://testwebproject.eu&type=0&buttontext=KonwersatoriumMuzyczne' style='font-weight: bold; color: #d2c1a1'>Konwersatorium Muzyczne / Online Payment</a>
                                                                 </multiline>
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td class='text' style='color:#333333; font-family:Roboto, Georgia, serif; font-size:16px; line-height:30px; text-align:left; font-weight:300; padding-bottom:30px;'>
-                                                                Dane do przelewu oraz adres biura:<br>
+                                                                Bank transfer details and the office address:<br>
                                                                 Bogna Kołodziej Konwersatorium Muzyczne<br>
                                                                 ul. Aleje Jerozolimskie 47/20<br>
                                                                 00-697 Warszawa<br>
@@ -219,7 +185,7 @@ Content-type: text/html; charset=UTF-8
                                                         <tr>
                                                             <td class='text pb30' style='color:#333333; font-family:Roboto, Georgia, serif; font-size:16px; line-height:28px; text-align:justify; font-weight:300; padding-bottom:30px;'>
                                                                 <multiline>
-                                                                    Rezerwacja ważna jest przez okres 7 dni. W przypadku braku płatności w podanym terminie rezerwacja zostaje anulowana.
+                                                                    The reservation is valid for 7 more days. If a payment is not made within that time, the reservation will be cancelled.
                                                                 </multiline>
                                                             </td>
                                                         </tr>
@@ -240,14 +206,14 @@ Content-type: text/html; charset=UTF-8
                                                         <tr>
                                                             <td class='text pb30' style='color:#666666; font-family:Roboto, Georgia, serif; font-size:14px; line-height:24px; text-align:left; font-weight:300; padding-bottom:30px;'>
                                                                 <multiline>
-                                                                    W przypadku pytań prosimy o kontakt z działem sprzedaży:<br>
+                                                                    If you have any questions, please contact the sales department:<br>
                                                                     <span class='link2' style='color:#666666; text-decoration:none;'>
-                                                                        Zadzwoń<br>+48 22 628 01 13<br>+48 883 489 184
+                                                                        Call us<br>+48 22 628 01 13<br>+48 883 489 184
                                                                     </span>
                                                                     <br>
                                                                     <a href='mailto:sekretariat@konwersatoriummuzyczne.pl' target='_blank' class='link2' style='color:#666666; text-decoration:none;'>
                                                                         <span class='link2' style='color:#666666; text-decoration:none;'>
-                                                                            Napisz<br>sekretariat@konwersatoriummuzyczne.pl
+                                                                            Write to us<br>sekretariat@konwersatoriummuzyczne.pl
                                                                         </span>
                                                                     </a>
                                                                 </multiline>
@@ -289,8 +255,6 @@ Content-type: text/html; charset=UTF-8
         </tr>
     </table>
 </body>
-</html>
-
---boundary1q2w3e4r5t6y--";
+</html>";
 
 ?>
