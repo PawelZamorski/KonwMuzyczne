@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Czas generowania: 25 Lis 2020, 02:23
+-- Czas generowania: 26 Lis 2020, 03:03
 -- Wersja serwera: 10.1.13-MariaDB
 -- Wersja PHP: 5.6.23
 
@@ -1214,41 +1214,43 @@ INSERT INTO `menu_translation` (`id`, `languages_id`, `menu_id`, `nav_link`) VAL
 CREATE TABLE `offer` (
   `id` int(10) UNSIGNED NOT NULL,
   `courses_id` int(10) UNSIGNED NOT NULL,
-  `category_id` int(10) UNSIGNED NOT NULL
+  `category_id` int(10) UNSIGNED NOT NULL,
+  `sort_index` int(10) UNSIGNED NOT NULL,
+  `code` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Zrzut danych tabeli `offer`
 --
 
-INSERT INTO `offer` (`id`, `courses_id`, `category_id`) VALUES
-(1, 1, 1),
-(2, 2, 1),
-(4, 4, 1),
-(5, 5, 1),
-(6, 6, 1),
-(7, 7, 1),
-(8, 8, 1),
-(9, 9, 1),
-(10, 10, 2),
-(11, 11, 2),
-(12, 12, 2),
-(13, 13, 2),
-(14, 14, 2),
-(15, 15, 2),
-(16, 16, 2),
-(17, 17, 2),
-(18, 18, 2),
-(19, 10, 3),
-(20, 11, 3),
-(21, 12, 3),
-(22, 13, 3),
-(23, 14, 3),
-(24, 15, 3),
-(25, 16, 3),
-(26, 17, 3),
-(27, 18, 3),
-(28, 17, 1);
+INSERT INTO `offer` (`id`, `courses_id`, `category_id`, `sort_index`, `code`) VALUES
+(1, 1, 1, 2, 'dz_logorytmika'),
+(2, 2, 1, 1, 'dz_gordonki'),
+(4, 4, 1, 4, 'dz_fortepian'),
+(5, 5, 1, 5, 'dz_spiew'),
+(6, 6, 1, 6, 'dz_gitara'),
+(7, 7, 1, 7, 'dz_wiolonczela'),
+(8, 8, 1, 8, 'dz_saksofon'),
+(9, 9, 1, 9, 'dz_umuzykalnienie'),
+(10, 10, 2, 1, 'dor_fortepian'),
+(11, 11, 2, 2, 'dor_spiew'),
+(12, 12, 2, 3, 'dor_gitara'),
+(13, 13, 2, 4, 'dor_wiolonczela'),
+(14, 14, 2, 5, 'dor_saksofon'),
+(15, 15, 2, 6, 'dor_zespol'),
+(16, 16, 2, 7, 'dor_retoryka'),
+(17, 17, 2, 8, 'dor_musicfulness'),
+(18, 18, 2, 9, 'dor_meloman'),
+(19, 10, 3, 1, 'sen_fortepian'),
+(20, 11, 3, 2, 'sen_spiew'),
+(21, 12, 3, 3, 'sen_gitara'),
+(22, 13, 3, 4, 'sen_wiolonczela'),
+(23, 14, 3, 5, 'sen_saksofon'),
+(24, 15, 3, 6, 'sen_zespol'),
+(25, 16, 3, 7, 'sen_retoryka'),
+(26, 17, 3, 8, 'sen_musicfulness'),
+(27, 18, 3, 9, 'sen_meloman'),
+(28, 17, 1, 3, 'dz_musicfulness');
 
 -- --------------------------------------------------------
 
@@ -1507,93 +1509,6 @@ CREATE TABLE `shop_client_reservations` (
   `res_active` tinyint(1) NOT NULL,
   `res_paid` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Zrzut danych tabeli `shop_client_reservations`
---
-
-INSERT INTO `shop_client_reservations` (`id`, `offer_id`, `name`, `email`, `res_no`, `res_date`, `res_active`, `res_paid`) VALUES
-(1, 1, 'name', 'email', 'res_no', '2008-07-04', 1, 0),
-(2, 2, 'name', 'email', 'res_no', '2020-12-02', 1, 0),
-(3, 1, 'Test Name', 'zamorskipawel@wp.pl', '111', '2020-11-12', 1, 0),
-(4, 11, 'Test Name', 'zamorskipawel@wp.pl', '21', '2020-11-12', 1, 0),
-(21, 20, 'Test Name', 'zamorskipawel@wp.pl', '20201114/233400', '2020-11-14', 1, 0),
-(22, 11, 'Test Name', 'zamorskipawel@wp.pl', '20201114/233501', '2020-11-14', 1, 0),
-(23, 11, 'Test Name', 'zamorskipawel@wp.pl', '20201114/234217', '2020-11-14', 1, 0),
-(24, 11, 'Test Name', 'zamorskipawel@wp.pl', '20201114/234351', '2020-11-14', 1, 0),
-(25, 11, 'Test Name', 'zamorskipawel@wp.pl', '20201116/123406', '2020-11-16', 1, 0),
-(26, 11, 'Test Name', 'zamorskipawel@wp.pl', '20201116/135631', '2020-11-16', 1, 0),
-(27, 11, 'Test Name', 'zamorskipawel@wp.pl', '20201116/135635', '2020-11-16', 1, 0),
-(28, 11, 'Test Name', 'zamorskipawel@wp.pl', '20201116/135649', '2020-11-16', 1, 0),
-(29, 11, 'Test Name', 'zamorskipawel@wp.pl', '20201116/140313', '2020-11-16', 1, 0),
-(30, 11, 'Test Name', 'zamorskipawel@wp.pl', '20201116/140448', '2020-11-16', 1, 0),
-(31, 12, 'Test Name', 'zamorskipawel@wp.pl', '20201116/164402', '2020-11-16', 1, 0),
-(32, 12, 'Test Name', 'zamorskipawel@wp.pl', '20201116/164530', '2020-11-16', 1, 0),
-(33, 13, 'Test Name', 'zamorskipawel@wp.pl', '20201116/183354', '2020-11-16', 1, 0),
-(34, 13, 'Test Name', 'zamorskipawel@wp.pl', '20201116/184001', '2020-11-16', 1, 0),
-(35, 14, 'Test', 'zamorskipawel@wp.pl', '20201117/201518', '2020-11-17', 1, 0),
-(36, 27, 'Test', 'zamorskipawel@wp.pl', '20201117/201622', '2020-11-17', 1, 0),
-(37, 13, 'Pawel Zamorski', 'zamorskipawel@wp.pl', '20201118/185050', '2020-11-18', 1, 0),
-(38, 14, 'Pawel Zamorski', 'zamorskipawel@wp.pl', '20201118/193015', '2020-11-18', 1, 0),
-(39, 14, 'Pawel Zamorski', 'zamorskipawel@wp.pl', '20201118/193639', '2020-11-18', 1, 0),
-(40, 14, 'Pawel Zamorski', 'zamorskipawel@wp.pl', '20201118/195448', '2020-11-18', 1, 0),
-(41, 14, 'Pawel Zamorski', 'zamorskipawel@wp.pl', '20201118/195713', '2020-11-18', 1, 0),
-(42, 14, 'Pawel Zamorski', 'zamorskipawel@wp.pl', '20201118/200817', '2020-11-18', 1, 0),
-(43, 26, 'Pawel Zamorski', 'zamorskipawel@wp.pl', '20201118/201853', '2020-11-18', 1, 0),
-(44, 26, 'Pawel Zamorski', 'zamorskipawel@wp.pl', '20201118/202159', '2020-11-18', 1, 0),
-(45, 26, 'Pawel Zamorski', 'zamorskipawel@wp.pl', '20201118/204323', '2020-11-18', 1, 0),
-(46, 26, 'Pawel Zamorski', 'zamorskipawel@wp.pl', '20201118/204818', '2020-11-18', 1, 0),
-(47, 14, 'Pawel Zamorski', 'zamorskipawel@wp.pl', '20201118/205040', '2020-11-18', 1, 0),
-(48, 14, 'Pawel Zamorski', 'zamorskipawel@wp.pl', '20201118/205501', '2020-11-18', 1, 0),
-(49, 13, 'Pawel Zamorski', 'zamorskipawel@wp.pl', '20201118/223459', '2020-11-18', 1, 0),
-(50, 13, 'Pawel Zamorski', 'zamorskipawel@wp.pl', '20201118/223612', '2020-11-18', 1, 0),
-(51, 13, 'Pawel Zamorski', 'zamorskipawel@wp.pl', '20201118/224246', '2020-11-18', 1, 0),
-(52, 14, 'Pawel Zamorski', 'zamorskipawel@wp.pl', '20201118/224427', '2020-11-18', 1, 0),
-(53, 13, 'Pawel Zamorski', 'zamorskipawel@wp.pl', '20201118/224943', '2020-11-18', 1, 0),
-(54, 13, 'Pawel Zamorski', 'zamorskipawel@wp.pl', '20201119/133939', '2020-11-19', 1, 0),
-(55, 13, 'Pawel Zamorski', 'zamorskipawel@wp.pl', '20201119/134816', '2020-11-19', 1, 0),
-(56, 17, 'Pawel Zamorski', 'zamorskipawel@wp.pl', '20201119/135105', '2020-11-19', 1, 0),
-(57, 17, 'Pawel Zamorski', 'zamorskipawel@wp.pl', '20201119/135654', '2020-11-19', 1, 0),
-(58, 10, 'Pawel Zamorski', 'zamorskipawel@wp.pl', '20201119/140432', '2020-11-19', 1, 0),
-(59, 10, 'Pawel Zamorski', 'zamorskipawel@wp.pl', '20201119/140721', '2020-11-19', 1, 0),
-(60, 10, 'Pawel Zamorski', 'zamorskipawel@wp.pl', '20201119/141527', '2020-11-19', 1, 0),
-(61, 10, 'Pawel Zamorski', 'zamorskipawel@wp.pl', '20201119/142006', '2020-11-19', 1, 0),
-(62, 10, 'Pawel Zamorski', 'mojodelsol@gmail.com', '20201119/143050', '2020-11-19', 1, 0),
-(63, 17, 'Pawel Zamorski', 'zamorskipawel@wp.pl', '20201119/221137', '2020-11-19', 1, 0),
-(64, 12, 'Pawel Zamorski', 'zamorskipawel@wp.pl', '20201124/141453', '2020-11-24', 1, 0),
-(65, 12, 'Pawel Zamorski', 'zamorskipawel@wp.pl', '20201124/143505', '2020-11-24', 1, 0),
-(66, 12, 'Pawel Zamorski', 'zamorskipawel@wp.pl', '20201124/143559', '2020-11-24', 1, 0),
-(67, 10, 'Pawel Zamorski', 'zamorskipawel@wp.pl', '20201124/144233', '2020-11-24', 1, 0),
-(68, 12, 'Pawel Zamorski', 'zamorskipawel@wp.pl', '20201124/145504', '2020-11-24', 1, 0),
-(69, 12, 'Pawel Zamorski', 'zamorskipawel@wp.pl', '20201124/145833', '2020-11-24', 1, 0),
-(70, 12, 'Pawel Zamorski', 'zamorskipawel@wp.pl', '20201124/151349', '2020-11-24', 1, 0),
-(71, 12, 'Pawel Zamorski', 'zamorskipawel@wp.pl', '20201124/151440', '2020-11-24', 1, 0),
-(72, 10, 'Pawel Zamorski', 'zamorskipawel@wp.pl', '20201124/152415', '2020-11-24', 1, 0),
-(73, 10, 'Pawel Zamorski', 'zamorskipawel@wp.pl', '20201124/152518', '2020-11-24', 1, 0),
-(74, 10, 'Pawel Zamorski', 'zamorskipawel@wp.pl', '20201124/153759', '2020-11-24', 1, 0),
-(75, 10, 'Pawel Zamorski', 'zamorskipawel@wp.pl', '20201124/153840', '2020-11-24', 1, 0),
-(76, 18, 'Pawel Zamorski', 'zamorskipawel@wp.pl', '20201124/195813', '2020-11-24', 1, 0),
-(77, 18, 'Pawel Zamorski', 'zamorskipawel@wp.pl', '20201124/200155', '2020-11-24', 1, 0),
-(78, 18, 'Pawel Zamorski', 'zamorskipawel@wp.pl', '20201124/200709', '2020-11-24', 1, 0),
-(79, 18, 'Pawel Zamorski', 'zamorskipawel@wp.pl', '20201124/201143', '2020-11-24', 1, 0),
-(80, 18, 'Pawel Zamorski', 'zamorskipawel@wp.pl', '20201124/201251', '2020-11-24', 1, 0),
-(81, 11, 'Pawel Zamorski', 'zamorskipawel@wp.pl', '20201124/204151', '2020-11-24', 1, 0),
-(82, 11, 'Pawel Zamorski', 'zamorskipawel@wp.pl', '20201124/204435', '2020-11-24', 1, 0),
-(83, 11, 'Pawel Zamorski', 'zamorskipawel@wp.pl', '20201124/204808', '2020-11-24', 1, 0),
-(84, 11, 'Pawel Zamorski', 'zamorskipawel@wp.pl', '20201124/205929', '2020-11-24', 1, 0),
-(85, 11, 'Pawel Zamorski', 'zamorskipawel@wp.pl', '20201124/210631', '2020-11-24', 1, 0),
-(86, 11, 'Pawel Zamorski', 'zamorskipawel@wp.pl', '20201124/211631', '2020-11-24', 1, 0),
-(87, 11, 'Pawel Zamorski', 'zamorskipawel@wp.pl', '20201124/212952', '2020-11-24', 1, 0),
-(88, 11, 'Pawel Zamorski', 'zamorskipawel@wp.pl', '20201124/213725', '2020-11-24', 1, 0),
-(89, 11, 'Pawel Zamorski', 'zamorskipawel@wp.pl', '20201124/214435', '2020-11-24', 1, 0),
-(90, 11, 'Pawel Zamorski', 'zamorskipawel@wp.pl', '20201124/214917', '2020-11-24', 1, 0),
-(91, 10, 'Pawel Zamorski', 'zamorskipawel@wp.pl', '20201124/215355', '2020-11-24', 1, 0),
-(92, 10, 'Pawel Zamorski', 'zamorskipawel@wp.pl', '20201124/215956', '2020-11-24', 1, 0),
-(93, 10, 'Pawel Zamorski', 'zamorskipawel@wp.pl', '20201124/220501', '2020-11-24', 1, 0),
-(94, 10, 'Pawel Zamorski', 'zamorskipawel@wp.pl', '20201124/220659', '2020-11-24', 1, 0),
-(95, 10, 'Pawel Zamorski', 'zamorskipawel@wp.pl', '20201124/220900', '2020-11-24', 1, 0),
-(96, 10, 'Pawel Zamorski', 'zamorskipawel@wp.pl', '20201124/221025', '2020-11-24', 1, 0),
-(97, 10, 'Pawel Zamorski', 'zamorskipawel@wp.pl', '20201124/222114', '2020-11-24', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -2203,7 +2118,7 @@ ALTER TABLE `common_desc_translation`
 -- AUTO_INCREMENT dla tabeli `courses`
 --
 ALTER TABLE `courses`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 --
 -- AUTO_INCREMENT dla tabeli `courses_heading_translation`
 --
@@ -2378,7 +2293,7 @@ ALTER TABLE `shop_buy_translation`
 -- AUTO_INCREMENT dla tabeli `shop_client_reservations`
 --
 ALTER TABLE `shop_client_reservations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=98;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=99;
 --
 -- AUTO_INCREMENT dla tabeli `shop_item_quantity`
 --

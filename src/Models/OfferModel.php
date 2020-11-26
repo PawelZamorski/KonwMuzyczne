@@ -159,7 +159,7 @@ class OfferModel extends AbstractModel {
     public function getOfferByCategoryId($lang, $category_id) {
         $itemArr = array();
 
-        $query = "SELECT offer.id as offer_id, course_name_translation.course_name, courses_translation.long_desc, courses_translation.short_desc, courses_translation.img, courses.img_thumbnail, courses.movie, common_desc_translation.common_desc, category_translation.category, course_type_translation.type 
+        $query = "SELECT offer.id as offer_id, offer.sort_index, course_name_translation.course_name, courses_translation.long_desc, courses_translation.short_desc, courses_translation.img, courses.img_thumbnail, courses.movie, common_desc_translation.common_desc, category_translation.category, course_type_translation.type 
             FROM courses, courses_translation, offer, course_name_translation, category, category_translation, course_type_translation, common_desc_translation, languages
             WHERE offer.category_id=?
             AND offer.category_id = category.id
@@ -190,12 +190,14 @@ class OfferModel extends AbstractModel {
         $result = $stmt->get_result();
         // Fetch associative array
         while ($row = $result->fetch_assoc()) {
-            array_push($itemArr, new Offer($row['offer_id'], $row['course_name'], $row['category'], $row['type'], $row['short_desc'], $row['common_desc'], $row['long_desc'], $row['img'], $row['img_thumbnail'], $row['movie']));
+            $itemArr[$row['sort_index']] = new Offer($row['offer_id'], $row['course_name'], $row['category'], $row['type'], $row['short_desc'], $row['common_desc'], $row['long_desc'], $row['img'], $row['img_thumbnail'], $row['movie']);
         }
         // Check if there are any data
         if (empty($itemArr)) {
             throw new NotFoundException();
         }
+        // sort array according to key
+        ksort($itemArr);
         return $itemArr;
     }
 

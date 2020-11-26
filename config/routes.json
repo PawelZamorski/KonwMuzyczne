@@ -3,6 +3,12 @@
         "controller": "HomeController",
         "method": "getAll"
     },
+
+    "friday.php": {
+        "controller": "FridayController",
+        "method": "get"
+    },
+
     ":lang": {
         "controller": "HomeController",
         "method": "getAllLang",

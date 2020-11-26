@@ -329,7 +329,8 @@ class MailerBuy {
                                                                                 The payment can be done by a traditional bank transfer, an online payment or directly at the premises of the Music Conversatory.                                                                    
                                                                                 <!-- Version with online payment - link must contain data required by dotpay gateway -->
                                                                                 See the details below. To make an online payment, please follow the link:
-                                                                                <a href='https://ssl.dotpay.pl/test_payment/?chk=" . $chkValue . "&lang=en&id=730320&amount=99&currency=EUR&description=" . $this->res_no . "&url=http://testwebproject.eu&type=0&buttontext=KonwersatoriumMuzyczne' style='font-weight: bold; color: #d2c1a1'>Konwersatorium Muzyczne / Online Payment</a>
+<!--                                                                                <a href='https://ssl.dotpay.pl/test_payment/?chk=" . $chkValue . "&lang=en&id=730320&amount=99&currency=EUR&description=" . $this->res_no . "&url=http://testwebproject.eu&type=0&buttontext=KonwersatoriumMuzyczne' style='font-weight: bold; color: #d2c1a1'>Konwersatorium Muzyczne / Online Payment</a> -->
+<a href=# style='font-weight: bold; color: #d2c1a1'>Konwersatorium Muzyczne / Online Payment</a>
                                                                             </multiline>
                                                                         </td>
                                                                     </tr>
@@ -597,7 +598,8 @@ class MailerBuy {
                                                                     <!-- Version with online payment - link must contain data required by dotpay gateway -->
                                                                         Płatność można uregulować tradycyjnym przelewem, płatnością online lub bezpośrednio w biurze Konwersatorium Muzycznego.
                                                                         W celu dokonania płatności online prosimy o skorzystanie z następującego linku: 
-                                                                        <a href='https://ssl.dotpay.pl/test_payment/?chk=" . $chkValue . "&lang=pl&id=730320&amount=400&currency=PLN&description=" . $this->res_no . "&url=http://testwebproject.eu&type=0&buttontext=KonwersatoriumMuzyczne' style='font-weight: bold; color: #d2c1a1'>Konwersatorium Muzyczne/Płatność</a>
+<!--                                                                        <a href='https://ssl.dotpay.pl/test_payment/?chk=" . $chkValue . "&lang=pl&id=730320&amount=400&currency=PLN&description=" . $this->res_no . "&url=http://testwebproject.eu&type=0&buttontext=KonwersatoriumMuzyczne' style='font-weight: bold; color: #d2c1a1'>Konwersatorium Muzyczne/Płatność</a> -->
+<a href=# style='font-weight: bold; color: #d2c1a1'>Konwersatorium Muzyczne/Płatność</a>
                                                                 </multiline>
                                                             </td>
                                                         </tr>
