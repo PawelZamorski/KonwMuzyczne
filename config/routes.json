@@ -119,6 +119,22 @@
         }
     },
 
+    "privacypolicy/:lang": {
+        "controller": "DocumentController",
+        "method": "getPrivacyPolicy",
+        "params": {
+            ":lang": "string"
+        }
+    },
+
+    "onlinelearningpolicy/:lang": {
+        "controller": "DocumentController",
+        "method": "getOnlinelearningPolicy",
+        "params": {
+            ":lang": "string"
+        }
+    },
+
     "gitaradodomu/:lang": {
         "controller": "OfferController",
         "method": "getOfferSpecialDetails_3",

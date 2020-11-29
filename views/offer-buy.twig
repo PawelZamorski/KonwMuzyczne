@@ -26,6 +26,17 @@
                         <div class="field">
                             <input type="email" id="email" name="email" placeholder="{{ contactMainArr.getEmailEmail }}" required style="width:100%">
                         </div>
+                        <div class="field">
+                            <input id="privacy-policy" type="checkbox" name="privacyPolicy" value="true" required style="height: 13px;">
+                            <label for="privacy-policy" style="font-size: small;">Potwierdzam zapoznanie się z <a href="https://www.konwersatoriummuzyczne.pl/privacypolicy/pl" target="_blank">Polityką Prywatności</a> i akceptuję jego treść*</label>
+                        </div>
+                        <br>
+                        <div class="field">
+                            <input id="onlinelearning-policy" type="checkbox" name="onlinelearningPolicy" value="true" required style="height: 13px;">
+                            <label for="onlinelearning-policy" style="font-size: small;">Potwierdzam zapoznanie się z <a href="/onlinelearningpolicy/pl" target="_blank">Regulaminem Warsztatów Muzycznych</a> i akceptuję jego treść*</label>
+                        </div>
+                        <br>
+
                         <!-- error message-->
                         {% if errorMessage %}                        
                         <div id="error-messages" class="text-central" >
