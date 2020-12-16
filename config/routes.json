@@ -9,6 +9,11 @@
         "method": "get"
     },
 
+    "gitaradodomu.html": {
+        "controller": "GitaraController",
+        "method": "get"
+    },
+
     ":lang": {
         "controller": "HomeController",
         "method": "getAllLang",
@@ -101,6 +106,30 @@
             ":lang": "string",
             ":offerId": "int"
         }
+    },
+
+    "offer/buy/payment/:lang/:offerId/:resId/:resNo": {
+        "controller": "OfferController",
+        "method": "payOfferByIdResidResno",
+        "params": {
+            ":lang": "string",
+            ":offerId": "int",
+            ":resId": "int",
+            ":resNo": "int"
+        }
+    },
+
+    "offer/buy/payment/gateway/:lang": {
+        "controller": "OfferController",
+        "method": "paymentGateway",
+        "params": {
+            ":lang": "string"
+        }
+    },
+
+    "offer/buy/payment/status": {
+        "controller": "OfferController",
+        "method": "paymentStatus"
     },
 
     "offer/buy/payment/policy/:lang": {

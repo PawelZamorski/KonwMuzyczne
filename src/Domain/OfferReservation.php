@@ -11,8 +11,13 @@ class OfferReservation {
     private $res_date;
     private $res_active;
     private $res_paid;
+    private $amount;
+    private $currency;
+    private $description;
 
-    public function __construct($id, $offer_id, $name, $email, $res_no, $res_date, $res_active, $res_paid) {
+    public function __construct($id, $offer_id, $name, $email, $res_no, $res_date, $res_active, $res_paid,
+            $amount, $currency, $description) {
+
         $this->id = $id;
         $this->offer_id = $offer_id;
         $this->name = $name;
@@ -21,6 +26,9 @@ class OfferReservation {
         $this->res_date = $res_date;
         $this->res_active = $res_active;
         $this->res_paid = $res_paid;
+        $this->amount = $amount;
+        $this->currency = $currency;
+        $this->description = $description;
     }
 
     public function getId() {
@@ -53,6 +61,18 @@ class OfferReservation {
 
     public function getResPaid() {
         return $this->res_paid;
+    }
+
+    public function getAmount() {
+        return $this->amount;
+    }
+
+    public function getCurrency() {
+        return $this->currency;
+    }
+
+    public function getDescription() {
+        return $this->description;
     }
 
 }

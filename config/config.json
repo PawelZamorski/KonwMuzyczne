@@ -14,5 +14,11 @@
         "secretKey": "6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe",
         "sitekey": "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
     },
-    "domain": ""
+    "domain": "",
+    "przelewy24": {
+        "merchantId":111111,
+        "posID":111111,
+        "keyAPI":"fakekey",
+        "crc":"fakecrc"
+    }
 }

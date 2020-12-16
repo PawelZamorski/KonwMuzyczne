@@ -17,6 +17,7 @@ class GoogleTranslate {
     */
 
     # Explicitly use service account credentials by specifying the private key file.
+    // TODO move to config file
     private $config = [
         'keyFilePath' => 'C:\Users\MoioM\Desktop\WEBSITES\Bogna\GoogleTranslation\konwersatoriummuzyczne-09b4d4133377.json',
         'projectId' => 'konwersatoriummuzyczne',

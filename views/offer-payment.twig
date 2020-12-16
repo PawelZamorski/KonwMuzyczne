@@ -39,39 +39,13 @@
             </div>
             <div class="col-2-3">
             <!--    {{ offerBuyArr.getInfoPaymentGateway | raw }} -->
-                <!-- Form DotPay -->
-            <!--    <form action="https://ssl.dotpay.pl/t2/" method="post" target="_parent"> -->
-                <form action="https://ssl.dotpay.pl/test_payment/" method="post" target="_parent">
-                    <!-- numer ID w Dotpay -->
-                    <input type="hidden" name="chk" value="{{ chkValue }}" />
-                    <input type="hidden" name="id" value="730320" />
-                    <!-- Ardes URL powrotu do sklepu -->
-                    <input type="hidden" name="url" value="http://testwebproject.eu/" />
-                    <input type="hidden" name="type" value="0" />
-                    {% if lang == 'en' or lang == 'vi' or lang == 'zh' %}
-                        <!-- DotPay Config -->
-                        <input type="hidden" name="amount" value="99" />
-                        <input type="hidden" name="currency" value="EUR" />
-                        <!-- Tytuł transakcji -->
-                        <input type="hidden" name="description" value="4 lessons package, reservation no {{ res_no }}" />
-                        <!-- Tekst przycisku powrotu do sklepu -->
-                        <input type="hidden" name="buttontext" value="Return to Konwersatorium Muzyczne website" />
-                        <!-- Jezyk strony dotpay -->
-                        <input type='hidden' name='lang' value='en' />
-                    {% else %}
-                        <!-- DotPay Config -->
-                        <input type="hidden" name="amount" value="400" />
-                        <input type="hidden" name="currency" value="PLN" />
-                        <!-- Tytuł transakcji -->
-                        <input type="hidden" name="description" value="Pakiet 4 lekcji, numer rezerwacji {{ res_no }}" />
-                        <!-- Tekst przycisku powrotu do sklepu -->
-                        <input type="hidden" name="buttontext" value="Powrót do Konwersatorium Muzycznego" />
-                        <!-- Jezyk strony dotpay -->
-                        <input type='hidden' name='lang' value='pl' />
-                    {% endif %}
-                    <!-- End of DotPay Config -->
+                <!-- Form Payment -->
+                <form action="/offer/buy/payment/gateway/{{ lang }}" method="post" target="_parent">
+                    <!-- resevation number -->
+                    <input type="hidden" name="res_id" value="{{ res_id }}" />
+                    <!-- End of Form Payment -->
                 
-                    <button id="button" class="secondary-color" type="submit" style="border:0px; cursor: pointer; margin-bottom: 10px" disabled>
+                    <button id="button" class="secondary-color" type="submit" style="border:0px; cursor: pointer; margin-bottom: 10px">
                         <img src="/images/shop/payment/gateway-button.png" alt="Logo Credit Cards and DotPay" style="width: 90%; height: auto;" />
                     </button>
                 </form>

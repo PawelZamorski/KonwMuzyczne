@@ -10,6 +10,7 @@ use Konwersatorium\Exceptions\NotFoundException;
 use Konwersatorium\Exceptions\DbException;
 use Konwersatorium\Core\Config;
 use Konwersatorium\Mailer\MailerBuy;
+use Konwersatorium\Services\PaymentPrzelewy24;
 
 class OfferController extends AbstractController {
     
@@ -228,12 +229,8 @@ class OfferController extends AbstractController {
             $errorController = new ErrorController($this->request);
             return $errorController->notFoundWithMessage($lang, 'Error details: data fetching failed.');
         }
-
         return $this->render('offer-buy.twig', $properties);
-//return $this->render('test-offer-buy.twig', $properties);
-
     }
-
 
     public function payOfferById($lang, $offer_id) {
         // instantiate array
@@ -283,7 +280,21 @@ class OfferController extends AbstractController {
                         $offer_id = $mailerBuyData['offer_id'];
                         $name = $mailerBuyData['name'];
                         $email = $mailerBuyData['email'];
-                        $offer_reservation_last_id = $shopModel->createOfferReservation($offer_id, $name, $email);
+                        // keep the language consistent over the payment process
+                        $lang = $mailerBuyData['lang'];
+                        // use lang to set up amount and currency
+                        $amount = '40000'; // amount in polish grosze 
+                        $currency = 'PLN';
+                        if($lang == 'en' || $lang == 'vi' || $lang == 'zh') {
+                            $amount = '9900'; // amount in cents
+                            $currency = 'EUR';
+                        }
+                        // create description
+                        $offer_category = $mailerBuyData['offer_category'];
+                        $offer_name = $mailerBuyData['offer_name'];
+                        $description = $offer_category . ' ' . $offer_name;
+                        
+                        $offer_reservation_last_id = $shopModel->createOfferReservation($offer_id, $name, $email, $amount, $currency, $description);
                         // get reservation number from database
                         $res_no = $shopModel->getResNo($offer_reservation_last_id);
 
@@ -291,9 +302,11 @@ class OfferController extends AbstractController {
                         $shopModel->updateItemQuantity($offer_id, $quantity - 1);
 
                         // send email
-                        // set res_no in MailerBuy object to use it in isEmailSend
+                        // set res_no and res_id in MailerBuy object to use it in isEmailSend
                         $mailerBuy->setResNo($res_no);
+                        $mailerBuy->setResId($offer_reservation_last_id);
                         if($processed = $mailerBuy->isEmailSend()) {
+                            // TODO -> check if correct i think that is is not correct, because you cannot clear POST that way, but you must redirect
                             // clear Post data to prevent from resubmission
                             $_POST[] = array();
                         } else {
@@ -311,23 +324,6 @@ class OfferController extends AbstractController {
                 $errorMessage = "Oferta jest wyprzedana. Prosimy o kontakt telefoniczny z biurem sprzedaży.";
             }
 
-// TODO: refactor -> move to config or function. It is used also in MailerBuy
-// dotpay chk value - the order of values must be kept. For more info check the dotpay website: 
-// https://www.dotpay.pl/developer/doc/api_payment/pl/#ochrona-integralnosci-parametrow-przekierowania-chk
-
-$chkValue = "";
-
-if($lang == 'en' | $lang == 'vi' | $lang == 'zh' ) {
-    $chkParametersChain = "ifhFAPPwsaml1GV5u5JaqUBkqshCqhfa" . "en" . "730320" . "99" . "EUR" . "4 lessons package, reservation no " . $res_no
-    . "http://testwebproject.eu/" . "0" . "Return to Konwersatorium Muzyczne website";
-    $chkValue = hash('sha256', $chkParametersChain);
-} else {
-    $chkParametersChain = "ifhFAPPwsaml1GV5u5JaqUBkqshCqhfa" . "pl" . "730320" . "400" . "PLN" . "Pakiet 4 lekcji, numer rezerwacji " . $res_no
-    . "http://testwebproject.eu/" . "0" . "Powrót do Konwersatorium Muzycznego";
-    $chkValue = hash('sha256', $chkParametersChain);    
-}
-
-
             // set up properties
             $properties = [
                 'lang' => $lang,
@@ -337,10 +333,10 @@ if($lang == 'en' | $lang == 'vi' | $lang == 'zh' ) {
                 'contactMainArr' => $contactMainArr,
                 'contactDetailsArr' => $contactDetailsArr,
                 'recaptchaConfig' => $recaptchaConfig,
-                'chkValue' => $chkValue,
                 'errorMessage' => $errorMessage,
                 'mailerBuyData' => $mailerBuyData,
-                'res_no' => $res_no
+                'res_no' => $res_no,
+                'res_id' => $offer_reservation_last_id
                 ];
         } catch (NotFoundException $e) {
             $this->log->warning('NotFoundException: ' . $e);
@@ -360,7 +356,193 @@ if($lang == 'en' | $lang == 'vi' | $lang == 'zh' ) {
         }
     }
 
-        public function getPaymentPolicy($lang) {
+
+
+    public function payOfferByIdResidResno($lang, $offer_id, $res_id, $res_no) {
+        // instantiate array
+        $properties = array();
+
+        try {
+            // get menu data
+            $menuModel = new MenuModel($this->conn);
+            $menuArr = $menuModel->getAllLang($lang);
+
+            // get employee data
+            $offerModel = new OfferModel($this->conn);
+            $offerByIdArr = $offerModel->getOfferById($lang, $offer_id);
+            $offerBuyArr = $offerModel->getOfferBuy($lang);
+
+            // get contactMain data
+            $contactModel = new ContactModel($this->conn);
+            $contactMainArr = $contactModel->getContactMain($lang);
+            $contactDetailsArr = $contactModel->getContactDetails($lang);
+
+            // TODO: check if reservation is valid. If not valid (7 day) display page with offers and include message, that res is not valid but someone can make new reservation.
+            // $errorMessage
+            $processed = true;
+
+            // set up properties
+            $properties = [
+                'lang' => $lang,
+                'menuArr' => $menuArr,
+                'offerByIdArr' => $offerByIdArr,
+                'offerBuyArr' => $offerBuyArr,
+                'contactMainArr' => $contactMainArr,
+                'contactDetailsArr' => $contactDetailsArr,
+//                'errorMessage' => $errorMessage,
+                'mailerBuyData' => $mailerBuyData,
+                'res_no' => $res_no,
+                'res_id' => $res_id
+                ];
+        } catch (NotFoundException $e) {
+            $this->log->warning('NotFoundException: ' . $e);
+            $errorController = new ErrorController($this->request);
+            return $errorController->notFoundWithMessage($lang, 'Error details: data fetching failed.');
+        } catch (DbException $e) {
+            $this->log->error('DbException: ' . $e);
+            $errorController = new ErrorController($this->request);
+            return $errorController->notFoundWithMessage($lang, $e);
+        }
+
+        if($processed) {
+            return $this->render('offer-payment.twig', $properties);
+        } else {
+            // TODO: redirect to url: offer buy
+            return $this->render('offer-buy.twig', $properties); // display offer-buy page with error message
+        }
+    }
+
+
+
+    public function paymentGateway($lang) {
+        $this->log->info('OfferController::paymentGateway');
+
+        // instantiate array
+        $properties = array();
+
+        try {
+            // get menu data
+            $menuModel = new MenuModel($this->conn);
+            $menuArr = $menuModel->getAllLang($lang);
+
+            // get data to payment
+            // get POST res_id
+            $res_id = '';
+            if(isset($_POST['res_id'])) $res_id = $_POST['res_id'];
+            // check if res_id is empty. If it is empty throw exception
+            if(empty($res_id) || !is_numeric($res_id)) {
+                throw new NotFoundException();
+            } else {
+                // convert to number
+                $res_id = intval($res_id);
+            }
+            
+            $shopModel = new ShopModel($this->conn);
+            $offerReservationById = $shopModel->getOfferReservationById($res_id);
+
+            $paymentPrzelewy24 = new PaymentPrzelewy24();
+            // TODO: $token as a respone
+            $token = $paymentPrzelewy24->getTokenRequest($offerReservationById);
+
+            // if $response = 0 -> throw exception.
+            // TODO  Use NotFoundException for a while, but refactor
+            if(empty($token)) {
+                throw new NotFoundException();
+            }
+
+            // set up properties
+            $properties = [
+                'lang' => $lang,
+                'menuArr' => $menuArr
+                ];
+
+        } catch (NotFoundException $e) {
+            $this->log->warning('NotFoundException: ' . $e);
+            $errorController = new ErrorController($this->request);
+            return $errorController->notFoundWithMessage($lang, 'Error details: data fetching faild. Token empty.');
+        }
+//            header("location: https://google.com"); // 302 id default, it is move temporary
+ 
+        // if $response != 0 -> redirect to pzelewy24
+//        header("Location: http://www.example.com/another-page.php", true, 301); // use 301 to move permanently
+        header("location: https://sandbox.przelewy24.pl/trnRequest/" . $token); // 302 id default, it is move temporary
+        exit();
+    }
+
+
+    public function paymentStatus() {
+        $this->log->info('OfferController::paymentStatus');
+
+        try {
+            // get GET data from response from przelewy24
+            $status = '';
+            if(isset($_GET['status'])) $status = $_GET['status'];
+            // check if status is empty. If it is empty throw exception
+
+            $this->log->info('Status confirmed 1: ' . $status);
+//            $this->log->warning('http_response_header: ' . json_encode($http_response_header));
+            $this->log->info('apache_request_headers(): ' . json_encode(apache_request_headers()));
+//            $this->log->warning('getallheaders ( ): ' . json_encode(getallheaders()));
+//            $this->log->warning('apache_response_headers ( ): ' . json_encode(apache_response_headers()));
+            
+            $this->log->info('OfferController::paymentStatus() -> file_get_contents("php://input"): ' . file_get_contents('php://input'));
+
+            $dataJson = file_get_contents('php://input');
+            $dataArr = json_decode($dataJson, true);
+
+            if(empty($status)) {
+                // TODO use other exception
+                throw new NotFoundException();
+            }
+            
+            // Change the status of transaction in DB
+            $shopModel = new ShopModel($this->conn);
+            // 1) get transaction id
+            $this->log->info('OfferController::paymentStatus() -> after creating $shopModel.');
+            $id = $shopModel->getId($dataArr['sessionId']); // res_no i DB refers to sessionId in Przelewy24 Notification
+            // 2) update transaction status
+            $this->log->info('OfferController::paymentStatus() -> after getting id from DB.');
+            $id =  intval($id);
+            $shopModel->updateOfferReservationStatusById($id);
+            $this->log->info('OfferController::paymentStatus() -> after updating DB.');
+
+            // confirm that transaction is correct to przelewy24
+            // get data from response
+            $paymentPrzelewy24 = new PaymentPrzelewy24();
+            $this->log->info('OfferController::paymentStatus() -> after creating PaymentPrzelewy24 object.');
+            $getVerificationStatusResponse = $paymentPrzelewy24->confirmVerification($dataArr); // gets przelewy24 Notification
+            $this->log->info('OfferController::paymentStatus() -> $getVerificationStatusResponse: ' . $getVerificationStatusResponse);
+            
+
+            // $token = $paymentPrzelewy24->getTokenRequest($offerReservationById);
+
+            // // if $response = 0 -> throw exception.
+            // // TODO  Use NotFoundException for a while, but refactor
+            // if(empty($token)) {
+            //     throw new NotFoundException();
+            // }
+
+            // // send confirmation email to customer
+            // if ($getVerificationStatusResponse == ) -> send email
+
+        } catch (NotFoundException $e) {
+            $this->log->warning('NotFoundException: ' . $e);
+            $errorController = new ErrorController($this->request);
+            return $errorController->notFoundWithMessage($lang, 'Error details: data fetching faild. Status confirmation.');
+        } catch (DbException $e) {
+            $this->log->warning('DbException: ' . $e);
+            $errorController = new ErrorController($this->request);
+            return $errorController->notFoundWithMessage($lang, $e);
+        }
+        $this->log->info('OfferController::paymentStatus() -> end of function: ' . $status);
+        exit();
+    }
+
+
+
+
+
+    public function getPaymentPolicy($lang) {
         // instantiate array
         $properties = array();
 

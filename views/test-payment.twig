@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+<h1>Test</h1>
+
+
+{# <script>	
+
+
+    var apikey = btoa("129030:a5e0e4e1a6b4ed0a6fc8e5e5662d1ba4");
+    console.log(apikey);
+	var settings = {
+		"async": true,
+		"crossDomain": true,
+		"url": "https://sandbox.przelewy24.pl/api/v1/transaction/register",
+		"method": "POST",
+		"headers": {
+		  "Content-Type": "application/json",
+		  "Authorization": "Basic MTI5MDMwOmE1ZTBlNGUxYTZiNGVkMGE2ZmM4ZTVlNTY2MmQxYmE0",
+		  // "cache-control": "no-cache",
+		  // "Postman-Token": "172f7130-6486-4931-85b8-50a08eba6b78"
+		},
+		"processData": false,
+		"data":{
+			  "merchantId":129030,
+			  "posId":129030,
+			  "sessionId":"session123456",
+			  "amount":400,
+			  "currency":"PLN",
+			  "description":"test order",
+			  "email":"zamorskipawel@wp.pl",
+			  "country":"PL",
+			  "language":"pl",
+			  "urlReturn":"https://www.konwersatoriummuzyczne.pl",
+			  "urlStatus":"https://www.konwersatoriummuzyczne.pl/?status=OK",
+			  "sign":"133ff4187db579f577b28b33b036ca419806e207aeeff200769b710bca6dd19962c3bc5cf44a3684e784715ab099636c",
+			}
+		}
+
+		$.ajax(settings).done(function(response) {
+		console.log(response);
+		});
+
+
+
+</script> #}
+</body>
+</html>

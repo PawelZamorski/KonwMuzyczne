@@ -281,7 +281,7 @@ class OfferModel extends AbstractModel {
             throw new NotFoundException();
         }
 
-        return new OfferSpecialMain($row['heading_3'], $row['heading_2'], $row['short_desc'], $row['long_desc'], $row['button'], $row['img']);
+       return new OfferSpecialMain($row['heading_3'], $row['heading_2'], $row['short_desc'], $row['long_desc'], $row['button'], $row['img']);
     }
 
     public function getOfferSpecial_3($lang) {
@@ -648,6 +648,8 @@ class OfferModel extends AbstractModel {
             $row['heading_2_payment_3'], $row['info_main'], $row['info_buy'], $row['info_course'], $row['info_price'], $row['info_expiration'], $row['info_buy_contact'], $row['info_payment'], $row['button_confirm'],
             $row['button_pay'], $row['button_payment_policy'], $row['info_account'], $row['info_address'], $row['info_payment_gateway']);        
     }
+
+    
 
 
 }

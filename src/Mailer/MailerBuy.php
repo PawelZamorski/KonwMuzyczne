@@ -18,6 +18,7 @@ class MailerBuy {
     private $offer_name = "";
     private $lang = "";
     private $res_no = "";
+    private $res_id = "";
 
     public function __construct() {
         // get config data
@@ -49,14 +50,11 @@ class MailerBuy {
             } else {
                 $this->lang = 'pl';
             }
-
-            // uset POST data to prevent from resubmission
-            unset($_POST['name']);
-            unset($_POST['email']);
         }
     }
 
     // TODO refactor -> use other class to collect data from POST form -> move this method to other class
+    // TODO get amount, currency
     public function getData() {
         return array("name"=>$this->name, "email"=>$this->email, "offer_id"=>$this->offer_id, "offer_category"=>$this->offer_category,
                     "offer_name"=>$this->offer_name, "lang"=>$this->lang);
@@ -131,8 +129,10 @@ class MailerBuy {
         $headers[] = 'From: ' . $this->config_mailer['from'];
 
         // Send the email.
-        set_time_limit(60); // extend the execution time 
+        set_time_limit(120); // extend the execution time 
         $mail=mail($recipient, $subject, $email_content, implode("\r\n", $headers));
+
+//        if (true) {
 
         if ($mail) {
             // Set a 200 (okay) response code.
@@ -149,17 +149,14 @@ class MailerBuy {
         $this->res_no = $res_no;
     }
 
+    public function setResId($res_id) {
+        $this->res_id = $res_id;
+    }
+
     private function createEmail() {
         $email_content= "";
 
         if($this->lang == 'en' | $this->lang == 'vi' | $this->lang == 'zh' ) {
-            // TODO: refactor -> move to config or function. It is used also in OfferController
-            // dotpay chk value - the order of values must be kept. For more info check the dotpay website: 
-            // https://www.dotpay.pl/developer/doc/api_payment/pl/#ochrona-integralnosci-parametrow-przekierowania-chk
-            $chkParametersChain = "ifhFAPPwsaml1GV5u5JaqUBkqshCqhfa" . "en" . "730320" . "99" . "EUR" . $this->res_no
-            . "http://testwebproject.eu" . "0" . "KonwersatoriumMuzyczne";
-            $chkValue = hash('sha256', $chkParametersChain);
-
             $email_content = "<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
             <html lang='pl' xml:lang='pl' xmlns='http://www.w3.org/1999/xhtml' xmlns:v='urn:schemas-microsoft-com:vml' xmlns:o='urn:schemas-microsoft-com:office:office'>
             <head>
@@ -327,10 +324,10 @@ class MailerBuy {
                                                                         <td class='text pb30' style='color:#333333; font-family:Roboto, Georgia, serif; font-size:16px; line-height:28px; text-align:justify; font-weight:300; padding-bottom:30px;'>
                                                                             <multiline>
                                                                                 The payment can be done by a traditional bank transfer, an online payment or directly at the premises of the Music Conversatory.                                                                    
-                                                                                <!-- Version with online payment - link must contain data required by dotpay gateway -->
+                                                                                <!-- Version with online payment - link must contain res_no -->
                                                                                 See the details below. To make an online payment, please follow the link:
-<!--                                                                                <a href='https://ssl.dotpay.pl/test_payment/?chk=" . $chkValue . "&lang=en&id=730320&amount=99&currency=EUR&description=" . $this->res_no . "&url=http://testwebproject.eu&type=0&buttontext=KonwersatoriumMuzyczne' style='font-weight: bold; color: #d2c1a1'>Konwersatorium Muzyczne / Online Payment</a> -->
-<a href=# style='font-weight: bold; color: #d2c1a1'>Konwersatorium Muzyczne / Online Payment</a>
+                <!-- Go back to konwersatoriummuzyczne page with payment options -->
+                <a href='https://www.konwersatoriummuzyczne.pl/offer/buy/payment/" . $this->lang . "/" . $this->offer_id . "/" . $this->res_id . "/" . $this->res_no . "' style='font-weight: bold; color: #d2c1a1'>Konwersatorium Muzyczne / Online Payment</a>
                                                                             </multiline>
                                                                         </td>
                                                                     </tr>
@@ -419,13 +416,6 @@ class MailerBuy {
             </html>";
 
         } else {
-            // TODO: refactor -> move to config or function. It is used also in OfferController
-            // dotpay chk value - the order of values must be kept. For more info check the dotpay website: 
-            // https://www.dotpay.pl/developer/doc/api_payment/pl/#ochrona-integralnosci-parametrow-przekierowania-chk
-            $chkParametersChain = "ifhFAPPwsaml1GV5u5JaqUBkqshCqhfa" . "pl" . "730320" . "400" . "PLN" . $this->res_no
-            . "http://testwebproject.eu" . "0" . "KonwersatoriumMuzyczne";
-            $chkValue = hash('sha256', $chkParametersChain);
-
             $email_content = "
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html lang='pl' xml:lang='pl' xmlns='http://www.w3.org/1999/xhtml' xmlns:v='urn:schemas-microsoft-com:vml' xmlns:o='urn:schemas-microsoft-com:office:office'>
@@ -598,8 +588,9 @@ class MailerBuy {
                                                                     <!-- Version with online payment - link must contain data required by dotpay gateway -->
                                                                         Płatność można uregulować tradycyjnym przelewem, płatnością online lub bezpośrednio w biurze Konwersatorium Muzycznego.
                                                                         W celu dokonania płatności online prosimy o skorzystanie z następującego linku: 
-<!--                                                                        <a href='https://ssl.dotpay.pl/test_payment/?chk=" . $chkValue . "&lang=pl&id=730320&amount=400&currency=PLN&description=" . $this->res_no . "&url=http://testwebproject.eu&type=0&buttontext=KonwersatoriumMuzyczne' style='font-weight: bold; color: #d2c1a1'>Konwersatorium Muzyczne/Płatność</a> -->
-<a href=# style='font-weight: bold; color: #d2c1a1'>Konwersatorium Muzyczne/Płatność</a>
+                    <!-- Go back to konwersatoriummuzyczne page with payment options -->
+    <a href='https://www.konwersatoriummuzyczne.pl/offer/buy/payment/" . $this->lang . "/" . $this->offer_id . "/" . $this->res_id . "/" . $this->res_no . "' style='font-weight: bold; color: #d2c1a1'>Konwersatorium Muzyczne / Online Payment</a>
+
                                                                 </multiline>
                                                             </td>
                                                         </tr>
