@@ -1,0 +1,24 @@
+{
+    "db": {
+        "servername": "localhost",
+        "user": "root",
+        "password": "",
+        "dbname": "DBName"
+    },
+    "log": "/var/log/konwersatorium.log",
+    "mailer": {
+        "recipient": "email@email.com",
+        "from": "email@email.com"
+    },
+    "recaptcha": {
+        "secretKey": "",
+        "sitekey": ""
+    },
+    "domain": "http://www.testwebproject.eu",
+    "przelewy24": {
+        "merchantId":111111,
+        "posID":111111,
+        "keyAPI":"",
+        "crc":""
+    }
+}

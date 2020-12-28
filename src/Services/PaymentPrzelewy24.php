@@ -83,6 +83,7 @@ class PaymentPrzelewy24 {
                 "language":"pl",
                 "urlReturn":"' . $this->config_domain . '",
                 "urlStatus":"' . $this->config_domain . '/offer/buy/payment/status?status=OK",
+                "channel":3,
                 "sign":"' . $sign . '"
             }',
 

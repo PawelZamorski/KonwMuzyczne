@@ -1,0 +1,3 @@
+# Ignore config file containing api keys
+config.json
+config/config.json

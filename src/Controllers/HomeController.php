@@ -63,6 +63,8 @@ class HomeController extends AbstractController {
             $offerSpecialMainArr = $offerModel->getOfferSpecial($lang);
             // get offerSpecialMain_2 data
             $offerSpecialMain_2_Arr = $offerModel->getOfferSpecial_2($lang);
+            // get offerSpecialMain_3 data
+            $offerSpecialMain_3_Arr = $offerModel->getOfferSpecial_3($lang);
 
 
             // get employeeMain data
@@ -97,6 +99,7 @@ class HomeController extends AbstractController {
                 'offerCategoryArr' => $offerCategoryArr,
                 'offerSpecialMainArr' => $offerSpecialMainArr,
                 'offerSpecialMain_2_Arr' => $offerSpecialMain_2_Arr,
+                'offerSpecialMain_3_Arr' => $offerSpecialMain_3_Arr,
                 'employeeMainArr' => $employeeMainArr,
                 'employeeArr' => $employeeArr,
                 'referencesMainArr' => $referencesMainArr,

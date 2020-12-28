@@ -90,6 +90,15 @@
             ":lang": "string"
         }
     },
+
+    "offer/winter/details/:lang": {
+        "controller": "OfferController",
+        "method": "getOfferSpecialDetails_3",
+        "params": {
+            ":lang": "string"
+        }
+    },
+
     "offer/buy/:lang/:offerId": {
         "controller": "OfferController",
         "method": "buyOfferById",
