@@ -201,15 +201,17 @@ class OfferController extends AbstractController {
 
             // get contactMain data
             $contactModel = new ContactModel($this->conn);
-            $contactMainArr = $contactModel->getContactMain($lang);
             $contactDetailsArr = $contactModel->getContactDetails($lang);
 
             // get config data - recaptcha site key
             $recaptchaConfig = Config::getConfig()->get('recaptcha');
 
             $shopModel = new ShopModel($this->conn);
+            // get form fields description data
+            $formFieldsDesc = $shopModel->getOfferBuyForm($lang);
             // check availibility of an item
             $quantity = $shopModel->getItemQuantity($offer_id);
+
 
 
             // set up properties
@@ -218,7 +220,7 @@ class OfferController extends AbstractController {
                 'menuArr' => $menuArr,
                 'offerByIdArr' => $offerByIdArr,
                 'offerBuyArr' => $offerBuyArr,
-                'contactMainArr' => $contactMainArr,
+                'formFieldsDesc' => $formFieldsDesc,
                 'contactDetailsArr' => $contactDetailsArr,
                 'recaptchaConfig' => $recaptchaConfig,
                 'quantity' => $quantity

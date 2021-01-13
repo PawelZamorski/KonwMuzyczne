@@ -2642,7 +2642,16 @@ img.topMargin { margin-top: 5px; }
 /* Form */
 
 #shop-form { text-align:center;}
-#shop-contact #email, #shop-contact #name { width: 80%; margin-bottom:1em;
+
+#shop-contact #email,
+#shop-contact #name,
+#shop-contact #surname,
+#shop-contact #street,
+#shop-contact #town,
+#shop-contact #postcode,
+#shop-contact #country 
+{ width: 80%; margin-bottom:1em;
   display:inline; background-color: transparent; }
+
 #shop-contact #message { font-size: 100%; min-height: 175px;}
 #shop-contact #button { width: 250px; background: transparent; }

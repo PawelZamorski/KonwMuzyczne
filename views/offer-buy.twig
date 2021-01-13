@@ -9,7 +9,6 @@
                 <h2 class="section-title" style="padding-bottom:0px;">{{ offerBuyArr.getHeading2Buy }}</h2>
             </div>
             <div class="col">
-<!--                <form id="shop-contact" class="text-left" method="post" action="/offer/buy/payment/{{ lang }}/{{ offerByIdArr.getOfferId }}"> -->
                 <form id="shop-contact" class="text-left" method="post" action="/offer/buy/payment/{{ lang }}/{{ offerByIdArr.getOfferId }}">
                     <div class="col-1" style="padding-top:0px; padding-bottom:0px;">
                         {{ offerBuyArr.getInfoMain | raw }}
@@ -21,19 +20,34 @@
                         <input type="hidden" name="offerName" value="{{ offerByIdArr.getName }}">
                         <input type="hidden" name="lang" value="{{ lang }}">
                         <div class="field">
-                            <input type="text" id="name" name="name" placeholder="{{ contactMainArr.getEmailName }}" required style="width:100%">
+                            <input type="text" id="name" name="name" placeholder="{{ formFieldsDesc.getName }}" required style="width:100%">
                         </div>
                         <div class="field">
-                            <input type="email" id="email" name="email" placeholder="{{ contactMainArr.getEmailEmail }}" required style="width:100%">
+                            <input type="text" id="surname" name="surname" placeholder="{{ formFieldsDesc.getSurname }}" required style="width:100%">
+                        </div>
+                        <div class="field">
+                            <input type="text" id="street" name="street" placeholder="{{ formFieldsDesc.getStreet }}" required style="width:100%">
+                        </div>
+                        <div class="field col-3" style="padding:0;">
+                            <input type="text" id="town" name="town" placeholder="{{ formFieldsDesc.getTown }}" required style="width:100%">
+                        </div>
+                        <div class="field col-3" style="padding:0 10px;">
+                            <input type="text" id="postcode" name="postcode" placeholder="{{ formFieldsDesc.getPostcode }}" style="width:100%">
+                        </div>
+                        <div class="field col-3" style="padding:0;">
+                            <input type="text" id="country" name="country" placeholder="{{ formFieldsDesc.getCountry }}" required style="width:100%">
+                        </div>
+                        <div class="field">
+                            <input type="email" id="email" name="email" placeholder="{{ formFieldsDesc.getEmail }}" required style="width:100%">
                         </div>
                         <div class="field">
                             <input id="privacy-policy" type="checkbox" name="privacyPolicy" value="true" required style="height: 13px;">
-                            <label for="privacy-policy" style="font-size: small;">Potwierdzam zapoznanie się z <a href="https://www.konwersatoriummuzyczne.pl/privacypolicy/pl" target="_blank">Polityką Prywatności</a> i akceptuję jego treść*</label>
+                            <label for="privacy-policy" style="font-size: small;">{{ formFieldsDesc.getPrivacyPolicy | raw }}</label>
                         </div>
                         <br>
                         <div class="field">
                             <input id="onlinelearning-policy" type="checkbox" name="onlinelearningPolicy" value="true" required style="height: 13px;">
-                            <label for="onlinelearning-policy" style="font-size: small;">Potwierdzam zapoznanie się z <a href="/onlinelearningpolicy/pl" target="_blank">Regulaminem Warsztatów Muzycznych</a> i akceptuję jego treść*</label>
+                            <label for="onlinelearning-policy" style="font-size: small;">{{ formFieldsDesc.getLearningPolicy | raw }}</label>
                         </div>
                         <br>
 
@@ -46,7 +60,7 @@
                         <div class="g-recaptcha" data-sitekey="{{ recaptchaConfig.sitekey }}">
                         </div>
                         <div class="field text-center">
-                            <button id="button" class="button" type="submit">{{ offerBuyArr.getButtonConfirm }}</button>
+                            <button id="button" class="button" type="submit">{{ formFieldsDesc.getButton }}</button>
                         </div>
                     </div>
                     <!-- End Form Input -->
@@ -56,7 +70,8 @@
                         <ul>
                             <li class="text-left">{{ offerBuyArr.getInfoCourse }} {{ offerByIdArr.getCategory }} | {{ offerByIdArr.getName }}</li>
                             <li class="text-left">{{ offerBuyArr.getInfoPrice }}</li>
-                            <li class="text-left">{{ offerBuyArr.getInfoExpiration }}</li>                        </ul>
+                            <li class="text-left">{{ offerBuyArr.getInfoExpiration }}</li>
+                        </ul>
                     </div>
                     <!-- End Info -->
                 </form>

@@ -8,51 +8,24 @@ use Konwersatorium\Exceptions\NotFoundException;
 
 class DocumentController extends AbstractController {
 
-    public function getPrivacyPolicy() {
-        // instantiate array
-        $properties = array();
-        $lang = 'pl';
-
-        try {
-            // get menu data
-            $menuModel = new MenuModel($this->conn);
-            $menuArr = $menuModel->getAllLang($lang);
-
-            // set up properties
-            $properties = [
-                'lang' => $lang,
-                'menuArr' => $menuArr
-                ];
-
-        } catch (NotFoundException $e) {
-            $this->log->warning('NotFoundException: ' . $e);
-            $errorController = new ErrorController($this->request);
-            return $errorController->notFoundWithMessage($lang, 'Error details: requested document does not exist.');
-        }
-
-        return $this->render('policy-privacy.twig', $properties);
+    public function getPrivacyPolicy($lang) {
+        $this->getDocument($lang, 'privacypolicy.pdf');
     }
 
-    public function getOnlinelearningPolicy() {
-        // instantiate array
-        $properties = array();
-        $lang = 'pl';
+    public function getOnlinelearningPolicy($lang) {
+        $this->getDocument($lang, 'onlinelearning.pdf');
+    }
 
+    // All documents must be kept in 'documents' folder and correct language subfolder
+    private function getDocument($lang, $documentName) {
         try {
-            // get menu data
-            $menuModel = new MenuModel($this->conn);
-            $menuArr = $menuModel->getAllLang($lang);
-
-            // set up properties
-            $properties = [
-                'lang' => $lang,
-                'menuArr' => $menuArr
-                ];
-
+            // read file
+            @$file = file_get_contents(__DIR__ . '/../../documents/' . $lang . '/' . $documentName); // file_get_contents returns 'false' if not found with warning
+            if($file === false) throw new NotFoundException();
         } catch (NotFoundException $e) {
             $this->log->warning('NotFoundException: ' . $e);
             $errorController = new ErrorController($this->request);
-            return $errorController->notFoundWithMessage($lang, 'Error details: requested document does not exist.');
+            return $errorController->notFoundWithMessage($lang, 'Error details: document not found.');
         }
 
         header('Content-Type: application/pdf');
@@ -60,7 +33,7 @@ class DocumentController extends AbstractController {
 //        header('Content-Disposition: attachment'; filename="document_name");
 //        header('Content-Transfer-Encoding: binary');
 //        header('Accept-Ranges: bytes');
-        echo file_get_contents(__DIR__ . '/../../documents/onlinelearning.pdf');
+        echo $file;
 
     }
 

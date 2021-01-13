@@ -19,8 +19,8 @@ class GoogleTranslate {
     # Explicitly use service account credentials by specifying the private key file.
     // TODO move to config file
     private $config = [
-        'keyFilePath' => 'C:\Users\MoioM\Desktop\WEBSITES\Bogna\GoogleTranslation\konwersatoriummuzyczne-09b4d4133377.json',
-        'projectId' => 'konwersatoriummuzyczne',
+        'keyFilePath' => 'C:\Users\MoioM\Desktop\WEBSITES\Bogna\GoogleTranslation\angular-ecommerce-57e73eb69482.json',
+        'projectId' => 'angular-ecommerce-300621',
     ];
 
     function translate($text, $target_language) {

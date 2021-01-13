@@ -12,7 +12,14 @@ class MailerBuy {
     // TODO refactor -> use other class to collect data from POST form
     // data send by POST
     private $name = "";
-    private $email = "";
+
+    private $surname = "";
+    private $street = "";
+    private $town = "";
+    private $postcode = "";
+    private $country = "";
+
+    private $email = "";  
     private $offer_id = "";
     private $offer_category = "";
     private $offer_name = "";
@@ -31,9 +38,31 @@ class MailerBuy {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if(isset($_POST['name'])) { 
                 // Get the form fields and remove whitespace.
-                $this->name = strip_tags(trim($_POST["name"]));
+                $this->name = htmlspecialchars(strip_tags(trim($_POST["name"])));
                 $this->name = str_replace(array("\r","\n"),array(" "," "),$this->name);
             }
+
+            if(isset($_POST['surname'])) { 
+                // Get the form fields, trim and remove special char
+                $this->surname = htmlspecialchars(strip_tags(trim($_POST["surname"])));
+            }
+            if(isset($_POST['street'])) { 
+                // Get the form fields, trim and remove special char
+                $this->street = htmlspecialchars(strip_tags(trim($_POST["street"])));
+            }
+            if(isset($_POST['town'])) { 
+                // Get the form fields, trim and remove special char
+                $this->town = htmlspecialchars(strip_tags(trim($_POST["town"])));
+            }
+            if(isset($_POST['postcode'])) { 
+                // Get the form fields, trim and remove special char
+                $this->postcode = htmlspecialchars(strip_tags(trim($_POST["postcode"])));
+            }
+            if(isset($_POST['country'])) { 
+                // Get the form fields, trim and remove special char
+                $this->country = htmlspecialchars(strip_tags(trim($_POST["country"])));
+            }
+
             if(isset($_POST['email'])) {
                 $this->email = filter_var(trim($_POST['email']), FILTER_SANITIZE_EMAIL);    
             }
