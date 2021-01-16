@@ -6,6 +6,7 @@ use Konwersatorium\Models\MenuModel;
 use Konwersatorium\Models\OfferModel;
 use Konwersatorium\Models\ContactModel;
 use Konwersatorium\Models\ShopModel;
+use Konwersatorium\Models\FormModel;
 use Konwersatorium\Exceptions\NotFoundException;
 use Konwersatorium\Exceptions\DbException;
 use Konwersatorium\Core\Config;
@@ -199,20 +200,16 @@ class OfferController extends AbstractController {
             $offerByIdArr = $offerModel->getOfferById($lang, $offer_id);
             $offerBuyArr = $offerModel->getOfferBuy($lang);
 
-            // get contactMain data
-            $contactModel = new ContactModel($this->conn);
-            $contactDetailsArr = $contactModel->getContactDetails($lang);
-
             // get config data - recaptcha site key
             $recaptchaConfig = Config::getConfig()->get('recaptcha');
 
             $shopModel = new ShopModel($this->conn);
-            // get form fields description data
-            $formFieldsDesc = $shopModel->getOfferBuyForm($lang);
             // check availibility of an item
             $quantity = $shopModel->getItemQuantity($offer_id);
 
-
+            // get form fields description data
+            $formModel = new FormModel($this->conn);
+            $formFieldsDesc = $formModel->getAllFields($lang);
 
             // set up properties
             $properties = [
@@ -221,7 +218,6 @@ class OfferController extends AbstractController {
                 'offerByIdArr' => $offerByIdArr,
                 'offerBuyArr' => $offerBuyArr,
                 'formFieldsDesc' => $formFieldsDesc,
-                'contactDetailsArr' => $contactDetailsArr,
                 'recaptchaConfig' => $recaptchaConfig,
                 'quantity' => $quantity
                 ];

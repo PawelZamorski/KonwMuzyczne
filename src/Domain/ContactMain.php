@@ -5,18 +5,16 @@ namespace Konwersatorium\Domain;
 class ContactMain { 
     private $heading_3;
     private $heading_2;
-    private $email_name;
-    private $email_email;
-    private $email_message;
-    private $button;
+    private $address;
+    private $branch_address;
+    private $phone;
 
-    public function __construct($heading_3, $heading_2, $email_name, $email_email, $email_message, $button) {
+    public function __construct($heading_3, $heading_2, $address, $branch_address, $phone) {
         $this->heading_3 = $heading_3;
         $this->heading_2 = $heading_2;
-        $this->email_name = $email_name;
-        $this->email_email = $email_email;
-        $this->email_message = $email_message;
-        $this->button = $button;
+        $this->address = $address;
+        $this->branch_address = $branch_address;
+        $this->phone = $phone;
     }
 
     public function getHeading3() {
@@ -27,20 +25,16 @@ class ContactMain {
         return $this->heading_2;
     }
 
-    public function getEmailName() {
-        return $this->email_name;
+    public function getAddress() {
+        return $this->address;
     }
 
-    public function getEmailEmail() {
-        return $this->email_email;
+    public function getBranchAddress() {
+        return $this->branch_address;
     }
 
-    public function getEmailMessage() {
-        return $this->email_message;
-    }
-
-    public function getButton() {
-        return $this->button;
+    public function getPhone() {
+        return $this->phone;
     }
 
 }

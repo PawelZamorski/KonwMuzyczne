@@ -12,6 +12,7 @@ use Konwersatorium\Models\OfferModel;
 use Konwersatorium\Models\EmployeeModel;
 use Konwersatorium\Models\ReferencesModel;
 use Konwersatorium\Models\ContactModel;
+use Konwersatorium\Models\FormModel;
 use Konwersatorium\Exceptions\NotFoundException;
 use Konwersatorium\Core\Config;
 
@@ -80,7 +81,10 @@ class HomeController extends AbstractController {
             // get contactMain data
             $contactModel = new ContactModel($this->conn);
             $contactMainArr = $contactModel->getContactMain($lang);
-            $contactDetailsArr = $contactModel->getContactDetails($lang);
+
+            // get form fields description data
+            $formModel = new FormModel($this->conn);
+            $formFieldsDesc = $formModel->getAllFields($lang);
 
             // get config data - recaptcha site key
             $recaptchaConfig = Config::getConfig()->get('recaptcha');
@@ -105,7 +109,7 @@ class HomeController extends AbstractController {
                 'referencesMainArr' => $referencesMainArr,
                 'referencesArr' => $referencesArr,
                 'contactMainArr' => $contactMainArr,
-                'contactDetailsArr' => $contactDetailsArr,
+                'formFieldsDesc' => $formFieldsDesc,
                 'recaptchaConfig' => $recaptchaConfig
                 ];
 

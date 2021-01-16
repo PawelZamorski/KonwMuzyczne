@@ -3,7 +3,6 @@
 namespace Konwersatorium\Models;
 
 use Konwersatorium\Domain\OfferBuy;
-use Konwersatorium\Domain\OfferBuyForm;
 use Konwersatorium\Domain\OfferReservation;
 use Konwersatorium\Domain\OfferPaymentPolicy;
 use Konwersatorium\Exceptions\NotFoundException;
@@ -32,30 +31,6 @@ class ShopModel extends AbstractModel {
         return new OfferBuy($row['heading_3_buy'], $row['heading_2_buy'], $row['heading_2_payment'], $row['heading_2_payment_1'], $row['heading_2_payment_2'],
             $row['heading_2_payment_3'], $row['info_main'], $row['info_buy'], $row['info_course'], $row['info_price'], $row['info_expiration'], $row['info_buy_contact'], $row['info_payment'], $row['button_confirm'],
             $row['button_pay'], $row['button_payment_policy'], $row['info_account'], $row['info_address'], $row['info_payment_gateway']);        
-    }
-
-    public function getOfferBuyForm($lang) {
-        $query = "SELECT sbft.name, sbft.surname, sbft.street, sbft.town, sbft.postcode, sbft.country, sbft.email, sbft.privacy_policy,
-        sbft.learning_policy, sbft.button 
-        FROM shop_buy_form_translation as sbft, languages
-        WHERE sbft.languages_id = languages.id
-        AND languages.code = ?;";
-
-        // TODO: should try catch block be used ???
-        $stmt = $this->conn->prepare($query); // prepare statement
-        $stmt->bind_param('s', $lang); // bind params to the statement
-        $stmt->execute(); // execute query
-        // Get the result
-        $result = $stmt->get_result();
-        // Fetch first row
-        $row = $result->fetch_assoc();
-        // Check if there are any data
-        if (empty($row)) {
-            throw new NotFoundException();
-        }
-
-        return new OfferBuyForm($row['name'], $row['surname'], $row['street'], $row['town'], $row['postcode'],
-            $row['country'], $row['email'], $row['privacy_policy'], $row['learning_policy'], $row['button']);        
     }
 
 
