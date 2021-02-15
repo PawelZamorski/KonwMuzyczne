@@ -16,6 +16,10 @@ class DocumentController extends AbstractController {
         $this->getDocument($lang, 'onlinelearning.pdf');
     }
 
+    public function getPaymentPolicy($lang) {
+        $this->getDocument($lang, 'paymentpolicy.pdf');
+    }
+
     // All documents must be kept in 'documents' folder and correct language subfolder
     private function getDocument($lang, $documentName) {
         try {

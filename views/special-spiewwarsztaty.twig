@@ -1,0 +1,35 @@
+{% extends 'layout.twig' %}
+{% block content %}
+    <!-- Offer Details -->
+    <section id="about" class="introduction scrollto">
+        <div class="row clearfix">
+            <div class="col-3">
+                <div class="section-heading">
+                    <h3>Warsztaty</h3>
+                    <h2 class="section-title">Śpiew dla dorosłych od podstaw</h2>
+                    <p><img src="/images/oferta-specjalne/spiew.jpg" /></p>
+                </div>
+            </div>
+            <div class="col-2-3 alignToPhoto">
+                <p>Zawsze chciałaś śpiewać? Nie było czasu, możliwości?</p>
+                <p><b>Spełnij marzenia i uwolnij swój głos!</b></p>
+                <p>Zapraszamy w czwartek 25 lutego 2021 na wyjątkowy dzień otwarty dla dorosłych.</p>
+                <p>Mamy specjalny program dla osób dorosłych, od podstaw, które wcześniej nigdy nie śpiewały. W ramach warsztatów, odbędą się indywidualne lekcje śpiewu. Tego dnia każdy chętna osoba będzie mogła spróbować zaśpiewać pod okiem nauczyciela i poznać nasze metody pracy. Prowadzimy naukę śpiewu klasycznego, rozrywkowego, musicalowego oraz emisję głosu.</p>
+                <p>Zajęcia odbywają się w centrum Warszawy. Przestronne sale 30m2 pozwalają zachować bezpieczny dystans.</p>
+                <p><b>ILOŚĆ MIEJSC OGRANICZONA</b></p>
+                <p>Jak to zrobić? To proste!</p>
+                <ol>
+                    <li>napisz <a href="mailto:sekretariat@konwersatoriummuzyczne.pl">sekretariat@konwersatoriummuzyczne.pl</a> lub zadzwoń 883 489 184</li>
+                    <li>kup 1 lekcję i wybierz godzinę</li>
+                    <li>ciesz się muzyką!</li>
+                </ol>
+                <p>Cena lekcji: 39zł</p>
+                <p>Zrób coś dla siebie, spełnij marzenia</p>
+			</div>
+
+            <!-- Offer -->
+            {{ include('offer-main.twig') }}
+        </div>
+    </section>
+    <!-- End of Offer Details -->
+{% endblock %}

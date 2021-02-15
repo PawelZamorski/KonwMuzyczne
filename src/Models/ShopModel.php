@@ -64,10 +64,46 @@ class ShopModel extends AbstractModel {
         }
     }
 
+        /* */
+        public function createOfferReservation_2($offerReservation) {
+            // last id from offer_reservation table
+            $offer_reservation_last_id = 0;
+            
+            // values
+            $offer_id = $offerReservation->getOfferId();
+            $name = $offerReservation->getName();
+            $email = $offerReservation->getEmail();
+            $res_no = $offerReservation->getResNo();
+            $res_date = $offerReservation->getResDate();
+            $res_active = $offerReservation->getResActive();
+            $res_paid = $offerReservation->getResPaid();
+            $amount = $offerReservation->getAmount();
+            $currency = $offerReservation->getCurrency();
+            $description = $offerReservation->getDescription();
+
+            // Insert main data
+            // Step 2: Perform database query
+            $sql = "INSERT INTO shop_client_reservations (`offer_id`, `name`, `email`, `res_no`, `res_date`, `res_active`, `res_paid`,
+                    `amount`, `currency`, `description`)
+            VALUES ($offer_id, '$name', '$email', '$res_no', '$res_date', $res_active, $res_paid, 
+                    $amount, '$currency', '$description');";
+            // TODO: should return boolean value
+            if ($this->conn->query($sql) === TRUE) {
+                // get last id of inserted entity
+                $last_id = $this->conn->insert_id;
+    //            echo "Record added successfully";
+            } else {
+                throw new DbException($this->conn->error);
+            }
+
+            return $this->getOfferReservationById($last_id);
+        }
+    
+
     public function getOfferReservationById($id) {
         $query = "SELECT *
-        FROM shop_client_reservations
-        WHERE id = ?;";
+            FROM shop_client_reservations
+            WHERE id = ?;";
 
         // TODO: should try catch block be used ???
         $stmt = $this->conn->prepare($query); // prepare statement
@@ -173,28 +209,5 @@ class ShopModel extends AbstractModel {
             throw new DbException($this->conn->error);
         }
     }
-
-    public function getPaymentPolicy($lang) {
-        $query = "SELECT *
-        FROM shop_payment_policy_translation, languages
-        WHERE shop_payment_policy_translation.languages_id = languages.id
-        AND languages.code = ?;";
-
-        // TODO: should try catch block be used ???
-        $stmt = $this->conn->prepare($query); // prepare statement
-        $stmt->bind_param('s', $lang); // bind params to the statement
-        $stmt->execute(); // execute query
-        // Get the result
-        $result = $stmt->get_result();
-        // Fetch first row
-        $row = $result->fetch_assoc();
-        // Check if there are any data
-        if (empty($row)) {
-            throw new NotFoundException();
-        }
-        return new OfferPaymentPolicy($row['heading_3'], $row['heading_2'], $row['long_desc']);
-    }
-
     
-
 }

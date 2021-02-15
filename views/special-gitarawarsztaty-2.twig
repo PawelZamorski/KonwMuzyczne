@@ -1,0 +1,33 @@
+{% extends 'layout.twig' %}
+{% block content %}
+    <!-- Offer Details -->
+    <section id="about" class="introduction scrollto">
+        <div class="row clearfix">
+            <div class="col-3">
+                <div class="section-heading">
+                    <h3>Warsztaty</h3>
+                    <h2 class="section-title">Gitara dla dorosłych od podstaw</h2>
+                    <p><img src="/images/oferta-specjalne/gitara.jpg" /></p>
+                </div>
+            </div>
+            <div class="col-2-3 alignToPhoto">
+                <p>Zawsze chciałeś grać? Nie był czasu i możliwości? Spełnij marzenia i zacznij grać!</p>
+                <p>Zapraszamy 22-27 lutego 2021 na specjalny otwarty tydzień dla dorosłych.</p>
+                <p>Mamy specjalny program dla dorosłych, którzy wcześniej nie uczyli się grać. Zapraszamy na indywidualne lekcje gitary na platformie Zoom.</p>
+                <p><b>LEKCJE NA ŻYWO, INDYWIDUALNE, TAKŻE OD PODSTAW!</b></p>
+                <p>Jak to zrobić? To proste!</p>
+                    <ol>
+                        <li><a href="mailto:sekretariat@konwersatoriummuzyczne.pl">Zapisz się!</a> Albo napisz <a href="mailto:sekretariat@konwersatoriummuzyczne.pl">sekretariat@konwersatoriummuzyczne.pl</a></li>
+                        <li>Kup 1 lekcje</li>
+                        <li>Wybierz termin i godzinę lekcji</li>
+                    </ol>
+                <p><b>Specjalna cena – 1 lekcja 39zł</b></p>
+                <p>Zrób coś dla siebie, spełnij marzenia! Lekcje online są efektywne i bezpieczne. Prosto z Warszawy do Twojego domu!</p>
+			</div>
+
+            <!-- Offer -->
+            {{ include('offer-main.twig') }}
+        </div>
+    </section>
+    <!-- End of Offer Details -->
+{% endblock %}

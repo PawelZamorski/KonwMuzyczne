@@ -1,0 +1,34 @@
+{% extends 'layout.twig' %}
+{% block content %}
+    <!-- Offer Details -->
+    <section id="about" class="introduction scrollto">
+        <div class="row clearfix">
+            <div class="col-3">
+                <div class="section-heading">
+                    <h3>Warsztaty</h3>
+                    <h2 class="section-title">Saksofon dla dorosłych od podstaw</h2>
+                    <p><img src="/images/oferta-specjalne/saksofon.jpg" /></p>
+                </div>
+            </div>
+            <div class="col-2-3 alignToPhoto">
+                <p>Zawsze chciałaś spróbować grać? Nie było czasu, możliwości? Spełnij marzenia i zacznij grać! Zapraszamy w sobotę 27 lutego 2021 na wyjątkowy dzień otwarty dla dorosłych.</p>
+                <p><b>ZAPEWNIAMY INSTRUMENT</b></p>
+                <p>Mamy specjalny program dla osób dorosłych, od podstaw, które wcześniej nigdy nie grały. W ramach warsztatów, odbędą się indywidualne lekcje gry na saksofonie. Tego dnia każdy chętna osoba będzie mogła spróbować zagrać na tym niezwykłym instrumencie.</p>
+                <p>Zajęcia odbywają się w centrum Warszawy. Przestronne sale 30m2 pozwalają zachować bezpieczny dystans.</p>
+                <p><b>ILOŚĆ MIEJSC OGRANICZONA</b></p>
+                <p>Jak to zrobić? To proste!</p>
+                <ol>
+                    <li>napisz <a href="mailto:sekretariat@konwersatoriummuzyczne.pl">sekretariat@konwersatoriummuzyczne.pl</a> lub zadzwoń 883 489 184</li>
+                    <li>kup 1 lekcję i wybierz godzinę</li>
+                    <li>ciesz się muzyką!</li>
+                </ol>
+                <p>Cena lekcji: 59zł</p>
+                <p>Zrób coś dla siebie, spełnij marzenia</p>
+			</div>
+
+            <!-- Offer -->
+            {{ include('offer-main.twig') }}
+        </div>
+    </section>
+    <!-- End of Offer Details -->
+{% endblock %}

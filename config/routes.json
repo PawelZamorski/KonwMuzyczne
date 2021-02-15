@@ -13,6 +13,52 @@
         "controller": "GitaraController",
         "method": "get"
     },
+    "walentynki.html": {
+        "controller": "GitaraController",
+        "method": "getValentinesday"
+    },
+    "wiolonczela.html": {
+        "controller": "GitaraController",
+        "method": "getWiolonczela"
+    },
+    "ukulele.html": {
+        "controller": "GitaraController",
+        "method": "getUkulele"
+    },
+    "saksofon.html": {
+        "controller": "GitaraController",
+        "method": "getSaksofon"
+    },
+    "saksofonsaxholder.html": {
+        "controller": "GitaraController",
+        "method": "getSaksofonSaxholder"
+    },
+    "gitara.html": {
+        "controller": "GitaraController",
+        "method": "getGitara"
+    },
+    "gitara2.html": {
+        "controller": "GitaraController",
+        "method": "getGitara2"
+    },
+    "guitar.html": {
+        "controller": "GitaraController",
+        "method": "getEnGitara"
+    },
+    "guitar2.html": {
+        "controller": "GitaraController",
+        "method": "getEnGitara2"
+    },
+    "guitar3.html": {
+        "controller": "GitaraController",
+        "method": "getEnGitara3"
+    },
+    "spiew.html": {
+        "controller": "GitaraController",
+        "method": "getSpiew"
+    },
+
+
 
     ":lang": {
         "controller": "HomeController",
@@ -91,25 +137,21 @@
         }
     },
 
-    "offer/winter/details/:lang": {
-        "controller": "OfferController",
-        "method": "getOfferSpecialDetails_3",
-        "params": {
-            ":lang": "string"
-        }
-    },
+
+
+
+
 
     "offer/buy/:lang/:offerId": {
-        "controller": "OfferController",
-        "method": "buyOfferById",
+        "controller": "ShopController",
+        "method": "getBuyFormByOfferId",
         "params": {
             ":lang": "string",
             ":offerId": "int"
         }
     },
-
     "offer/buy/payment/:lang/:offerId": {
-        "controller": "OfferController",
+        "controller": "ShopController",
         "method": "payOfferById",
         "params": {
             ":lang": "string",
@@ -118,7 +160,7 @@
     },
 
     "offer/buy/payment/:lang/:offerId/:resId/:resNo": {
-        "controller": "OfferController",
+        "controller": "ShopController",
         "method": "payOfferByIdResidResno",
         "params": {
             ":lang": "string",
@@ -129,7 +171,7 @@
     },
 
     "offer/buy/payment/gateway/:lang": {
-        "controller": "OfferController",
+        "controller": "ShopController",
         "method": "paymentGateway",
         "params": {
             ":lang": "string"
@@ -137,17 +179,12 @@
     },
 
     "offer/buy/payment/status": {
-        "controller": "OfferController",
+        "controller": "ShopController",
         "method": "paymentStatus"
     },
 
-    "offer/buy/payment/policy/:lang": {
-        "controller": "OfferController",
-        "method": "getPaymentPolicy",
-        "params": {
-            ":lang": "string"
-        }
-    },
+
+
 
     "voucher/:lang": {
         "controller": "OfferController",
@@ -164,7 +201,6 @@
             ":lang": "string"
         }
     },
-
     "onlinelearningpolicy/:lang": {
         "controller": "DocumentController",
         "method": "getOnlinelearningPolicy",
@@ -172,6 +208,14 @@
             ":lang": "string"
         }
     },
+    "paymentpolicy/:lang": {
+        "controller": "DocumentController",
+        "method": "getPaymentPolicy",
+        "params": {
+            ":lang": "string"
+        }
+    },
+
 
     "gitaradodomu/:lang": {
         "controller": "OfferController",

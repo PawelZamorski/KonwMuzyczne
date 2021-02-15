@@ -13,7 +13,11 @@
                     <!-- Buy Button -->
                     {% if quantity > 0 %}
                         <div class="text-center">
-                            <a href="/offer/buy/{{ lang }}/{{ offerByIdArr.getOfferId }}" class="button button-secondary uppercase">{{ offerBuyArr.getButtonPay }}</a>
+                        <a href="/offer/buy/{{ lang }}/{{ offerByIdArr.getOfferId }}" class="button button-secondary uppercase">{{ offerBuyArr.getButtonPay }}</a>
+
+<!-- 
+<a href="/offer/test-buy/{{ lang }}/{{ offerByIdArr.getOfferId }}" class="button button-secondary uppercase">{{ offerBuyArr.getButtonPay }}</a>
+-->
                         </div>
                     {% else %}
                         <p style="color: red; font-size: small;">*Brak wolnych miejsc. Prosimy o kontakt z biurem sprzedaży w celu rezerwcji późniejszego terminu</p>

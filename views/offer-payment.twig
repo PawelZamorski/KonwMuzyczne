@@ -25,7 +25,7 @@
                 <!-- Course info -->
 <!-- TODO: Add 'tytu przelewu'  oraz numer rezerwacji-->
                 <p class="capitalize">
-                    {{ res_no }} - {{ mailerBuyData.offer_category }} {{ mailerBuyData.offer_name }}
+                    {{ offerReservation.getResNo }} - {{ offerReservation.getDescription }}
                 </p>
                 <br><br><br>
             </div>
@@ -53,7 +53,7 @@
                 </form>
                 <!-- End of Form DotPay -->
                 <br>
-                <a href="/offer/buy/payment/policy/{{ lang }}" target="_blank">{{ offerBuyArr.getButtonPaymentPolicy }}</a>
+                <a href="/paymentpolicy/{{ lang }}" target="_blank">{{ offerBuyArr.getButtonPaymentPolicy }}</a>
                 <br><br><br>
             </div>
         </div>
