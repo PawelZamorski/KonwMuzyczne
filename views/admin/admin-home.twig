@@ -1,7 +1,99 @@
 {% extends 'admin/admin-layout.twig' %}
 
 {% block content %}
+<div class="row">
+  <div class="col">
+    <h1 class="text-left">INSTRUKCJA</h1>
+  </div>
+</div>
+<hr>
+<!-- Kurs -->
+<div class="bg-light p-4">
+  <div class="row">
+    <div class="col">
+      <h2 class="text-left">KURSY</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <h3 class="text-left">Aktualizaja Kursu</h3>
+      <p class="card-text">W celu zmodyfikowania tekstu w tabeli 'Kursy' wybierz z menu 'Kursy', następnie 'Wyświetl'. Odszukaj kurs po 'Kodzie kursu', następnie naciśnij 'Edytuj'.</p>
+      <p class="card-text">'Kod kursu' ma na celu łatwe rozróżnienie kursów. Można ustalić dowolną nazwę. Kod kursu musi być unikalny. Ważne, żeby był krótki i opisowy. 'Kod kursu' jest również używany w tabeli 'Oferty' przy tworzeniu nowej oferty.</p>
+      <p class="card-text">Na zdjęciach po prawej zaznaczone są elementy i odpowiadające im pola w tabeli aktualizacji kursu.</p>
+      <p class="card-text">W celu aktualizacji danych w innych wersjach językowych, wybierz z menu 'Język', następnie powtórz powyższe czynności.</p>
+      <p class="card-text">'Wspólny opis' zawiera listę opisów do wyboru. Wybierz ten, który ma być wyświetlany w kursie. Aktualizacja i dodawanie 'Wpólnego opisu' będzie możliwe, ale jeszcze nie jest gotowe. 'Wspólny opis' zawiera informacje, które są wspólne dla kilku kursów. Szczególnie te, które są często zmieniane, jak daty, ceny, itd. Przyspieszy to aktualizowanie ofert.</p>
+      <p class="card-text">Zdjęcia można wybrać z lokalnego dysku. Obecnie nie ma możliwości dla danego kursu wyboru innych zdjęć w innych wersjach językowych z poziomu panelu. Czyli jeśli zmienisz zdjęcie w innej wersji językowej, to zmiana będzie widoczna w innych wersjach językowych. Zmiany te trzeba robić na serwerze.</p>
+      <p class="card-text">Element 'Film' jest już gotowy do wyświetlania na stronie. Obecnie jest wyłączony. Daj znać, jak będziesz chciała wyświetlić film na stronie z ofertą kursu. 'Film' dla danego kursu jest ten sam we wszystkich wersjach językowych. Mogę to zmienić jeśli będzie taka potrzeba. Do tabeli wpisałem jakiś przykładowy film z twojego youtube.</p>
+      <p class="card-text">Po wprowadzeniu zmian 'Zapisz' zmiany albo przejdź do innej strony bez zapisywania zmian.</p>
+    </div>
+  </div>
+  <div class="row row-cols-1 row-cols-md-3 g-4 py-4">
+    <div class="col">
+      <div class="card h-100">
+        <div class="card-body">
+          <h5 class="card-title">Widok tabeli aktualizacji kursu</h5>
+        </div>
+        <img src="/images/admin/instruction/kurs-utworz.jpg" class="card-img-top" alt="...">
+        <div class="card-body">
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card h-100">
+        <div class="card-body">
+          <h5 class="card-title">Widok kafelka</h5>
+        </div>
+        <img src="/images/admin/instruction/kurs-kafelek.jpg" class="card-img-top" alt="...">
+        <div class="card-body">
+          <p class="card-text">Napis <b><i>'dla dorosłych'</i></b> pochodzi z tabeli 'Kategorie' z rubryki 'nazwa kategorii'. Pozostałe elementy można modyfikować w tabeli 'Kursy'.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card h-100">
+        <div class="card-body">
+          <h5 class="card-title">Widok oferty</h5>
+        </div>
+        <img src="/images/admin/instruction/kurs-podglad.jpg" class="card-img-top" alt="...">
+        <div class="card-body">
+          <p class="card-text">Napis <b>'DLA DOROSŁYCH'</b> pochodzi z tabeli 'Kategorie' z rubryki 'nazwa kategorii'. Pozostałe elementy można modyfikować w tabeli 'Kursy'.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<hr>
 
-Admin {{ lang }}
+<!-- Oferta -->
+<div class="bg-light p-4">
+  <div class="row">
+    <div class="col">
+      <h2 class="text-left">OFERTY</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <h3 class="text-left">Dodawanie Oferty</h3>
+      <p class="card-text">Oferta składa się z 'Kategorii' oraz 'Kursu'. 'Kategorie' oraz 'Kursy' posiadają unikalny kod, dzięki któremu można je odróżnić.</p>
+      <p class="card-text">'Kod Kategorii' to np: 'dzieci', dorośli'.</p>
+      <p class="card-text">'Kod Kursu' to np: 'dla dzieci - logorytmika'. Inne to np: 'dla dzieci - fortepian', 'dla dorosłych - fortepian'.</p>
+      <p class="card-text">'Kategorie' i ' Kursy' można łączyć w dowolny sposób, np. są utworzone oferty 'dorośli | dla dorosłych - fortepian' oraz 'seniorzy | dla dorosłych - fortepian'.
+          Inna oferta to 'dzieci | dla dorosłych - musicfulness'.</p>
+      <p>Przed modyfikacją treści 'Kursu' warto sprawdzić w 'Ofertach', z jakimi 'Kategoriami' jest obecnie połączony. </p>
+    </div>
+  </div>
+  <div class="row row-cols-1 row-cols-md-3 g-4 py-4">
+    <div class="col">
+      <div class="card h-100">
+        <div class="card-body">
+          <h5 class="card-title">Widok tabeli 'Utwórz ofertę'</h5>
+        </div>
+        <img src="/images/admin/instruction/oferta.jpg" class="card-img-top" alt="...">
+        <div class="card-body">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 {% endblock %}

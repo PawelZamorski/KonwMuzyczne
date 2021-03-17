@@ -136,7 +136,7 @@ figure {
 
 /* --------- 1.1 Input Elements ---------- */
 
-input, textarea {
+input, textarea, select {
     border: 1px solid #e1e1e1;
     padding: 10px;
     -webkit-transition: all .3s linear;
@@ -145,7 +145,7 @@ input, textarea {
     border-radius: 3px;
 }
 
-input {
+input, select {
     height: 40px;
     margin: 3px 0;
     outline: none;
@@ -162,9 +162,7 @@ input[type="submit"] {
 }
 
 select {
-    border: 1px solid #e1e1e1;
-    height: 40px;
-    padding: 5px;
+    width: 100%;
 }
 
 input:focus, textarea:focus {

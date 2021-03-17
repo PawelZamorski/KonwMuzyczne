@@ -25,11 +25,14 @@
                 <!-- Course info -->
 <!-- TODO: Add 'tytu przelewu'  oraz numer rezerwacji-->
                 <p class="capitalize">
-                    {{ offerReservation.getResNo }} - {{ offerReservation.getDescription }}
+                    {{ offerReservation.getResNo }} - {{ offerReservation.getOfferCategory }} {{ offerReservation.getOfferName }}
                 </p>
                 <br><br><br>
             </div>
         </div>
+
+
+
 
         {% if lang != 'pl' %}
         <!-- DotPay POST -->
@@ -44,10 +47,10 @@
                 <!-- Form Payment -->
                 <form action="/offer/buy/payment/gateway/{{ lang }}" method="post" target="_parent">
                     <!-- resevation number -->
-                    <input type="hidden" name="res_id" value="{{ res_id }}" />
+                    <input type="hidden" name="res_id" value="{{ offerReservation.getId }}" />
                     <!-- End of Form Payment -->
                 
-                    <button id="button" class="secondary-color" type="submit" style="border:0px; cursor: pointer; margin-bottom: 10px" disabled>
+                    <button id="button" class="secondary-color" type="submit" style="border:0px; cursor: pointer; margin-bottom: 10px">
                         <img src="/images/shop/payment/gateway-button.png" alt="Logo Credit Cards and DotPay" style="width: 90%; height: auto;" />
                     </button>
                 </form>
@@ -58,6 +61,8 @@
             </div>
         </div>
         {% endif %}
+
+
 
         <!-- Payment In Office -->
         <div class="row no-padding-bottom no-padding-top margin-top">

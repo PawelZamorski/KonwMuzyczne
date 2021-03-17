@@ -361,6 +361,70 @@ class GitaraController extends AbstractController {
         return $this->render('special-en-gitarawarsztaty-3.twig', $properties);
     }
 
+    public function getChfGitara1() {
+        // instantiate array
+        $properties = array();
+        $lang = 'en';
+
+        try {
+            // get menu data
+            $menuModel = new MenuModel($this->conn);
+            $menuArr = $menuModel->getAllLang($lang);
+
+            // get offerMain data
+            $offerModel = new OfferModel($this->conn);
+            $offerMainArr = $offerModel->getOfferMain($lang);
+            $offerCategoryArr = $offerModel->getOfferCategory($lang);
+
+            // set up properties
+            $properties = [
+                'lang' => $lang,
+                'menuArr' => $menuArr,
+                'offerMainArr' => $offerMainArr,
+                'offerCategoryArr' => $offerCategoryArr
+                ];
+
+        } catch (NotFoundException $e) {
+            $this->log->warning('NotFoundException: ' . $e);
+            $errorController = new ErrorController($this->request);
+            return $errorController->notFoundWithMessage($lang, 'Error details: requested category does not exist.');
+        }
+
+        return $this->render('special-chf-gitarawarsztaty-1.twig', $properties);
+    }
+
+    public function getChfGitara2() {
+        // instantiate array
+        $properties = array();
+        $lang = 'en';
+
+        try {
+            // get menu data
+            $menuModel = new MenuModel($this->conn);
+            $menuArr = $menuModel->getAllLang($lang);
+
+            // get offerMain data
+            $offerModel = new OfferModel($this->conn);
+            $offerMainArr = $offerModel->getOfferMain($lang);
+            $offerCategoryArr = $offerModel->getOfferCategory($lang);
+
+            // set up properties
+            $properties = [
+                'lang' => $lang,
+                'menuArr' => $menuArr,
+                'offerMainArr' => $offerMainArr,
+                'offerCategoryArr' => $offerCategoryArr
+                ];
+
+        } catch (NotFoundException $e) {
+            $this->log->warning('NotFoundException: ' . $e);
+            $errorController = new ErrorController($this->request);
+            return $errorController->notFoundWithMessage($lang, 'Error details: requested category does not exist.');
+        }
+
+        return $this->render('special-chf-gitarawarsztaty-2.twig', $properties);
+    }
+
     public function getSpiew() {
         // instantiate array
         $properties = array();
@@ -392,6 +456,104 @@ class GitaraController extends AbstractController {
 
         return $this->render('special-spiewwarsztaty.twig', $properties);
     }
+
+    public function getWbcWarsztaty() {
+        // instantiate array
+        $properties = array();
+        $lang = 'pl';
+
+        try {
+            // get menu data
+            $menuModel = new MenuModel($this->conn);
+            $menuArr = $menuModel->getAllLang($lang);
+
+            // get offerMain data
+            $offerModel = new OfferModel($this->conn);
+            $offerMainArr = $offerModel->getOfferMain($lang);
+            $offerCategoryArr = $offerModel->getOfferCategory($lang);
+
+            // set up properties
+            $properties = [
+                'lang' => $lang,
+                'menuArr' => $menuArr,
+                'offerMainArr' => $offerMainArr,
+                'offerCategoryArr' => $offerCategoryArr
+                ];
+
+        } catch (NotFoundException $e) {
+            $this->log->warning('NotFoundException: ' . $e);
+            $errorController = new ErrorController($this->request);
+            return $errorController->notFoundWithMessage($lang, 'Error details: requested category does not exist.');
+        }
+
+        return $this->render('special-wbc-warsztaty.twig', $properties);
+    }
+
+
+    public function getWbcWarsztaty2() {
+        // instantiate array
+        $properties = array();
+        $lang = 'pl';
+
+        try {
+            // get menu data
+            $menuModel = new MenuModel($this->conn);
+            $menuArr = $menuModel->getAllLang($lang);
+
+            // get offerMain data
+            $offerModel = new OfferModel($this->conn);
+            $offerMainArr = $offerModel->getOfferMain($lang);
+            $offerCategoryArr = $offerModel->getOfferCategory($lang);
+
+            // set up properties
+            $properties = [
+                'lang' => $lang,
+                'menuArr' => $menuArr,
+                'offerMainArr' => $offerMainArr,
+                'offerCategoryArr' => $offerCategoryArr
+                ];
+
+        } catch (NotFoundException $e) {
+            $this->log->warning('NotFoundException: ' . $e);
+            $errorController = new ErrorController($this->request);
+            return $errorController->notFoundWithMessage($lang, 'Error details: requested category does not exist.');
+        }
+
+        return $this->render('special-wbc-warsztaty-2.twig', $properties);
+    }
+
+    public function getWbcWarsztaty3() {
+        // instantiate array
+        $properties = array();
+        $lang = 'pl';
+
+        try {
+            // get menu data
+            $menuModel = new MenuModel($this->conn);
+            $menuArr = $menuModel->getAllLang($lang);
+
+            // get offerMain data
+            $offerModel = new OfferModel($this->conn);
+            $offerMainArr = $offerModel->getOfferMain($lang);
+            $offerCategoryArr = $offerModel->getOfferCategory($lang);
+
+            // set up properties
+            $properties = [
+                'lang' => $lang,
+                'menuArr' => $menuArr,
+                'offerMainArr' => $offerMainArr,
+                'offerCategoryArr' => $offerCategoryArr
+                ];
+
+        } catch (NotFoundException $e) {
+            $this->log->warning('NotFoundException: ' . $e);
+            $errorController = new ErrorController($this->request);
+            return $errorController->notFoundWithMessage($lang, 'Error details: requested category does not exist.');
+        }
+
+        return $this->render('special-wbc-warsztaty-3.twig', $properties);
+    }
+
 
 }
 

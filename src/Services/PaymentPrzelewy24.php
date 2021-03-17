@@ -26,9 +26,26 @@ use Konwersatorium\Core\Config;
 * - kwota transakcji
 * - SessionId
 */
+
+
+/*
+Dzień dobry,
+
+płatności kartowe zostały na poniższych kontach aktywowane:
+USD 136352,
+EUR 136353,
+CHF 136354,
+GBP 136355,
+NOK 136356,
+AUD 136357,
+CAD 136358,
+DKK 136359,
+SEK 136360.
+*/
 class PaymentPrzelewy24 {
     private $config_przelewy24;
     private $config_domain;
+
     public function __construct() {
         // get config data
         $this->config_przelewy24 = Config::getConfig()->get('przelewy24'); // returns string
@@ -46,25 +63,39 @@ class PaymentPrzelewy24 {
     */
 
     // TODO log errors -> must use Logger object
+    // TODO
     public function getTokenRequest($offerResObj) {
-        // set up variables
-        $merchantId = $this->config_przelewy24['merchantId']; // config
-        $posID = $this->config_przelewy24['posID']; // config
-        $sessionId = $offerResObj->getResNo(); // res table/ res No -> Session ID – unikalny identyfikator służący do zidentyfikowania pojedynczej transakcji w systemie partnera.
-        $amount = $offerResObj->getAmount(); // res table
+        // currency is used to determine the account type (PLN, EUR, ect)
+        // set up as first, as it is used to get data from array
         $currency = $offerResObj->getCurrency(); // res table
-        $description = $offerResObj->getDescription(); // res table
-        $email = $offerResObj->getEmail(); // res table
-        $language = "pl"; // constant
-        $crc = $this->config_przelewy24['crc']; //config
-        $keyAPI = $this->config_przelewy24['keyAPI']; // config
 
+        // set up variables
+        // required variables
+        $merchantId = $this->config_przelewy24[$currency]['merchantId']; // config
+        $posID = $this->config_przelewy24[$currency]['posID']; // config
+        $sessionId = $offerResObj->getResNo(); // res table/ res No -> Session ID – unikalny identyfikator służący do zidentyfikowania pojedynczej transakcji w systemie partnera.
+        $amount = intval($offerResObj->getAmount()) * 100; // res table
+        $description = $offerResObj->getOfferCategory() . $offerResObj->getOfferName(); // res table
+        $email = $offerResObj->getEmail(); // res table
+        $country = $offerResObj->getCountry();
+//        $language = $offerResObj->getLangCode(); // constant
+        $language = $this->config_przelewy24[$currency]['lang'];;
+        $urlReturn = $this->config_domain;
+
+        $crc = $this->config_przelewy24[$currency]['crc']; //config
+        $keyAPI = $this->config_przelewy24[$currency]['keyAPI']; // config
         $sign = $this->generateSign($sessionId, $merchantId, $amount, $currency, $crc);
+
+        // aditional variables
+        $client = $offerResObj->getName() . $offerResObj->getSurname();
+        $address = $offerResObj->getStreet();
+        $zip = $offerResObj->getPostcode();
+        $city = $offerResObj->getTown();
 
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => "https://sandbox.przelewy24.pl/api/v1/transaction/register",
+            CURLOPT_URL => $this->config_przelewy24[$currency]['url'] . "/api/v1/transaction/register",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => "",
             CURLOPT_MAXREDIRS => 10,
@@ -79,11 +110,15 @@ class PaymentPrzelewy24 {
                 "currency":"' . $currency . '",
                 "description":"' . $description . '",
                 "email":"' . $email . '",
-                "country":"PL",
-                "language":"pl",
-                "urlReturn":"' . $this->config_domain . '",
+                "client":"' . $client . '",
+                "address":"' . $address . '",
+                "zip":"' . $zip . '",
+                "city":"' . $city . '",
+                "country":"' . $country . '",
+                "language":"' . $language . '",
+                "urlReturn":"' . $urlReturn . '",
                 "urlStatus":"' . $this->config_domain . '/offer/buy/payment/status?status=OK",
-                "channel":3,
+                "channel":16,
                 "sign":"' . $sign . '"
             }',
 
@@ -117,21 +152,23 @@ class PaymentPrzelewy24 {
     // Confirms verification, gets result from payment service
     public function confirmVerification($dataArr) {
         // set up variables
-        $merchantId = $this->config_przelewy24['merchantId']; // config
-        $posID = $this->config_przelewy24['posID']; // config
+        // set up as first, as it is used to get data from array
+        $currency = $dataArr['currency']; // notification
+
+        $merchantId = $this->config_przelewy24[$currency]['merchantId']; // config
+        $posID = $this->config_przelewy24[$currency]['posID']; // config
         $sessionId = $dataArr['sessionId']; // notification
         $amount = $dataArr['amount']; // notification
-        $currency = $dataArr['currency']; // notification
         $orderId = $dataArr['orderId']; // notification
-        $crc = $this->config_przelewy24['crc']; //config
-        $keyAPI = $this->config_przelewy24['keyAPI']; // config
+        $crc = $this->config_przelewy24[$currency]['crc']; //config
+        $keyAPI = $this->config_przelewy24[$currency]['keyAPI']; // config
 
         $sign = $this->generateSignStatus($sessionId, $orderId, $amount, $currency, $crc);
 
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => "https://sandbox.przelewy24.pl/api/v1/transaction/verify",
+            CURLOPT_URL => $this->config_przelewy24[$currency]['url'] . "/api/v1/transaction/verify",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => "",
             CURLOPT_MAXREDIRS => 10,

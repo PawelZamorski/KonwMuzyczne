@@ -9,7 +9,7 @@
                 <h2 class="section-title" style="padding-bottom:0px;">{{ offerBuyArr.getHeading2Buy }}</h2>
             </div>
             <div class="col">
-                <form id="shop-contact" class="text-left" method="post" action="/offer/buy/payment/{{ lang }}/{{ offerByIdArr.getOfferId }}">
+                <form id="shop-contact" class="text-left" method="post" action="/offer/buy/payment/{{ lang }}/{{ offerId }}">
                     <div class="col-1" style="padding-top:0px; padding-bottom:0px;">
                         {{ offerBuyArr.getInfoMain | raw }}
                     </div>
@@ -22,10 +22,11 @@
 
                     <!-- Form inputs -->
                     <div class="col-2" style="padding-top:0px;">
-                        <input type="hidden" name="offerId" value={{ offerByIdArr.getOfferId }}>
-                        <input type="hidden" name="offerCategory" value="{{ offerByIdArr.getCategory }}">
-                        <input type="hidden" name="offerName" value="{{ offerByIdArr.getName }}">
-                        <input type="hidden" name="lang" value="{{ lang }}">
+                        <input type="hidden" name="offerId" value={{ offerId }}>
+                        <input type="hidden" name="offerCategory" value="{{ offerCategory.getCategory }}">
+                        <input type="hidden" name="offerName" value="{{ offerCourse.getCourseName }}">
+                        <input type="hidden" name="langCode" value="{{ lang }}">
+                        <input id="amount" type="hidden" name="amount" value="400">
                         <div class="field">
                             <input type="text" id="name" name="name" placeholder="{{ formFieldsDesc.getName }}" required style="width:100%">
                         </div>
@@ -42,7 +43,12 @@
                             <input type="text" id="postcode" name="postcode" placeholder="{{ formFieldsDesc.getPostcode }}" style="width:100%">
                         </div>
                         <div class="field col-3" style="padding:0;">
-                            <input type="text" id="country" name="country" placeholder="{{ formFieldsDesc.getCountry }}" required style="width:100%">
+                            <select id="country" name="country" required style="width:100%">
+                                <option value="" disabled selected>{{ formFieldsDesc.getCountry }}</option>
+                                {% for key, country in countries %}
+                                    <option value="{{ key }}">{{ country }}</option>
+                                {% endfor %}
+                            </select>
                         </div>
                         <div class="field">
                             <input type="email" id="email" name="email" placeholder="{{ formFieldsDesc.getEmail }}" required style="width:100%">
@@ -52,10 +58,12 @@
                         {% if lang == 'pl' %}
                         <!-- Option visible on polish website -->
                         <label for="lesson">Preferowana forma zajęć: </label>
-                        <select name="lesson" id="lesson"  style="width:45%" onchange="changeCurrency()">
+                        <select name="lessonType" id="lesson"  style="width:45%" onchange="changeCurrency()">
                             <option value="facetoface" selected>Lekcje stacjonarne</option>
                             <option value="online">Lekcje online</option>
                         </select>
+                        {% else %}
+                            <input type="hidden" name="lessonType" value="online">
                         {% endif %}
 
                         <!-- Option visible on foreign languages pages. When used, adjust price and currency in info below the form by using <span id="price-display-info"></span> -->
@@ -100,7 +108,7 @@
                     <div class="col-1">
                         {{ offerBuyArr.getInfoBuy | raw }}
                         <ul>
-                            <li class="text-left">{{ offerBuyArr.getInfoCourse }} {{ offerByIdArr.getCategory }} | {{ offerByIdArr.getName }}</li>
+                            <li class="text-left">{{ offerBuyArr.getInfoCourse }} {{ offerCategory.getCategory }} | {{ offerCourse.getCourseName }}</li>
                             <!-- When currency is changed, adjust price and currency in email info by using <span id="price-display-info"></span> -->
                             <li class="text-left">{{ offerBuyArr.getInfoPrice | raw}}</li>
                             <li class="text-left">{{ offerBuyArr.getInfoExpiration }}</li>
@@ -123,45 +131,48 @@
 <script>
 <!-- currencies: AUD, CAD, CHF, DKK, EUR, GBP, NOK, SEK, USD -->
     function changeCurrency() {
-        var selectedCurrency = document.getElementById("currency").value;
-        var price = getPrice(selectedCurrency);
-        document.getElementById("price-display").innerHTML = price;
-        document.getElementById("price-display-info").innerHTML = price;
+        var currency = document.getElementById("currency").value;
+        var price = getPrice(currency);
+        document.getElementById("price-display").innerHTML = currency + " " + price;
+        document.getElementById("price-display-info").innerHTML = currency + " " + price;
+
+        // change amout value in amount field
+        document.getElementById("amount").value = price;
     }
 
     function getPrice(currency) {
-        var price = "PLN 400";
+        var price = "400";
 
         switch (currency) {
         case "AUD":
-            price = "AUD 160";
+            price = "160";
             break;
         case "CAD":
-            price = "CAD 160";
+            price = "160";
             break;
         case "CHF":
-            price = "CHF 110";
+            price = "110";
             break;
         case "DKK":
-            price = "DKK 800";
+            price = "800";
             break;
         case "EUR":
-            price = "EUR 100";
+            price = "100";
             break;
         case "GBP":
-            price = "GBP 100";
+            price = "100";
             break;
         case "NOK":
-            price = "NOK 1000";
+            price = "1000";
             break;
         case "SEK":
-            price = "SEK 1000";
+            price = "1000";
             break;
         case "USD":
-            price = "USD 120";
+            price = "120";
             break;
         default:
-            price = "PLN 100";
+            price = "400";
             break;
         }
 
@@ -169,7 +180,8 @@
 
     }
 
-changeCurrency();
+    // Run script after page is loaded
+    changeCurrency();
 </script>
 
 {% endif %}

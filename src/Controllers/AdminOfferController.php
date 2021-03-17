@@ -8,22 +8,31 @@ use Konwersatorium\Models\ContactModel;
 use Konwersatorium\Exceptions\NotFoundException;
 use Konwersatorium\Exceptions\DbException;
 use Konwersatorium\Services\Authentication;
-
-// TODO: refactor -> create course model
+use Konwersatorium\Core\Request;
 use Konwersatorium\Models\EmployeeModel;
-
 
 class AdminOfferController extends AbstractController {
     
-    public function getAllOffer($lang) {
+    public function __construct(Request $request) {
+        parent::__construct($request);
+        session_start();
+    }
+
+// NEW  ----------------------////////////////////
+
+
+// OFFER
+
+    public function getOfferAll($lang) {
         // instantiate array
         $properties = array();
 
         try {
             // get offer data
             $offerModel = new OfferModel($this->conn);
-            $offerArr = $offerModel->getAllOffer($lang);
- 
+            $offerArr = $offerModel->getOfferAll($lang);
+
+
             // set up properties
             $properties = [
                 'lang' => $lang,
@@ -49,103 +58,22 @@ class AdminOfferController extends AbstractController {
         }
     }
 
-    public function getOfferById($lang, $offer_id) {
-        // instantiate array
-        $properties = array();
-
-        try {
-            // get menu data
-            $menuModel = new MenuModel($this->conn);
-            $menuArr = $menuModel->getAllLang($lang);
-
-            // get offer data
-            $offerModel = new OfferModel($this->conn);
-            $offerByIdArr = $offerModel->getOfferById($lang, $offer_id);
-
-            $offerCategoryArr = $offerModel->getOfferCategory($lang);
-            $offerCategoryAssociativeArr = $offerModel->parseOfferCategoryArrToAssociativeArr($offerCategoryArr);
-
-            $commonDescArr = $offerModel->getAllCommonDescAsAssociateArr($lang);
-
-            $offerTypesArr = $offerModel->getAllOfferTypes($lang);
-            
-            // TODO: refactor -> create Course name model
-            // get all course names
-            $employeeModel = new EmployeeModel($this->conn);
-            $courseNamesArr = $employeeModel->getAllCourseNames($lang);
-
-            // set up properties
-            $properties = [
-                'lang' => $lang,
-                'menuArr' => $menuArr,
-                'offerByIdArr' => $offerByIdArr,
-                'offerCategoryArr' => $offerCategoryArr,
-                'offerCategoryAssociativeArr' => $offerCategoryAssociativeArr,
-                'commonDescArr' => $commonDescArr,
-                'offerTypesArr' => $offerTypesArr,
-                'courseNamesArr' => $courseNamesArr
-                ];
-
-        } catch (NotFoundException $e) {
-            $this->log->warning('NotFoundException: ' . $e);
-            $errorController = new ErrorController($this->request);
-            return $errorController->notFoundWithMessage($lang, 'Error details: data fetching failed.');
-        }
-
-        if($this->isLoggedIn()) {
-            return $this->render('admin/admin-offer-details.twig', $properties);
-        } else {
-            // set up properties
-            $properties = [
-                'lang' => $lang,
-                'userName' => 'default user name'
-                ];
-            // user is not logged in and did not send any post data
-            return $this->render('admin/admin-login.twig', $properties);            
-        }
-    }
-
-    public function updateOfferById($lang, $offer_id) {
-        try {
-            // update offer data
-            $offerModel = new OfferModel($this->conn);
-            // TODO: display message
-            $message = $offerModel->updateOfferById($lang, $offer_id);
-
-            echo $message;
-            
-            $host = $_SERVER['HTTP_HOST'];
-            $uri = "/admin/$lang/offer/$offer_id";
-            header("Location: http://$host$uri");
-            exit;
-            
-        } catch (DbException $e) {
-            $this->log->warning('DbException: ' . $e);
-            $errorController = new ErrorController($this->request);
-            return $errorController->notFoundWithMessage($lang, $e);
-        }
-    }
 
     public function openCreateOfferForm($lang) {
         // instantiate array
         $properties = array();
 
         try {
-            // get menu data
-            $menuModel = new MenuModel($this->conn);
-            $menuArr = $menuModel->getAllLang($lang);
-
             // get offer data
             $offerModel = new OfferModel($this->conn);
-            $offerCategoryArr = $offerModel->getOfferCategory($lang);
-            $allCoursesArr = $offerModel->getAllCourses($lang);
+            $offerCategoryArr = $offerModel->getOfferCategoryAll($lang);
+            $coursesArr = $offerModel->getCoursesAll($lang);
             
             // set up properties
             $properties = [
                 'lang' => $lang,
-                'menuArr' => $menuArr,
                 'offerCategoryArr' => $offerCategoryArr,
-                'allCoursesArr' => $allCoursesArr
+                'coursesArr' => $coursesArr
                 ];
 
         } catch (NotFoundException $e) {
@@ -174,9 +102,9 @@ class AdminOfferController extends AbstractController {
             // TODO: display message
             $message = $offerModel->createOffer($lang);
             
-            $host = $_SERVER['HTTP_HOST'];
+            $host = $_SERVER['SERVER_NAME'];
             $uri = "/admin/$lang/offer";
-            header("Location: http://$host$uri");
+            header("Location: https://$host$uri");
             exit;
            
         } catch (DbException $e) {
@@ -193,9 +121,9 @@ class AdminOfferController extends AbstractController {
             // TODO: display message
             $message = $offerModel->deleteOfferById($lang, $offer_id);
             
-            $host = $_SERVER['HTTP_HOST'];
+            $host = $_SERVER['SERVER_NAME'];
             $uri = "/admin/$lang/offer";
-            header("Location: http://$host$uri");
+            header("Location: https://$host$uri");
             exit;
             
         } catch (DbException $e) {
@@ -205,19 +133,23 @@ class AdminOfferController extends AbstractController {
         }
     }
 
-    public function getAllCourses($lang) {
+
+
+// COURSE
+
+    public function getCoursesAll($lang) {
         // instantiate array
         $properties = array();
 
         try {
             // get offer data
             $offerModel = new OfferModel($this->conn);
-            $allCoursesArr = $offerModel->getAllCourses($lang);
- 
+            $coursesArr = $offerModel->getCoursesAll($lang);
+
             // set up properties
             $properties = [
                 'lang' => $lang,
-                'allCoursesArr' => $allCoursesArr
+                'coursesArr' => $coursesArr
             ];
 
         } catch (NotFoundException $e) {
@@ -231,8 +163,7 @@ class AdminOfferController extends AbstractController {
         } else {
             // set up properties
             $properties = [
-                'lang' => $lang,
-                'userName' => 'default user name'
+                'lang' => $lang
                 ];
             // user is not logged in and did not send any post data
             return $this->render('admin/admin-login.twig', $properties);            
@@ -244,32 +175,17 @@ class AdminOfferController extends AbstractController {
         $properties = array();
 
         try {
-            // get menu data
-            $menuModel = new MenuModel($this->conn);
-            $menuArr = $menuModel->getAllLang($lang);
-
             // get offer data
             $offerModel = new OfferModel($this->conn);
-            $courseArr = $offerModel->getCourseById($lang, $course_id);
+            $course = $offerModel->getCourseById($lang, $course_id);
 
-            $commonDescArr = $offerModel->getAllCommonDescAsAssociateArr($lang);
-
-            $offerTypesArr = $offerModel->getAllOfferTypes($lang);
-            
-            // TODO: refactor -> create Course name model
-            // get all course names
-            $employeeModel = new EmployeeModel($this->conn);
-            $courseNamesArr = $employeeModel->getAllCourseNames($lang);
+            $commonDescArr = $offerModel->getCommonDescAll($lang);
  
             // set up properties
             $properties = [
                 'lang' => $lang,
-                'menuArr' => $menuArr,
-                'courseArr' => $courseArr,
-                'commonDescArr' => $commonDescArr,
-                'offerTypesArr' => $offerTypesArr,
-                'courseNamesArr' => $courseNamesArr
-
+                'course' => $course,
+                'commonDescArr' => $commonDescArr
             ];
 
         } catch (NotFoundException $e) {
@@ -279,31 +195,48 @@ class AdminOfferController extends AbstractController {
         }
 
         if($this->isLoggedIn()) {
-            return $this->render('admin/admin-offerCourse-details.twig', $properties);        
+            return $this->render('admin/admin-offerCourse-update.twig', $properties);        
         } else {
             // set up properties
             $properties = [
                 'lang' => $lang,
                 'userName' => 'default user name'
                 ];
-            // user is not logged in and did not send any post data
             return $this->render('admin/admin-login.twig', $properties);            
         }
     }
+    
     public function updateCourseById($lang, $course_id) {
         try {
             // update offer data
             $offerModel = new OfferModel($this->conn);
             // TODO: display message
             $message = $offerModel->updateCourseById($lang, $course_id);
-/*
-            echo $message;
             
-            $host = $_SERVER['HTTP_HOST'];
+            $host = $_SERVER['SERVER_NAME'];
             $uri = "/admin/$lang/offerCourse/$course_id";
-            header("Location: http://$host$uri");
+            header("Location: httpss://$host$uri");
             exit;
-*/            
+            
+        } catch (DbException $e) {
+            $this->log->warning('DbException: ' . $e);
+            $errorController = new ErrorController($this->request);
+            return $errorController->notFoundWithMessage($lang, $e);
+        }
+    }
+
+    public function deleteCourseById($lang, $course_id) {
+        try {
+            // delete offer data
+            $offerModel = new OfferModel($this->conn);
+            // TODO: display message
+            $message = $offerModel->deleteCourseById($lang, $course_id);
+            
+            $host = $_SERVER['SERVER_NAME'];
+            $uri = "/admin/$lang/offerCourse";
+            header("Location: https://$host$uri");
+            exit;
+            
         } catch (DbException $e) {
             $this->log->warning('DbException: ' . $e);
             $errorController = new ErrorController($this->request);
@@ -319,30 +252,15 @@ class AdminOfferController extends AbstractController {
         $lang = 'pl';
 
         try {
-            // get menu data
-            $menuModel = new MenuModel($this->conn);
-            $menuArr = $menuModel->getAllLang($lang);
-
             // get offer data
             $offerModel = new OfferModel($this->conn);
-
-            $commonDescArr = $offerModel->getAllCommonDescAsAssociateArr($lang);
-
-            $offerTypesArr = $offerModel->getAllOfferTypes($lang);
+            $commonDescArr = $offerModel->getCommonDescAll($lang);
             
-            // TODO: refactor -> create Course name model
-            // get all course names
-            $employeeModel = new EmployeeModel($this->conn);
-            $courseNamesArr = $employeeModel->getAllCourseNames($lang);
-
             // set up properties
             $properties = [
                 'lang' => $lang,
-                'menuArr' => $menuArr,
-                'commonDescArr' => $commonDescArr,
-                'offerTypesArr' => $offerTypesArr,
-                'courseNamesArr' => $courseNamesArr
-                ];
+                'commonDescArr' => $commonDescArr
+            ];
 
         } catch (NotFoundException $e) {
             $this->log->warning('NotFoundException: ' . $e);
@@ -355,9 +273,8 @@ class AdminOfferController extends AbstractController {
         } else {
             // set up properties
             $properties = [
-                'lang' => $lang,
-                'userName' => 'default user name'
-                ];
+                'lang' => $lang
+            ];
             // user is not logged in and did not send any post data
             return $this->render('admin/admin-login.twig', $properties);            
         }
@@ -368,11 +285,12 @@ class AdminOfferController extends AbstractController {
             // delete employee data
             $offerModel = new OfferModel($this->conn);
             // TODO: display message
+
             $message = $offerModel->createOfferCourse($lang);
             
-            $host = $_SERVER['HTTP_HOST'];
+            $host = $_SERVER['SERVER_NAME'];
             $uri = "/admin/$lang/offerCourse";
-            header("Location: http://$host$uri");
+            header("Location: https://$host$uri");
             exit;
             
         } catch (DbException $e) {
@@ -383,16 +301,164 @@ class AdminOfferController extends AbstractController {
 
     }
 
-    public function deleteCourseById($lang, $course_id) {
+
+
+// CATEGORY
+    public function getOfferCategoryAll($lang) {
+        // instantiate array
+        $properties = array();
+        
+        try {
+            // get offer data
+            $offerModel = new OfferModel($this->conn);
+            $offerCategoryAll = $offerModel->getOfferCategoryAll($lang);
+
+            // set up properties
+            $properties = [
+                'lang' => $lang,
+                'offerCategoryAll' => $offerCategoryAll
+            ];
+
+        } catch (NotFoundException $e) {
+            $this->log->warning('NotFoundException: ' . $e);
+            $errorController = new ErrorController($this->request);
+            return $errorController->notFoundWithMessage($lang, 'Error details: data fetching failed.');
+        }
+
+        if($this->isLoggedIn()) {
+            return $this->render('admin/admin-offerCategory-all.twig', $properties);        
+        } else {
+            // set up properties
+            $properties = [
+                'lang' => $lang,
+                'userName' => 'default user name'
+                ];
+            // user is not logged in and did not send any post data
+            return $this->render('admin/admin-login.twig', $properties);            
+        }
+    }
+    
+    public function getCategoryById($lang, $category_id) {
+        // instantiate array
+        $properties = array();
+
+        try {
+            // get data
+            $offerModel = new OfferModel($this->conn);
+            $category = $offerModel->getOfferCategoryById($lang, $category_id);
+
+            $commonDescArr = $offerModel->getCommonDescAll($lang);
+ 
+            // set up properties
+            $properties = [
+                'lang' => $lang,
+                'category' => $category,
+                'commonDescArr' => $commonDescArr
+            ];
+
+        } catch (NotFoundException $e) {
+            $this->log->warning('NotFoundException: ' . $e);
+            $errorController = new ErrorController($this->request);
+            return $errorController->notFoundWithMessage($lang, 'Error details: data fetching failed.');
+        }
+
+        if($this->isLoggedIn()) {
+            return $this->render('admin/admin-offerCategory-update.twig', $properties);        
+        } else {
+            // set up properties
+            $properties = [
+                'lang' => $lang
+            ];
+            return $this->render('admin/admin-login.twig', $properties);            
+        }
+    }
+    
+    public function updateCategoryById($lang, $category_id) {
+        try {
+            // update offer data
+            $offerModel = new OfferModel($this->conn);
+            // TODO: display message
+            $message = $offerModel->updateCategoryById($lang, $category_id);
+            
+            $host = $_SERVER['SERVER_NAME'];
+            $uri = "/admin/$lang/offerCategory/$category_id";
+            header("Location: https://$host$uri");
+            exit;
+            
+        } catch (DbException $e) {
+            $this->log->warning('DbException: ' . $e);
+            $errorController = new ErrorController($this->request);
+            return $errorController->notFoundWithMessage($lang, $e);
+        }
+    }
+
+    public function openCreateOfferCategoryForm($lang) {
+        // instantiate array
+        $properties = array();
+
+        // always use pl language for create employee form
+        $lang = 'pl';
+
+        try {
+            // get offer data
+            $offerModel = new OfferModel($this->conn);
+            $commonDescArr = $offerModel->getCommonDescAll($lang);
+            
+            // set up properties
+            $properties = [
+                'lang' => $lang,
+                'commonDescArr' => $commonDescArr
+            ];
+
+        } catch (NotFoundException $e) {
+            $this->log->warning('NotFoundException: ' . $e);
+            $errorController = new ErrorController($this->request);
+            return $errorController->notFoundWithMessage($lang, 'Error details: data fetching failed.');
+        }
+
+        if($this->isLoggedIn()) {
+            return $this->render('admin/admin-offerCategory-create-form.twig', $properties);
+        } else {
+            // set up properties
+            $properties = [
+                'lang' => $lang
+            ];
+            // user is not logged in and did not send any post data
+            return $this->render('admin/admin-login.twig', $properties);            
+        }
+    }
+
+    public function createOfferCategory($lang) {
+        try {
+            // delete employee data
+            $offerModel = new OfferModel($this->conn);
+            // TODO: display message
+
+            $message = $offerModel->createOfferCategory($lang);
+            echo "done!";
+            $host = $_SERVER['SERVER_NAME'];
+            $uri = "/admin/$lang/offerCategory";
+            header("Location: https://$host$uri");
+            exit;
+            
+        } catch (DbException $e) {
+            $this->log->error('DbException: ' . $e);
+            $errorController = new ErrorController($this->request);
+            return $errorController->notFoundWithMessage($lang, $e);
+        }
+
+    }
+
+    public function deleteCategoryById($lang, $category_id) {
         try {
             // delete offer data
             $offerModel = new OfferModel($this->conn);
             // TODO: display message
-            $message = $offerModel->deleteCourseById($lang, $course_id);
+            $message = $offerModel->deleteCategoryById($lang, $category_id);
             
-            $host = $_SERVER['HTTP_HOST'];
-            $uri = "/admin/$lang/offerCourse";
-            header("Location: http://$host$uri");
+            $host = $_SERVER['SERVER_NAME'];
+            $uri = "/admin/$lang/offerCategory";
+            header("Location: https://$host$uri");
             exit;
             
         } catch (DbException $e) {

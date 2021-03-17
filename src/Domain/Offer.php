@@ -3,68 +3,47 @@
 namespace Konwersatorium\Domain;
 
 class Offer {
-    private $offer_id;
-    private $name;
-    private $category;
-    private $type;
-    private $short_desc;
-    private $common_desc;
-    private $long_desc;
-    private $img;
-    private $img_thumbnail;
-    private $movie;
+    private $id;
+    private $courses_id;
+    private $category_id;
+    private $sort_index;
+    private $code;
 
-    public function __construct($offer_id, $name, $category, $type, $short_desc, $common_desc, $long_desc, $img, $img_thumbnail, $movie) {
-        $this->offer_id = $offer_id;
-        $this->name = $name;
-        $this->category = $category;
-        $this->type = $type;
-        $this->shortDesc = $short_desc;
-        $this->common_desc = $common_desc;
-        $this->long_desc = $long_desc;
-        $this->img = $img;
-        $this->img_thumbnail = $img_thumbnail;
-        $this->movie = $movie;
+    public function __construct($id, $courses_id, $category_id, $sort_index, $code) {
+        $this->id = $id;
+        $this->courses_id = $courses_id;
+        $this->category_id = $category_id;
+        $this->sort_index = $sort_index;
+        $this->code = $code;
     }
 
-    public function getOfferId() {
-        return $this->offer_id;
-    }
- 
-    public function getName() {
-        return $this->name;
+    public function getId() {
+        return $this->id;
     }
 
-    public function getCategory() {
-        return $this->category;
+    public function getCoursesId() {
+        return $this->courses_id;
     }
 
-    public function getType() {
-        return $this->type;
+    public function getCategoryId() {
+        return $this->category_id;
     }
 
-    public function getShortDesc() {
-        return $this->shortDesc;
+    public function getSortIndex() {
+        return $this->sort_index;
     }
 
-    public function getCommonDesc() {
-        return $this->common_desc;
+    public function getCode() {
+        return $this->code;
     }
 
-    public function getLongDesc() {
-        return $this->long_desc;
-    }
-
-    public function getImg() {
-        return $this->img;
-    }
-
-    public function getImgThumbnail() {
-        return $this->img_thumbnail;
-    }
-
-    public function getMovie() {
-        return $this->movie;
+    /* This is the static comparing function: sot on $id */
+    public static function comparator($a, $b)
+    {
+        if ($a->getSortIndex() == $b->getSortIndex()) {
+            return 0;
+        }
+        return ($a->getSortIndex() > $b->getSortIndex()) ? +1 : -1;
     }
 
 }

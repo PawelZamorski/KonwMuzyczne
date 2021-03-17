@@ -1,0 +1,75 @@
+{% extends 'admin/admin-layout.twig' %}
+
+{% block content %}
+<div>
+    <form id="offerForm" action="/admin/{{ lang }}/teacher/{{ employee.getId }}/update" method="post" enctype="multipart/form-data">
+        <input name="employee_id" value="{{ employee.getId }}" hidden>
+        <table class="table table-bordered">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">Element</th>
+                    <th scope="col">Zawartość</th>
+                </tr>
+            </thead>
+            <tbody id="data">
+                <tr>
+                    <th scope="col">Imię i nazwisko</th>
+                    <td><input id="fullName" class="form-control" type="text" name="full_name" value="{{ employee.getFullName }}"></td>
+                </tr>
+                <tr>
+                    <th scope="col">Stanowisko</th>
+                    <td><input id="position" class="form-control" type="text" name="position" value="{{ employee.getPosition }}"></td>
+                </tr>
+                <tr>
+                    <th scope="col">Specjalizacja</th>
+                    <td><input id="specialization" class="form-control" type="text" name="specialization" value="{{ employee.getSpecialization }}"></td>
+                </tr>
+                <tr>
+                    <th scope="col">Zdjęcie</th>
+                    <td>
+                        <input id="img" class="form-control" type="file" name="img">
+                        <input id="img_original" class="form-control" type="hidden" name="img_original" value="{{ employee.getImg }}">
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="col">Zdjęcie - thumbnail/square</th>
+                    <td>
+                        <input id="img_thumbnail" class="form-control" type="file" name="img_thumbnail">
+                        <input id="img_thumbnail_original" class="form-control" type="hidden" name="img_thumbnail_original" value="{{ employee.getImgThumbnail }}">
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="col">Opis</th>
+                    <td><textarea id="longDesc" class="form-control" name="long_desc" cols="100">{{ employee.getLongDesc }}</textarea></td>
+                </tr>
+            </tbody>
+        </table>
+        <button type="button" class="btn btn-primary btn-lg btn-block" onclick="submitForm(this)">Aktualizuj</button>
+    </form>
+</div>
+<!-- End of Container -->
+
+<!-- textarea function -->
+<script>
+    const tx = document.getElementsByTagName('textarea');
+    for (let i = 0; i < tx.length; i++) {
+        tx[i].setAttribute('style', 'height:' + (tx[i].scrollHeight) + 'px;overflow-y:hidden;');        
+        tx[i].addEventListener("input", OnInput, false);
+    }
+
+    function OnInput() {
+        this.style.height = 'auto';
+        this.style.height = (this.scrollHeight) + 'px';
+    }
+
+</script>
+
+<script>
+    function submitForm() {
+        const element = document.getElementById("offerForm");
+        element.submit();
+    }
+</script>
+
+
+{% endblock %}

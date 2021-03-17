@@ -6,6 +6,7 @@ use Konwersatorium\Domain\OfferBuy;
 use Konwersatorium\Domain\OfferReservation;
 use Konwersatorium\Domain\OfferPaymentPolicy;
 use Konwersatorium\Exceptions\NotFoundException;
+use Konwersatorium\Exceptions\DBException;
 
 class ShopModel extends AbstractModel {
     
@@ -71,7 +72,15 @@ class ShopModel extends AbstractModel {
             
             // values
             $offer_id = $offerReservation->getOfferId();
+            $offer_category = $offerReservation->getOfferCategory();
+            $offer_name = $offerReservation->getOfferName();
+            $lang_code = $offerReservation->getLangCode();
             $name = $offerReservation->getName();
+            $surname = $offerReservation->getSurname();
+            $street = $offerReservation->getStreet();
+            $town = $offerReservation->getTown();
+            $postcode = $offerReservation->getPostcode();
+            $country = $offerReservation->getCountry();
             $email = $offerReservation->getEmail();
             $res_no = $offerReservation->getResNo();
             $res_date = $offerReservation->getResDate();
@@ -79,14 +88,17 @@ class ShopModel extends AbstractModel {
             $res_paid = $offerReservation->getResPaid();
             $amount = $offerReservation->getAmount();
             $currency = $offerReservation->getCurrency();
-            $description = $offerReservation->getDescription();
+            $lesson_type = $offerReservation->getLessonType();
 
             // Insert main data
             // Step 2: Perform database query
-            $sql = "INSERT INTO shop_client_reservations (`offer_id`, `name`, `email`, `res_no`, `res_date`, `res_active`, `res_paid`,
-                    `amount`, `currency`, `description`)
-            VALUES ($offer_id, '$name', '$email', '$res_no', '$res_date', $res_active, $res_paid, 
-                    $amount, '$currency', '$description');";
+            $sql = "INSERT INTO shop_client_reservations (`offer_id`, `offer_category`, `offer_name`, `lang_code`, `name`,
+            `surname`, `street`, `town`, `postcode`, `country`, `email`, `res_no`, `res_date`,
+            `res_active`, `res_paid`, `amount`, `currency`, `lesson_type`)
+
+            VALUES ($offer_id, '$offer_category', '$offer_name', '$lang_code', '$name',
+                '$surname', '$street', '$town', '$postcode', '$country', '$email', '$res_no', '$res_date',
+                $res_active, $res_paid, $amount, '$currency', '$lesson_type');";
             // TODO: should return boolean value
             if ($this->conn->query($sql) === TRUE) {
                 // get last id of inserted entity
@@ -117,8 +129,10 @@ class ShopModel extends AbstractModel {
         if (empty($row)) {
             throw new NotFoundException();
         }
-        return new OfferReservation($row['id'], $row['offer_id'], $row['name'], $row['email'], $row['res_no'], $row['res_date'], 
-            $row['res_active'], $row['res_paid'], $row['amount'], $row['currency'], $row['description']);
+
+        return new OfferReservation($row['id'], $row['offer_id'], $row['offer_category'], $row['offer_name'], $row['lang_code'], $row['name'],
+            $row['surname'], $row['street'], $row['town'], $row['postcode'], $row['country'], $row['email'], $row['res_no'], $row['res_date'],
+            $row['res_active'], $row['res_paid'], $row['amount'], $row['currency'], $row['lesson_type']);
     }
 
     public function updateOfferReservationStatusById($id) {

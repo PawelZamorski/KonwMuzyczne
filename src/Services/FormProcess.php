@@ -69,11 +69,23 @@ class FormProcess {
     */
     public function parseFormToOfferReservation($lang, $validatorResult) {
         //Form field names:
-        // 'offerId', 'offerCategory', 'offerName', 'name' ,'surname', 'street', 'town', 'postcode', 'country', 'currency', 'email'
+        // 'offerId', 'offerCategory', 'offerName', 'langCode', 'name' ,'surname', 'street', 'town', 'postcode', 'country', 'email', 'currency', 'lessonType'
 
         $offer_id = intval($validatorResult['offerId']->getValue());
+        $offer_category = $validatorResult['offerCategory']->getValue();
+        $offer_name = $validatorResult['offerName']->getValue();
+        $lang_code = $validatorResult['langCode']->getValue();
         $name = $validatorResult['name']->getValue();
+        $surname = $validatorResult['surname']->getValue();
+        $street = $validatorResult['street']->getValue();
+        $town = $validatorResult['town']->getValue();
+        $postcode = $validatorResult['postcode']->getValue();
+        $country = $validatorResult['country']->getValue();
         $email = $validatorResult['email']->getValue();
+        $amount = $validatorResult['amount']->getValue(); 
+        $currency = $validatorResult['currency']->getValue();
+        $lesson_type = $validatorResult['lessonType']->getValue();
+
 
         // prepare the data to be inserted
         $res_no = date('YmdHis');
@@ -81,20 +93,9 @@ class FormProcess {
         $res_active = 1;
         $res_paid = 0;
 
-        // use lang to set up amount and currency
-        $amount = '40000'; // amount in polish grosze 
-        $currency = 'PLN';
-        if($lang == 'en' || $lang == 'vi' || $lang == 'zh') {
-            $amount = '10000'; // amount in cents
-            $currency = 'EUR';
-        }
-        // create description
-        $offer_category = $validatorResult['offerCategory']->getValue();
-        $offer_name = $validatorResult['offerName']->getValue();
-        $description = $offer_category . ' ' . $offer_name;
-
-        return new OfferReservation(-1, $offer_id, $name, $email, $res_no, $res_date, $res_active, $res_paid,
-            $amount, $currency, $description);
+        return new OfferReservation(-1, $offer_id, $offer_category, $offer_name, $lang_code, $name,
+            $surname, $street, $town, $postcode, $country, $email, $res_no, $res_date,
+            $res_active, $res_paid, $amount, $currency, $lesson_type);
     }
 
 

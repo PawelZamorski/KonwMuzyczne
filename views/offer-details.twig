@@ -5,18 +5,20 @@
         <div class="row clearfix">
             <div class="col-3">
                 <div class="section-heading">
-                    <h3 class="uppercase">{{ offerByIdArr.getCategory }}</h3>
-                    <h2 class="section-title">{{ offerByIdArr.getName }}</h2>
+                    <h3 class="uppercase">{{ offerCategory.getCategory }}</h3>
+                    <h2 class="section-title">{{ offerCourse.getHeading3 }}</h2>
                     <p>
-                        <img src="{{ offerByIdArr.getImg }}" alt="{{ offerByIdArr.getName }}"/>
+                        <img src="{{ offerCourse.getImg }}" alt="{{ offerCourse.getCourseName }}"/>
                     </p>
+                <!-- Block offer if Gordonki -->
+                {% if offerId != 2 %}
                     <!-- Buy Button -->
                     {% if quantity > 0 %}
                         <div class="text-center">
-                        <a href="/offer/buy/{{ lang }}/{{ offerByIdArr.getOfferId }}" class="button button-secondary uppercase">{{ offerBuyArr.getButtonPay }}</a>
+                        <a href="/offer/buy/{{ lang }}/{{ offerId }}" class="button button-secondary uppercase">{{ offerBuyArr.getButtonPay }}</a>
 
 <!-- 
-<a href="/offer/test-buy/{{ lang }}/{{ offerByIdArr.getOfferId }}" class="button button-secondary uppercase">{{ offerBuyArr.getButtonPay }}</a>
+<a href="/offer/test-buy/{{ lang }}/{{ offerId }}" class="button button-secondary uppercase">{{ offerBuyArr.getButtonPay }}</a>
 -->
                         </div>
                     {% else %}
@@ -26,22 +28,24 @@
                         </div>
                     {% endif %}
                     <!-- End of Buy Button -->
+                {% endif %}
+                <!-- Block offer if Gordonki -->
                 </div>
             </div>
             <div class="col-2-3 alignToPhoto">
                 <!-- Youtube Movie
                 <div>
                     <div class="iframe-container">
-                        <iframe src="{{ offerByIdArr.getMovie }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <iframe src="{{ offerCourse.getMovie }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </div>
                 </div>
-                End of Youtube Movie-->
+                End of Youtube Movie -->
                 <!-- Short description -->
-                {{ offerByIdArr.getShortDesc | raw }}
+                {{ offerCourse.getShortDesc | raw }}
                 <!-- Common description -->
-                {{ offerByIdArr.getCommonDesc | raw }}
+                {{ offerCommonDesc.getCommonDesc | raw }}
                 <!-- Long description -->
-                {{ offerByIdArr.getLongDesc | raw }}
+                {{ offerCourse.getLongDesc | raw }}
             </div>
         </div>
     </section>

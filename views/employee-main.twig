@@ -6,18 +6,10 @@
         </div>
         {% for employee in employeeArr %}
         <blockquote class="col-3 testimonial classic">
-            <a href="teacher/{{ lang }}/{{ employee.getEmpId }}"><img src="{{ employee.getImgThumbnail }}" alt="Zdjęcie {{ employee.getName }}"/></a>
-            <h3><a href="teacher/{{ lang }}/{{ employee.getEmpId }}">{{ employee.getName }}</a></h3>
-            <h4>{{ employee.getCourseName }}</h4>
-            <footer>
-                {% for position in employee.getPosition %}
-                    {{ position }}
-                {% endfor %}
-
-                {% for specialization in employee.specialization %}
-                    {{ specialization }}
-                {% endfor %}
-            </footer>
+            <a href="teacher/{{ lang }}/{{ employee.getId }}"><img src="{{ employee.getImgThumbnail }}" alt="Zdjęcie {{ employee.getFullName }}"/></a>
+            <h3><a href="teacher/{{ lang }}/{{ employee.getId }}">{{ employee.getFullName }}</a></h3>
+            <h4>{{ employee.getSpecialization }}</h4>
+            <footer>{{ employee.getPosition }}</footer>
         </blockquote>
         {% endfor %}
     </div>

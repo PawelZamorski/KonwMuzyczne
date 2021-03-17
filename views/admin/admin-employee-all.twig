@@ -1,8 +1,6 @@
 {% extends 'admin/admin-layout.twig' %}
 
 {% block content %}
-<h1>Test {{ test }} </h1>
-
 <div>
     <table class="table table-hover table-bordered">
         <caption style="caption-side: top;">Lista nauczycieli</caption>
@@ -10,29 +8,23 @@
             <tr>
                 <th scope="col">ID</th>
                 <th scope="col">Imię i nazwisko</th>
-                <th scope="col">Nazwa kursu</th>
+                <th scope="col">Stanowisko</th>
                 <th scope="col">Edycja</th>
-                <th scope="col">Usuń</th>                
+                <th scope="col">Usuń</th>
             </tr>
         </thead>
         <tbody>
         {% for employee in employeeArr %}
             <tr>
-                <th scope="row">{{ employee.getEmpId }}</th>
-                <td>{{ employee.getName }}</td>
-                <td>{{ employee.getCourseName }}</td>
-                <td><a href="/admin/{{ lang }}/teacher/{{ employee.getEmpId }}" class="btn btn-light" role="button" aria-pressed="true">Edytuj</a></td>
-                <td><a href="/admin/{{ lang }}/teacher/{{ employee.getEmpId }}/delete" class="btn btn-light" role="button" aria-pressed="true" onclick="return confirm('Potwierdź usunięcie danych!')">Usuń</a></td>
+                <th scope="row">{{ employee.getId }}</th>
+                <td>{{ employee.getFullName }}</td>
+                <td>{{ employee.getPosition }} | {{ employee.getSpecialization }}</td>
+                <td><a href="/admin/{{ lang }}/teacher/{{ employee.getId }}" class="btn btn-light" role="button" aria-pressed="true">Edytuj</a></td>
+                <td><a href="/admin/{{ lang }}/teacher/{{ employee.getId }}/delete" class="btn btn-light" role="button" aria-pressed="true" onclick="return confirm('Potwierdź usunięcie danych!')">Usuń</a></td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 </div>
-
-<hr>
-
-<!-- Visualisation -->
-{{ include('employee-main.twig') }}
-
 {% endblock %}
 

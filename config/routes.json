@@ -53,11 +53,30 @@
         "controller": "GitaraController",
         "method": "getEnGitara3"
     },
+    "guitarchf1.html": {
+        "controller": "GitaraController",
+        "method": "getChfGitara1"
+    },
+    "guitarchf2.html": {
+        "controller": "GitaraController",
+        "method": "getChfGitara2"
+    },
     "spiew.html": {
         "controller": "GitaraController",
         "method": "getSpiew"
     },
-
+    "wbc-warsztaty.html": {
+        "controller": "GitaraController",
+        "method": "getWbcWarsztaty"
+    },
+    "wbc-warsztaty-2.html": {
+        "controller": "GitaraController",
+        "method": "getWbcWarsztaty2"
+    },
+    "wbc-warsztaty-3.html": {
+        "controller": "GitaraController",
+        "method": "getWbcWarsztaty3"
+    },
 
 
     ":lang": {
@@ -115,7 +134,7 @@
     },
     "offer/category/:lang/:categoryId": {
         "controller": "OfferController",
-        "method": "getOfferByCategoryId",
+        "method": "getCategoryById",
         "params": {
             ":lang": "string",
             ":categoryId": "int"
@@ -236,9 +255,17 @@
         }
     },
 
+    "admin/:lang/logout": {
+        "controller": "AdminHomeController",
+        "method": "logout",
+        "params": {
+            ":lang": "string"
+        }
+    },
+
     "admin/:lang/teacher": {
         "controller": "AdminEmployeeController",
-        "method": "getAllEmployee",
+        "method": "getEmployeeAll",
         "params": {
             ":lang": "string"
         }
@@ -289,27 +316,9 @@
 
     "admin/:lang/offer": {
         "controller": "AdminOfferController",
-        "method": "getAllOffer",
+        "method": "getOfferAll",
         "params": {
             ":lang": "string"
-        }
-    },
-
-    "admin/:lang/offer/:offerId": {
-        "controller": "AdminOfferController",
-        "method": "getOfferById",
-        "params": {
-            ":lang": "string",
-            ":offerId": "int"
-        }
-    },
-
-    "admin/:lang/offer/:offerId/update": {
-        "controller": "AdminOfferController",
-        "method": "updateOfferById",
-        "params": {
-            ":lang": "string",
-            ":offerId": "int"
         }
     },
 
@@ -340,7 +349,7 @@
 
     "admin/:lang/offerCourse": {
         "controller": "AdminOfferController",
-        "method": "getAllCourses",
+        "method": "getCoursesAll",
         "params": {
             ":lang": "string"
         }
@@ -387,11 +396,58 @@
             ":lang": "string",
             ":courseId": "int"
         }
+    },
+
+    "admin/:lang/offerCategory": {
+        "controller": "AdminOfferController",
+        "method": "getOfferCategoryAll",
+        "params": {
+            ":lang": "string"
+        }
+    },
+
+    "admin/:lang/offerCategory/:categoryId": {
+        "controller": "AdminOfferController",
+        "method": "getCategoryById",
+        "params": {
+            ":lang": "string",
+            ":categoryId": "int"
+        }
+    },
+
+    "admin/:lang/offerCategory/:categoryId/update": {
+        "controller": "AdminOfferController",
+        "method": "updateCategoryById",
+        "params": {
+            ":lang": "string",
+            ":categoryId": "int"
+        }
+    },
+
+    "admin/:lang/offerCategory/createOfferCategoryForm": {
+        "controller": "AdminOfferController",
+        "method": "openCreateOfferCategoryForm",
+        "params": {
+            ":lang": "string"
+        }
+    },
+
+    "admin/:lang/offerCategory/create": {
+        "controller": "AdminOfferController",
+        "method": "createOfferCategory",
+        "params": {
+            ":lang": "string"
+        }
+    },
+
+    "admin/:lang/offerCategory/:categoryId/delete": {
+        "controller": "AdminOfferController",
+        "method": "deleteCategoryById",
+        "params": {
+            ":lang": "string",
+            ":categoryId": "int"
+        }
     }
-
-
-
-
 
 
 

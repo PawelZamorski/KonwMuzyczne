@@ -14,11 +14,11 @@
             </tr>
         </thead>
         <tbody>
-        {% for course in allCoursesArr %}
+        {% for course in coursesArr %}
                 <tr>
                     <th scope="row">{{ course.getId }}</th>
                     <td>{{ course.getCode }}</td>
-                    <td><a href="/admin/pl/offerCourse/{{ course.getId }}" class="btn btn-light" role="button" aria-pressed="true">Edytuj</a></td>
+                    <td><a href="/admin/{{ lang }}/offerCourse/{{ course.getId }}" class="btn btn-light" role="button" aria-pressed="true">Edytuj</a></td>
                     <td><a href="/admin/{{ lang }}/offerCourse/{{ course.getId }}/delete" class="btn btn-light" role="button" aria-pressed="true" onclick="return confirm('Potwierdź usunięcie danych!')">Usuń</a></td>
                 </tr>
         {% endfor %}
@@ -27,8 +27,5 @@
 </div>
 
 <hr>
-
-<!-- Visualisation -->
-
 {% endblock %}
 

@@ -15,9 +15,7 @@ use Konwersatorium\Exceptions\LogicException;
 use Konwersatorium\Services\FormProcess;
 use Konwersatorium\Services\MailerBuy;
 use Konwersatorium\Services\RecaptchaValidator;
-
-// use Konwersatorium\Mailer\MailerBuy;
-// use Konwersatorium\Services\PaymentPrzelewy24;
+use Konwersatorium\Services\PaymentPrzelewy24;
 
 class ShopController extends AbstractController {
 
@@ -30,9 +28,15 @@ class ShopController extends AbstractController {
             $menuModel = new MenuModel($this->conn);
             $menuArr = $menuModel->getAllLang($lang);
 
-            // get employee data
+            // get offer data
             $offerModel = new OfferModel($this->conn);
-            $offerByIdArr = $offerModel->getOfferById($lang, $offer_id);
+            $offerById = $offerModel->getOfferById($offer_id);
+            // get OfferCourseNEW based on courses_id
+            $offerCourse = $offerModel->getCourseById($lang, $offerById->getCoursesId());
+            // get OfferCategory based on category_id
+            $offerCategory = $offerModel->getOfferCategoryById($lang, $offerById->getCategoryId());
+
+            // get OfferBuy data 
             $offerBuyArr = $offerModel->getOfferBuy($lang);
 
             // get config data - recaptcha site key
@@ -46,15 +50,21 @@ class ShopController extends AbstractController {
             $formModel = new FormModel($this->conn);
             $formFieldsDesc = $formModel->getAllFields($lang);
 
+            // get the list of countries
+            $countries = $this->getCountries();
+
             // set up properties
             $properties = [
                 'lang' => $lang,
                 'menuArr' => $menuArr,
-                'offerByIdArr' => $offerByIdArr,
+                'offerId' => $offer_id,
+                'offerCourse' => $offerCourse,
+                'offerCategory' => $offerCategory,
                 'offerBuyArr' => $offerBuyArr,
                 'formFieldsDesc' => $formFieldsDesc,
                 'recaptchaConfig' => $recaptchaConfig,
-                'quantity' => $quantity
+                'quantity' => $quantity,
+                'countries' => $countries
                 ];
 
         } catch (NotFoundException $e) {
@@ -81,9 +91,14 @@ class ShopController extends AbstractController {
             $menuModel = new MenuModel($this->conn);
             $menuArr = $menuModel->getAllLang($lang);
 
-            // get employee data
+            // get offer data
             $offerModel = new OfferModel($this->conn);
-            $offerByIdArr = $offerModel->getOfferById($lang, $offer_id);
+            $offerById = $offerModel->getOfferById($offer_id);
+            // get OfferCourseNEW based on courses_id
+            $offerCourse = $offerModel->getCourseById($lang, $offerById->getCoursesId());
+            // get OfferCategory based on category_id
+            $offerCategory = $offerModel->getOfferCategoryById($lang, $offerById->getCategoryId());
+
             $offerBuyArr = $offerModel->getOfferBuy($lang);
 
             // get config data - recaptcha site key
@@ -97,6 +112,8 @@ class ShopController extends AbstractController {
             $formModel = new FormModel($this->conn);
             $formFieldsDesc = $formModel->getAllFields($lang);
 
+            // get the list of countries
+            $countries = $this->getCountries();
 
             // DATA FOR REDIRECTING TO PAYMENT
             // validate recaptcha
@@ -107,8 +124,8 @@ class ShopController extends AbstractController {
                 // validate form
                 $formProcess = new FormProcess();
                 // array of input fields names. Names must be the same as in form.
-                $arrInputFields = array('offerId', 'offerCategory', 'offerName', 'name' ,'surname', 'street', 
-                    'town', 'postcode', 'country', 'currency', 'email');
+                $arrInputFields = array('offerId', 'offerCategory', 'offerName', 'langCode', 'name' ,'surname', 'street', 
+                    'town', 'postcode', 'country', 'email', 'amount', 'currency', 'lessonType');
                 $data = $formProcess->processForm($lang, $arrInputFields);
                 // form values as an associated array
                 $validationResult = $data['validatorResult'];
@@ -196,11 +213,14 @@ class ShopController extends AbstractController {
             $properties = [
                 'lang' => $lang,
                 'menuArr' => $menuArr,
-                'offerByIdArr' => $offerByIdArr,
+                'offerId' => $offer_id,
+                'offerCourse' => $offerCourse,
+                'offerCategory' => $offerCategory,
                 'offerBuyArr' => $offerBuyArr,
                 'formFieldsDesc' => $formFieldsDesc,
                 'recaptchaConfig' => $recaptchaConfig,
                 'quantity' => $quantity,
+                'countries' => $countries,
                 // data with error message
                 'errorMessage' => $errorMessage
                 ];
@@ -221,7 +241,7 @@ class ShopController extends AbstractController {
             $menuModel = new MenuModel($this->conn);
             $menuArr = $menuModel->getAllLang($lang);
 
-            // get employee data
+            // get OfferBuy data
             $offerModel = new OfferModel($this->conn);
             $offerBuyArr = $offerModel->getOfferBuy($lang);
 
@@ -233,6 +253,14 @@ class ShopController extends AbstractController {
             // $errorMessage
             $processed = true;
 
+            // set up properties
+            $properties = [
+                'lang' => $lang,
+                'menuArr' => $menuArr,
+                'offerBuyArr' => $offerBuyArr,
+                'offerReservation' => $offerReservation
+            ];
+        
         } catch (NotFoundException $e) {
             $this->log->warning('NotFoundException: ' . $e);
             $errorController = new ErrorController($this->request);
@@ -244,14 +272,6 @@ class ShopController extends AbstractController {
         }
 
         if($processed) {
-            // set up properties
-            $properties = [
-                'lang' => $lang,
-                'menuArr' => $menuArr,
-                'offerBuyArr' => $offerBuyArr,
-                'offerReservation' => $offerReservation
-                ];
-
             return $this->render('offer-payment.twig', $properties);
         } else {
             // TODO: if reservation is not valid, redirect to url: offer buy
@@ -260,9 +280,7 @@ class ShopController extends AbstractController {
     }
 
 
-
     public function paymentGateway($lang) {
-        $this->log->info('OfferController::paymentGateway');
 
         // instantiate array
         $properties = array();
@@ -278,6 +296,9 @@ class ShopController extends AbstractController {
             if(isset($_POST['res_id'])) $res_id = $_POST['res_id'];
             // check if res_id is empty. If it is empty throw exception
             if(empty($res_id) || !is_numeric($res_id)) {
+                echo "res_no is empty or not numeric";
+
+
                 throw new NotFoundException();
             } else {
                 // convert to number
@@ -294,6 +315,8 @@ class ShopController extends AbstractController {
             // if $response = 0 -> throw exception.
             // TODO  Use NotFoundException for a while, but refactor
             if(empty($token)) {
+                echo "Empty token";
+
                 throw new NotFoundException();
             }
 
@@ -304,6 +327,10 @@ class ShopController extends AbstractController {
                 ];
 
         } catch (NotFoundException $e) {
+
+            echo "other reason";
+
+
             $this->log->warning('NotFoundException: ' . $e);
             $errorController = new ErrorController($this->request);
             return $errorController->notFoundWithMessage($lang, 'Error details: data fetching faild. Token empty.');
@@ -312,7 +339,11 @@ class ShopController extends AbstractController {
  
         // if $response != 0 -> redirect to pzelewy24
 //        header("Location: http://www.example.com/another-page.php", true, 301); // use 301 to move permanently
-        header("location: https://sandbox.przelewy24.pl/trnRequest/" . $token); // 302 id default, it is move temporary
+        
+        // TEST - use url for przelewy24 sandbox
+        // header("location: https://sandbox.przelewy24.pl/trnRequest/" . $token); // 302 id default, it is move temporary
+
+        header("location: https://secure.przelewy24.pl/trnRequest/" . $token); // 302 id default, it is move temporary
         exit();
     }
 
@@ -385,162 +416,13 @@ class ShopController extends AbstractController {
         exit();
     }
 
+    private function getCountries() {
+        $countries = array(
+                "AF"=>"Afghanistan","AL"=>"Albania","DZ"=>"Algeria","AS"=>"American Samoa","AD"=>"Andorra","AO"=>"Angola","AI"=>"Anguilla","AQ"=>"Antarctica","AG"=>"Antigua and Barbuda","AR"=>"Argentina","AM"=>"Armenia","AW"=>"Aruba","AU"=>"Australia","AT"=>"Austria","AZ"=>"Azerbaijan","BS"=>"Bahamas (the)","BH"=>"Bahrain","BD"=>"Bangladesh","BB"=>"Barbados","BY"=>"Belarus","BE"=>"Belgium","BZ"=>"Belize","BJ"=>"Benin","BM"=>"Bermuda","BT"=>"Bhutan","BO"=>"Bolivia (Plurinational State of)","BQ"=>"Bonaire, Sint Eustatius and Saba","BA"=>"Bosnia and Herzegovina","BW"=>"Botswana","BV"=>"Bouvet Island","BR"=>"Brazil","IO"=>"British Indian Ocean Territory (the)","BN"=>"Brunei Darussalam","BG"=>"Bulgaria","BF"=>"Burkina Faso","BI"=>"Burundi","CV"=>"Cabo Verde","KH"=>"Cambodia","CM"=>"Cameroon","CA"=>"Canada","KY"=>"Cayman Islands (the)","CF"=>"Central African Republic (the)","TD"=>"Chad","CL"=>"Chile","CN"=>"China","CX"=>"Christmas Island","CC"=>"Cocos (Keeling) Islands (the)","CO"=>"Colombia","KM"=>"Comoros (the)","CD"=>"Congo (the Democratic Republic of the)","CG"=>"Congo (the)","CK"=>"Cook Islands (the)","CR"=>"Costa Rica","HR"=>"Croatia","CU"=>"Cuba","CW"=>"Curaçao","CY"=>"Cyprus","CZ"=>"Czechia","CI"=>"Côte d'Ivoire","DK"=>"Denmark","DJ"=>"Djibouti","DM"=>"Dominica","DO"=>"Dominican Republic (the)","EC"=>"Ecuador","EG"=>"Egypt","SV"=>"El Salvador","GQ"=>"Equatorial Guinea","ER"=>"Eritrea","EE"=>"Estonia","SZ"=>"Eswatini","ET"=>"Ethiopia","FK"=>"Falkland Islands (the) [Malvinas]","FO"=>"Faroe Islands (the)","FJ"=>"Fiji","FI"=>"Finland","FR"=>"France","GF"=>"French Guiana","PF"=>"French Polynesia","TF"=>"French Southern Territories (the)","GA"=>"Gabon","GM"=>"Gambia (the)","GE"=>"Georgia","DE"=>"Germany","GH"=>"Ghana","GI"=>"Gibraltar","GR"=>"Greece","GL"=>"Greenland","GD"=>"Grenada","GP"=>"Guadeloupe","GU"=>"Guam","GT"=>"Guatemala","GG"=>"Guernsey","GN"=>"Guinea","GW"=>"Guinea-Bissau","GY"=>"Guyana","HT"=>"Haiti","HM"=>"Heard Island and McDonald Islands","VA"=>"Holy See (the)","HN"=>"Honduras","HK"=>"Hong Kong","HU"=>"Hungary","IS"=>"Iceland","IN"=>"India","ID"=>"Indonesia","IR"=>"Iran (Islamic Republic of)","IQ"=>"Iraq","IE"=>"Ireland","IM"=>"Isle of Man","IL"=>"Israel","IT"=>"Italy","JM"=>"Jamaica","JP"=>"Japan","JE"=>"Jersey","JO"=>"Jordan","KZ"=>"Kazakhstan","KE"=>"Kenya","KI"=>"Kiribati","KP"=>"Korea (the Democratic People's Republic of)","KR"=>"Korea (the Republic of)","KW"=>"Kuwait","KG"=>"Kyrgyzstan","LA"=>"Lao People's Democratic Republic (the)","LV"=>"Latvia","LB"=>"Lebanon","LS"=>"Lesotho","LR"=>"Liberia","LY"=>"Libya","LI"=>"Liechtenstein","LT"=>"Lithuania","LU"=>"Luxembourg","MO"=>"Macao","MG"=>"Madagascar","MW"=>"Malawi","MY"=>"Malaysia","MV"=>"Maldives","ML"=>"Mali","MT"=>"Malta","MH"=>"Marshall Islands (the)","MQ"=>"Martinique","MR"=>"Mauritania","MU"=>"Mauritius","YT"=>"Mayotte","MX"=>"Mexico","FM"=>"Micronesia (Federated States of)","MD"=>"Moldova (the Republic of)","MC"=>"Monaco","MN"=>"Mongolia","ME"=>"Montenegro","MS"=>"Montserrat","MA"=>"Morocco","MZ"=>"Mozambique","MM"=>"Myanmar","NA"=>"Namibia","NR"=>"Nauru","NP"=>"Nepal","NL"=>"Netherlands (the)","NC"=>"New Caledonia","NZ"=>"New Zealand","NI"=>"Nicaragua","NE"=>"Niger (the)","NG"=>"Nigeria","NU"=>"Niue","NF"=>"Norfolk Island","MP"=>"Northern Mariana Islands (the)","NO"=>"Norway","OM"=>"Oman","PK"=>"Pakistan","PW"=>"Palau","PS"=>"Palestine, State of","PA"=>"Panama","PG"=>"Papua New Guinea","PY"=>"Paraguay","PE"=>"Peru","PH"=>"Philippines (the)","PN"=>"Pitcairn","PL"=>"Poland","PT"=>"Portugal","PR"=>"Puerto Rico","QA"=>"Qatar","MK"=>"Republic of North Macedonia","RO"=>"Romania","RU"=>"Russian Federation (the)","RW"=>"Rwanda","RE"=>"Réunion","BL"=>"Saint Barthélemy","SH"=>"Saint Helena, Ascension and Tristan da Cunha","KN"=>"Saint Kitts and Nevis","LC"=>"Saint Lucia","MF"=>"Saint Martin (French part)","PM"=>"Saint Pierre and Miquelon","VC"=>"Saint Vincent and the Grenadines","WS"=>"Samoa","SM"=>"San Marino","ST"=>"Sao Tome and Principe","SA"=>"Saudi Arabia","SN"=>"Senegal","RS"=>"Serbia","SC"=>"Seychelles","SL"=>"Sierra Leone","SG"=>"Singapore","SX"=>"Sint Maarten (Dutch part)","SK"=>"Slovakia","SI"=>"Slovenia","SB"=>"Solomon Islands","SO"=>"Somalia","ZA"=>"South Africa","GS"=>"South Georgia and the South Sandwich Islands","SS"=>"South Sudan","ES"=>"Spain","LK"=>"Sri Lanka","SD"=>"Sudan (the)","SR"=>"Suriname","SJ"=>"Svalbard and Jan Mayen","SE"=>"Sweden","CH"=>"Switzerland","SY"=>"Syrian Arab Republic","TW"=>"Taiwan (Province of China)","TJ"=>"Tajikistan","TZ"=>"Tanzania, United Republic of","TH"=>"Thailand","TL"=>"Timor-Leste","TG"=>"Togo","TK"=>"Tokelau","TO"=>"Tonga","TT"=>"Trinidad and Tobago","TN"=>"Tunisia","TR"=>"Turkey","TM"=>"Turkmenistan","TC"=>"Turks and Caicos Islands (the)","TV"=>"Tuvalu","UG"=>"Uganda","UA"=>"Ukraine","AE"=>"United Arab Emirates (the)","GB"=>"United Kingdom of Great Britain and Northern Ireland (the)","UM"=>"United States Minor Outlying Islands (the)","US"=>"United States of America (the)","UY"=>"Uruguay","UZ"=>"Uzbekistan","VU"=>"Vanuatu","VE"=>"Venezuela (Bolivarian Republic of)","VN"=>"Viet Nam","VG"=>"Virgin Islands (British)","VI"=>"Virgin Islands (U.S.)","WF"=>"Wallis and Futuna","EH"=>"Western Sahara","YE"=>"Yemen","ZM"=>"Zambia","ZW"=>"Zimbabwe","AX"=>"Åland Islands"
+            );
 
-
-
-
-    public function getPaymentPolicy($lang) {
-        // instantiate array
-        $properties = array();
-
-        try {
-            // get menu data
-            $menuModel = new MenuModel($this->conn);
-            $menuArr = $menuModel->getAllLang($lang);
-
-            $shopModel = new ShopModel($this->conn);
-            $offerPaymentPolicy = $shopModel->getPaymentPolicy($lang);
-
-
-            // set up properties
-            $properties = [
-                'lang' => $lang,
-                'menuArr' => $menuArr,
-                'offerPaymentPolicy' => $offerPaymentPolicy
-                ];
-
-        } catch (NotFoundException $e) {
-            $this->log->warning('NotFoundException: ' . $e);
-            $errorController = new ErrorController($this->request);
-            return $errorController->notFoundWithMessage($lang, 'Error details: data fetching failed.');
-        }
-
-        return $this->render('offer-payment-policy.twig', $properties);
+        return $countries;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-    public function payOfferById_TEST($lang, $offer_id) {
-        // instantiate array
-        $properties = array();
-        // variables for conditions
-        $isRecaptchaValid = false;
-        $isFormValid = false;
-        $isProductAvailable = false;
-        $isEmailSend = false;
-
-        try {
-            // DATA FOR REDIRECTING TO FORM (COPIED FROM )
-            // get menu data
-            $menuModel = new MenuModel($this->conn);
-            $menuArr = $menuModel->getAllLang($lang);
-
-            // get employee data
-            $offerModel = new OfferModel($this->conn);
-            $offerByIdArr = $offerModel->getOfferById($lang, $offer_id);
-            $offerBuyArr = $offerModel->getOfferBuy($lang);
-
-            // get config data - recaptcha site key
-            $recaptchaConfig = Config::getConfig()->get('recaptcha');
-
-            $shopModel = new ShopModel($this->conn);
-            // check availibility of an item
-            $quantity = $shopModel->getItemQuantity($offer_id);
-
-            // get form fields description data
-            $formModel = new FormModel($this->conn);
-            $formFieldsDesc = $formModel->getAllFields($lang);
-
-            // DATA FOR REDIRECTING TO PAYMENT
-            // validate recaptcha
-           $recaptchaValidator = new RecaptchaValidator();
-           $isRecaptchaValid = $recaptchaValidator->isRecaptchaValid();
-
-            if($isRecaptchaValid) {
-                // validate form
-                $formProcess = new FormProcess();
-                // array of input fields names. Names must be the same as in form.
-                $arrInputFields = array('offerId', 'offerCategory', 'offerName', 'name' ,'surname', 'street', 
-                    'town', 'postcode', 'country', 'currency', 'email');
-                $data = $formProcess->processForm($lang, $arrInputFields);
-                // // form values as an associated array
-                // $validationResult = $data['validatorResult'];
-
-                // // check availability of an item
-                // $offerId = intval($validationResult['offerId']->getValue()); // TODO: check if offerId is number
-                // $shopModel = new ShopModel($this->conn);
-
-                // $isFormValid = $data['isFormValid'];
-                // $quantity = $shopModel->getItemQuantity($offerId);
-                // $isProductAvailable = $quantity > 0;
-            }
-
-
-
-
-            // DATA FOR REDIRECTIONG TO FORM WITH ERROR MESSAGE
-            // set up error message
-            $errorMessage = '';
-
-            if(!$isEmailSend) {
-                $errorMessage = 'Opppssss! Email nie został wysłany. Prosimy o kontakt z biurem.';
-            }
-            if (!$isProductAvailable) {
-                $errorMessage = 'Niestety, oferta nie jest już dostępna. Prosimy o kontakt z biurem.';
-            }
-            if (!$isFormValid) {
-                $errorMessage = 'Dane wpisane do formularza są niepoprawne. Prosimy o ponowne wypełnienie.';
-            }
-            if (!$isRecaptchaValid) {
-                $errorMessage = 'Recaptcha nie została przeprowadzona pomyślnie. Prosimy o ponowne wypełnienie formularza.';
-            }
-
-
-        } catch (NotFoundException $e) {
-            $this->log->warning('NotFoundException: ' . $e);
-            $errorController = new ErrorController($this->request);
-            return $errorController->notFoundWithMessage($lang, 'Error details: data fetching failed.');
-        } catch (DbException $e) {
-            $this->log->error('DbException: ' . $e);
-            $errorController = new ErrorController($this->request);
-            return $errorController->notFoundWithMessage($lang, $e);
-        } catch (LogicException $e) {
-            $this->log->error('LogicException: ' . $e);
-            $errorController = new ErrorController($this->request);
-            return $errorController->notFoundWithMessage($lang, $e);
-        }
-
-        if(false) {
-        } else {
-            // redirect to form with error message
-
-            // set up properties
-            $properties = [
-                'lang' => $lang,
-                'menuArr' => $menuArr,
-                'offerByIdArr' => $offerByIdArr,
-                'offerBuyArr' => $offerBuyArr,
-                'formFieldsDesc' => $formFieldsDesc,
-                'recaptchaConfig' => $recaptchaConfig,
-                'quantity' => $quantity,
-                // data with error message
-                'errorMessage' => $errorMessage
-                ];
-                            
-            return $this->render('offer-buy-form.twig', $properties); // display offer-buy page with error message
-        }
-    }
-
-
 
 }
 

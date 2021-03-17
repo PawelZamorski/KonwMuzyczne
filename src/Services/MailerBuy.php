@@ -51,12 +51,49 @@ class MailerBuy {
         if ($mail) {
             // Set a 200 (okay) response code.
             http_response_code(200);
+            $this->sendInfoToAdmin();
             return true;
         } else {
             // Set a 500 (internal server error) response code.
             http_response_code(500);
             return false;
         }
+    }
+
+    private function sendInfoToAdmin() {
+        // Set the recipient email address.
+        $recipient = "sekretariat@konwersatoriummuzyczne.pl";
+
+
+        // Set the email subject.
+        $subject = "Nowa rezerwacja kursu. Numer rezerwacji: " . $this->offerReservation->getResNo();
+       
+        // Build the email content.
+        $email_content = "Zarejestrowano rezerwację kursu. 
+                        <br> Numer rezerwacji: " . $this->offerReservation->getResNo() . "
+                        <br> Imię: " . $this->offerReservation->getName() . "
+                        <br> Email: " . $this->offerReservation->getEmail() . "
+                        <br> Kategoria: " . $this->offerReservation->getOfferCategory() . "
+                        <br> Nazwa kursu: " . $this->offerReservation->getOfferName() . "
+                        <br> Data rezerwacji: " . $this->offerReservation->getResDate() . "
+                        ";
+
+        // To send HTML mail, the Content-type header must be set
+        $headers[] = 'MIME-Version: 1.0';
+        // Use plain text and html version of an email
+        // $headers[] = 'Content-Type: multipart/alternative; boundary=boundary1q2w3e4r5t6y';
+        
+        $headers[] = 'Content-type: text/html; charset=UTF-8';
+        // Additional headers
+        // $headers[] = 'From: sekretariat@konwersatoriummuzyczne.pl';
+        
+        $headers[] = 'From: ' . $this->config_mailer['from'];
+
+        // Send the email.
+        set_time_limit(120); // extend the execution time 
+        $mail=mail($recipient, $subject, $email_content, implode("\r\n", $headers));
+
+        // TODO: log if email not send
     }
 
 
@@ -204,7 +241,7 @@ class MailerBuy {
                                                                     <tr>
                                                                         <td class='text' style='color:#333333; font-family:Roboto, Georgia, serif; font-size:16px; line-height:28px; text-align:justify; font-weight:300;'>
                                                                             <multiline>
-                                                                            " . $this->offerReservation->getDescription() . "
+                                                                            " . $this->offerReservation->getOfferCategory() . ", " . $this->offerReservation->getOfferCategory() . "
                                                                             </multiline>
                                                                         </td>
                                                                     </tr>
@@ -464,8 +501,8 @@ class MailerBuy {
                                                         <tr>
                                                             <td class='text' style='color:#333333; font-family:Roboto, Georgia, serif; font-size:16px; line-height:28px; text-align:justify; font-weight:300;'>
                                                                 <multiline>
-                                                                    Kurs " . $this->offerReservation->getDescription() .
-                                                                "</multiline>
+                                                                    Kurs  " . $this->offerReservation->getOfferCategory() . ", " . $this->offerReservation->getOfferCategory() . "
+                                                                </multiline>
                                                             </td>
                                                         </tr>
                                                         <tr>

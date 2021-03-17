@@ -15,7 +15,8 @@ class Authentication {
 
     public function login($user_name, $user_password) {
         if($this->isAuthenticated($user_name, $user_password)) {
-            session_start();
+            // Set session variables
+            $_SESSION["user_name"] = $user_name;
             return true;
         } else {
             return false;
@@ -23,13 +24,17 @@ class Authentication {
     }
 
     public function isLoggedIn() {
-        // check if the session is active and user_name and user_password is set up
-        return true;
+        // check if the session is active and $_Session user_name is set up
+        if(!empty($_SESSION['user_name']) && (session_status() === PHP_SESSION_ACTIVE)) {
+            return true;
+        } else {
+            return false;
+        }
     }
     
     public function logout() {
 		session_destroy();
-		header("Location: /");
+//		header("Location: /");
     }
     
     private function isAuthenticated($user_name, $user_password) {

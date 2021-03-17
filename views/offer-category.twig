@@ -6,14 +6,14 @@
         <div class="row clearfix">
             <div class="col-3">
                 <div class="section-heading">
-                    <h3>{{ offerMainByCategoryArr.getHeading3Category }}</h3>
-                    <h2 class="section-title">{{ offerMainByCategoryArr.getCategory }}</h2>
-                    <p><img src="{{ offerMainByCategoryArr.getImg }}" alt="Lekcje indywidualne {{ offerMainByCategoryArr.getHeading3 }}" /></p>
+                    <h3>{{ offerCategory.getHeading3 }}</h3>
+                    <h2 class="section-title">{{ offerCategory.getCategory }}</h2>
+                    <p><img src="{{ offerCategory.getImg }}" alt="Lekcje indywidualne {{ offerCategory.getHeading3 }}" /></p>
                 </div>
             </div>
             <div class="col-2-3 alignToPhoto">
-            {{ offerMainByCategoryArr.getCommonDesc | raw }}
-            {{ offerMainByCategoryArr.getLongDesc | raw }}
+            {{ offerCommonDesc.getCommonDesc | raw }}
+            {{ offerCategory.getLongDesc | raw }}
             </div>
         </div>
     </section>
@@ -21,17 +21,17 @@
     <section class="secondary-color text-center scrollto clearfix ">
         <div class="row clearfix">
             <div class="section-heading">
-                <h3>{{ offerMainByCategoryArr.getHeading3 }}</h3>
-                <h2 class="section-title">{{ offerMainByCategoryArr.getHeading2 }}</h2>
+                <h3>{{ offerMain.getHeading3 }}</h3>
+                <h2 class="section-title">{{ offerMain.getHeading2 }}</h2>
             </div>
 
-            {% for offer in offerByCategoryArr %}
+            {% for offerId, offerCourses in offerCoursesByCategoryArr %}
                 <div class="pricing-block col-3 wow fadeInUp" data-wow-delay="0.8s">
                     <div class="pricing-block-content">
-                        <h3>{{ offer.getType }}</h3>
-                        <p class="pricing-sub">{{ offer.getCategory }}</p>
-                        <span><a href="/offer/details/{{ lang }}/{{ offer.getOfferId }}"><img src="{{ offer.getImgThumbnail }}" alt="{{ offer.getType }} {{ offer.getName }}"/></a></span>
-                        <a href="/offer/details/{{ lang }}/{{ offer.getOfferId }}" class="button">{{ offerMainArr.getButton }}</a>
+                        <h3>{{ offerCourses.getCourseName }}</h3>
+                        <p class="pricing-sub">{{ offerCategory.getCategory }}</p>
+                        <span><a href="/offer/details/{{ lang }}/{{ offerId }}"><img src="{{ offerCourses.getImgThumbnail }}" alt="{{ offerCourses.getCourseName }}"/></a></span>
+                        <a href="/offer/details/{{ lang }}/{{ offerId }}" class="button">{{ offerCourses.getButton }}</a>
                     </div>
                 </div>
             {% endfor %}

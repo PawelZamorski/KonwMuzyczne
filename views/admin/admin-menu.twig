@@ -1,66 +1,62 @@
-<div class="container-fluid">
-    <!-- Language Icons -->
-    <div>
-        <ul class="social-icons">
-            <li class="inline-block">
-                <a title="Dla Polskich Studentów" href="/admin/pl">
-                    <img src="/images/flags/poland.png" />
-                </a>
-            </li>
-            <li class="inline-block">
-                <a title="For Vietnamese Students" href="/admin/vi">
-                    <img src="/images/flags/vietnam.png" />
-                </a>
-            </li>
-            <li class="inline-block">
-                <a title="For English Students" href="/admin/en">
-                    <img src="/images/flags/england.png"  />
-                </a>
-            </li>
-            <li class="inline-block">
-                <a title="For Chinese Students" href="/admin/zh">
-                    <img src="/images/flags/china.png" />
-                </a>
-            </li>
-        </ul>
+<h1>Panel administracyjny</h1>
+<hr>
+<nav class="navbar navbar-expand-lg navbar-light sticky-top" style="background-color: #e3f2fd;">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/admin/{{ lang }}">Help</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Nauczyciele</a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="/admin/{{ lang }}/teacher">Wyświetl</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="/admin/{{ lang }}/teacher/createEmployeeForm">Utwórz</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-primary">|</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Kursy</a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="/admin/{{ lang }}/offerCourse">Wyświetl</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="/admin/{{ lang }}/offerCourse/createOfferCourseForm">Utwórz</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Kategorie</a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="/admin/{{ lang }}/offerCategory">Wyświetl</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="/admin/{{ lang }}/offerCategory/createOfferCategoryForm">Utwórz</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Oferta</a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="/admin/{{ lang }}/offer">Wyświetl</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="/admin/{{ lang }}/offer/createOfferForm">Utwórz</a></li>
+          </ul>
+        </li>
+      </ul>
+      <ul class="d-flex navbar-nav mb-2 mb-lg-0">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Język</a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="/admin/pl">pl <img src="/images/flags/poland.png" /></a></li>
+            <li><a class="dropdown-item" href="/admin/en">en <img src="/images/flags/england.png" /></a></li>
+            <li><a class="dropdown-item" href="/admin/vi">vi <img src="/images/flags/vietnam.png" /></a></li>
+            <li><a class="dropdown-item" href="/admin/zh">zh <img src="/images/flags/china.png" /></a></li>
+          </ul>
+        </li>
+      </ul>
+      <a class="d-flex btn btn-outline-primary" href="/admin/{{ lang }}/logout">Log out</a>
     </div>
-
-    <!-- End of Language Icons -->
-    <h1>Panel administracyjny</h1>
-    <a class="btn btn-info" href="/admin/{{ lang }}" role="button" aria-pressed="true">Home</a>
-<!-- Update -->
-    <a class="btn btn-info" href="/admin/{{ lang }}/offer" role="button" aria-pressed="true">Oferta</a>
-    <a class="btn btn-info" href="/admin/{{ lang }}/offerCourse" role="button" aria-pressed="true">Kursy</a>
-    <a class="btn btn-info" href="/admin/{{ lang }}/teacher" role="button" aria-pressed="true">Nauczyciele</a>
-<!-- 
-    <div class="dropdown">
-        <a class="btn btn-info" href="#" role="button" id="dropdownMenuLink" aria-haspopup="true" aria-expanded="false">
-            Główna strona
-        </a>
-        <div class="dropdown-content" aria-labelledby="dropdownMenuLink">
-            <a class="dropdown-item" href="/admin/main/banner/banner.php">Baner</a>
-            <a class="dropdown-item" href="/admin/main/about/about.php">About</a>
-            <a class="dropdown-item" href="/admin/main/contact/contact.php">Contact</a>
-            <a class="dropdown-item" href="/admin/main/references/references.php">References</a>
-        </div>
-    </div>
--->
-
-<!-- Add -->
-    <div class="dropdown">
-        <a class="btn btn-info" href="#" role="button" id="dropdownMenuLink" aria-haspopup="true" aria-expanded="false">
-            Dodaj
-        </a>
-        <div class="dropdown-content" aria-labelledby="dropdownMenuLink">
-            <a class="dropdown-item" href="/admin/{{ lang }}/offer/createOfferForm">Oferta</a>
-            <a class="dropdown-item" href="/admin/{{ lang }}/offerCourse/createOfferCourseForm">Kurs</a>
-            <a class="dropdown-item" href="/admin/{{ lang }}/teacher/createEmployeeForm">Nauczyciel</a>
-<!--            <a class="dropdown-item" href="#">Kurs</a>
-            <a class="dropdown-item" href="#">Kategoria</a>
-            <a class="dropdown-item" href="#">Typ kursu</a>
-            <a class="dropdown-item" href="#">Nazwa kursu</a> -->
-        </div>
-    </div>
-    <hr>
-</div>
-
+  </div>
+</nav>
+<hr>

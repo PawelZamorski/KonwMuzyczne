@@ -4,12 +4,20 @@ namespace Konwersatorium\Controllers;
 
 use Konwersatorium\Exceptions\NotFoundException;
 use Konwersatorium\Services\Authentication;
+use Konwersatorium\Core\Request;
+
 
 /*
 * Admin Homepage Controller
 */
 
 class AdminHomeController extends AbstractController {
+
+    public function __construct(Request $request) {
+        parent::__construct($request);
+        session_start();
+    }
+
     
     public function loadHomepageLang($lang) {
         // instantiate array
@@ -52,4 +60,30 @@ class AdminHomeController extends AbstractController {
 
         }
     }
+        
+    public function logout($lang) {
+        // instantiate array
+        $properties = array();
+
+        // TODO move authentication to parent class, so it will be done for all admin controllers
+        // authentication service to login
+        $auth = new Authentication;
+
+        try {
+            $auth->logout();
+
+            // set up properties
+            $properties = [
+                'lang' => $lang
+                ];
+
+        } catch (NotFoundException $e) {
+            $this->log->warning('NotFoundException: ' . $e);
+            $errorController = new ErrorController($this->request);
+            return $errorController->notFoundWithMessage($lang, 'Error details: data fetching failed.');            
+        }
+        // user is not logged in and did not send any post data
+        return $this->render('admin/admin-login.twig', $properties);
+    }
+
 }

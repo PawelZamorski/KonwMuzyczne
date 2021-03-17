@@ -19,13 +19,13 @@ class EmployeeController extends AbstractController {
 
             // get employee data
             $employeeModel = new EmployeeModel($this->conn);
-            $employeeArr = $employeeModel->getEmployeeById($lang, $employee_id);
+            $employee = $employeeModel->getEmployeeById($lang, $employee_id);
 
             // set up properties
             $properties = [
                 'lang' => $lang,
                 'menuArr' => $menuArr,
-                'employeeArr' => $employeeArr
+                'employee' => $employee
                 ];
 
         } catch (NotFoundException $e) {

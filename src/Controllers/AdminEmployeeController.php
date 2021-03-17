@@ -6,24 +6,30 @@ use Konwersatorium\Models\EmployeeModel;
 use Konwersatorium\Exceptions\NotFoundException;
 use Konwersatorium\Exceptions\DbException;
 use Konwersatorium\Services\Authentication;
+use Konwersatorium\Core\Request;
 
+// OK
 class AdminEmployeeController extends AbstractController {
 
-    public function getAllEmployee($lang) {
+    public function __construct(Request $request) {
+        parent::__construct($request);
+        session_start();
+    }
+
+    public function getEmployeeAll($lang) {
         // instantiate array
         $properties = array();
 
         try {
             // get employee data
             $employeeModel = new EmployeeModel($this->conn);
-            $employeeArr = $employeeModel->getAll($lang);
+            $employeeArr = $employeeModel->getEmployeeAll($lang);
 
             // set up properties
             $properties = [
                 'lang' => $lang,
-                'employeeArr' => $employeeArr,
-                'test' => 'alamakota'
-                ];
+                'employeeArr' => $employeeArr
+            ];
 
         } catch (NotFoundException $e) {
             $this->log->warning('NotFoundException: ' . $e);
@@ -36,9 +42,8 @@ class AdminEmployeeController extends AbstractController {
         } else {
             // set up properties
             $properties = [
-                'lang' => $lang,
-                'userName' => 'default user name'
-                ];
+                'lang' => $lang
+            ];
             // user is not logged in and did not send any post data
             return $this->render('admin/admin-login.twig', $properties);            
         }
@@ -51,18 +56,12 @@ class AdminEmployeeController extends AbstractController {
         try {
             // get employee data
             $employeeModel = new EmployeeModel($this->conn);
-            $employeeArr = $employeeModel->getEmployeeById($lang, $employee_id);
-            $courseNamesArr = $employeeModel->getAllCourseNames($lang);
-            $positionsArr = $employeeModel->getAllPositions($lang);
-            $specializationsArr = $employeeModel->getAllSpecializations($lang);
+            $employee = $employeeModel->getEmployeeById($lang, $employee_id);
 
             // set up properties
             $properties = [
                 'lang' => $lang,
-                'employeeArr' => $employeeArr,
-                'courseNamesArr' => $courseNamesArr,
-                'positionsArr' => $positionsArr,
-                'specializationsArr' => $specializationsArr
+                'employee' => $employee,
                 ];
 
         } catch (NotFoundException $e) {
@@ -72,7 +71,7 @@ class AdminEmployeeController extends AbstractController {
         }
 
         if($this->isLoggedIn()) {
-            return $this->render('admin/admin-employee-details.twig', $properties);
+            return $this->render('admin/admin-employee-update.twig', $properties);
         } else {
             // set up properties
             $properties = [
@@ -91,9 +90,9 @@ class AdminEmployeeController extends AbstractController {
             // TODO: display message
             $message = $employeeModel->updateEmployeeById($lang, $employee_id);
             
-            $host = $_SERVER['HTTP_HOST'];
+            $host = $_SERVER['SERVER_NAME'];
             $uri = "/admin/$lang/teacher/$employee_id";
-            header("Location: http://$host$uri");
+            header("Location: https://$host$uri");
             exit;
             
         } catch (DbException $e) {
@@ -110,9 +109,9 @@ class AdminEmployeeController extends AbstractController {
             // TODO: display message
             $message = $employeeModel->deleteEmployeeById($lang, $employee_id);
             
-            $host = $_SERVER['HTTP_HOST'];
+            $host = $_SERVER['SERVER_NAME'];
             $uri = "/admin/$lang/teacher";
-            header("Location: http://$host$uri");
+            header("Location: https://$host$uri");
             exit;
             
         } catch (DbException $e) {
@@ -129,35 +128,18 @@ class AdminEmployeeController extends AbstractController {
         // always use pl language for create employee form
         $lang = 'pl';
 
-        try {
-            // get employee data
-            $employeeModel = new EmployeeModel($this->conn);
-            $courseNamesArr = $employeeModel->getAllCourseNames($lang);
-            $positionsArr = $employeeModel->getAllPositions($lang);
-            $specializationsArr = $employeeModel->getAllSpecializations($lang);
-
-            // set up properties
-            $properties = [
-                'lang' => $lang,
-                'courseNamesArr' => $courseNamesArr,
-                'positionsArr' => $positionsArr,
-                'specializationsArr' => $specializationsArr
-                ];
-
-        } catch (NotFoundException $e) {
-            $this->log->warning('NotFoundException: ' . $e);
-            $errorController = new ErrorController($this->request);
-            return $errorController->notFoundWithMessage($lang, 'Error details: data fetching failed.');
-        }
+        // set up properties
+        $properties = [
+            'lang' => $lang
+        ];
 
         if($this->isLoggedIn()) {
             return $this->render('admin/admin-employee-create-form.twig', $properties);
         } else {
             // set up properties
             $properties = [
-                'lang' => $lang,
-                'userName' => 'default user name'
-                ];
+                'lang' => $lang
+            ];
             // user is not logged in and did not send any post data
             return $this->render('admin/admin-login.twig', $properties);            
         }
@@ -170,12 +152,18 @@ class AdminEmployeeController extends AbstractController {
             // TODO: display message
             $message = $employeeModel->createEmployee($lang);
             
-            $host = $_SERVER['HTTP_HOST'];
-            $uri = "/admin/$lang/teacher";
-            header("Location: http://$host$uri");
-            exit;
+           $host = $_SERVER['SERVER_NAME'];
+           $uri = "/admin/$lang/teacher";
+           header("Location: https://$host$uri");
+           exit;
             
         } catch (DbException $e) {
+            $this->log->error('DbException: ' . $e);
+            $errorController = new ErrorController($this->request);
+            return $errorController->notFoundWithMessage($lang, $e);
+
+        // TODO use general error or create specific one    
+        } catch (NotFoundException $e) {
             $this->log->error('DbException: ' . $e);
             $errorController = new ErrorController($this->request);
             return $errorController->notFoundWithMessage($lang, $e);

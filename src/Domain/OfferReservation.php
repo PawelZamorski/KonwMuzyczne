@@ -5,7 +5,15 @@ namespace Konwersatorium\Domain;
 class OfferReservation {
     private $id;
     private $offer_id;
+private $offer_category;
+private $offer_name;
+private $lang_code;
     private $name;
+private $surname;
+private $street;
+private $town;
+private $postcode;
+private $country;
     private $email;
     private $res_no;
     private $res_date;
@@ -13,14 +21,23 @@ class OfferReservation {
     private $res_paid;
     private $amount;
     private $currency;
-    private $description;
+private $lesson_type;
 
-    public function __construct($id, $offer_id, $name, $email, $res_no, $res_date, $res_active, $res_paid,
-            $amount, $currency, $description) {
-
+    public function __construct($id, $offer_id, $offer_category, $offer_name, $lang_code, $name,
+            $surname, $street, $town, $postcode, $country, $email, $res_no, $res_date,
+            $res_active, $res_paid, $amount, $currency, $lesson_type) {
+                
         $this->id = $id;
         $this->offer_id = $offer_id;
+        $this->offer_category = $offer_category;
+        $this->offer_name = $offer_name;
+        $this->lang_code = $lang_code;
         $this->name = $name;
+        $this->surname = $surname;
+        $this->street = $street;
+        $this->town = $town;
+        $this->postcode = $postcode;
+        $this->country = $country;
         $this->email = $email;
         $this->res_no = $res_no;
         $this->res_date = $res_date;
@@ -28,9 +45,9 @@ class OfferReservation {
         $this->res_paid = $res_paid;
         $this->amount = $amount;
         $this->currency = $currency;
-        $this->description = $description;
-    }
+        $this->lesson_type = $lesson_type;
 
+    }
     public function getId() {
         return $this->id;
     }
@@ -39,8 +56,40 @@ class OfferReservation {
         return $this->offer_id;
     }
 
+    public function getOfferCategory() {
+        return $this->offer_category;
+    }
+
+    public function getOfferName() {
+        return $this->offer_name;
+    }
+
+    public function getLangCode() {
+        return $this->lang_code;
+    }
+
     public function getName() {
         return $this->name;
+    }
+
+    public function getSurname() {
+        return $this->surname;
+    }
+
+    public function getStreet() {
+        return $this->street;
+    }
+
+    public function getTown() {
+        return $this->town;
+    }
+
+    public function getPostcode() {
+        return $this->postcode;
+    }
+
+    public function getCountry() {
+        return $this->country;
     }
 
     public function getEmail() {
@@ -71,8 +120,8 @@ class OfferReservation {
         return $this->currency;
     }
 
-    public function getDescription() {
-        return $this->description;
+    public function getLessonType() {
+        return $this->lesson_type;
     }
 
 }

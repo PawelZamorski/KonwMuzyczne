@@ -2,38 +2,60 @@
 
 {% block content %}
 <!-- Container -->
-<div class="container-fluid">
+<div>
     <form id="offerForm" action="/admin/{{ lang }}/offer/create" method="post">
         <table class="table table-bordered">
             <thead class="thead-light">
                 <tr>
                     <th scope="col">Element</th>
                     <th scope="col">Zawartość</th>
-                    <th scope="col">Dodaj</th>
                 </tr>
             </thead>
             <tbody id="data">
                 <tr>
-                    <th scope="row">Kategoria</th>
+                    <th scope="row">Kod Kategorii</th>
                     <td>
                         <select id="category" class="form-control custom-select mb-3" name="category_id">
+                            {% set firstItem = offerCategoryArr | first %}
                             {% for offerCategory in offerCategoryArr %}
-                                <option value="{{ offerCategory.getCategoryId }}">{{ offerCategory.getCategory }}</option>
+                                {% if offerCategory.getId == firstItem.getId %}
+                                    <option value="{{ offerCategory.getId }}" selected>{{ offerCategory.getCode }}</option>
+                                {% else %}
+                                    <option value="{{ offerCategory.getId }}">{{ offerCategory.getCode }}</option>
+                                {% endif %}
                             {% endfor %}
                         </select>
                     </td>
-                    <td><a class="btn btn-info btn-block" href="/admin/{{ lang }}/offerCategory/createOfferCategoryForm" role="button" aria-pressed="true">Utwórz Kategorię</a></td>
                 </tr>
                 <tr>
                     <th scope="row">Kod kursu</th>
                     <td>
                         <select id="courseId" class="form-control custom-select mb-3" name="course_id">
-                            {% for course in allCoursesArr %}
-                                <option value="{{ course.getId }}">{{ course.getCode }}</option>
+                            {% set firstItem = coursesArr | first %}
+                            {% for course in coursesArr %}
+                                {% if course.getId == firstItem.getId %}
+                                    <option value="{{ course.getId }}" selected>{{ course.getCode }}</option>
+                                {% else %}
+                                    <option value="{{ course.getId }}">{{ course.getCode }}</option>
+                                {% endif %}
                             {% endfor %}
                         </select>
                     </td>
-                    <td><a class="btn btn-info btn-block" href="/admin/{{ lang }}/offerCourse/createOfferCourseForm" role="button" aria-pressed="true">Utwórz Kurs</a></td>
+                </tr>
+                <tr>
+                    <th scope="row">Kod ilość ofert</th>
+                    <td>
+                        <select id="courseId" class="form-control custom-select mb-3" name="course_id">
+                            {% set firstItem = coursesArr | first %}
+                            {% for course in coursesArr %}
+                                {% if course.getId == firstItem.getId %}
+                                    <option value="{{ course.getId }}" selected>{{ course.getCode }}</option>
+                                {% else %}
+                                    <option value="{{ course.getId }}">{{ course.getCode }}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </td>
                 </tr>
             </tbody>
         </table>

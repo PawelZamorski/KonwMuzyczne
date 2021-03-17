@@ -1,0 +1,31 @@
+{% extends 'admin/admin-layout.twig' %}
+
+{% block content %}
+
+<div>
+    <table class="table table-hover table-bordered">
+        <caption style="caption-side: top;">Lista kategorii kursów</caption>
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Kod Kategorii</th>
+                <th scope="col">Edytuj</th>
+                <th scope="col">Usuń</th>                
+            </tr>
+        </thead>
+        <tbody>
+        {% for category in offerCategoryAll %}
+                <tr>
+                    <th scope="row">{{ category.getId }}</th>
+                    <td>{{ category.getCode }}</td>
+                    <td><a href="/admin/{{ lang }}/offerCategory/{{ category.getId }}" class="btn btn-light" role="button" aria-pressed="true">Edytuj</a></td>
+                    <td><a href="/admin/pl/offerCategory/{{ category.getId }}/delete" class="btn btn-light" role="button" aria-pressed="true" onclick="return confirm('Potwierdź usunięcie danych!')">Usuń</a></td>
+                </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<hr>
+{% endblock %}
+
