@@ -234,7 +234,7 @@ class OfferModel extends AbstractModel {
     public function getCoursesAll($lang) {
         $itemArr = array();        
 
-        $query = "SELECT c.id, c.code, c.common_desc_id, c.img_thumbnail, c.movie, 
+        $query = "SELECT c.id, c.code, c.common_desc_id, c.img_thumbnail, c.movie, c.quantity,
                 c_t.course_name, c_t.heading_3, c_t.button, c_t.long_desc, c_t.short_desc, c_t.img
             FROM courses as c, courses_translation as c_t, languages
             WHERE c.id = c_t.courses_id
@@ -250,7 +250,7 @@ class OfferModel extends AbstractModel {
 
         // Fetch associative array
         while ($row = $result->fetch_assoc()) {
-            array_push($itemArr, new OfferCourse($row['id'], $row['code'], $row['common_desc_id'], $row['img_thumbnail'], $row['movie'],
+            array_push($itemArr, new OfferCourse($row['id'], $row['code'], $row['common_desc_id'], $row['img_thumbnail'], $row['movie'], $row['quantity'],
             $row['course_name'], $row['heading_3'], $row['button'], $row['long_desc'], $row['short_desc'], $row['img']));
         }
         // Check if there are any data
@@ -265,7 +265,7 @@ class OfferModel extends AbstractModel {
     }
 
     public function getCourseById($lang, $course_id) {
-        $query = "SELECT c.id, c.code, c.common_desc_id, c.img_thumbnail, c.movie, 
+        $query = "SELECT c.id, c.code, c.common_desc_id, c.img_thumbnail, c.movie, c.quantity,
                 c_t.course_name, c_t.heading_3, c_t.button, c_t.long_desc, c_t.short_desc, c_t.img
             FROM courses as c, courses_translation as c_t, languages
             WHERE c.id = ?
@@ -287,7 +287,7 @@ class OfferModel extends AbstractModel {
             throw new NotFoundException();
         }
 
-        return new OfferCourse($row['id'], $row['code'], $row['common_desc_id'], $row['img_thumbnail'], $row['movie'],
+        return new OfferCourse($row['id'], $row['code'], $row['common_desc_id'], $row['img_thumbnail'], $row['movie'], $row['quantity'],
                     $row['course_name'], $row['heading_3'], $row['button'], $row['long_desc'], $row['short_desc'], $row['img']);
     }
 
@@ -311,6 +311,7 @@ class OfferModel extends AbstractModel {
             }
         }
         $movie = $_POST['movie'];
+        $quantity = $_POST['quantity'];
 
         // courses_translation table
         $course_name = $_POST['course_name'];
@@ -341,7 +342,8 @@ class OfferModel extends AbstractModel {
                 code = '$code',
                 common_desc_id = $common_desc_id,
                 img_thumbnail = '$img_thumbnail',
-                movie = '$movie'
+                movie = '$movie',
+                quantity = $quantity
             WHERE courses.id = $course_id;";
 
         if ($this->conn->query($sql) === TRUE) {
@@ -374,6 +376,17 @@ class OfferModel extends AbstractModel {
     }
 
     public function deleteCourseById($lang, $course_id) {
+        // delete rows from 'offer' table (foreing key constraint)
+
+        $sql = "DELETE FROM offer WHERE courses_id = $course_id;";
+
+        if ($this->conn->query($sql) === TRUE) {
+            // echo "Record updated successfully";
+        } else {
+            throw new DbException($this->conn->error);
+        }
+
+        // delete rows from 'courses' table
         $sql = "DELETE FROM courses WHERE id = $course_id;";
 
         if ($this->conn->query($sql) === TRUE) {
@@ -404,6 +417,7 @@ class OfferModel extends AbstractModel {
             }
         }
         $movie = $_POST['movie'];
+        $quantity = $_POST['quantity'];
 
         // courses_translation table
         $course_name = $_POST['course_name'];
@@ -430,8 +444,8 @@ class OfferModel extends AbstractModel {
         $course_last_id;
         // Insert data to courses table
         // Step 2: Perform database query
-        $sql = "INSERT INTO courses (`code`, `common_desc_id`, `img_thumbnail`, `movie`)
-        VALUES ('$code', $common_desc_id, '$img_thumbnail', '$movie');";
+        $sql = "INSERT INTO courses (`code`, `common_desc_id`, `img_thumbnail`, `movie`, `quantity`)
+            VALUES ('$code', $common_desc_id, '$img_thumbnail', '$movie', '$quantity');";
 
         if ($this->conn->query($sql) === TRUE) {
             // get last id of inserted entity

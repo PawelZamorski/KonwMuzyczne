@@ -1,0 +1,22 @@
+{% extends 'layout.twig' %}
+{% block content %}
+    <!-- Offer Details -->
+    <section id="about" class="introduction scrollto">
+        <div class="row clearfix">
+            <div class="col-3">
+                <div class="section-heading">
+                    <h3>{{ offerSpecial.getHeading3 }}</h3>
+                    <h2 class="section-title">{{ offerSpecial.getHeading2 }}</h2>
+                    <p><img src="{{ offerSpecial.getImg }}" /></p>
+                </div>
+            </div>
+            <div class="col-2-3 alignToPhoto">
+                {{ offerSpecial.getLongDesc | raw }}
+			</div>
+            <br>
+            <!-- Offer -->
+            {{ include('offer-main.twig') }}
+        </div>
+    </section>
+    <!-- End of Offer Details -->
+{% endblock %}

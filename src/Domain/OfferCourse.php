@@ -9,6 +9,7 @@ class OfferCourse {
     private $common_desc_id;
     private $img_thumbnail;
     private $movie;
+    private $quantity;
     // courses_translation table
     private $course_name;
     private $heading_3;
@@ -17,13 +18,14 @@ class OfferCourse {
     private $short_desc;
     private $img;
 
-    public function __construct($id, $code, $common_desc_id, $img_thumbnail, $movie, 
+    public function __construct($id, $code, $common_desc_id, $img_thumbnail, $movie, $quantity,
             $course_name, $heading_3, $button, $long_desc, $short_desc, $img) {
         $this->id = $id;
         $this->code = $code;
         $this->common_desc_id = $common_desc_id;
         $this->img_thumbnail = $img_thumbnail;
         $this->movie = $movie;
+        $this->quantity = $quantity;
         $this->course_name = $course_name;
         $this->heading_3 = $heading_3;
         $this->button = $button;
@@ -50,6 +52,10 @@ class OfferCourse {
 
     public function getMovie() {
         return $this->movie;
+    }
+
+    public function getQuantity() {
+        return $this->quantity;
     }
 
     public function getCourseName() {

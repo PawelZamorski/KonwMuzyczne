@@ -13,7 +13,7 @@
                 <!-- Block offer if Gordonki -->
                 {% if offerId != 2 %}
                     <!-- Buy Button -->
-                    {% if quantity > 0 %}
+                    {% if offerCourse.getQuantity > 0 %}
                         <div class="text-center">
                         <a href="/offer/buy/{{ lang }}/{{ offerId }}" class="button button-secondary uppercase">{{ offerBuyArr.getButtonPay }}</a>
 

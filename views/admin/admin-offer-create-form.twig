@@ -42,21 +42,6 @@
                         </select>
                     </td>
                 </tr>
-                <tr>
-                    <th scope="row">Kod ilość ofert</th>
-                    <td>
-                        <select id="courseId" class="form-control custom-select mb-3" name="course_id">
-                            {% set firstItem = coursesArr | first %}
-                            {% for course in coursesArr %}
-                                {% if course.getId == firstItem.getId %}
-                                    <option value="{{ course.getId }}" selected>{{ course.getCode }}</option>
-                                {% else %}
-                                    <option value="{{ course.getId }}">{{ course.getCode }}</option>
-                                {% endif %}
-                            {% endfor %}
-                        </select>
-                    </td>
-                </tr>
             </tbody>
         </table>
         <button type="button" class="btn btn-primary btn-lg btn-block" onclick="submitForm(this)">Dodaj</button>

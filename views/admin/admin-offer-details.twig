@@ -81,6 +81,10 @@
                     <th scope="col">Film</th>
                     <td><input id="movie" class="form-control" type="text" name="movie" value="{{ offerByIdArr.getMovie }}"></td>
                 </tr>
+                <tr>
+                    <th scope="col">Ilość ofert</th>
+                    <td><input id="quantity" class="form-control" type="text" name="quantity" value="{{ offerByIdArr.getQuantity }}"></td>
+                </tr>
             </tbody>
         </table>
         <button type="button" class="btn btn-primary btn-lg btn-block" onclick="submitForm(this)">Aktualizuj</button>

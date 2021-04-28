@@ -1,0 +1,33 @@
+{% extends 'admin/admin-layout.twig' %}
+
+{% block content %}
+
+<div>
+    <table class="table table-hover table-bordered">
+        <caption style="caption-side: top;">Lista kategorii kursów</caption>
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Kod Oferty Specjalnej</th>
+                <th scope="col">URL Oferty Specjalnej</th>
+                <th scope="col">Edytuj</th>
+                <th scope="col">Usuń</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for offerSpecial in offerSpecialAll %}
+                <tr>
+                    <th scope="row">{{ offerSpecial.getId }}</th>
+                    <td>{{ offerSpecial.getCode }}</td>
+                    <td>{{ offerSpecial.getUrl }}</td>
+                    <td><a href="/admin/{{ lang }}/offerSpecial/{{ offerSpecial.getId }}" class="btn btn-light" role="button" aria-pressed="true">Edytuj</a></td>
+                    <td><a href="/admin/pl/offerSpecial/{{ offerSpecial.getId }}/delete" class="btn btn-light" role="button" aria-pressed="true" onclick="return confirm('Potwierdź usunięcie danych!')">Usuń</a></td>
+                </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<hr>
+{% endblock %}
+

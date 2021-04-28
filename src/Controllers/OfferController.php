@@ -180,10 +180,6 @@ class OfferController extends AbstractController {
             // get offer buy data (button in view)
             $offerBuyArr = $offerModel->getOfferBuy($lang);
 
-            $shopModel = new ShopModel($this->conn);
-            // check availibility of an item
-            $quantity = $shopModel->getItemQuantity($offer_id);
-
             // set up properties
             $properties = [
                 'lang' => $lang,
@@ -192,8 +188,7 @@ class OfferController extends AbstractController {
                 'offerCourse' => $offerCourse,
                 'offerCommonDesc' => $offerCommonDesc,
                 'offerCategory' => $offerCategory,
-                'offerBuyArr' => $offerBuyArr,
-                'quantity' => $quantity
+                'offerBuyArr' => $offerBuyArr
             ];
 
         } catch (NotFoundException $e) {

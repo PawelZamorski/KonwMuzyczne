@@ -148,6 +148,14 @@
             ":offerId": "int"
         }
     },
+    "offer/special/:lang/:offerSpecialId": {
+        "controller": "OfferSpecialController",
+        "method": "getOfferSpecialById",
+        "params": {
+            ":lang": "string",
+            ":offerSpecialId": "int"
+        }
+    },
     "offer/special/details/:lang": {
         "controller": "OfferController",
         "method": "getOfferSpecialDetails",
@@ -447,8 +455,58 @@
             ":lang": "string",
             ":categoryId": "int"
         }
-    }
+    },
 
+    "admin/:lang/offerSpecial": {
+        "controller": "AdminOfferSpecialController",
+        "method": "getOfferSpecialAll",
+        "params": {
+            ":lang": "string"
+        }
+    },
+
+    "admin/:lang/offerSpecial/:offerSpecialId": {
+        "controller": "AdminOfferSpecialController",
+        "method": "getOfferSpecialById",
+        "params": {
+            ":lang": "string",
+            ":offerSpecialId": "int"
+        }
+    },
+
+    "admin/:lang/offerSpecial/:offerSpecialId/update": {
+        "controller": "AdminOfferSpecialController",
+        "method": "updateOfferSpecialById",
+        "params": {
+            ":lang": "string",
+            ":offerSpecialId": "int"
+        }
+    },
+
+    "admin/:lang/offerSpecial/createOfferSpecialForm": {
+        "controller": "AdminOfferSpecialController",
+        "method": "openCreateOfferSpecialForm",
+        "params": {
+            ":lang": "string"
+        }
+    },
+
+    "admin/:lang/offerSpecial/create": {
+        "controller": "AdminOfferSpecialController",
+        "method": "createOfferSpecial",
+        "params": {
+            ":lang": "string"
+        }
+    },
+
+    "admin/:lang/offerSpecial/:offerSpecialId/delete": {
+        "controller": "AdminOfferSpecialController",
+        "method": "deleteOfferSpecialById",
+        "params": {
+            ":lang": "string",
+            ":offerSpecialId": "int"
+        }
+    }
 
 
 

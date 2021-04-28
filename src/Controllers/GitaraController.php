@@ -20,14 +20,14 @@ class GitaraController extends AbstractController {
 
             // get offerMain data
             $offerModel = new OfferModel($this->conn);
-            $offerMainArr = $offerModel->getOfferMain($lang);
-            $offerCategoryArr = $offerModel->getOfferCategory($lang);
+            $offerMain = $offerModel->getOfferMain($lang);
+            $offerCategoryArr = $offerModel->getOfferCategoryAll($lang);
 
             // set up properties
             $properties = [
                 'lang' => $lang,
                 'menuArr' => $menuArr,
-                'offerMainArr' => $offerMainArr,
+                'offerMain' => $offerMain,
                 'offerCategoryArr' => $offerCategoryArr
                 ];
 
@@ -52,14 +52,14 @@ class GitaraController extends AbstractController {
 
             // get offerMain data
             $offerModel = new OfferModel($this->conn);
-            $offerMainArr = $offerModel->getOfferMain($lang);
-            $offerCategoryArr = $offerModel->getOfferCategory($lang);
+            $offerMain = $offerModel->getOfferMain($lang);
+            $offerCategoryArr = $offerModel->getOfferCategoryAll($lang);
 
             // set up properties
             $properties = [
                 'lang' => $lang,
                 'menuArr' => $menuArr,
-                'offerMainArr' => $offerMainArr,
+                'offerMain' => $offerMain,
                 'offerCategoryArr' => $offerCategoryArr
                 ];
 
@@ -84,14 +84,14 @@ class GitaraController extends AbstractController {
 
             // get offerMain data
             $offerModel = new OfferModel($this->conn);
-            $offerMainArr = $offerModel->getOfferMain($lang);
-            $offerCategoryArr = $offerModel->getOfferCategory($lang);
+            $offerMain = $offerModel->getOfferMain($lang);
+            $offerCategoryArr = $offerModel->getOfferCategoryAll($lang);
 
             // set up properties
             $properties = [
                 'lang' => $lang,
                 'menuArr' => $menuArr,
-                'offerMainArr' => $offerMainArr,
+                'offerMain' => $offerMain,
                 'offerCategoryArr' => $offerCategoryArr
                 ];
 
@@ -116,14 +116,14 @@ class GitaraController extends AbstractController {
 
             // get offerMain data
             $offerModel = new OfferModel($this->conn);
-            $offerMainArr = $offerModel->getOfferMain($lang);
-            $offerCategoryArr = $offerModel->getOfferCategory($lang);
+            $offerMain = $offerModel->getOfferMain($lang);
+            $offerCategoryArr = $offerModel->getOfferCategoryAll($lang);
 
             // set up properties
             $properties = [
                 'lang' => $lang,
                 'menuArr' => $menuArr,
-                'offerMainArr' => $offerMainArr,
+                'offerMain' => $offerMain,
                 'offerCategoryArr' => $offerCategoryArr
                 ];
 
@@ -148,14 +148,14 @@ class GitaraController extends AbstractController {
 
             // get offerMain data
             $offerModel = new OfferModel($this->conn);
-            $offerMainArr = $offerModel->getOfferMain($lang);
-            $offerCategoryArr = $offerModel->getOfferCategory($lang);
+            $offerMain = $offerModel->getOfferMain($lang);
+            $offerCategoryArr = $offerModel->getOfferCategoryAll($lang);
 
             // set up properties
             $properties = [
                 'lang' => $lang,
                 'menuArr' => $menuArr,
-                'offerMainArr' => $offerMainArr,
+                'offerMain' => $offerMain,
                 'offerCategoryArr' => $offerCategoryArr
                 ];
 
@@ -180,14 +180,14 @@ class GitaraController extends AbstractController {
 
             // get offerMain data
             $offerModel = new OfferModel($this->conn);
-            $offerMainArr = $offerModel->getOfferMain($lang);
-            $offerCategoryArr = $offerModel->getOfferCategory($lang);
+            $offerMain = $offerModel->getOfferMain($lang);
+            $offerCategoryArr = $offerModel->getOfferCategoryAll($lang);
 
             // set up properties
             $properties = [
                 'lang' => $lang,
                 'menuArr' => $menuArr,
-                'offerMainArr' => $offerMainArr,
+                'offerMain' => $offerMain,
                 'offerCategoryArr' => $offerCategoryArr
                 ];
 
@@ -212,14 +212,14 @@ class GitaraController extends AbstractController {
 
             // get offerMain data
             $offerModel = new OfferModel($this->conn);
-            $offerMainArr = $offerModel->getOfferMain($lang);
-            $offerCategoryArr = $offerModel->getOfferCategory($lang);
+            $offerMain = $offerModel->getOfferMain($lang);
+            $offerCategoryArr = $offerModel->getOfferCategoryAll($lang);
 
             // set up properties
             $properties = [
                 'lang' => $lang,
                 'menuArr' => $menuArr,
-                'offerMainArr' => $offerMainArr,
+                'offerMain' => $offerMain,
                 'offerCategoryArr' => $offerCategoryArr
                 ];
 
@@ -244,14 +244,14 @@ class GitaraController extends AbstractController {
 
             // get offerMain data
             $offerModel = new OfferModel($this->conn);
-            $offerMainArr = $offerModel->getOfferMain($lang);
-            $offerCategoryArr = $offerModel->getOfferCategory($lang);
+            $offerMain = $offerModel->getOfferMain($lang);
+            $offerCategoryArr = $offerModel->getOfferCategoryAll($lang);
 
             // set up properties
             $properties = [
                 'lang' => $lang,
                 'menuArr' => $menuArr,
-                'offerMainArr' => $offerMainArr,
+                'offerMain' => $offerMain,
                 'offerCategoryArr' => $offerCategoryArr
                 ];
 
@@ -277,14 +277,14 @@ class GitaraController extends AbstractController {
 
             // get offerMain data
             $offerModel = new OfferModel($this->conn);
-            $offerMainArr = $offerModel->getOfferMain($lang);
-            $offerCategoryArr = $offerModel->getOfferCategory($lang);
+            $offerMain = $offerModel->getOfferMain($lang);
+            $offerCategoryArr = $offerModel->getOfferCategoryAll($lang);
 
             // set up properties
             $properties = [
                 'lang' => $lang,
                 'menuArr' => $menuArr,
-                'offerMainArr' => $offerMainArr,
+                'offerMain' => $offerMain,
                 'offerCategoryArr' => $offerCategoryArr
                 ];
 
@@ -309,14 +309,14 @@ class GitaraController extends AbstractController {
 
             // get offerMain data
             $offerModel = new OfferModel($this->conn);
-            $offerMainArr = $offerModel->getOfferMain($lang);
-            $offerCategoryArr = $offerModel->getOfferCategory($lang);
+            $offerMain = $offerModel->getOfferMain($lang);
+            $offerCategoryArr = $offerModel->getOfferCategoryAll($lang);
 
             // set up properties
             $properties = [
                 'lang' => $lang,
                 'menuArr' => $menuArr,
-                'offerMainArr' => $offerMainArr,
+                'offerMain' => $offerMain,
                 'offerCategoryArr' => $offerCategoryArr
                 ];
 
@@ -341,14 +341,14 @@ class GitaraController extends AbstractController {
 
             // get offerMain data
             $offerModel = new OfferModel($this->conn);
-            $offerMainArr = $offerModel->getOfferMain($lang);
-            $offerCategoryArr = $offerModel->getOfferCategory($lang);
+            $offerMain = $offerModel->getOfferMain($lang);
+            $offerCategoryArr = $offerModel->getOfferCategoryAll($lang);
 
             // set up properties
             $properties = [
                 'lang' => $lang,
                 'menuArr' => $menuArr,
-                'offerMainArr' => $offerMainArr,
+                'offerMain' => $offerMain,
                 'offerCategoryArr' => $offerCategoryArr
                 ];
 
@@ -373,14 +373,14 @@ class GitaraController extends AbstractController {
 
             // get offerMain data
             $offerModel = new OfferModel($this->conn);
-            $offerMainArr = $offerModel->getOfferMain($lang);
-            $offerCategoryArr = $offerModel->getOfferCategory($lang);
+            $offerMain = $offerModel->getOfferMain($lang);
+            $offerCategoryArr = $offerModel->getOfferCategoryAll($lang);
 
             // set up properties
             $properties = [
                 'lang' => $lang,
                 'menuArr' => $menuArr,
-                'offerMainArr' => $offerMainArr,
+                'offerMain' => $offerMain,
                 'offerCategoryArr' => $offerCategoryArr
                 ];
 
@@ -405,14 +405,14 @@ class GitaraController extends AbstractController {
 
             // get offerMain data
             $offerModel = new OfferModel($this->conn);
-            $offerMainArr = $offerModel->getOfferMain($lang);
-            $offerCategoryArr = $offerModel->getOfferCategory($lang);
+            $offerMain = $offerModel->getOfferMain($lang);
+            $offerCategoryArr = $offerModel->getOfferCategoryAll($lang);
 
             // set up properties
             $properties = [
                 'lang' => $lang,
                 'menuArr' => $menuArr,
-                'offerMainArr' => $offerMainArr,
+                'offerMain' => $offerMain,
                 'offerCategoryArr' => $offerCategoryArr
                 ];
 
@@ -437,14 +437,14 @@ class GitaraController extends AbstractController {
 
             // get offerMain data
             $offerModel = new OfferModel($this->conn);
-            $offerMainArr = $offerModel->getOfferMain($lang);
-            $offerCategoryArr = $offerModel->getOfferCategory($lang);
+            $offerMain = $offerModel->getOfferMain($lang);
+            $offerCategoryArr = $offerModel->getOfferCategoryAll($lang);
 
             // set up properties
             $properties = [
                 'lang' => $lang,
                 'menuArr' => $menuArr,
-                'offerMainArr' => $offerMainArr,
+                'offerMain' => $offerMain,
                 'offerCategoryArr' => $offerCategoryArr
                 ];
 
@@ -469,14 +469,14 @@ class GitaraController extends AbstractController {
 
             // get offerMain data
             $offerModel = new OfferModel($this->conn);
-            $offerMainArr = $offerModel->getOfferMain($lang);
-            $offerCategoryArr = $offerModel->getOfferCategory($lang);
+            $offerMain = $offerModel->getOfferMain($lang);
+            $offerCategoryArr = $offerModel->getOfferCategoryAll($lang);
 
             // set up properties
             $properties = [
                 'lang' => $lang,
                 'menuArr' => $menuArr,
-                'offerMainArr' => $offerMainArr,
+                'offerMain' => $offerMain,
                 'offerCategoryArr' => $offerCategoryArr
                 ];
 
@@ -502,14 +502,14 @@ class GitaraController extends AbstractController {
 
             // get offerMain data
             $offerModel = new OfferModel($this->conn);
-            $offerMainArr = $offerModel->getOfferMain($lang);
-            $offerCategoryArr = $offerModel->getOfferCategory($lang);
+            $offerMain = $offerModel->getOfferMain($lang);
+            $offerCategoryArr = $offerModel->getOfferCategoryAll($lang);
 
             // set up properties
             $properties = [
                 'lang' => $lang,
                 'menuArr' => $menuArr,
-                'offerMainArr' => $offerMainArr,
+                'offerMain' => $offerMain,
                 'offerCategoryArr' => $offerCategoryArr
                 ];
 
@@ -534,14 +534,14 @@ class GitaraController extends AbstractController {
 
             // get offerMain data
             $offerModel = new OfferModel($this->conn);
-            $offerMainArr = $offerModel->getOfferMain($lang);
-            $offerCategoryArr = $offerModel->getOfferCategory($lang);
+            $offerMain = $offerModel->getOfferMain($lang);
+            $offerCategoryArr = $offerModel->getOfferCategoryAll($lang);
 
             // set up properties
             $properties = [
                 'lang' => $lang,
                 'menuArr' => $menuArr,
-                'offerMainArr' => $offerMainArr,
+                'offerMain' => $offerMain,
                 'offerCategoryArr' => $offerCategoryArr
                 ];
 

@@ -188,34 +188,9 @@ class ShopModel extends AbstractModel {
         return $row['id'];
     }
 
-    public function getItemQuantity($offer_id) {
-        $query = "SELECT siq.quantity as quantity
-        FROM offer, shop_item_quantity_to_courses as siqtc, shop_item_quantity as siq
-        WHERE offer.courses_id = siqtc.courses_id
-        AND siqtc.shop_item_quantity_id = siq.id
-        AND offer.id = ?;";
-
-        // TODO: should try catch block be used ???
-        $stmt = $this->conn->prepare($query); // prepare statement
-        $stmt->bind_param('i', $offer_id); // bind params to the statement
-        $stmt->execute(); // execute query
-        // Get the result
-        $result = $stmt->get_result();
-        // Fetch first row
-        $row = $result->fetch_assoc();
-        // Check if there are any data
-        if (empty($row)) {
-            throw new NotFoundException();
-        }
-        return $row['quantity'];
-    }
-
-    public function updateItemQuantity($offer_id, $quantity) {
-        $query = "UPDATE shop_item_quantity SET shop_item_quantity.quantity = $quantity
-            WHERE shop_item_quantity.id = (SELECT siqtc.shop_item_quantity_id
-                FROM offer, shop_item_quantity_to_courses as siqtc
-                WHERE offer.courses_id = siqtc.courses_id
-                AND offer.id = $offer_id);";
+    public function updateItemQuantity($course_id, $quantity) {
+        $query = "UPDATE courses SET quantity = $quantity
+            WHERE courses.id = $course_id;";
 
         if ($this->conn->query($query) === TRUE) {
             // echo  "Record updated successfully";

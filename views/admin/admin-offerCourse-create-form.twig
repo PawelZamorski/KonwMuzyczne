@@ -68,6 +68,10 @@
                     <th scope="row">Przycisk - napis</th>
                     <td><input id="button" class="form-control" type="text" name="button" value="Sprawdź"></td>
                 </tr>
+                <tr>
+                    <th scope="row">Ilość ofert</th>
+                    <td><input id="quantity" class="form-control" type="text" name="quantity" value="{{ course.getQuantity }}" required></td>
+                </tr>
             </tbody>
         </table>
 <!-- TODO: Browser will automaticly validate input. However, if the JS function submit() is used, it will submit the form anyway. Must use input type="submit" for automatic validation or validate input data inside function -->

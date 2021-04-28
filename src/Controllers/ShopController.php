@@ -42,10 +42,6 @@ class ShopController extends AbstractController {
             // get config data - recaptcha site key
             $recaptchaConfig = Config::getConfig()->get('recaptcha');
 
-            $shopModel = new ShopModel($this->conn);
-            // check availibility of an item
-            $quantity = $shopModel->getItemQuantity($offer_id);
-
             // get form fields description data
             $formModel = new FormModel($this->conn);
             $formFieldsDesc = $formModel->getAllFields($lang);
@@ -63,7 +59,6 @@ class ShopController extends AbstractController {
                 'offerBuyArr' => $offerBuyArr,
                 'formFieldsDesc' => $formFieldsDesc,
                 'recaptchaConfig' => $recaptchaConfig,
-                'quantity' => $quantity,
                 'countries' => $countries
                 ];
 
@@ -104,9 +99,8 @@ class ShopController extends AbstractController {
             // get config data - recaptcha site key
             $recaptchaConfig = Config::getConfig()->get('recaptcha');
 
-            $shopModel = new ShopModel($this->conn);
             // check availibility of an item
-            $quantity = $shopModel->getItemQuantity($offer_id);
+            $quantity = $offerCourse->getQuantity();
 
             // get form fields description data
             $formModel = new FormModel($this->conn);
@@ -135,8 +129,6 @@ class ShopController extends AbstractController {
                 $shopModel = new ShopModel($this->conn);
 
                 $isFormValid = $data['isFormValid'];
-                $quantity = $shopModel->getItemQuantity($offerId);
-                $isProductAvailable = $quantity > 0;
             }
 
 
@@ -149,7 +141,7 @@ class ShopController extends AbstractController {
                 // return object OfferReservation with id
                 $offerReservation = $shopModel->createOfferReservation_2($offerReservation);
                 // decrement the quantity of available item
-                $shopModel->updateItemQuantity($offerReservation->getOfferId(), $quantity - 1);
+                $shopModel->updateItemQuantity($offerCourse->getId(), $quantity - 1);
 
                 // send email
                 // set res_no and res_id in MailerBuy object to use it in isEmailSend
