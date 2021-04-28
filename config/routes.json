@@ -457,6 +457,57 @@
         }
     },
 
+    "admin/:lang/offerCommonDesc": {
+        "controller": "AdminOfferController",
+        "method": "getOfferCommonDescAll",
+        "params": {
+            ":lang": "string"
+        }
+    },
+
+    "admin/:lang/offerCommonDesc/:commonDescId": {
+        "controller": "AdminOfferController",
+        "method": "getCommonDescById",
+        "params": {
+            ":lang": "string",
+            ":commonDescId": "int"
+        }
+    },
+
+    "admin/:lang/offerCommonDesc/:commonDescId/update": {
+        "controller": "AdminOfferController",
+        "method": "updateCommonDescById",
+        "params": {
+            ":lang": "string",
+            ":commonDescId": "int"
+        }
+    },
+
+    "admin/:lang/offerCommonDesc/createCommonDescForm": {
+        "controller": "AdminOfferController",
+        "method": "openCreateOfferCommonDescForm",
+        "params": {
+            ":lang": "string"
+        }
+    },
+
+    "admin/:lang/offerCommonDesc/create": {
+        "controller": "AdminOfferController",
+        "method": "createOfferCommonDesc",
+        "params": {
+            ":lang": "string"
+        }
+    },
+
+    "admin/:lang/offerCommonDesc/:commonDescId/delete": {
+        "controller": "AdminOfferController",
+        "method": "deleteCommonDescById",
+        "params": {
+            ":lang": "string",
+            ":commonDescId": "int"
+        }
+    },
+
     "admin/:lang/offerSpecial": {
         "controller": "AdminOfferSpecialController",
         "method": "getOfferSpecialAll",

@@ -110,9 +110,9 @@ class OfferModel extends AbstractModel {
 // CommonDesc ----------- //
 
     public function getCommonDescAll($lang) {
-        $itemArr = array();        
+        $itemArr = array();
 
-        $query = "SELECT c_d.id, c_d_t.common_desc
+        $query = "SELECT c_d.id, c_d.code, c_d_t.common_desc
             FROM common_desc as c_d, common_desc_translation as c_d_t, languages
             WHERE c_d.id = c_d_t.common_desc_id
             AND c_d_t.languages_id = languages.id
@@ -125,7 +125,7 @@ class OfferModel extends AbstractModel {
         $result = $stmt->get_result();
         // Fetch associative array
         while ($row = $result->fetch_assoc()) {
-            array_push($itemArr, new OfferCommonDesc($row['id'], $row['common_desc']));
+            array_push($itemArr, new OfferCommonDesc($row['id'], $row['code'], $row['common_desc']));
         }
         // Check if there are any data
         if (empty($itemArr)) {
@@ -136,7 +136,7 @@ class OfferModel extends AbstractModel {
     }
 
     public function getCommonDescById($lang, $common_desc_id) {
-        $query = "SELECT c_d.id, c_d_t.common_desc
+        $query = "SELECT c_d.id, c_d.code, c_d_t.common_desc
             FROM common_desc as c_d, common_desc_translation as c_d_t, languages
             WHERE c_d.id = ?
             AND c_d.id = c_d_t.common_desc_id
@@ -155,8 +155,131 @@ class OfferModel extends AbstractModel {
             throw new NotFoundException();
         }
 
-        return new OfferCommonDesc($row['id'], $row['common_desc']);
+        return new OfferCommonDesc($row['id'], $row['code'], $row['common_desc']);
     }
+
+
+
+
+
+
+
+
+
+    public function updateCommonDescById($lang, $common_desc_id) {
+        // common_desc table
+        $code = $_POST['code'];
+        // common_desc_translation table
+        $common_desc = $_POST['common_desc'];
+
+        // update main data
+        // Step 2: Perform database query
+        $sql = "UPDATE common_desc
+            SET
+                code = '$code'
+            WHERE id = $common_desc_id;";
+
+        if ($this->conn->query($sql) === TRUE) {
+            echo "Record updated successfully";
+        } else {
+            throw new DbException($this->conn->error);
+        }
+        
+        // update translation data
+        // Step 2: Perform database query
+        $sql = "UPDATE common_desc_translation 
+        SET 
+            common_desc = '$common_desc'
+        WHERE common_desc_translation.common_desc_id = $common_desc_id
+        
+        AND common_desc_translation.languages_id = 
+            (SELECT id FROM languages WHERE code = '$lang');";
+
+        if ($this->conn->query($sql) === TRUE) {
+            echo "Record updated successfully";
+        } else {
+            throw new DbException($this->conn->error);
+        }
+    }
+
+    public function createCommonDesc($lang) {
+        // common_desc table
+        $code = $_POST['code'];
+        // common_desc_translation table
+        $common_desc = $_POST['common_desc'];
+    
+        $common_desc_last_id;
+        // Insert data to category table
+        // Step 2: Perform database query
+        $sql = "INSERT INTO common_desc (`code`)
+        VALUES ('$code');";
+
+        if ($this->conn->query($sql) === TRUE) {
+            // get last id of inserted entity
+            $common_desc_last_id = $this->conn->insert_id;
+        } else {
+            throw new DbException($this->conn->error);
+        }
+
+        // TODO: check if  = $e_last_id is not -1
+        // Insert translation data
+        // Step 2: Perform database query
+        // Use Google Translate to translate from polish to english
+        $google_translate_service = new GoogleTranslate();
+
+        $common_desc_en = $google_translate_service->translate($common_desc, 'en');
+        // Use english translation to translate to vietnamies and chinies
+        $common_desc_vi = $google_translate_service->translate($common_desc, 'vi');
+        $common_desc_zh = $google_translate_service->translate($common_desc, 'zh');
+
+        $sql = "INSERT INTO common_desc_translation (`languages_id`, `common_desc_id`, `common_desc`)
+            VALUES 
+            (1, $common_desc_last_id, '$common_desc'),
+            (2, $common_desc_last_id, '$common_desc_en'),
+            (3, $common_desc_last_id, '$common_desc_vi'),
+            (4, $common_desc_last_id, '$common_desc_zh');";
+        if ($this->conn->query($sql) === TRUE) {
+            // get last id of inserted entity
+            echo "Record added successfully";
+        } else {
+            throw new DbException($this->conn->error);
+        }
+       
+    }
+
+    public function deleteCommonDescById($lang, $common_desc_id) {
+        $sql = "DELETE FROM common_desc WHERE id = $common_desc_id;";
+
+        if ($this->conn->query($sql) === TRUE) {
+            // echo "Record updated successfully";
+        } else {
+            throw new DbException($this->conn->error);
+        }
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

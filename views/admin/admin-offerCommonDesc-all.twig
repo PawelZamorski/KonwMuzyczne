@@ -1,0 +1,31 @@
+{% extends 'admin/admin-layout.twig' %}
+
+{% block content %}
+
+<div>
+    <table class="table table-hover table-bordered">
+        <caption style="caption-side: top;">Lista opisów wspólnych</caption>
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Kod Opisu Wspólnego</th>
+                <th scope="col">Edytuj</th>
+                <th scope="col">Usuń</th>                
+            </tr>
+        </thead>
+        <tbody>
+        {% for commonDesc in offerCommonDescAll %}
+                <tr>
+                    <th scope="row">{{ commonDesc.getId }}</th>
+                    <td>{{ commonDesc.getCode }}</td>
+                    <td><a href="/admin/{{ lang }}/offerCommonDesc/{{ commonDesc.getId }}" class="btn btn-light" role="button" aria-pressed="true">Edytuj</a></td>
+                    <td><a href="/admin/pl/offerCommonDesc/{{ commonDesc.getId }}/delete" class="btn btn-light" role="button" aria-pressed="true" onclick="return confirm('Potwierdź usunięcie danych!')">Usuń</a></td>
+                </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<hr>
+{% endblock %}
+

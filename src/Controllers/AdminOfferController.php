@@ -468,12 +468,205 @@ class AdminOfferController extends AbstractController {
         }
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// COMMON DESC
+    public function getOfferCommonDescAll($lang) {
+        // instantiate array
+        $properties = array();
+        
+        try {
+            // get offer data
+            $offerModel = new OfferModel($this->conn);
+            $offerCommonDescAll = $offerModel->getCommonDescAll($lang);
+
+            // set up properties
+            $properties = [
+                'lang' => $lang,
+                'offerCommonDescAll' => $offerCommonDescAll
+            ];
+
+        } catch (NotFoundException $e) {
+            $this->log->warning('NotFoundException: ' . $e);
+            $errorController = new ErrorController($this->request);
+            return $errorController->notFoundWithMessage($lang, 'Error details: data fetching failed.');
+        }
+
+        if($this->isLoggedIn()) {
+            return $this->render('admin/admin-offerCommonDesc-all.twig', $properties);        
+        } else {
+            // set up properties
+            $properties = [
+                'lang' => $lang,
+                'userName' => 'default user name'
+                ];
+            // user is not logged in and did not send any post data
+            return $this->render('admin/admin-login.twig', $properties);            
+        }
+    }
+    
+    public function getCommonDescById($lang, $common_desc_id) {
+        // instantiate array
+        $properties = array();
+
+        try {
+            // get data
+            $offerModel = new OfferModel($this->conn);
+            $offer_common_desc = $offerModel->getCommonDescById($lang, $common_desc_id);
+
+            // set up properties
+            $properties = [
+                'lang' => $lang,
+                'offer_common_desc' => $offer_common_desc
+            ];
+
+        } catch (NotFoundException $e) {
+            $this->log->warning('NotFoundException: ' . $e);
+            $errorController = new ErrorController($this->request);
+            return $errorController->notFoundWithMessage($lang, 'Error details: data fetching failed.');
+        }
+
+        if($this->isLoggedIn()) {
+            return $this->render('admin/admin-offerCommonDesc-update.twig', $properties);        
+        } else {
+            // set up properties
+            $properties = [
+                'lang' => $lang
+            ];
+            return $this->render('admin/admin-login.twig', $properties);            
+        }
+    }
+    
+    public function updateCommonDescById($lang, $common_desc_id) {
+        try {
+            // update offer data
+            $offerModel = new OfferModel($this->conn);
+            // TODO: display message
+            $message = $offerModel->updateCommonDescById($lang, $common_desc_id);
+            
+            $host = $_SERVER['SERVER_NAME'];
+            $uri = "/admin/$lang/offerCategory/$category_id";
+            header("Location: https://$host$uri");
+            exit;
+            
+        } catch (DbException $e) {
+            $this->log->warning('DbException: ' . $e);
+            $errorController = new ErrorController($this->request);
+            return $errorController->notFoundWithMessage($lang, $e);
+        }
+    }
+
+    public function openCreateOfferCommonDescForm($lang) {
+        // instantiate array
+        $properties = array();
+
+        // always use pl language for create employee form
+        $lang = 'pl';
+
+        try {
+            
+            // set up properties
+            $properties = [
+                'lang' => $lang
+            ];
+
+        } catch (NotFoundException $e) {
+            $this->log->warning('NotFoundException: ' . $e);
+            $errorController = new ErrorController($this->request);
+            return $errorController->notFoundWithMessage($lang, 'Error details: data fetching failed.');
+        }
+
+        if($this->isLoggedIn()) {
+            return $this->render('admin/admin-offerCommonDesc-create-form.twig', $properties);
+        } else {
+            // set up properties
+            $properties = [
+                'lang' => $lang
+            ];
+            // user is not logged in and did not send any post data
+            return $this->render('admin/admin-login.twig', $properties);            
+        }
+    }
+
+    public function createOfferCommonDesc($lang) {
+        try {
+            // delete employee data
+            $offerModel = new OfferModel($this->conn);
+            // TODO: display message
+
+            $message = $offerModel->createCommonDesc($lang);
+            echo "done!";
+            $host = $_SERVER['SERVER_NAME'];
+            $uri = "/admin/$lang/offerCategory";
+            header("Location: https://$host$uri");
+            exit;
+            
+        } catch (DbException $e) {
+            $this->log->error('DbException: ' . $e);
+            $errorController = new ErrorController($this->request);
+            return $errorController->notFoundWithMessage($lang, $e);
+        }
+
+    }
+
+    public function deleteCommonDescById($lang, $common_desc_id) {
+        try {
+            // delete offer data
+            $offerModel = new OfferModel($this->conn);
+            // TODO: display message
+            $message = $offerModel->deleteCommonDescById($lang, $common_desc_id);
+            
+            $host = $_SERVER['SERVER_NAME'];
+            $uri = "/admin/$lang/offerCategory";
+            header("Location: https://$host$uri");
+            exit;
+            
+        } catch (DbException $e) {
+            $this->log->warning('DbException: ' . $e);
+            $errorController = new ErrorController($this->request);
+            return $errorController->notFoundWithMessage($lang, $e);
+        }
+    }
+
+
+
+
     private function isLoggedIn() {
         // TODO move authentication to parent class, so it will be done for all admin controllers
         // authentication service to login
         $auth = new Authentication;
         return $auth->isLoggedIn();
     }
+
 
 }
 

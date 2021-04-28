@@ -1,0 +1,54 @@
+{% extends 'admin/admin-layout.twig' %}
+
+{% block content %}
+<div>
+    <form id="offerForm" action="/admin/{{ lang }}/offerCommonDesc/{{ offer_common_desc.getId }}/update" method="post" enctype="multipart/form-data">
+        <table class="table table-bordered">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">Element</th>
+                    <th scope="col">Zawartość</th>
+                </tr>
+            </thead>
+            <tbody id="data">
+                <tr>
+                    <th scope="row">Kod opisu wspólnego</th>
+                    <td><input id="code" class="form-control" type="text" name="code" value="{{ offer_common_desc.getCode }}"></td>
+                </tr>
+                <tr>
+                    <th scope="col">Opis</th>
+                    <td><textarea id="commonDesc" class="form-control" name="common_desc" cols="100" oninput="display(this)">{{ offer_common_desc.getCommonDesc }}</textarea></td>
+                </tr>
+            </tbody>
+        </table>
+<!-- TODO: Browser will automaticly validate input. However, if the JS function submit() is used, it will submit the form anyway. Must use input type="submit" for automatic validation or validate input data inside function -->
+        <button class="btn btn-primary btn-lg btn-block" onlcick="submitForm()">Zapisz</button>
+    </form>
+</div>
+<br><br>
+<hr>
+<!-- End of Container -->
+
+<!-- textarea function -->
+<script>
+    const tx = document.getElementsByTagName('textarea');
+    for (let i = 0; i < tx.length; i++) {
+        tx[i].setAttribute('style', 'height:' + (tx[i].scrollHeight) + 'px;overflow-y:hidden;');        
+        tx[i].addEventListener("input", OnInput, false);
+    }
+
+    function OnInput() {
+        this.style.height = 'auto';
+        this.style.height = (this.scrollHeight) + 'px';
+    }
+
+</script>
+
+<script>
+    function submitForm() {
+        const element = document.getElementById("offerForm");
+        element.submit();
+    }
+</script>
+
+{% endblock %}

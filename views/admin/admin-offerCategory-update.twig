@@ -25,9 +25,9 @@
                         <select id="commonDesc" class="form-control custom-select mb-3" name="common_desc_id">
                             {% for commonDesc in commonDescArr %}
                                 {% if commonDesc.getId == category.getCommonDescId %}
-                                    <option value="{{ commonDesc.getId }}" selected>{{ commonDesc.getCommonDesc }}</option>
+                                    <option value="{{ commonDesc.getId }}" selected>{{ commonDesc.getCode }}</option>
                                 {% else %}
-                                    <option value="{{ commonDesc.getId }}">{{ commonDesc.getCommonDesc }}</option>
+                                    <option value="{{ commonDesc.getId }}">{{ commonDesc.getCode }}</option>
                                 {% endif %}
                             {% endfor %}
                         </select>

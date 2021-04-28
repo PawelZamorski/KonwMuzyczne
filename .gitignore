@@ -3,5 +3,6 @@ config.json
 config/config.json
 config/config-prod.json
 sql/fortepian_konwe3.sql
+sql/*
 config/config-google-translate.json
 config/*
