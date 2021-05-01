@@ -468,33 +468,60 @@ class AdminOfferController extends AbstractController {
         }
     }
 
+    public function openCreateOfferCategorySortForm($lang) {
+        // instantiate array
+        $properties = array();
 
+        // always use pl language for create employee form
+        $lang = 'pl';
 
+        try {
+            // get offer data
+            $offerModel = new OfferModel($this->conn);
+            $offerCategoryAll = $offerModel->getOfferCategoryAll($lang);
 
+            // set up properties
+            $properties = [
+                'lang' => $lang,
+                'offerCategoryAll' => $offerCategoryAll
+            ];
 
+        } catch (NotFoundException $e) {
+            $this->log->warning('NotFoundException: ' . $e);
+            $errorController = new ErrorController($this->request);
+            return $errorController->notFoundWithMessage($lang, 'Error details: data fetching failed.');
+        }
 
+        if($this->isLoggedIn()) {
+            return $this->render('admin/admin-offerCategory-sort.twig', $properties);
+        } else {
+            // set up properties
+            $properties = [
+                'lang' => $lang
+            ];
+            // user is not logged in and did not send any post data
+            return $this->render('admin/admin-login.twig', $properties);            
+        }
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    public function updateCategorySortIndexById($lang, $category_id) {
+        try {
+            // update offer data
+            $offerModel = new OfferModel($this->conn);
+            // TODO: display message
+            $message = $offerModel->updateCategorySortIndexById($lang, $category_id);
+            
+            $host = $_SERVER['SERVER_NAME'];
+            $uri = "/admin/$lang/offerCategory/createOfferCategorySortForm";
+            header("Location: https://$host$uri");
+            exit;
+            
+        } catch (DbException $e) {
+            $this->log->warning('DbException: ' . $e);
+            $errorController = new ErrorController($this->request);
+            return $errorController->notFoundWithMessage($lang, $e);
+        }
+    }
 
 
 

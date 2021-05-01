@@ -629,7 +629,7 @@ class OfferModel extends AbstractModel {
     public function getOfferCategoryAll($lang) {
         $itemArr = array();
 
-        $query = "SELECT c.id, c.code, c.common_desc_id, c.img, c_t.heading_3, c_t.paragraph, c_t.button, c_t.category, c_t.long_desc  
+        $query = "SELECT c.id, c.code, c.sort_index, c.common_desc_id, c.img, c_t.heading_3, c_t.paragraph, c_t.button, c_t.category, c_t.long_desc  
             FROM category as c, category_translation as c_t, languages 
             WHERE c_t.category_id = c.id
             AND c_t.languages_id = languages.id
@@ -645,13 +645,18 @@ class OfferModel extends AbstractModel {
         // Fetch associative array
         while ($row = $result->fetch_assoc()) {
 
-            array_push($itemArr, new OfferCategory($row['id'], $row['code'], $row['common_desc_id'], $row['img'], 
+            array_push($itemArr, new OfferCategory($row['id'], $row['code'], $row['sort_index'], $row['common_desc_id'], $row['img'], 
                 $row['heading_3'], $row['paragraph'], $row['button'], $row['category'], $row['long_desc']));
         }
         // Check if there are any data
         if (empty($itemArr)) {
             throw new NotFoundException();
         }
+
+        // TODO move sorting to controler 
+        // Sort array
+        usort($itemArr, array('Konwersatorium\Domain\OfferCategory', 'comparator'));
+
         return $itemArr;
     }
 
@@ -659,7 +664,7 @@ class OfferModel extends AbstractModel {
     * Return offer category domain by category id
     */
     public function getOfferCategoryById($lang, $category_id) {
-        $query = "SELECT c.id, c.code, c.common_desc_id, c.img, c_t.heading_3, c_t.paragraph, c_t.button, c_t.category, c_t.long_desc  
+        $query = "SELECT c.id, c.code, c.sort_index, c.common_desc_id, c.img, c_t.heading_3, c_t.paragraph, c_t.button, c_t.category, c_t.long_desc  
             FROM category as c, category_translation as c_t, languages 
             WHERE c.id = ?
             AND c_t.category_id = c.id
@@ -679,7 +684,7 @@ class OfferModel extends AbstractModel {
             throw new NotFoundException();
         }
 
-        return new OfferCategory($row['id'], $row['code'], $row['common_desc_id'], $row['img'], 
+        return new OfferCategory($row['id'], $row['code'], $row['sort_index'], $row['common_desc_id'], $row['img'], 
             $row['heading_3'], $row['paragraph'], $row['button'], $row['category'], $row['long_desc']);
     }
 
@@ -844,6 +849,25 @@ class OfferModel extends AbstractModel {
         }
 
     }
+
+    public function updateCategorySortIndexById($lang, $category_id) {
+        // category table
+        $sort_index = $_POST['sort_index'];
+
+        // update main data
+        // Step 2: Perform database query
+        $sql = "UPDATE category
+            SET
+                sort_index = '$sort_index'
+            WHERE category.id = $category_id;";
+
+        if ($this->conn->query($sql) === TRUE) {
+            echo "Record updated successfully";
+        } else {
+            throw new DbException($this->conn->error);
+        }
+    }
+
 
 
 // Offer (offer)  ----------- //

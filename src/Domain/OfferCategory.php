@@ -6,6 +6,7 @@ class OfferCategory {
     // category table
     private $id;
     private $code;
+    private $sort_index;
     private $common_desc_id;
     private $img;
     // category_translation table
@@ -15,9 +16,10 @@ class OfferCategory {
     private $category;
     private $long_desc;
 
-    public function __construct($id, $code, $common_desc_id, $img, $heading_3, $paragraph, $button, $category, $long_desc) {
+    public function __construct($id, $code, $sort_index, $common_desc_id, $img, $heading_3, $paragraph, $button, $category, $long_desc) {
         $this->id = $id;
         $this->code = $code;
+        $this->sort_index = $sort_index;
         $this->common_desc_id = $common_desc_id;
         $this->img = $img;
         $this->heading_3 = $heading_3;
@@ -33,6 +35,10 @@ class OfferCategory {
 
     public function getCode() {
         return $this->code;
+    }
+
+    public function getSortIndex() {
+        return $this->sort_index;
     }
 
     public function getCommonDescId() {
@@ -62,4 +68,13 @@ class OfferCategory {
         return $this->long_desc;
     }
 
+    /* This is the static comparing function: sort on $sort_index */
+    public static function comparator($a, $b)
+    {
+        if ($a->getSortIndex() == $b->getSortIndex()) {
+            return 0;
+        }
+        return ($a->getSortIndex() > $b->getSortIndex()) ? +1 : -1;
+    }
+    
 }

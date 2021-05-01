@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 28 Kwi 2021, 18:10
+-- Czas generowania: 01 Maj 2021, 11:29
 -- Wersja serwera: 10.4.14-MariaDB
 -- Wersja PHP: 7.4.11
 
@@ -49,6 +49,7 @@ INSERT INTO `admin_users` (`id`, `user_name`, `user_password`) VALUES
 CREATE TABLE `category` (
   `id` int(10) UNSIGNED NOT NULL,
   `code` varchar(255) NOT NULL,
+  `sort_index` int(11) NOT NULL,
   `common_desc_id` int(10) UNSIGNED DEFAULT NULL,
   `img` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -57,13 +58,13 @@ CREATE TABLE `category` (
 -- Zrzut danych tabeli `category`
 --
 
-INSERT INTO `category` (`id`, `code`, `common_desc_id`, `img`) VALUES
-(1, 'dzieci', 6, '/images/oferta-ikony/dzieci.jpg'),
-(2, 'dorośli', 6, '/images/oferta-ikony/dorosli.jpg'),
-(3, 'seniorzy', 6, '/images/oferta-ikony/senior.jpg'),
-(8, '0-3', 6, '/images/oferta-ikony/gordonki.jpg'),
-(9, '3-5', 6, '/images/oferta-ikony/logorytmika.jpg'),
-(10, 'młodzież', 6, '/images/oferta-ikony/mlodziez-duzy.jpg');
+INSERT INTO `category` (`id`, `code`, `sort_index`, `common_desc_id`, `img`) VALUES
+(1, 'dzieci', 0, 6, '/images/oferta-ikony/dzieci.jpg'),
+(2, 'dorośli', 0, 6, '/images/oferta-ikony/dorosli.jpg'),
+(3, 'seniorzy', 0, 6, '/images/oferta-ikony/senior.jpg'),
+(8, '0-3', 0, 6, '/images/oferta-ikony/gordonki.jpg'),
+(9, '3-5', 0, 6, '/images/oferta-ikony/logorytmika.jpg'),
+(10, 'młodzież', 0, 6, '/images/oferta-ikony/mlodziez-duzy.jpg');
 
 -- --------------------------------------------------------
 
@@ -130,10 +131,10 @@ CREATE TABLE `common_desc` (
 INSERT INTO `common_desc` (`id`, `code`) VALUES
 (1, 'Ogólny wspólny opis 1'),
 (2, 'Ogólny wspólny opis 2'),
-(3, 'Opis wspólny dla dzieci'),
+(3, 'Ogólny wspólny dla dzieci'),
 (4, 'Ogólny wspólny opis krótki'),
-(5, 'Ogólny wspólny lekcje śpiew???'),
-(6, 'Opis wspólny dla dzieci krótki');
+(5, 'Wspólny opis lekcje spiewu ????'),
+(6, 'Ogólny wspólny dla dzieci krótki');
 
 -- --------------------------------------------------------
 
@@ -154,8 +155,8 @@ CREATE TABLE `common_desc_translation` (
 
 INSERT INTO `common_desc_translation` (`id`, `languages_id`, `common_desc_id`, `common_desc`) VALUES
 (1, 1, 1, '<p><b>ZAPISZ SIĘ JUŻ TERAZ!<br>Liczba miejsc ograniczona. Zacznij już dziś i spełnij marzenia. Zapisy i informacje 883 489 184</b></p>\r\n<p><b>Chcesz mieć pewność? Wypróbuj pakiet startowy – 4 lekcje, aby przekonać się czy to jest najlepszy nauczyciel dla Ciebie!</b></p>\r\n<p>Koszt pakietu 4 lekcje to 300zł</p>\r\n<p>Lekcje prowadzimy w secesyjnej kamienicy w centrum Warszawy, a teraz także online – zajęcia dostępne w całej Polsce oraz na świecie.</p>\r\n<p>Zajęcia online są dostępne z uwzględnieniem występujących różnic czasu./p>'),
-(2, 1, 2, '<p><b>ZAPISZ SIĘ JUŻ TERAZ!</p><p>Liczba miejsc ograniczona. Zacznij grać i spełnij marzenia. Zapisy i informacje 883 489 184</b></p><p><b>Chcesz mieć pewność? Wypróbuj pakiet startowy – 4 lekcje, aby przekonać się czy to jest najlepszy nauczyciel dla Ciebie!</b></p>\r\n<p>Koszt pakietu 4 lekcje to 300zł dla nowych klientów.</p>\r\n<p>Lekcje prowadzimy w secesyjnej kamienicy w centrum Warszawy, a teraz także online – zajęcia dostępne w całej Polsce oraz na świecie. Zajęcia online są dostępne z uwzględnieniem występujących różnic czasu.</p>'),
-(3, 1, 3, '<p><b>ZAPISZ SWOJE DZIECKO JUŻ TERAZ!<br>Liczba miejsc ograniczona. Niech Twoje dziecko zacznie grać i spełni marzenia. Zapisy i informacje 883 489 184</b></p><p><b>Chcesz mieć gwarancje? Wypróbuj pakiet startowy – 4 lekcje, aby przekonać się czy to jest najlepszy nauczyciel dla Twojego dziecka!</b></p>\r\n<p>Koszt pakietu 4 lekcje to 300zł dla nowych klientów.</p>\r\n<p>Lekcje prowadzimy w secesyjnej kamienicy w centrum Warszawy, a teraz także online – zajęcia dostępne w całej Polsce oraz na świecie.</p>'),
+(2, 1, 2, '<p><b>ZAPISZ SIĘ JUŻ TERAZ!</p><p>Liczba miejsc ograniczona. Zacznij grać i spełnij marzenia. Zapisy i informacje 883 489 184</b></p><p><b>Chcesz mieć pewność? Wypróbuj pakiet startowy – 4 lekcje, aby przekonać się czy to jest najlepszy nauczyciel dla Ciebie!</b></p>\n<p>Koszt pakietu 4 lekcje to 300zł dla nowych klientów.</p>\n<p>Lekcje prowadzimy w secesyjnej kamienicy w centrum Warszawy, a teraz także online – zajęcia dostępne w całej Polsce oraz na świecie. Zajęcia online są dostępne z uwzględnieniem występujących różnic czasu.</p>'),
+(3, 1, 3, '<p><b>ZAPISZ SWOJE DZIECKO JUŻ TERAZ!<br>Liczba miejsc ograniczona. Niech Twoje dziecko zacznie grać i spełni marzenia. Zapisy i informacje 883 489 184</b></p><p><b>Chcesz mieć gwarancje? Wypróbuj pakiet startowy – 4 lekcje, aby przekonać się czy to jest najlepszy nauczyciel dla Twojego dziecka!</b></p>\n<p>Koszt pakietu 4 lekcje to 300zł dla nowych klientów.</p>\n<p>Lekcje prowadzimy w secesyjnej kamienicy w centrum Warszawy, a teraz także online – zajęcia dostępne w całej Polsce oraz na świecie.</p>'),
 (4, 2, 1, '<p> <b> ENROLL NOW! <br> Limited number of participants. Start today and make your dreams come true. Records and information 883 489 184 </b> </p>\n<p> <b> Want to be sure? Try the 4 Lessons Starter Pack to find out if this is the best teacher for you! </b></p>\n<p>Now special price for you! The cost of the 4 lessons package is 100€. You can choose other payment currency - AUD, CAD, CHF, DKK, EUR, GBP, NOK, SEK, USD.</p>\n<p> We conduct lessons in an Art Nouveau tenement house in the center of Warsaw, and now also online - classes available all over Poland and around the world. </p>\n<p> Online classes are available taking into account the time differences'),
 (5, 2, 2, '<p><b>Sing up now! The number of slots is limited.</b></p>\n<p>Afraid of commitments? Try a starter package - 4 lessons to check what\'s best for you!</p>\n<p>Now special price for you! The cost of the 4 lessons package is 100€. You can choose other payment currency - AUD, CAD, CHF, DKK, EUR, GBP, NOK, SEK, USD.</p>\n<p>We offer lessons in an Art Nouveau building in the center of Warsaw, and also online - available across the world.</p>\n<p>Online lessons are available in accordance with time zone differences. Lessons are intended for adult first-timers, beginners, and advanced players. Learning materials – everything you need you will receive by email. Online lessons are adjusted to individual needs of every student – live in an agreed time. Lessons are available in English.</p>'),
 (6, 2, 3, '<p><b> SIGN UP YOUR CHILD NOW! <br>The number of slots is limited. Let your child play and make their dreams come true. Records and information 883 489 184 </b> </p>\r\n<p>Afraid of commitments? Try a starter package - 4 lessons to check what\'s best for your child!</p>\r\n<p>Now special price for you! The cost of the 4 lessons package is 100€. You can choose other payment currency - AUD, CAD, CHF, DKK, EUR, GBP, NOK, SEK, USD.</p>\r\n<p>We offer lessons in an Art Nouveau building in the center of Warsaw, and also online - available across the world.</p>\r\n<p>Online lessons are available in accordance with time zone differences. Lessons are intended for adult first-timers, beginners, and advanced players. Learning materials – everything you need you will receive by email. Online lessons are adjusted to individual needs of every student – live in an agreed time. Lessons are available in English.</p>'),
@@ -165,11 +166,11 @@ INSERT INTO `common_desc_translation` (`id`, `languages_id`, `common_desc_id`, `
 (10, 4, 1, '<p> <b>現在註冊！<br>參加人數有限。 從今天開始，讓您的夢想成真。 記錄和信息883489184 </ b> </ p>\r\n<p> <b>想要確定嗎？ 嘗試4個課程入門包，以了解這是否是最適合您的老師！</ b> </ p>\r\n<p>現在為您特別優惠！ 4節課的套餐費用為100€。您可以選擇其他付款貨幣-AUD，CAD，CHF，DKK，EUR，GBP，NOK，SEK，USD。 </ p>\r\n<p>我們在華沙市中心的一座新藝術風格的廉價公寓裡上課，並且現在也在線上授課-遍及波蘭和世界各地的課程。</ p>\r\n<p>考慮到現有的時差，可以使用在線課程。/p>'),
 (11, 4, 2, '<p> <b>現在唱歌！插槽數是有限的。</ b> </ p>\r\n<p>害怕承諾嗎？嘗試入門包-4課，以了解最適合您的內容！</ p>\r\n<p>現在為您特別優惠！ 4節課的套餐費用為100€。您可以選擇其他付款貨幣-AUD，CAD，CHF，DKK，EUR，GBP，NOK，SEK，USD。 </ p>\r\n<p>我們在華沙市中心的一幢新藝術風格建築中提供課程，並且還在世界各地在線提供。</ p>\r\n<p>根據時區差異提供在線課程。這些課程適用於成人初學者，初學者和高級玩家。學習資料–您需要的一切都會通過電子郵件收到。在線課程根據每個學生的個人需求進行調整-在約定的時間內進行。課程以英語提供。</ p>'),
 (12, 4, 3, '<p> <b>立即註冊您的孩子！ <br>插槽數量有限。讓您的孩子玩耍並實現他們的夢想。記錄和信息883489184 </ b> </ p>\r\n<p>害怕承諾嗎？嘗試入門包-4課，以檢查最適合您的孩子！</ p>\r\n<p>現在為您特別優惠！ 4節課的套餐費用為100€。您可以選擇其他付款貨幣-AUD，CAD，CHF，DKK，EUR，GBP，NOK，SEK，USD。 </ p>\r\n<p>我們在華沙市中心的一幢新藝術風格建築中提供課程，並且還在世界各地在線提供。</ p>\r\n<p>根據時區差異提供在線課程。這些課程適用於成人初學者，初學者和高級玩家。學習資料–您需要的一切都會通過電子郵件收到。在線課程根據每個學生的個人需求進行調整-在約定的時間內進行。課程以英語提供。</ p>'),
-(13, 1, 4, '<p><b>Lekcje prowadzimy w secesyjnej kamienicy w centrum Warszawy, a teraz także online – zajęcia dostępne w całej Polsce oraz na świecie.</b></p>\r\n<p>Koszt pakietu 4 lekcje to 300zł dla nowych klientów.</p>\r\n<p><b>Trwają zapisy. Liczba miejsc ograniczona. Zapisy i informacje 883 489 184</b></p>'),
-(14, 2, 4, '<p><b>We conduct lessons in an Art Nouveau tenement house in the center of Warsaw, and now also online - classes available all over Poland and around the world.</b></p>\r\n<p><b>Writes are in progress. The number of places is limited. Records and information 883 489 184</b></p>'),
+(13, 1, 4, '<p><b>Lekcje prowadzimy w secesyjnej kamienicy w centrum Warszawy, a teraz także online – zajęcia dostępne w całej Polsce oraz na świecie.</b></p>\n<p>Koszt pakietu 4 lekcje to 300zł dla nowych klientów.</p>\n<p><b>Trwają zapisy. Liczba miejsc ograniczona. Zapisy i informacje 883 489 184</b></p>'),
+(14, 2, 4, '<p><b>We conduct lessons in an Art Nouveau tenement house in the center of Warsaw, and now also online - classes available all over Poland and around the world.</b></p>\n<p><b>Writes are in progress. The number of places is limited. Records and information 883 489 184</b></p>'),
 (15, 3, 4, '<p><b>Chúng tôi tổ chức các bài học trong một ngôi nhà chung cư theo trường phái Tân nghệ thuật ở trung tâm Warsaw, và bây giờ cũng có thể học trực tuyến - các lớp học có sẵn trên khắp Ba Lan và trên thế giới.</b></p>\r\n<p><b>Đang viết. Số lượng nơi có hạn. Hồ sơ và thông tin 883 489 184</b></p>'),
 (16, 4, 4, '<p> <b>我們在華沙市中心的一座新藝術風格的廉價公寓裡上課，並且現在也在線上授課-遍及波蘭和世界各地。</ b> </ p>\r\n<p> <b>寫入正在進行中。名額有限。記錄和信息883489184 </ b> </ p>'),
-(17, 1, 5, '<p><b>ZAPISZ SIĘ JUŻ TERAZ!<br>Liczba miejsc ograniczona. Zacznij śpiewać i spełnij marzenia. Zapisy i informacje 883 489 184</b></p>\r\n<p><b>Chcesz mieć pewność? Wypróbuj pakiet startowy – 4 lekcje, aby przekonać się czy to jest najlepszy nauczyciel dla Ciebie!</b></p>\r\n<p>Koszt pakietu 4 lekcje to 300zł dla nowych klientów.</p>\r\n<p>Lekcje prowadzimy w secesyjnej kamienicy w centrum Warszawy, a teraz także online – zajęcia dostępne w całej Polsce oraz na świecie. \r\nZajęcia online są dostępne z uwzględnieniem występujących różnic czasu.</p>\r\n'),
+(17, 1, 5, '<p><b>ZAPISZ SIĘ JUŻ TERAZ!<br>Liczba miejsc ograniczona. Zacznij śpiewać i spełnij marzenia. Zapisy i informacje 883 489 184</b></p>\n<p><b>Chcesz mieć pewność? Wypróbuj pakiet startowy – 4 lekcje, aby przekonać się czy to jest najlepszy nauczyciel dla Ciebie!</b></p>\n<p>Koszt pakietu 4 lekcje to 300zł dla nowych klientów.</p>\n<p>Lekcje prowadzimy w secesyjnej kamienicy w centrum Warszawy, a teraz także online – zajęcia dostępne w całej Polsce oraz na świecie. \nZajęcia online są dostępne z uwzględnieniem występujących różnic czasu.</p>\n'),
 (18, 2, 5, '<p> <b> REGISTER NOW! <br> Limited number of participants. Start singing and make your dreams come true. Records and information 883 489 184 </b> </p>\r\n<p> <b> Want to be sure? Try the 4 Lessons Starter Pack to find out if this is the best teacher for you! </b> </p>\r\n<p>Now special price for you! The cost of the 4 lessons package is 100€. You can choose other payment currency - AUD, CAD, CHF, DKK, EUR, GBP, NOK, SEK, USD.</p>\r\n<p> We conduct lessons in an Art Nouveau tenement house in the center of Warsaw, and now also online - classes available all over Poland and around the world.\r\nOnline classes are available subject to time differences. </p>'),
 (19, 3, 5, '<p> <b> ĐĂNG KÝ NGAY! <br> Số lượng người tham gia có hạn. Bắt đầu ca hát và biến ước mơ của bạn thành hiện thực. Hồ sơ và thông tin 883 489 184 </b> </p>\r\n<p> <b> Bạn muốn chắc chắn? Hãy thử Gói khởi đầu 4 bài học để tìm hiểu xem đây có phải là giáo viên tốt nhất dành cho bạn không! </b> </p>\r\n<p> Hiện có giá đặc biệt dành cho bạn! Chi phí của gói 4 bài học là 100€. Bạn có thể chọn đơn vị tiền tệ thanh toán khác - AUD, CAD, CHF, DKK, EUR, GBP, NOK, SEK, USD. </p>\r\n<p> Chúng tôi tổ chức các bài học trong một ngôi nhà chung cư theo trường phái Tân nghệ thuật ở trung tâm Warsaw, và giờ đây cũng có thể học trực tuyến - các lớp học có sẵn trên khắp Ba Lan và trên thế giới.\r\nCác lớp học trực tuyến có sẵn tùy thuộc vào thời gian khác nhau. </p>'),
 (20, 4, 5, '<p> <b>現在註冊！ <br>參加人數有限。開始唱歌，讓您的夢想成真。記錄和信息883489184 </ b> </ p>\r\n<p> <b>想要確定嗎？嘗試4個課程入門包，以了解這是否是最適合您的老師！ </ b> </ p>\r\n<p>現在為您特別優惠！ 4節課的套餐費用為100€。您可以選擇其他付款貨幣-AUD，CAD，CHF，DKK，EUR，GBP，NOK，SEK，USD。 </ p>\r\n<p>我們在華沙市中心的一座新藝術風格的廉價公寓裡上課，並且現在也在線上授課-遍及波蘭和世界各地的課程。\r\n在線課程因時差而異。 </ p>'),
@@ -1709,7 +1710,7 @@ ALTER TABLE `category_translation`
 --
 ALTER TABLE `common_desc_translation`
   ADD CONSTRAINT `common_desc_translation_ibfk_1` FOREIGN KEY (`languages_id`) REFERENCES `languages` (`id`),
-  ADD CONSTRAINT `common_desc_translation_ibfk_2` FOREIGN KEY (`common_desc_id`) REFERENCES `common_desc` (`id`);
+  ADD CONSTRAINT `common_desc_translation_ibfk_2` FOREIGN KEY (`common_desc_id`) REFERENCES `common_desc` (`id`) ON DELETE CASCADE;
 
 --
 -- Ograniczenia dla tabeli `courses`

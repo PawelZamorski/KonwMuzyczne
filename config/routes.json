@@ -457,6 +457,44 @@
         }
     },
 
+
+
+
+
+
+
+
+
+
+
+    "admin/:lang/offerCategory/createOfferCategorySortForm": {
+        "controller": "AdminOfferController",
+        "method": "openCreateOfferCategorySortForm",
+        "params": {
+            ":lang": "string"
+        }
+    },
+
+    "admin/:lang/offerCategory/:categoryId/updateSortIndex": {
+        "controller": "AdminOfferController",
+        "method": "updateCategorySortIndexById",
+        "params": {
+            ":lang": "string",
+            ":categoryId": "int"
+        }
+    },
+
+
+
+
+
+
+
+
+
+
+
+
     "admin/:lang/offerCommonDesc": {
         "controller": "AdminOfferController",
         "method": "getOfferCommonDescAll",
