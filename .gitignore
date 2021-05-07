@@ -6,3 +6,4 @@ sql/fortepian_konwe3.sql
 sql/*
 config/config-google-translate.json
 config/*
+src/Services/PaymentPrzelewy24.php

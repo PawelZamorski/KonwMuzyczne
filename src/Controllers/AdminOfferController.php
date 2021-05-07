@@ -601,7 +601,7 @@ class AdminOfferController extends AbstractController {
             $message = $offerModel->updateCommonDescById($lang, $common_desc_id);
             
             $host = $_SERVER['SERVER_NAME'];
-            $uri = "/admin/$lang/offerCategory/$category_id";
+            $uri = "/admin/$lang/offerCommonDesc/$common_desc_id";
             header("Location: https://$host$uri");
             exit;
             
@@ -653,7 +653,7 @@ class AdminOfferController extends AbstractController {
             $message = $offerModel->createCommonDesc($lang);
             echo "done!";
             $host = $_SERVER['SERVER_NAME'];
-            $uri = "/admin/$lang/offerCategory";
+            $uri = "/admin/$lang/offerCommonDesc";
             header("Location: https://$host$uri");
             exit;
             
@@ -673,7 +673,7 @@ class AdminOfferController extends AbstractController {
             $message = $offerModel->deleteCommonDescById($lang, $common_desc_id);
             
             $host = $_SERVER['SERVER_NAME'];
-            $uri = "/admin/$lang/offerCategory";
+            $uri = "/admin/$lang/offerCommonDesc";
             header("Location: https://$host$uri");
             exit;
             

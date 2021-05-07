@@ -457,16 +457,6 @@
         }
     },
 
-
-
-
-
-
-
-
-
-
-
     "admin/:lang/offerCategory/createOfferCategorySortForm": {
         "controller": "AdminOfferController",
         "method": "openCreateOfferCategorySortForm",
@@ -483,17 +473,6 @@
             ":categoryId": "int"
         }
     },
-
-
-
-
-
-
-
-
-
-
-
 
     "admin/:lang/offerCommonDesc": {
         "controller": "AdminOfferController",
