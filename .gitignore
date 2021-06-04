@@ -5,4 +5,4 @@ config/config-prod.json
 sql/fortepian_konwer.sql
 config/config-google-translate.json
 config/*
-src/Services/PaymentPrzelewy24.php
+
